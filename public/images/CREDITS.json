@@ -124,5 +124,77 @@
     "page": "https://commons.wikimedia.org/wiki/File:Brochette_d%27espadon_%C3%A0_Georgio%C3%BApoli_(Cr%C3%A8te)_en_juillet_2021.jpg",
     "author": "Benoît Prieur",
     "license": "CC0"
+  },
+  "fish/pageot": {
+    "file": "Pageot commun (Pagellus erythrinus) (Ifremer 00710-82226).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Pageot_commun_(Pagellus_erythrinus)_(Ifremer_00710-82226).jpg",
+    "author": "Isabelle Cheret, null",
+    "license": "CC BY 4.0"
+  },
+  "fish/chinchard": {
+    "file": "Trachurus trachurus France.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Trachurus_trachurus_France.jpg",
+    "author": "jujurenoult",
+    "license": "CC BY 4.0"
+  },
+  "fish/congre": {
+    "file": "Meeraal Conger conger 1.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Meeraal_Conger_conger_1.jpg",
+    "author": "Holger Krisp",
+    "license": "CC BY 3.0"
+  },
+  "fish/raie": {
+    "file": "Rajidae Raja clavata 2.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Rajidae_Raja_clavata_2.jpg",
+    "author": "NasserHalaweh",
+    "license": "CC BY-SA 4.0"
+  },
+  "fish/bar-loup": {
+    "file": "Bar commun (Dicentrarchus labrax) (Ifremer 00572-68449 - 26366).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Bar_commun_(Dicentrarchus_labrax)_(Ifremer_00572-68449_-_26366).jpg",
+    "author": "Olivier Dugornay",
+    "license": "CC BY 4.0"
+  },
+  "fish/mulet": {
+    "file": "Mújol (Mugil cephalus), Parque natural de la Arrábida, Portugal, 2021-09-09, DD 25.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:M%C3%BAjol_(Mugil_cephalus),_Parque_natural_de_la_Arr%C3%A1bida,_Portugal,_2021-09-09,_DD_25.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0"
+  },
+  "fish/maquereau": {
+    "file": "Atlantic mackerel (Scomber scombrus).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Atlantic_mackerel_(Scomber_scombrus).jpg",
+    "author": "Petar Milošević",
+    "license": "CC BY-SA 4.0"
+  },
+  "fish/thon-rouge": {
+    "file": "Thunnus thynnus Croatia.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Thunnus_thynnus_Croatia.jpg",
+    "author": "picturavis",
+    "license": "CC0"
+  },
+  "fish/sabre": {
+    "file": "Lepidopus caudatus - Mercado Municipal Funchal 01.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Lepidopus_caudatus_-_Mercado_Municipal_Funchal_01.jpg",
+    "author": "H. Zell",
+    "license": "CC BY-SA 3.0"
+  },
+  "fish/rouget": {
+    "file": "Salmonete de roca (Mullus surmuletus), Parque natural de la Arrábida, Portugal, 2020-07-21, DD 59.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Salmonete_de_roca_(Mullus_surmuletus),_Parque_natural_de_la_Arr%C3%A1bida,_Portugal,_2020-07-21,_DD_59.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0"
+  },
+  "fish/seiche": {
+    "file": "Sepia común (Sepia officinalis), Parque natural de la Arrábida, Portugal, 2020-07-21, DD 62.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Sepia_com%C3%BAn_(Sepia_officinalis),_Parque_natural_de_la_Arr%C3%A1bida,_Portugal,_2020-07-21,_DD_62.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0"
+  },
+  "fish/moules-bouzroug": {
+    "file": "Perna perna 02.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Perna_perna_02.jpg",
+    "author": "H. Zell",
+    "license": "CC BY-SA 3.0"
   }
 }

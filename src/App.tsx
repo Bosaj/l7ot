@@ -3,6 +3,9 @@ import {
   Search,
   Waves,
   Fish as FishIcon,
+  Compass,
+  Globe,
+  Volume2,
 } from 'lucide-react'
 import { Header } from './components/Header'
 import { FishCard } from './components/FishCard'
@@ -16,6 +19,7 @@ import { CleaningTutorialModal } from './components/CleaningTutorialModal'
 
 import { MOROCCAN_FISH } from './data/fish'
 import { MOROCCAN_RECIPES } from './data/recipes'
+import { FISHERIES_AGREEMENTS } from './data/agreements'
 import type { Fish, Recipe } from './data/types'
 import type { SupportedLanguage } from './i18n/strings'
 import { STRINGS } from './i18n/strings'
@@ -36,10 +40,15 @@ export const App: React.FC = () => {
   const t = STRINGS[lang]
   const isRtl = lang === 'ar'
 
-  // Filtered Fish
+  // Filtered Fish (including deep search across all regional Moroccan names & Amazigh terms)
   const filteredFish = useMemo(() => {
     return MOROCCAN_FISH.filter((fish) => {
       const q = searchQuery.toLowerCase().trim()
+      const allRegionalNames = [
+        ...fish.regionalNames.chamal,
+        ...fish.regionalNames.centre,
+        ...fish.regionalNames.sud,
+      ]
       const matchesSearch =
         !q ||
         fish.nameDarijaArabic.includes(q) ||
@@ -47,7 +56,8 @@ export const App: React.FC = () => {
         fish.nameFrench.toLowerCase().includes(q) ||
         fish.nameEnglish.toLowerCase().includes(q) ||
         fish.scientificName.toLowerCase().includes(q) ||
-        fish.mainPorts.some((p) => p.toLowerCase().includes(q))
+        fish.mainPorts.some((p) => p.toLowerCase().includes(q)) ||
+        allRegionalNames.some((r) => r.toLowerCase().includes(q))
 
       const matchesCat =
         selectedCategory === 'all' || fish.category === selectedCategory
@@ -83,13 +93,12 @@ export const App: React.FC = () => {
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-white"
+      className="min-h-dvh bg-[#0b0908] text-[#f6f1e7] font-sans selection:bg-[#d96b27] selection:text-[#0b0908]"
     >
-      {/* Background Oceanic Glow Orbs */}
+      {/* Subtle Warm Terracotta & Brass Ambient Illumination */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-cyan-600/10 blur-[128px]" />
-        <div className="absolute top-1/3 -right-40 h-96 w-96 rounded-full bg-blue-600/10 blur-[128px]" />
-        <div className="absolute -bottom-40 left-1/3 h-96 w-96 rounded-full bg-emerald-600/10 blur-[128px]" />
+        <div className="absolute -top-48 left-1/4 h-[28rem] w-[28rem] rounded-full bg-[#d96b27]/[0.05] blur-[140px]" />
+        <div className="absolute bottom-0 right-1/4 h-[26rem] w-[26rem] rounded-full bg-[#b85318]/[0.04] blur-[140px]" />
       </div>
 
       <Header
@@ -99,120 +108,227 @@ export const App: React.FC = () => {
         setLang={setLang}
       />
 
-      <main className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 space-y-8">
-        {/* Sub-hero Search Bar (active on fish and recipe tabs) */}
+      <main className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 space-y-10">
+        {/* Editorial Asymmetric Masthead Hero (Fish & Recipes Tabs) */}
         {(activeTab === 'fish' || activeTab === 'recipes') && (
-          <div className="mx-auto max-w-3xl space-y-4">
-            <div className="relative">
-              <Search className="absolute top-3.5 right-4 h-5 w-5 text-slate-400 rtl:right-4 ltr:left-4 ltr:right-auto" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={t.searchPlaceholder}
-                className="w-full rounded-2xl border border-white/10 bg-slate-900/80 px-12 py-3.5 text-sm text-white placeholder-slate-400 shadow-xl backdrop-blur-xl focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all"
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery('')}
-                  className="absolute top-3.5 left-4 text-xs text-slate-400 hover:text-white rtl:left-4 ltr:right-4 ltr:left-auto"
-                >
-                  مسح
-                </button>
-              )}
-            </div>
-
-            {/* Fish Tab Category & Coast Pills */}
-            {activeTab === 'fish' && (
-              <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
-                {/* Categories */}
-                <div className="flex flex-wrap items-center gap-1.5">
-                  {[
-                    { id: 'all', label: t.allCategories },
-                    { id: 'poisson_bleu', label: t.catPoissonBleu },
-                    { id: 'poisson_blanc', label: t.catPoissonBlanc },
-                    { id: 'cephalopode', label: t.catCephalopode },
-                    { id: 'crustace', label: t.catCrustace },
-                    { id: 'mollusque', label: t.catMollusque },
-                    { id: 'cartilagineux', label: t.catCartilagineux },
-                  ].map((cat) => (
-                    <button
-                      key={cat.id}
-                      type="button"
-                      onClick={() => setSelectedCategory(cat.id)}
-                      className={`rounded-xl px-3 py-1.5 font-medium transition-all ${
-                        selectedCategory === cat.id
-                          ? 'bg-cyan-500 text-white shadow-md shadow-cyan-500/20 font-bold'
-                          : 'bg-slate-900/60 text-slate-400 hover:bg-slate-800 hover:text-slate-200'
-                      }`}
-                    >
-                      {cat.label}
-                    </button>
-                  ))}
+          <section className="rounded-xl border border-[#f6f1e7]/12 bg-[#14110f] p-6 sm:p-8 shadow-2xl">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+              {/* Left Editorial Column */}
+              <div className="lg:col-span-7 space-y-4">
+                <div className="inline-flex items-center gap-2 border border-[#d96b27]/40 bg-[#d96b27]/10 px-3 py-1 font-mono text-[11px] font-semibold uppercase text-[#f2b47e]">
+                  <Compass className="h-3.5 w-3.5 text-[#e68a45]" />
+                  <span>
+                    {lang === 'ar'
+                      ? 'أطلس الثروة السمكية المغربية · من طنجة إلى الكويرة'
+                      : lang === 'fr'
+                      ? 'Atlas Halieutique & Criées du Maroc · De Tanger à Lagouira'
+                      : 'Moroccan Fisheries Atlas & Port Criées · Tangier to Lagouira'}
+                  </span>
                 </div>
 
-                {/* Coasts */}
-                <div className="flex items-center gap-1 rounded-xl border border-white/5 bg-slate-900/60 p-1">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedCoast('all')}
-                    className={`rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-colors ${
-                      selectedCoast === 'all'
-                        ? 'bg-cyan-500 text-white'
-                        : 'text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    {t.allCoasts}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedCoast('atlantic')}
-                    className={`rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-colors ${
-                      selectedCoast === 'atlantic'
-                        ? 'bg-cyan-500 text-white'
-                        : 'text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    {t.coastAtlantic}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedCoast('mediterranean')}
-                    className={`rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-colors ${
-                      selectedCoast === 'mediterranean'
-                        ? 'bg-cyan-500 text-white'
-                        : 'text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    {t.coastMed}
-                  </button>
+                <h2 className="font-editorial text-3xl font-bold leading-tight text-[#f6f1e7] sm:text-5xl">
+                  {activeTab === 'fish'
+                    ? lang === 'ar'
+                      ? 'موسوعة الحوت المغربي، الأسماء الجهوية وأسعار المراسي'
+                      : lang === 'fr'
+                      ? 'L’Encyclopédie des Poissons du Maroc & Cours des Criées'
+                      : 'The Encyclopedia of Moroccan Fish, Regional Dialects & Market Prices'
+                    : lang === 'ar'
+                    ? 'ديوان الطبخ الساحلي المغربي الأصيل'
+                    : lang === 'fr'
+                    ? 'Le Grand Répertoire de la Cuisine Côtière Marocaine'
+                    : 'Authentic Moroccan Coastal Culinary Repertoire'}
+                </h2>
+
+                <p className="max-w-2xl text-sm leading-relaxed text-[#a69b8d]">
+                  {lang === 'ar'
+                    ? 'دليل مرجعي يوثق 22 نوعاً من أشهر أسماك السواحل الأطلسية والمتوسطية بأسمائها الحقيقية في الشمال والوسط والجنوب والأمازيغية، مع نطق صوتي ناطق بالدارجة، وفيديوهات التنقية، وحاسبة القيمة الغذائية، و10 معاهدات صيد دولية.'
+                    : lang === 'fr'
+                    ? 'Référentiel documentant 22 espèces emblématiques des côtes atlantiques et méditerranéennes avec leurs noms régionaux (Nord, Centre, Sud & Amazigh), prononciation audio native, vidéos de nettoyage, nutrition (100g/1kg) et 10 traités internationaux.'
+                    : 'Definitive reference covering 22 iconic Atlantic and Mediterranean species with regional Moroccan names (Chamal, Centre, Sud & Amazigh), native Arabic audio pronunciation, video cleaning guides, 100g/1kg nutrition, and 10 sovereign treaties.'}
+                </p>
+              </div>
+
+              {/* Right Telemetry Metrics Grid */}
+              <div className="lg:col-span-5 grid grid-cols-2 gap-3">
+                <div className="rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-3.5">
+                  <span className="font-mono text-[10px] uppercase text-[#a69b8d] block">
+                    {lang === 'ar' ? 'الأنواع الموثقة' : 'ESPÈCES DOCUMENTÉES'}
+                  </span>
+                  <span className="font-editorial text-2xl font-bold text-[#e68a45]">
+                    {MOROCCAN_FISH.length}
+                  </span>
+                  <span className="mt-0.5 block font-mono text-[10px] text-[#786c60]">
+                    {lang === 'ar' ? 'بالصور الحقيقية والنطق' : 'Photos & Audio Darija'}
+                  </span>
+                </div>
+
+                <div
+                  onClick={() => setActiveTab('agreements')}
+                  className="cursor-pointer rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-3.5 transition-colors hover:border-[#d96b27]/50"
+                >
+                  <span className="font-mono text-[10px] uppercase text-[#a69b8d] block">
+                    {lang === 'ar' ? 'المعاهدات الدولية' : 'TRAITÉS & ACCORDS'}
+                  </span>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="font-editorial text-2xl font-bold text-[#f6f1e7]">
+                      {FISHERIES_AGREEMENTS.length}
+                    </span>
+                    <Globe className="h-3.5 w-3.5 text-[#e68a45]" />
+                  </div>
+                  <span className="mt-0.5 block font-mono text-[10px] text-[#e68a45]">
+                    {lang === 'ar' ? 'UE · UK · USA · اليابان · روسيا ←' : 'UE · UK · USA · Japon · Russie →'}
+                  </span>
+                </div>
+
+                <div className="rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-3.5">
+                  <span className="font-mono text-[10px] uppercase text-[#a69b8d] block">
+                    {lang === 'ar' ? 'صادرات المملكة' : 'EXPORT HALIEUTIQUE'}
+                  </span>
+                  <span className="font-mono text-xl font-bold text-emerald-400">
+                    31+ Md MAD
+                  </span>
+                  <span className="mt-0.5 block font-mono text-[10px] text-[#786c60]">
+                    {lang === 'ar' ? 'الرتبة 1 أفريقياً للسمك' : '#1 Exportateur Africain'}
+                  </span>
+                </div>
+
+                <div className="rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-3.5">
+                  <span className="font-mono text-[10px] uppercase text-[#a69b8d] block">
+                    {lang === 'ar' ? 'النطق الصوتي' : 'AUDIO DARIJA NATIF'}
+                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <Volume2 className="h-4 w-4 text-[#e68a45]" />
+                    <span className="font-mono text-sm font-bold text-[#f6f1e7]">
+                      100% MP3 Arabe
+                    </span>
+                  </div>
+                  <span className="mt-0.5 block font-mono text-[10px] text-[#786c60]">
+                    {lang === 'ar' ? 'لهجات الشمال والوسط والجنوب' : 'Chamal · Centre · Souss'}
+                  </span>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+
+            {/* Search & Filter Console */}
+            <div className="mt-6 space-y-4 border-t border-[#f6f1e7]/10 pt-6">
+              <div className="relative">
+                <Search className="absolute top-3.5 right-4 h-5 w-5 text-[#a69b8d] rtl:right-4 ltr:left-4 ltr:right-auto" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={t.searchPlaceholder}
+                  className="w-full rounded-lg border border-[#f6f1e7]/15 bg-[#0b0908] px-12 py-3.5 text-sm text-[#f6f1e7] placeholder-[#786c60] focus:border-[#d96b27] focus:outline-none focus:ring-1 focus:ring-[#d96b27]"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    className="absolute top-3.5 left-4 font-mono text-xs text-[#e68a45] hover:underline rtl:left-4 ltr:right-4 ltr:left-auto"
+                  >
+                    {lang === 'ar' ? 'مسح' : 'EFFACER'}
+                  </button>
+                )}
+              </div>
+
+              {/* Fish Tab Category & Coast Filters */}
+              {activeTab === 'fish' && (
+                <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
+                  {/* Categories */}
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {[
+                      { id: 'all', label: t.allCategories },
+                      { id: 'poisson_bleu', label: t.catPoissonBleu },
+                      { id: 'poisson_blanc', label: t.catPoissonBlanc },
+                      { id: 'cephalopode', label: t.catCephalopode },
+                      { id: 'crustace', label: t.catCrustace },
+                      { id: 'mollusque', label: t.catMollusque },
+                      { id: 'cartilagineux', label: t.catCartilagineux },
+                    ].map((cat) => (
+                      <button
+                        key={cat.id}
+                        type="button"
+                        onClick={() => setSelectedCategory(cat.id)}
+                        className={`rounded px-3 py-1.5 font-medium transition-all ${
+                          selectedCategory === cat.id
+                            ? 'bg-[#d96b27] text-[#0b0908] font-bold'
+                            : 'border border-[#f6f1e7]/10 bg-[#0b0908] text-[#a69b8d] hover:border-[#f6f1e7]/25 hover:text-[#f6f1e7]'
+                        }`}
+                      >
+                        {cat.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Coasts */}
+                  <div className="flex items-center gap-1 rounded border border-[#f6f1e7]/10 bg-[#0b0908] p-1 font-mono">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCoast('all')}
+                      className={`rounded px-2.5 py-1 text-[11px] font-semibold transition-colors ${
+                        selectedCoast === 'all'
+                          ? 'bg-[#d96b27] text-[#0b0908]'
+                          : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+                      }`}
+                    >
+                      {t.allCoasts}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCoast('atlantic')}
+                      className={`rounded px-2.5 py-1 text-[11px] font-semibold transition-colors ${
+                        selectedCoast === 'atlantic'
+                          ? 'bg-[#d96b27] text-[#0b0908]'
+                          : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+                      }`}
+                    >
+                      {t.coastAtlantic}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCoast('mediterranean')}
+                      className={`rounded px-2.5 py-1 text-[11px] font-semibold transition-colors ${
+                        selectedCoast === 'mediterranean'
+                          ? 'bg-[#d96b27] text-[#0b0908]'
+                          : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+                      }`}
+                    >
+                      {t.coastMed}
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
         )}
 
         {/* Tab 1: Fish Encyclopedia */}
         {activeTab === 'fish' && (
           <section className="space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-baseline justify-between border-b border-[#f6f1e7]/10 pb-3">
               <div>
-                <h2 className="text-2xl font-black text-white">
+                <h2 className="font-editorial text-2xl font-bold text-[#f6f1e7] sm:text-3xl">
                   {t.navFish} ({filteredFish.length})
                 </h2>
-                <p className="text-xs text-slate-400">
-                  جميع أنواع الحوت الشائعة في السواحل المغربية بأسمائها بالدارجة والأسعار الحالية
+                <p className="text-xs text-[#a69b8d] mt-0.5">
+                  {lang === 'ar'
+                    ? 'اضغط على زر "نطق بالدارجة" لسماع الاسم المغربي والجهوي بصوت عربي فصيح وواضح، أو افتح فيديو التنقية لكل سمكة'
+                    : 'Cliquez sur « Écouter » pour entendre la prononciation arabe et régionale, ou ouvrez la vidéo de découpe'}
                 </p>
               </div>
+              <span className="hidden font-mono text-xs text-[#e68a45] sm:inline">
+                INDEX HALIEUTIQUE // 01–{String(filteredFish.length).padStart(2, '0')}
+              </span>
             </div>
 
             {filteredFish.length > 0 ? (
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {filteredFish.map((fish) => (
+                {filteredFish.map((fish, idx) => (
                   <FishCard
                     key={fish.id}
                     fish={fish}
+                    index={idx}
                     lang={lang}
                     onSelectFish={(f) => {
                       setActiveFish(f)
@@ -228,13 +344,13 @@ export const App: React.FC = () => {
                 ))}
               </div>
             ) : (
-              <div className="rounded-3xl border border-dashed border-white/10 bg-slate-900/40 p-12 text-center">
-                <FishIcon className="mx-auto h-12 w-12 text-slate-600 mb-3" />
-                <h3 className="text-lg font-bold text-white mb-1">
+              <div className="rounded-xl border border-dashed border-[#f6f1e7]/15 bg-[#14110f] p-12 text-center">
+                <FishIcon className="mx-auto h-12 w-12 text-[#786c60] mb-3" />
+                <h3 className="font-editorial text-xl font-bold text-[#f6f1e7] mb-1">
                   لم يتم العثور على أي نوع حوت يطابق هذا البحث
                 </h3>
-                <p className="text-xs text-slate-400">
-                  جرب البحث باسم الحوت بالدارجة (سردين، ميرلا، صول، قرب) أو بالفرنسية
+                <p className="text-xs text-[#a69b8d]">
+                  جرب البحث باسم الحوت بالدارجة (سردين، ميرلا، صول، باجو، شرن، فرخ، درعي، سمطة، بوزروك) أو بالفرنسية
                 </p>
               </div>
             )}
@@ -244,22 +360,23 @@ export const App: React.FC = () => {
         {/* Tab 2: Coastal Recipes */}
         {activeTab === 'recipes' && (
           <section className="space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-baseline justify-between border-b border-[#f6f1e7]/10 pb-3">
               <div>
-                <h2 className="text-2xl font-black text-white">
+                <h2 className="font-editorial text-2xl font-bold text-[#f6f1e7] sm:text-3xl">
                   {t.navRecipes} ({filteredRecipes.length})
                 </h2>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-[#a69b8d] mt-0.5">
                   الوصفات الساحلية المغربية الأصيلة من طواجن الفخار إلى القلي المقرمش والبسطيلة الملكية
                 </p>
               </div>
             </div>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {filteredRecipes.map((recipe) => (
+              {filteredRecipes.map((recipe, idx) => (
                 <RecipeCard
                   key={recipe.id}
                   recipe={recipe}
+                  index={idx}
                   lang={lang}
                   onSelectRecipe={(r) => setActiveRecipe(r)}
                 />
@@ -314,15 +431,19 @@ export const App: React.FC = () => {
         />
       )}
 
-      {/* Footer */}
-      <footer className="mt-20 border-t border-white/5 bg-slate-950/80 py-8 text-center text-xs text-slate-400">
-        <div className="mx-auto max-w-7xl px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <Waves className="h-4 w-4 text-cyan-400" />
-            <span className="font-bold text-slate-200">L7OT · الحوت المغربي</span>
-            <span>— 3,500 كلم من السواحل الأطلسية والمتوسطية</span>
+      {/* Editorial Colophon Footer */}
+      <footer className="mt-20 border-t border-[#f6f1e7]/10 bg-[#0b0908] py-10 text-xs text-[#a69b8d]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2.5">
+            <Waves className="h-4 w-4 text-[#e68a45]" />
+            <span className="font-editorial text-base font-bold text-[#f6f1e7]">
+              L7OT · الحوت المغربي
+            </span>
+            <span className="font-mono text-[11px] text-[#786c60]">
+              — 22 ESPÈCES · 10 TRAITÉS · 3,500 KM LITTORAL
+            </span>
           </div>
-          <p>{t.footerMadeWith}</p>
+          <p className="font-mono text-[11px]">{t.footerMadeWith}</p>
         </div>
       </footer>
     </div>

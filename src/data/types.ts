@@ -103,9 +103,9 @@ export interface Fish {
     description: { ar: string; fr: string; en: string }
   }
   culinaryProfile: {
-    flavor: 'mild' | 'rich' | 'sweet' | 'oily' | 'delicate'
+    flavor: 'mild' | 'rich' | 'sweet' | 'oily' | 'delicate' | 'pronounced'
     texture: 'tender' | 'firm' | 'flaky' | 'meaty'
-    bonesDifficulty: 'low' | 'medium' | 'high'
+    bonesDifficulty: 'none' | 'low' | 'medium' | 'high'
     bestCookingMethods: CookingMethod[]
   }
   freshnessKeys: {

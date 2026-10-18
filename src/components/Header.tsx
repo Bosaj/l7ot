@@ -1,4 +1,5 @@
-import { Fish as FishIcon, BookOpen, Utensils, Compass, Languages, Waves, Globe } from 'lucide-react'
+import React from 'react'
+import { Anchor } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
 
@@ -17,136 +18,169 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const t = STRINGS[lang]
 
+  const navItems: Array<{
+    id: 'fish' | 'recipes' | 'chef' | 'market' | 'agreements'
+    index: string
+    label: string
+    meta: string
+  }> = [
+    {
+      id: 'fish',
+      index: '01',
+      label: t.navFish,
+      meta: lang === 'ar' ? '22 نوعاً' : lang === 'fr' ? '22 Espèces' : '22 Species',
+    },
+    {
+      id: 'recipes',
+      index: '02',
+      label: t.navRecipes,
+      meta: lang === 'ar' ? '11 وصفة' : lang === 'fr' ? '11 Recettes' : '11 Recipes',
+    },
+    {
+      id: 'chef',
+      index: '03',
+      label: t.navChef,
+      meta: lang === 'ar' ? 'ميزان التوابل' : lang === 'fr' ? 'Atelier' : 'Spice Lab',
+    },
+    {
+      id: 'market',
+      index: '04',
+      label: t.navMarket,
+      meta: lang === 'ar' ? 'فحص الطراوة' : lang === 'fr' ? 'Guide Criée' : 'Freshness',
+    },
+    {
+      id: 'agreements',
+      index: '05',
+      label: t.navAgreements,
+      meta: lang === 'ar' ? '10 معاهدات' : lang === 'fr' ? '10 Traités' : '10 Treaties',
+    },
+  ]
+
   return (
-    <header className="sticky top-0 z-40 border-b border-cyan-900/30 bg-slate-950/80 backdrop-blur-xl transition-all">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        {/* Brand */}
-        <div className="flex items-center gap-3">
-          <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-700 shadow-lg shadow-cyan-500/20 ring-1 ring-white/20">
-            <FishIcon className="h-6 w-6 text-white" />
-            <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 ring-2 ring-slate-950">
-              <Waves className="h-2.5 w-2.5 text-white" />
+    <header className="sticky top-0 z-40 border-b border-[#f6f1e7]/12 bg-[#0b0908]/95 backdrop-blur-md">
+      {/* Top Maritime Telemetry Strip (Criée Live Tape) */}
+      <div className="border-b border-[#f6f1e7]/8 bg-[#120f0d] px-4 py-1.5 sm:px-6">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 text-[11px]">
+          <div className="flex items-center gap-3 overflow-x-auto whitespace-nowrap font-mono text-[#a69b8d]">
+            <span className="inline-flex items-center gap-1.5 font-semibold text-[#e68a45]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#e68a45]" />
+              ONP CRIÉE LIVE
+            </span>
+            <span className="text-[#f6f1e7]/20">|</span>
+            <span>SAFI · SARDINE 14 MAD/KG ▼</span>
+            <span className="hidden text-[#f6f1e7]/20 md:inline">|</span>
+            <span className="hidden md:inline">DAKHLA · POULPE 95 MAD/KG ▲</span>
+            <span className="hidden text-[#f6f1e7]/20 lg:inline">|</span>
+            <span className="hidden lg:inline">TANGER MED · PAGEOT VORACERO 110 MAD/KG ▲</span>
+            <span className="hidden text-[#f6f1e7]/20 xl:inline">|</span>
+            <span className="hidden xl:inline text-emerald-400/90">
+              INRH · 3,500 KM LITTORAL ATLANTIQUE & MÉDITERRANÉEN
             </span>
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xl font-black tracking-tight text-white drop-shadow-sm font-sans">
-                {t.siteTitle}
-              </span>
-              <span className="rounded-full border border-cyan-400/30 bg-cyan-500/10 px-2 py-0.5 text-[11px] font-semibold text-cyan-300">
-                المغرب 🇲🇦
-              </span>
-            </div>
-            <p className="hidden text-xs text-slate-400 sm:block">
-              {t.tagline}
-            </p>
+
+          {/* Language Selector */}
+          <div className="flex items-center gap-1 font-mono text-[11px]">
+            <span className="mr-1.5 hidden text-[#786c60] sm:inline">ÉDITION:</span>
+            <button
+              type="button"
+              onClick={() => setLang('ar')}
+              className={`rounded px-2 py-0.5 font-semibold transition-colors ${
+                lang === 'ar'
+                  ? 'bg-[#d96b27] text-[#0b0908]'
+                  : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+              }`}
+            >
+              العربية
+            </button>
+            <button
+              type="button"
+              onClick={() => setLang('fr')}
+              className={`rounded px-2 py-0.5 font-semibold transition-colors ${
+                lang === 'fr'
+                  ? 'bg-[#d96b27] text-[#0b0908]'
+                  : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+              }`}
+            >
+              FR
+            </button>
+            <button
+              type="button"
+              onClick={() => setLang('en')}
+              className={`rounded px-2 py-0.5 font-semibold transition-colors ${
+                lang === 'en'
+                  ? 'bg-[#d96b27] text-[#0b0908]'
+                  : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+              }`}
+            >
+              EN
+            </button>
           </div>
         </div>
+      </div>
 
-        {/* Navigation Tabs */}
-        <nav className="flex items-center gap-1.5 overflow-x-auto rounded-2xl border border-white/5 bg-slate-900/80 p-1 text-sm shadow-inner">
-          <button
-            type="button"
+      {/* Main Editorial Masthead & Architectural Index Navigation */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="flex flex-col justify-between gap-4 py-4 lg:flex-row lg:items-center">
+          {/* Brand Crest */}
+          <div
             onClick={() => setActiveTab('fish')}
-            className={`flex items-center gap-2 rounded-xl px-3.5 py-2 font-medium transition-all duration-200 ${
-              activeTab === 'fish'
-                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20'
-                : 'text-slate-300 hover:bg-white/5 hover:text-white'
-            }`}
+            className="flex cursor-pointer items-center gap-3.5 group"
           >
-            <FishIcon className="h-4 w-4" />
-            <span>{t.navFish}</span>
-          </button>
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#d96b27]/40 bg-[#1c1612] text-[#e68a45] transition-transform duration-300 group-hover:border-[#e68a45]">
+              <Anchor className="h-5 w-5" />
+            </div>
+            <div>
+              <div className="flex flex-wrap items-baseline gap-2.5">
+                <h1 className="font-editorial text-2xl font-bold tracking-tight text-[#f6f1e7] sm:text-3xl">
+                  {t.siteTitle}
+                </h1>
+                <span className="border border-[#d96b27]/35 bg-[#d96b27]/10 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase text-[#f2b47e]">
+                  ATLAS MARITIME DU MAROC
+                </span>
+              </div>
+              <p className="mt-0.5 text-xs text-[#a69b8d]">{t.tagline}</p>
+            </div>
+          </div>
 
-          <button
-            type="button"
-            onClick={() => setActiveTab('recipes')}
-            className={`flex items-center gap-2 rounded-xl px-3.5 py-2 font-medium transition-all duration-200 ${
-              activeTab === 'recipes'
-                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20'
-                : 'text-slate-300 hover:bg-white/5 hover:text-white'
-            }`}
+          {/* Numbered Editorial Index Navigation */}
+          <nav
+            aria-label="Main Navigation"
+            className="flex items-stretch gap-1 overflow-x-auto border border-[#f6f1e7]/10 bg-[#14110f] p-1 rounded-lg"
           >
-            <BookOpen className="h-4 w-4" />
-            <span>{t.navRecipes}</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab('chef')}
-            className={`flex items-center gap-2 rounded-xl px-3.5 py-2 font-medium transition-all duration-200 ${
-              activeTab === 'chef'
-                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20'
-                : 'text-slate-300 hover:bg-white/5 hover:text-white'
-            }`}
-          >
-            <Utensils className="h-4 w-4" />
-            <span>{t.navChef}</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab('market')}
-            className={`flex items-center gap-2 rounded-xl px-3.5 py-2 font-medium transition-all duration-200 ${
-              activeTab === 'market'
-                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20'
-                : 'text-slate-300 hover:bg-white/5 hover:text-white'
-            }`}
-          >
-            <Compass className="h-4 w-4" />
-            <span>{t.navMarket}</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab('agreements')}
-            className={`flex items-center gap-2 rounded-xl px-3.5 py-2 font-medium transition-all duration-200 ${
-              activeTab === 'agreements'
-                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20'
-                : 'text-slate-300 hover:bg-white/5 hover:text-white'
-            }`}
-          >
-            <Globe className="h-4 w-4" />
-            <span>{t.navAgreements}</span>
-          </button>
-        </nav>
-
-        {/* Language Switcher */}
-        <div className="flex items-center gap-1 rounded-xl border border-white/10 bg-slate-900/60 p-1">
-          <Languages className="ml-1.5 h-3.5 w-3.5 text-slate-400" />
-          <button
-            type="button"
-            onClick={() => setLang('ar')}
-            className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition-colors ${
-              lang === 'ar'
-                ? 'bg-cyan-500 text-white shadow-sm'
-                : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            العربية
-          </button>
-          <button
-            type="button"
-            onClick={() => setLang('fr')}
-            className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition-colors ${
-              lang === 'fr'
-                ? 'bg-cyan-500 text-white shadow-sm'
-                : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            FR
-          </button>
-          <button
-            type="button"
-            onClick={() => setLang('en')}
-            className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition-colors ${
-              lang === 'en'
-                ? 'bg-cyan-500 text-white shadow-sm'
-                : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            EN
-          </button>
+            {navItems.map((item) => {
+              const isActive = activeTab === item.id
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setActiveTab(item.id)}
+                  className={`group relative flex items-center gap-2.5 whitespace-nowrap rounded-md px-3.5 py-2 text-xs transition-all duration-200 ${
+                    isActive
+                      ? 'bg-[#d96b27] text-[#0b0908] font-bold shadow-sm'
+                      : 'text-[#d4cbbd] hover:bg-[#f6f1e7]/5 hover:text-[#f6f1e7]'
+                  }`}
+                >
+                  <span
+                    className={`font-mono text-[10px] ${
+                      isActive ? 'text-[#0b0908]/80 font-bold' : 'text-[#e68a45]'
+                    }`}
+                  >
+                    {item.index}
+                  </span>
+                  <span className="text-xs sm:text-[13px]">{item.label}</span>
+                  <span
+                    className={`hidden rounded px-1.5 py-0.5 font-mono text-[9px] xl:inline-block ${
+                      isActive
+                        ? 'bg-[#0b0908]/15 text-[#0b0908]'
+                        : 'bg-[#f6f1e7]/5 text-[#a69b8d]'
+                    }`}
+                  >
+                    {item.meta}
+                  </span>
+                </button>
+              )
+            })}
+          </nav>
         </div>
       </div>
     </header>

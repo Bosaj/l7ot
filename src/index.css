@@ -1,15 +1,47 @@
 @import 'tailwindcss';
 
 /*
- * Unified typography.
- * One stack for the whole app: Plus Jakarta Sans draws Latin glyphs, Readex Pro draws
- * Arabic glyphs (the browser picks per-glyph), so mixed Darija/French/English text
- * always looks like a single typeface. Wired into Tailwind's `font-sans`, so utility
- * classes can no longer override it with the system font.
+ * ATLAS HALIEUTIQUE & CRIÉE ROYALE — DESIGN SYSTEM
+ * Replaces generic dark-slate/neon-cyan SaaS defaults with a warm Obsidian-Basalt canvas,
+ * Parchment-Ivory ink, Moroccan Saffron-Terracotta & Zellige-Brass accents, and a 3-tier
+ * editorial typographic architecture:
+ *   1. Display Serif: Fraunces Variable (Latin) + Amiri (Arabic classical Naskh)
+ *   2. Technical Body: Space Grotesk Variable (Latin) + IBM Plex Sans Arabic (Arabic)
+ *   3. Telemetry Mono: JetBrains Mono Variable (Prices, weights, port codes, quotas)
  */
 @theme {
-  --font-sans: 'Plus Jakarta Sans Variable', 'Readex Pro Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Plus Jakarta Sans Variable', 'Readex Pro Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Space Grotesk Variable', 'IBM Plex Sans Arabic', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces Variable', 'Amiri', Georgia, serif;
+  --font-serif: 'Fraunces Variable', 'Amiri', Georgia, serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, monospace;
+
+  /* Remap cold slate to Warm Obsidian & Basalt Stone */
+  --color-slate-950: #0b0908;
+  --color-slate-900: #151210;
+  --color-slate-800: #231e1a;
+  --color-slate-700: #362f29;
+  --color-slate-600: #52483f;
+  --color-slate-500: #786c60;
+  --color-slate-400: #a69b8d;
+  --color-slate-300: #d4cbbd;
+  --color-slate-200: #e8e0d3;
+  --color-slate-100: #f6f1e7;
+
+  /* Remap neon cyan/blue to Moroccan Saffron-Terracotta & Essaouira Brass */
+  --color-cyan-950: #281509;
+  --color-cyan-900: #45230e;
+  --color-cyan-600: #c2591a;
+  --color-cyan-500: #d96b27;
+  --color-cyan-400: #e68a45;
+  --color-cyan-300: #f2b47e;
+
+  --color-blue-950: #1f140c;
+  --color-blue-900: #382212;
+  --color-blue-700: #a34613;
+  --color-blue-600: #ba5218;
+  --color-blue-500: #d46524;
+  --color-blue-400: #e58849;
+  --color-blue-300: #f0b07d;
 }
 
 @layer base {
@@ -26,17 +58,32 @@
   body {
     font-family: var(--font-sans);
     font-feature-settings: 'kern' 1, 'liga' 1;
-    background-color: #020617;
-    color: #f8fafc;
+    background-color: #0b0908;
+    color: #f6f1e7;
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
-    text-wrap: balance;
+  /* Tactile subtle film/paper grain overlay across the viewport */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.032;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
-  /* Arabic letters must stay joined: never apply tracking in RTL. */
+  h1,
+  h2,
+  h3,
+  .font-editorial {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    font-weight: 700;
+  }
+
+  /* Arabic cursive letters must stay joined: never apply positive/negative tracking in RTL */
   [dir='rtl'] * {
     letter-spacing: 0 !important;
   }
@@ -45,27 +92,63 @@
     line-height: 1.75;
   }
 
-  /* Tabular figures keep prices and nutrition numbers aligned. */
-  .tabular {
+  [dir='rtl'] h1,
+  [dir='rtl'] h2,
+  [dir='rtl'] h3,
+  [dir='rtl'] .font-editorial {
+    font-family: 'Amiri', 'Fraunces Variable', Georgia, serif;
+    line-height: 1.35;
+  }
+
+  /* Tabular figures & technical mono for prices, weights, and port indices */
+  .tabular,
+  .font-telemetry {
+    font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
   }
 }
 
-
-/* Double-bezel Machined Glass Utility */
+/* Architectural Specimen Frame (Replaces generic rounded SaaS cards) */
 .double-bezel {
   position: relative;
-  border-radius: 1.75rem;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 0.375rem;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.07), 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+  background: rgba(246, 241, 231, 0.025);
+  padding: 0.3rem;
+  box-shadow:
+    0 0 0 1px rgba(246, 241, 231, 0.09),
+    0 24px 48px -18px rgba(0, 0, 0, 0.75);
 }
 
 .double-bezel-inner {
-  border-radius: calc(1.75rem - 0.375rem);
-  background: rgba(10, 20, 38, 0.75);
-  backdrop-filter: blur(20px);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
+  border-radius: calc(1rem - 0.25rem);
+  background: #14110f;
+  box-shadow: inset 0 1px 0 rgba(246, 241, 231, 0.08);
+}
+
+/* Editorial Rule Divider */
+.editorial-rule {
+  border-color: rgba(246, 241, 231, 0.1);
+}
+
+/* Soundwave Animation for Active Darija Audio Button */
+@keyframes soundwave {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.animate-wave-1 {
+  animation: soundwave 0.6s ease-in-out infinite;
+}
+.animate-wave-2 {
+  animation: soundwave 0.6s ease-in-out 0.15s infinite;
+}
+.animate-wave-3 {
+  animation: soundwave 0.6s ease-in-out 0.3s infinite;
 }
 
 /* Custom Scrollbar */
@@ -75,15 +158,15 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #020617;
+  background: #0b0908;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #2c2520;
+  border-radius: 2px;
+  border: 1px solid rgba(246, 241, 231, 0.08);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #06b6d4;
+  background: #d96b27;
 }

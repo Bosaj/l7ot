@@ -43,4 +43,14 @@ describe('L7OT App', () => {
 
     expect(screen.getByText('Encyclopédie des Poissons')).toBeInTheDocument()
   })
+
+  it('includes all 22 Moroccan fish species and supports regional dialect search', () => {
+    render(<App />)
+    expect(screen.getByText(/موسوعة الأسماك \(22\)/)).toBeInTheDocument()
+
+    const searchInput = screen.getByPlaceholderText(/ابحث باسم الحوت/i)
+    fireEvent.change(searchInput, { target: { value: 'فوراسيرو' } })
+    expect(screen.getByText('الباجو الملكي')).toBeInTheDocument()
+  })
 })
+

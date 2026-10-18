@@ -46,8 +46,8 @@ export const FishModal: React.FC<FishModalProps> = ({
 
   const handleAudio = () => {
     setIsPlayingAudio(true)
-    speakDarija(fish.nameDarijaArabic, fish.audioPhonetic)
-    setTimeout(() => setIsPlayingAudio(false), 1600)
+    speakDarija(fish.nameDarijaArabic, fish.audioPhonetic, fish.id)
+    setTimeout(() => setIsPlayingAudio(false), 3200)
   }
 
   const linkedRecipes = allRecipes.filter(

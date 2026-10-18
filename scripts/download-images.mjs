@@ -1,4 +1,4 @@
-﻿// Downloads curated Wikimedia Commons photos into public/images and writes credits.
+// Downloads curated Wikimedia Commons photos into public/images and writes credits.
 import { mkdir, writeFile } from 'node:fs/promises'
 
 const UA = 'L7otApp/1.0 (https://github.com/Bosaj/l7ot)'
@@ -13,6 +13,18 @@ const picks = {
   'fish/poulpe': 'Octopus vulgaris 03.jpg',
   'fish/crevette': 'Crevette rose du large (Parapenaeus longirostris) (Ifremer 00682-79444 - 32243).jpg',
   'fish/anchois': 'Anchois commun (Engraulis encrasicolus) (Ifremer 00402-51364).jpg',
+  'fish/pageot': 'Pageot commun (Pagellus erythrinus) (Ifremer 00710-82226).jpg',
+  'fish/chinchard': 'Trachurus trachurus France.jpg',
+  'fish/congre': 'Meeraal Conger conger 1.jpg',
+  'fish/raie': 'Rajidae Raja clavata 2.jpg',
+  'fish/bar-loup': 'Bar commun (Dicentrarchus labrax) (Ifremer 00572-68449 - 26366).jpg',
+  'fish/mulet': 'Mújol (Mugil cephalus), Parque natural de la Arrábida, Portugal, 2021-09-09, DD 25.jpg',
+  'fish/maquereau': 'Atlantic mackerel (Scomber scombrus).jpg',
+  'fish/thon-rouge': 'Thunnus thynnus Croatia.jpg',
+  'fish/sabre': 'Lepidopus caudatus - Mercado Municipal Funchal 01.jpg',
+  'fish/rouget': 'Salmonete de roca (Mullus surmuletus), Parque natural de la Arrábida, Portugal, 2020-07-21, DD 59.jpg',
+  'fish/seiche': 'Sepia común (Sepia officinalis), Parque natural de la Arrábida, Portugal, 2020-07-21, DD 62.jpg',
+  'fish/moules-bouzroug': 'Perna perna 02.jpg',
   'recipes/sardines-mchermline': 'Grilled sardines.jpg',
   'recipes/tagine-kouari-sardine': 'Tajine kefta (8348397161).jpg',
   'recipes/tagine-l7ot-khodra': 'Tagine au poisson.jpeg',
