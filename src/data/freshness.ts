@@ -1,0 +1,161 @@
+import type { MarketFreshnessCriterion } from './types'
+
+export const FRESHNESS_CRITERIA: MarketFreshnessCriterion[] = [
+  {
+    id: 'eyes',
+    titleAr: 'العينين (البريق والشكل)',
+    titleFr: 'Les Yeux (Clarté & Relief)',
+    titleEn: 'Eyes (Clarity & Convexity)',
+    freshIndicatorAr: 'بارزة محدبة للخارج، براقة وشفافة، البؤبؤ أسود ناصع والقرنية كالبلورة.',
+    freshIndicatorFr: 'Yeux bombés, vifs et brillants, cornée limpide et pupille noir profond.',
+    freshIndicatorEn: 'Convex, bulging outward, crystal-clear cornea and deep jet-black pupil.',
+    staleIndicatorAr: 'غائرة للداخل، معتمة أو رمادية، محاطة بغشاء دموي أحمر باهت.',
+    staleIndicatorFr: 'Yeux concaves enfoncés dans l’orbite, ternes, voilés ou laiteux.',
+    staleIndicatorEn: 'Sunken into eye sockets, cloudy, milky, or bloodshot.',
+    iconName: 'Eye',
+  },
+  {
+    id: 'gills',
+    titleAr: 'الخياشيم (اللون والرطوبة)',
+    titleFr: 'Les Ouïes (Couleur & Mucus)',
+    titleEn: 'Gills (Color & Moisture)',
+    freshIndicatorAr: 'لون أحمر قرمزي ناصع أو وردي زاهي، رطبة بنظافة وبدون أي مخاط رمادي.',
+    freshIndicatorFr: 'Ouïes rouge sang éclatant ou rose vif, humides, sans glaire épaisse.',
+    freshIndicatorEn: 'Vibrant blood-red or lively pink, clean and moist with zero slimy grey residue.',
+    staleIndicatorAr: 'بنية داكنة أو مصفرة، مغطاة بمخاط لزج معكر وكريه الرائحة.',
+    staleIndicatorFr: 'Ouïes brunâtres, jaunâtres ou décolorées, couvertes d’un mucus poisseux.',
+    staleIndicatorEn: 'Dull brown, yellowish or bleached, coated with thick sour slime.',
+    iconName: 'Activity',
+  },
+  {
+    id: 'skin-scales',
+    titleAr: 'الجلد والقشور (اللمعان والتماسك)',
+    titleFr: 'Peau & Écailles (Éclat & Adhérence)',
+    titleEn: 'Skin & Scales (Sheen & Adherence)',
+    freshIndicatorAr: 'جلد مشدود بألوان قوس قزح براقة، قشور قوية متراصة تقاوم النزع.',
+    freshIndicatorFr: 'Peau tendue aux reflets métalliques vifs, écailles bien adhérentes.',
+    freshIndicatorEn: 'Taut skin with vibrant metallic sheen, scales firmly anchored and hard to scrape.',
+    staleIndicatorAr: 'ألوان باهتة بدون لمعان، جلد رخو يتساقط قشره بمجرد لمسه.',
+    staleIndicatorFr: 'Peau flasque et terne, écailles qui se détachent au moindre effleurement.',
+    staleIndicatorEn: 'Dull faded tone, slack skin with loose scales shedding at the slightest touch.',
+    iconName: 'Sparkles',
+  },
+  {
+    id: 'flesh-resilience',
+    titleAr: 'صلابة اللحم (الارتداد عند اللمس)',
+    titleFr: 'La Chair (Fermeté & Élasticité)',
+    titleEn: 'Flesh (Firmness & Elasticity)',
+    freshIndicatorAr: 'لحم صلب ومرن يرتد فوراً عند ضغطه بالإبهام دون أن يترك أي أثر.',
+    freshIndicatorFr: 'Chair ferme et élastique : l’empreinte du doigt disparaît instantanément.',
+    freshIndicatorEn: 'Firm, springy muscle tissue: thumb indentation bounces back immediately.',
+    staleIndicatorAr: 'لحم طري رخو يترك أثراً غائراً دائماً بعد لمسه ولا يستعيد شكله.',
+    staleIndicatorFr: 'Chair molle et flasque : la trace du doigt reste visible et s’enfonce.',
+    staleIndicatorEn: 'Soft and mushy flesh: thumb indentation remains sunken and indented.',
+    iconName: 'ShieldCheck',
+  },
+  {
+    id: 'smell',
+    titleAr: 'الرائحة (نسيم البحر النقي)',
+    titleFr: 'L’Odeur (Brise Marine vs Ammoniaque)',
+    titleEn: 'Aroma (Ocean Spray vs Ammonia)',
+    freshIndicatorAr: 'رائحة نسيم البحر النظيف والطحالب المنعشة واليود الصافي.',
+    freshIndicatorFr: 'Parfum frais d’algues marines, de ressac et d’air iodé vivifiant.',
+    freshIndicatorEn: 'Pure invigorating sea spray, fresh ozone, and sweet clean seaweed.',
+    staleIndicatorAr: 'رائحة أمونياك نفاذة أو عفونة توحي ببداية التحلل البكتيري.',
+    staleIndicatorFr: 'Odeur forte et piquante d’ammoniaque, relents aigres ou de marécage.',
+    staleIndicatorEn: 'Pungent ammonia stink, sour rotten notes, or stagnant marsh smell.',
+    iconName: 'Wind',
+  },
+]
+
+export interface MoroccanPort {
+  id: string
+  nameAr: string
+  nameFr: string
+  nameEn: string
+  coast: 'atlantic' | 'mediterranean' | 'both'
+  topFish: string[]
+  descriptionAr: string
+  descriptionFr: string
+  descriptionEn: string
+}
+
+export const MOROCCAN_PORTS: MoroccanPort[] = [
+  {
+    id: 'dakhla',
+    nameAr: 'الداخلة (جوهرة الجنوب)',
+    nameFr: 'Dakhla (Baie de Rio de Oro)',
+    nameEn: 'Dakhla (Southern Jewel)',
+    coast: 'atlantic',
+    topFish: ['الأخطبوط (الروكاس)', 'القرب (الكوربين)', 'المحار النقي', 'الكالامار'],
+    descriptionAr: 'عاصمة الأخطبوط العالمية وأغنى الخلجان البحرية بالأسماك النبيلة في المحيط الأطلسي.',
+    descriptionFr: 'Capitale mondiale du poulpe et lagune d’exception aux eaux pures et oxygénées.',
+    descriptionEn: 'The global capital of wild octopus and exceptional pristine Atlantic lagoon fisheries.',
+  },
+  {
+    id: 'safi',
+    nameAr: 'آسفي (حاضرة السردين التاريخية)',
+    nameFr: 'Safi (Capitale historique de la Sardine)',
+    nameEn: 'Safi (Historic Sardine Capital)',
+    coast: 'atlantic',
+    topFish: ['السردين الأصيل', 'الشرن', 'الصول', 'الكابايلا'],
+    descriptionAr: 'المدينة التي ارتبط اسمها بصناعة وتعليب وصيد السردين المغربي الأسطوري لعقود.',
+    descriptionFr: 'Berceau mythique de la sardine marocaine et de l’artisanat de conserve de renom.',
+    descriptionEn: 'Legendary historical hub of the Moroccan sardine fleet and world-class canning heritage.',
+  },
+  {
+    id: 'essaouira',
+    nameAr: 'الصويرة (موكادور ومدينة الرياح)',
+    nameFr: 'Essaouira (Mogador des Alizés)',
+    nameEn: 'Essaouira (Wind City & Mogador)',
+    coast: 'atlantic',
+    topFish: ['بوزروك الصخري', 'الشرغو', 'السردين المشوي', 'اللانڭوست'],
+    descriptionAr: 'ميناء تاريخي بقوارب خشبية زرقاء وشواطئ تشتهر بشواء السردين الطازج وبوزروك الصخري.',
+    descriptionFr: 'Port aux barques bleues emblématiques réputé pour ses grillades de poissons et ses moules.',
+    descriptionEn: 'Historic port with iconic blue wooden boats celebrated for fresh charcoal sardine grills and wild mussels.',
+  },
+  {
+    id: 'al-hoceima',
+    nameAr: 'الحسيمة (لؤلؤة البحر الأبيض المتوسط)',
+    nameFr: 'Al Hoceima (Perle de la Méditerranée)',
+    nameEn: 'Al Hoceima (Pearl of the Mediterranean)',
+    coast: 'mediterranean',
+    topFish: ['الإسبادون', 'الباجو الياقوتي', 'الروجي العطري', 'الشطون'],
+    descriptionAr: 'مياه فيروزية عميقة تنتج أجود أنواع سمك الإسبادون والروجي والباجو في حوض المتوسط.',
+    descriptionFr: 'Eaux cristallines offrant les plus beaux espadons, rougets parfumés et daurades de Méditerranée.',
+    descriptionEn: 'Turquoise deep waters home to premier Mediterranean swordfish, red mullet, and pink sea bream.',
+  },
+  {
+    id: 'tanger',
+    nameAr: 'طنجة (مضيق البوغاز والتقاء البحرين)',
+    nameFr: 'Tanger (Détroit de Gibraltar)',
+    nameEn: 'Tangier (Strait of Gibraltar)',
+    coast: 'both',
+    topFish: ['التونة الحمراء', 'الإسبادون', 'الدرعي (اللوبين)', 'حوتة سيدنا موسى'],
+    descriptionAr: 'نقطة التقاء المحيط الأطلسي بالبحر الأبيض المتوسط حيث تهاجر أسراب التونة والإسبادون.',
+    descriptionFr: 'Confluent spectaculaire de l’Atlantique et de la Méditerranée, couloir de migration des géants pélagiques.',
+    descriptionEn: 'Where Atlantic and Mediterranean tides converge, a legendary migration highway for bluefin tuna and swordfish.',
+  },
+  {
+    id: 'larache',
+    nameAr: 'العرائش (عروس مصب اللوكوس)',
+    nameFr: 'Larache (Estuaire du Loukkos)',
+    nameEn: 'Larache (Loukkos Estuary)',
+    coast: 'atlantic',
+    topFish: ['الكروفيت الفاخر', 'الميرلا', 'الأنشوبة', 'التونة بالمضربة'],
+    descriptionAr: 'تشتهر بأسطول صيد الكروفيت الوردي ومضربات صيد التونة الحمراء التقليدية العريقة.',
+    descriptionFr: 'Célèbre pour ses chalutiers de crevettes royales et ses filets ancestraux de madragues.',
+    descriptionEn: 'Renowned for prized pink prawn fleets and ancient artisanal tuna madrague trap traditions.',
+  },
+  {
+    id: 'agadir',
+    nameAr: 'أكادير (بوابة سوس والمحيط الأطلسي)',
+    nameFr: 'Agadir (Grand Port Atlantique de Souss)',
+    nameEn: 'Agadir (Atlantic Souss Gateway)',
+    coast: 'atlantic',
+    topFish: ['السردين', 'الكالامار', 'الصول', 'القرب'],
+    descriptionAr: 'أكبر مجمع لتفريغ وصناعة الأسماك في المغرب مع سوق سمك نابض بالحياة فجراً.',
+    descriptionFr: 'Premier complexe halieutique du Royaume avec une halle aux poissons bouillonnante à l’aube.',
+    descriptionEn: 'Morocco’s largest industrial and artisanal fishing hub with an electric dawn fish auction.',
+  },
+]

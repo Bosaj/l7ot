@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="oceanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+    <linearGradient id="finGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="#020617" />
+  <path d="M50 32C42 18 20 20 12 32C20 44 42 46 50 32Z" fill="url(#oceanGrad)" />
+  <path d="M50 32L58 22V42L50 32Z" fill="url(#finGrad)" />
+  <circle cx="22" cy="30" r="3" fill="#ffffff" />
+  <circle cx="22" cy="30" r="1.5" fill="#020617" />
+  <path d="M30 26C32 29 32 35 30 38" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+  <path d="M36 27C38 30 38 34 36 37" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.4" />
+</svg>
