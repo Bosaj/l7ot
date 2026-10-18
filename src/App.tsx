@@ -6,6 +6,11 @@ import {
   Compass,
   Globe,
   Volume2,
+  Bug,
+  Mail,
+  Code2,
+  BookOpen,
+  ShieldCheck,
 } from 'lucide-react'
 import { Header } from './components/Header'
 import { FishCard } from './components/FishCard'
@@ -190,13 +195,23 @@ export const App: React.FC = () => {
 
                 <div className="rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-3.5">
                   <span className="font-mono text-[10px] uppercase text-[#a69b8d] block">
-                    {lang === 'ar' ? 'صادرات المملكة' : 'EXPORT HALIEUTIQUE'}
+                    {lang === 'ar'
+                      ? 'صادرات المملكة'
+                      : lang === 'fr'
+                      ? 'EXPORT HALIEUTIQUE'
+                      : 'SEAFOOD EXPORTS'}
                   </span>
-                  <span className="font-mono text-xl font-bold text-emerald-400">
-                    31+ Md MAD
-                  </span>
+                  <div className="flex items-baseline gap-1" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+                    <span className="font-mono text-xl font-bold text-emerald-400">
+                      {lang === 'ar' ? '+31 مليار درهم' : lang === 'fr' ? '+31 Mds MAD' : '+31B MAD'}
+                    </span>
+                  </div>
                   <span className="mt-0.5 block font-mono text-[10px] text-[#786c60]">
-                    {lang === 'ar' ? 'الرتبة 1 أفريقياً للسمك' : '#1 Exportateur Africain'}
+                    {lang === 'ar'
+                      ? 'الرتبة الأولى إفريقياً في الصيد'
+                      : lang === 'fr'
+                      ? '#1 Exportateur Africain'
+                      : '#1 African Exporter'}
                   </span>
                 </div>
 
@@ -534,39 +549,143 @@ export const App: React.FC = () => {
         />
       )}
 
-      {/* Editorial Colophon Footer */}
-      <footer className="mt-20 border-t border-[#f6f1e7]/10 bg-[#0b0908] py-10 text-xs text-[#a69b8d]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <Waves className="h-4 w-4 text-[#e68a45]" />
-            <span className="font-editorial text-base font-bold text-[#f6f1e7]">
-              L7OT · الحوت المغربي
-            </span>
-            <span className="font-mono text-[11px] text-[#786c60]">
-              {lang === 'ar'
-                ? '— 32 نوعاً بحرياً · 16 وصفة ساحلية · 10 معاهدات دولية · 3,500 كلم شريط ساحلي'
-                : lang === 'fr'
-                ? '— 32 espèces · 16 recettes côtières · 10 traités halieutiques · 3 500 km littoral'
-                : '— 32 Marine Species · 16 Coastal Recipes · 10 Sovereign Treaties · 3,500 km Coastline'}
-            </span>
+      {/* Editorial Colophon & Open Source Community Reporting Footer */}
+      <footer className="mt-20 border-t border-[#f6f1e7]/10 bg-[#0b0908] py-12 text-xs text-[#a69b8d]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-8">
+          {/* Main Footer Header */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-[#f6f1e7]/8 pb-6">
+            <div className="flex items-center gap-2.5">
+              <Waves className="h-5 w-5 text-[#e68a45]" />
+              <span className="font-editorial text-lg font-bold text-[#f6f1e7]">
+                L7OT · الحوت المغربي
+              </span>
+              <span className="font-mono text-[11px] text-[#786c60]">
+                {lang === 'ar'
+                  ? '— أطلس الثروة السمكية والموانئ والطبخ الساحلي بالمملكة المغربية'
+                  : lang === 'fr'
+                  ? '— Atlas des Ressources Halieutiques & Gastronomie Côtière du Maroc'
+                  : '— Moroccan Fisheries Atlas, Port Dynamics & Coastal Gastronomy'}
+              </span>
+            </div>
+
+            {/* Author Credit */}
+            <div className="flex items-center gap-2 font-mono text-[11px]">
+              <span>
+                {lang === 'ar'
+                  ? 'تصميم وهندسة بواسطة'
+                  : lang === 'fr'
+                  ? 'Conçu & développé par'
+                  : 'Designed & engineered by'}
+              </span>
+              <a
+                href="https://www.linkedin.com/in/oussama-elhadji"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#d96b27]/40 bg-[#d96b27]/10 px-3 py-1 font-semibold text-[#f2b47e] transition hover:border-[#d96b27] hover:bg-[#d96b27]/20 hover:text-white"
+              >
+                <span>Oussama EL HADJI</span>
+                <span className="text-[10px] text-[#d96b27]">in ↗</span>
+              </a>
+            </div>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-3 font-mono text-[11px]">
-            <span>
-              {lang === 'ar'
-                ? 'تصميم وهندسة بواسطة'
-                : lang === 'fr'
-                ? 'Conçu & développé par'
-                : 'Designed & engineered by'}
-            </span>
-            <a
-              href="https://www.linkedin.com/in/oussama-elhadji"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-[#d96b27]/40 bg-[#d96b27]/10 px-3 py-1 font-semibold text-[#f2b47e] transition hover:border-[#d96b27] hover:bg-[#d96b27]/20 hover:text-white"
-            >
-              <span>Oussama EL HADJI</span>
-              <span className="text-[10px] text-[#d96b27]">in ↗</span>
-            </a>
+
+          {/* Open Source Problem Reporting & Community Hub */}
+          <div className="rounded-xl border border-[#d96b27]/20 bg-[#14110f] p-5 sm:p-6 shadow-inner">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+              <div className="space-y-1.5 max-w-2xl">
+                <div className="flex items-center gap-2 text-[#e68a45]">
+                  <Bug className="h-4 w-4" />
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider">
+                    {lang === 'ar'
+                      ? 'مشروع مفتوح المصدر · بلّغ عن خطأ أو اقترح نوعاً سمكياً'
+                      : lang === 'fr'
+                      ? 'Projet Open Source · Signalez un bogue ou proposez une espèce'
+                      : 'Open Source Initiative · Report an Issue or Propose a Species'}
+                  </span>
+                </div>
+                <p className="text-xs text-[#a69b8d] leading-relaxed">
+                  {lang === 'ar'
+                    ? 'منصة الحوت المغربي مفتوحة المصدر بالكامل ومتاحة للعموم. إذا لاحظت أي خطأ في الأسماء المحلية أو الأسعار أو تود اقتراح معلومات جديدة، يمكنك التبليغ مباشرة عبر GitHub Issues أو بمراسلتنا عبر البريد الإلكتروني.'
+                    : lang === 'fr'
+                    ? 'L7OT est une plateforme 100% open-source au service du patrimoine halieutique marocain. Pour signaler un problème de données, de prix ou suggérer une espèce, ouvrez une issue GitHub ou contactez-nous par e-mail.'
+                    : 'L7OT is a fully open-source platform dedicated to Moroccan marine heritage. To report a data glitch, pricing discrepancy, or suggest a new fish species, open a GitHub issue or email us directly.'}
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+                <a
+                  href="https://github.com/Bosaj/l7ot/issues/new/choose"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border border-[#e68a45]/40 bg-[#d96b27] px-3.5 py-2 font-mono text-xs font-bold text-[#0b0908] transition hover:bg-[#e68a45] shadow-md shadow-[#d96b27]/20"
+                >
+                  <Bug className="h-3.5 w-3.5" />
+                  <span>
+                    {lang === 'ar'
+                      ? 'التبليغ عبر GitHub (Issues)'
+                      : lang === 'fr'
+                      ? 'Signaler sur GitHub'
+                      : 'Report on GitHub'}
+                  </span>
+                </a>
+
+                <a
+                  href="mailto:elhadjioussama11@gmail.com?subject=%5BL7OT%20Report%5D%20Signalement%20ou%20Suggestion%20de%20Poisson"
+                  className="inline-flex items-center gap-2 rounded-lg border border-[#f6f1e7]/15 bg-[#0b0908] px-3.5 py-2 font-mono text-xs font-medium text-[#f6f1e7] transition hover:border-[#d96b27]/50 hover:bg-[#1a1512]"
+                >
+                  <Mail className="h-3.5 w-3.5 text-[#e68a45]" />
+                  <span>
+                    {lang === 'ar'
+                      ? 'مراسلة عبر الإيميل'
+                      : lang === 'fr'
+                      ? 'Contacter par Email'
+                      : 'Contact via Email'}
+                  </span>
+                </a>
+
+                <a
+                  href="https://github.com/Bosaj/l7ot/wiki"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] px-3 py-2 font-mono text-xs font-medium text-[#a69b8d] transition hover:text-[#f6f1e7]"
+                >
+                  <BookOpen className="h-3.5 w-3.5 text-cyan-400" />
+                  <span>
+                    {lang === 'ar' ? 'ويكي المنصة' : 'Wiki L7ot'}
+                  </span>
+                </a>
+
+                <a
+                  href="https://github.com/Bosaj/l7ot"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] px-3 py-2 font-mono text-xs font-medium text-[#a69b8d] transition hover:text-[#f6f1e7]"
+                >
+                  <Code2 className="h-3.5 w-3.5 text-[#e68a45]" />
+                  <span>
+                    {lang === 'ar' ? 'الكود المصدري' : 'Source Code'}
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Moroccan Marine Law & Biological Conservation Notice */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[11px] font-mono text-[#786c60] border-t border-[#f6f1e7]/6 pt-4">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="h-4 w-4 text-emerald-500 shrink-0" />
+              <span>
+                {lang === 'ar'
+                  ? 'قوانين الصيد البحري المغربي: ظهير 1973، القانون 15-12، وقرارات الراحة البيولوجية (الميرو 1 يوليوز - 31 غشت، والأخطبوط) تضمن استدامة المصايد الوطنية.'
+                  : lang === 'fr'
+                  ? 'Réglementation maritime marocaine (Dahir 1973, Loi 15-12) : respect des tailles minimales, permis de chasse sous-marine en apnée et repos biologiques obligatoires.'
+                  : 'Moroccan Maritime Law (Dahir 1973, Law 15-12): compliance with legal minimum catch sizes, spearfishing apnea licensing, and mandatory biological resting periods.'}
+              </span>
+            </div>
+            <div className="shrink-0 text-start sm:text-end">
+              <span>{lang === 'ar' ? 'النسخة v1.2.0 · رخصة MIT الحرة' : 'Release v1.2.0 · MIT Open Source License'}</span>
+            </div>
           </div>
         </div>
       </footer>
