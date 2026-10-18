@@ -1,7 +1,8 @@
 import React from 'react'
-import { Camera } from 'lucide-react'
+import { Camera, MapPin } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
+import type { MoroccanPortRegion } from '../lib/moroccanRegions'
 
 export type NavTab = 'fish' | 'scanner' | 'recipes' | 'chef' | 'market' | 'agreements' | 'marine-apis'
 
@@ -10,6 +11,15 @@ interface HeaderProps {
   setActiveTab: (tab: NavTab) => void
   lang: SupportedLanguage
   setLang: (lang: SupportedLanguage) => void
+  userPortLocation?: {
+    selectedRegion: MoroccanPortRegion
+    isLocating: boolean
+    isAutoDetected: boolean
+    detectedDistanceKm: number | null
+    detectLocation: () => void
+    setManualRegion: (regionId: string) => void
+    regions: MoroccanPortRegion[]
+  }
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -17,6 +27,7 @@ export const Header: React.FC<HeaderProps> = ({
   setActiveTab,
   lang,
   setLang,
+  userPortLocation,
 }) => {
   const t = STRINGS[lang]
 
@@ -75,6 +86,7 @@ export const Header: React.FC<HeaderProps> = ({
   const tickerItems =
     lang === 'ar'
       ? [
+          { port: 'بني نصار / الناظور · باخيل والغامبا', price: '85 درهم/كلغ', trend: '▲', down: false },
           { port: 'آسفي · السردين', price: '14 درهم/كلغ', trend: '▼', down: true },
           { port: 'الداخلة · الأخطبوط', price: '95 درهم/كلغ', trend: '▲', down: false },
           { port: 'طنجة المتوسط · الباجو الملكي', price: '110 درهم/كلغ', trend: '▲', down: false },
@@ -82,12 +94,14 @@ export const Header: React.FC<HeaderProps> = ({
         ]
       : lang === 'fr'
         ? [
+            { port: 'NADOR · PAGEL & GAMBA', price: '85 MAD/KG', trend: '▲', down: false },
             { port: 'SAFI · SARDINE', price: '14 MAD/KG', trend: '▼', down: true },
             { port: 'DAKHLA · POULPE', price: '95 MAD/KG', trend: '▲', down: false },
             { port: 'TANGER MED · PAGEOT ROYAL', price: '110 MAD/KG', trend: '▲', down: false },
             { port: 'OUALIDIA · HUÎTRES & CRABE', price: '70 MAD/KG', trend: '●', down: true },
           ]
         : [
+            { port: 'NADOR · ROYAL PAGEL & SHRIMPS', price: '85 MAD/KG', trend: '▲', down: false },
             { port: 'SAFI · SARDINE', price: '14 MAD/KG', trend: '▼', down: true },
             { port: 'DAKHLA · OCTOPUS', price: '95 MAD/KG', trend: '▲', down: false },
             { port: 'TANGIER MED · ROYAL BREAM', price: '110 MAD/KG', trend: '▲', down: false },
@@ -130,44 +144,70 @@ export const Header: React.FC<HeaderProps> = ({
             ))}
           </div>
 
-          {/* Language Selector */}
-          <div className="flex items-center gap-1 font-mono text-[11px]">
-            <span className="me-1.5 hidden text-[#786c60] sm:inline">
-              {lang === 'ar' ? 'اللغة:' : lang === 'fr' ? 'ÉDITION:' : 'LANGUAGE:'}
-            </span>
-            <button
-              type="button"
-              onClick={() => setLang('ar')}
-              className={`rounded px-2 py-0.5 font-semibold transition-colors ${
-                lang === 'ar'
-                  ? 'bg-[#d96b27] text-[#0b0908]'
-                  : 'text-[#a69b8d] hover:text-[#f6f1e7]'
-              }`}
-            >
-              العربية
-            </button>
-            <button
-              type="button"
-              onClick={() => setLang('fr')}
-              className={`rounded px-2 py-0.5 font-semibold transition-colors ${
-                lang === 'fr'
-                  ? 'bg-[#d96b27] text-[#0b0908]'
-                  : 'text-[#a69b8d] hover:text-[#f6f1e7]'
-              }`}
-            >
-              FR
-            </button>
-            <button
-              type="button"
-              onClick={() => setLang('en')}
-              className={`rounded px-2 py-0.5 font-semibold transition-colors ${
-                lang === 'en'
-                  ? 'bg-[#d96b27] text-[#0b0908]'
-                  : 'text-[#a69b8d] hover:text-[#f6f1e7]'
-              }`}
-            >
-              EN
-            </button>
+          {/* Location Port & Language Controls */}
+          <div className="flex items-center gap-3 font-mono text-[11px]">
+            {userPortLocation && (
+              <div className="flex items-center gap-1 border-e border-[#f6f1e7]/15 pe-2.5">
+                <button
+                  type="button"
+                  onClick={userPortLocation.detectLocation}
+                  disabled={userPortLocation.isLocating}
+                  title={lang === 'ar' ? 'رصد الموقع الجغرافي وتحديد أقرب ميناء مغربي' : 'Localisation GPS du port le plus proche'}
+                  className={`inline-flex items-center gap-1 rounded border px-2 py-0.5 text-[10px] font-medium transition ${
+                    userPortLocation.isLocating
+                      ? 'border-[#d96b27] bg-[#d96b27]/20 text-[#f2b47e]'
+                      : 'border-cyan-500/30 bg-cyan-500/10 text-cyan-300 hover:border-cyan-400'
+                  }`}
+                >
+                  <MapPin className={`h-3 w-3 text-cyan-400 ${userPortLocation.isLocating ? 'animate-spin' : ''}`} />
+                  <span>
+                    {userPortLocation.isLocating
+                      ? (lang === 'ar' ? 'جاري الرصد...' : 'GPS...')
+                      : (lang === 'ar' ? userPortLocation.selectedRegion.primaryPortAr.split('/')[0] : userPortLocation.selectedRegion.primaryPortFr.split('/')[0])}
+                  </span>
+                </button>
+              </div>
+            )}
+
+            {/* Language Selector */}
+            <div className="flex items-center gap-1">
+              <span className="me-1 hidden text-[#786c60] sm:inline">
+                {lang === 'ar' ? 'اللغة:' : lang === 'fr' ? 'ÉDITION:' : 'LANGUAGE:'}
+              </span>
+              <button
+                type="button"
+                onClick={() => setLang('ar')}
+                className={`rounded px-2 py-0.5 font-semibold transition-colors ${
+                  lang === 'ar'
+                    ? 'bg-[#d96b27] text-[#0b0908]'
+                    : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+                }`}
+              >
+                العربية
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang('fr')}
+                className={`rounded px-2 py-0.5 font-semibold transition-colors ${
+                  lang === 'fr'
+                    ? 'bg-[#d96b27] text-[#0b0908]'
+                    : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+                }`}
+              >
+                FR
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang('en')}
+                className={`rounded px-2 py-0.5 font-semibold transition-colors ${
+                  lang === 'en'
+                    ? 'bg-[#d96b27] text-[#0b0908]'
+                    : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+                }`}
+              >
+                EN
+              </button>
+            </div>
           </div>
         </div>
       </div>

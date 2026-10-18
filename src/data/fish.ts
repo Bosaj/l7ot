@@ -13,6 +13,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Safi', 'Essaouira', 'Tan-Tan', 'Agadir', 'Laâyoune', 'Al Hoceima', 'Larache'],
     regionalNames: {
       chamal: ['سردينة (Sardina)', 'شطون غليظ', 'سردين العرائش والحسيمة'],
+      oriental: ['تيتشوكْتْ (Titchoukt بالأمازيغية الريفية)', 'الخشبة (Lkhechba بالناظور)', 'سردين رأس كبدانة والسعيدية'],
       centre: ['السردين (Serdine)', 'سردين آسفي الأصيل', 'السردين الفضي'],
       sud: ['السردين السوسي', 'تازنكارت (Tazenkart بالأمازيغية)', 'سردين طانطان والعيون'],
     },
@@ -166,6 +167,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Casablanca', 'Mehdia', 'Larache', 'Tanger', 'Agadir', 'Nador'],
     regionalNames: {
       chamal: ['ميرلوثة (Merluza بالأسبانية)', 'الميرلا الشمالية', 'ميرلا طنجة والعرائش'],
+      oriental: ['ميرلا (Merla)', 'البياض الناظوري', 'ميرلان المتوسط'],
       centre: ['الميرلا البيضاء (Mirla)', 'ميرلا المهدية والرباط', 'ميرلا الشواطئ'],
       sud: ['ميرلا أكادير', 'إسْلِم أومليل (Islem oumellil بالأمازيغية)', 'ميرلا الصويرة'],
     },
@@ -307,6 +309,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Al Hoceima', 'Nador', 'Tanger', 'Dakhla', 'Essaouira', 'Agadir'],
     regionalNames: {
       chamal: ['دورادا (Dorada)', 'زريقة الشمال', 'أورادا بالحسيمة والناظور'],
+      oriental: ['دورادا (Dorada)', 'الذهبية د بحيرة مارشيكا', 'الدوراد الحرة د بني نصار'],
       centre: ['الزريقة الملكية', 'الدوراد (Dorade)', 'دوراد آسفي والجديدة'],
       sud: ['زريقة سوس', 'تيزيرقت (Tizireqt بالأمازيغية)', 'دوراد خليج الداخلة'],
     },
@@ -445,6 +448,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Mehdia', 'Casablanca', 'Larache', 'Safi', 'Agadir'],
     regionalNames: {
       chamal: ['لينغوادو (Lenguado بالأسبانية)', 'الصول المتوسطي', 'صول طنجة والعرائش'],
+      oriental: ['لونغوادو (Lenguado)', 'لسان البحر الناظوري', 'صول رأس كبدانة'],
       centre: ['الصول (Sol)', 'صول المهدية الشهير', 'الصول الدكالي'],
       sud: ['صول أكادير وميرلفت', 'تاسلمت (Taslemt بالأمازيغية)', 'صول الرمال الذهبية'],
     },
@@ -583,6 +587,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Dakhla', 'Taghazout', 'Tan-Tan', 'Agadir', 'Essaouira'],
     regionalNames: {
       chamal: ['كوربينا (Corvina)', 'قرب الشمال (نادر)'],
+      oriental: ['كوربينا (Corvina)', 'الظل د المتوسط', 'الكوربينا الناظورية د رأس الماء'],
       centre: ['القرب (Qorb)', 'كوربين المحيط', 'حوت العواشر'],
       sud: ['قرب الداخلة الذهبي', 'حوتة الصحراء الملكية', 'تاكوربيت (Takourbit بالأمازيغية)'],
     },
@@ -721,6 +726,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Tanger', 'Al Hoceima', 'Larache', 'Nador', 'Casablanca'],
     regionalNames: {
       chamal: ['إمبيرادور (Emperador بالأسبانية)', 'بيث إسبادا (Pez Espada)', 'بوسف بمضيق طنجة'],
+      oriental: ['إسبادا (Pez Espada)', 'شكومبرو بو سيف', 'بيث إسبادا دي ناضور'],
       centre: ['الإسبادون (Spadon)', 'بوسف (Bousif)', 'ستيك البحر'],
       sud: ['إسبادون أكادير', 'أسيف ن ومان (Asif n waman بالأمازيغية)', 'بوسف الجنوب'],
     },
@@ -859,6 +865,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Dakhla', 'Agadir', 'Safi', 'Nador', 'Casablanca', 'Tanger'],
     regionalNames: {
       chamal: ['كالاماريس (Calamares)', 'تشيبيرون (Chipiron)', 'كالامار طنجة والناظور'],
+      oriental: ['شوكو (Choco)', 'كالامار مارشيكا', 'حبار السعيدية'],
       centre: ['الكالامار (Kalamar)', 'حوت القرطاس', 'كالامار الشواطئ'],
       sud: ['كالامار خليج الداخلة', 'أبو ركاس الأطلسي', 'كالامار السوس'],
     },
@@ -997,6 +1004,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Dakhla', 'Boujdour', 'Laâyoune', 'Essaouira', 'Agadir'],
     regionalNames: {
       chamal: ['بولبو (Pulpo بالأسبانية)', 'الأخطبوط الصخري', 'بولبو الحسيمة وطنجة'],
+      oriental: ['بوكْرون (Boukroun)', 'أخروي (Akharouy بالأمازيغية)', 'أخطبوط بحيرة مارشيكا'],
       centre: ['الأخطبوط (Poulpe)', 'حوت ثمانية رجلين', 'البويلب'],
       sud: ['آزايز (Azayz بالأمازيغية)', 'الروكاس (Rokas بالداخلة)', 'أخطبوط وادي الذهب'],
     },
@@ -1135,6 +1143,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Larache', 'Kenitra', 'Casablanca', 'Agadir', 'Tan-Tan'],
     regionalNames: {
       chamal: ['ڭامباس (Gambas)', 'ڭامبا بلانكا (Gamba Blanca)', 'كروفيت العرائش والمهدية'],
+      oriental: ['كامبار (Kamber)', 'الغامبا الناظورية', 'كامبار السعيدية'],
       centre: ['كروفيت (Krovette)', 'كروفيت وردي ملكي', 'الروبيان المغربي'],
       sud: ['كروفيت طانطان وأكادير', 'إفران بالأمازيغية (Ifran)', 'جمبري الجنوب'],
     },
@@ -1276,6 +1285,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Al Hoceima', 'Nador', 'Larache', 'Safi', 'Essaouira'],
     regionalNames: {
       chamal: ['بوكيرون (Boquerón)', 'أنشوا (Anchoa)', 'شطون الحسيمة وطنجة'],
+      oriental: ['بوكيرون (Boqueron)', 'شتوكا د السعيدية', 'أنشوا ملوية'],
       centre: ['شطون (Chtoun)', 'سردين رقيق', 'شطون الساحل'],
       sud: ['شطون سوسي', 'أنشوا الصويرة وأكادير', 'إيسلمان إيمزيلن'],
     },
@@ -1405,6 +1415,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Tanger', 'M’diq', 'Al Hoceima', 'Casablanca', 'Agadir', 'Dakhla'],
     regionalNames: {
       chamal: ['فوراسيرو (Voracero - طنجة وأصيلة)', 'بوقا حمرة (Boka 7amra)', 'البيسوغو (Besugo)'],
+      oriental: ['باخيل (Pagel / Bajel)', 'الباجو الحر بالناظور', 'باجيل ديال الحجرة'],
       centre: ['الباجو رويال (Pageot Royal)', 'البريكة الوردية', 'غزال الفران'],
       sud: ['أزوكاغ (Azoughagh بالأمازيغية)', 'باجو الداخلة والعيون', 'الباجو الحجري'],
     },
@@ -1534,6 +1545,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Safi', 'Essaouira', 'Casablanca', 'Agadir', 'Larache', 'Al Hoceima'],
     regionalNames: {
       chamal: ['الشخار (Chakhar - طنجة وتطوان والحسيمة)', 'خوريل (Jurel)'],
+      oriental: ['شوريل (Churel)', 'الشريل د السعيدية', 'سبيكة المتوسط'],
       centre: ['الشرن (Chrene - الدار البيضاء والرباط والجديدة)', 'شرن المقلة'],
       sud: ['أكلاز (Aglaz بالأمازيغية)', 'الشرن الأطلسي', 'شرن طانطان والعيون'],
     },
@@ -1663,6 +1675,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Salé', 'Rabat', 'Casablanca', 'Essaouira', 'Safi', 'Larache', 'Tétouan'],
     regionalNames: {
       chamal: ['الصنور (Es-Sennour - تطوان والعرائش وطنجة)', 'فرخ الحجر'],
+      oriental: ['كونغرو (Congro)', 'الفرخ د البحر الكبير', 'حنش الحجرة'],
       centre: ['الفرخ (El Farkh - سلا والرباط والدار البيضاء)', 'سلطان التفاية والزبيب'],
       sud: ['تيزلي (Tizli بالأمازيغية)', 'فرخ الصويرة وأكادير', 'الصنور الأطلسي'],
     },
@@ -1792,6 +1805,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Safi', 'Essaouira', 'Casablanca', 'El Jadida', 'Agadir', 'Larache'],
     regionalNames: {
       chamal: ['الراية (Er-Raya)', 'راية العرائش وطنجة'],
+      oriental: ['رايا (Raya)', 'المحرات الناظوري', 'البساط د ملوية'],
       centre: ['الراية الحجرية', 'راية المقلة بالشرمولة'],
       sud: ['تافغالت (Tafghalt بالأمازيغية)', 'راية الصويرة وأكادير'],
     },
@@ -1921,6 +1935,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Rabat', 'Casablanca', 'Oualidia', 'Agadir', 'Tanger', 'Nador', 'Dakhla'],
     regionalNames: {
       chamal: ['بوشوك (Bouchouk - طنجة وتطوان والناظور)', 'اللوبين (Lubina)'],
+      oriental: ['لوبينا (Lubina)', 'دراك الناظور', 'بوشوك الشرقية'],
       centre: ['الدرعي (Ed-Der3i - الرباط والبيضاء والواليدية)', 'درعي الموجة والقصبة'],
       sud: ['أغوري (Aghouri بالأمازيغية)', 'درعي تيفنيت وأكادير والداخلة'],
     },
@@ -2050,6 +2065,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Azemmour', 'Mehdia', 'Kénitra', 'Larache', 'Moulay Bousselham', 'Essaouira', 'Agadir'],
     regionalNames: {
       chamal: ['كابوسو (Cabousso - طنجة والعرائش وأصيلة)', 'بوري واد اللوكوس'],
+      oriental: ['ليزا (Lisa)', 'البوري د مارشيكا وبوغافر', 'المول د السعيدية'],
       centre: ['البوري (El Bouri - أزمور والجديدة والقنيطرة)', 'الركال (Reggal)'],
       sud: ['أزمول (Azmoul بالأمازيغية)', 'بوري ماسة وسوس'],
     },
@@ -2179,6 +2195,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Safi', 'Agadir', 'Essaouira', 'Tan-Tan', 'Casablanca', 'Tanger', 'Larache'],
     regionalNames: {
       chamal: ['كبايلا (Caballa - طنجة وتطوان والعرائش)', 'طونينو (Tonino)'],
+      oriental: ['كابايا (Caballa)', 'كاباييا د السعيدية', 'الإسقمري د الناظور'],
       centre: ['الإسقمري (Scomri)', 'كبايلا آسفي', 'زريرق (Zrireq)'],
       sud: ['أزرقان (Azerqan بالأمازيغية)', 'كبايلا أكادير وطانطان'],
     },
@@ -2308,6 +2325,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Larache', 'M’diq', 'Tanger', 'Asilah', 'Casablanca', 'Agadir', 'Dakhla'],
     regionalNames: {
       chamal: ['التون ديال المادرابة (Almadraba - العرائش والمضيق)', 'الباكورا (Bacora)'],
+      oriental: ['أتونا (Atuna)', 'التون د المتوسط', 'بونيتو بني نصار'],
       centre: ['التون الحمر (Et-Toun L’7mer)', 'البونيتو (Bonito)'],
       sud: ['أتون (Atoun بالأمازيغية)', 'تونة الداخلة والعيون'],
     },
@@ -2437,6 +2455,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Casablanca', 'Safi', 'Essaouira', 'Agadir', 'Larache', 'Tanger'],
     regionalNames: {
       chamal: ['السبتة (Es-Sebta - طنجة والعرائش وتطوان)', 'سيف الفضة'],
+      oriental: ['سبادا فينا (Espada Fina)', 'الحية الفضية د الناظور', 'شفرة البحر'],
       centre: ['السمطة (Es-Semta - الدار البيضاء والرباط وآسفي)', 'السمطة ديال القلي'],
       sud: ['تاسمطت (Tasemtat بالأمازيغية)', 'سمطة الصويرة وأكادير'],
     },
@@ -2566,6 +2585,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Al Hoceima', 'M’diq', 'Tanger', 'El Jadida', 'Oualidia', 'Safi', 'Agadir'],
     regionalNames: {
       chamal: ['سلطان إبراهيم (الحسيمة والناظور)', 'البرموني (Barmouni - طنجة وتطوان)'],
+      oriental: ['سالمونيتي (Salmonete)', 'الحمرية د بني نصار', 'السلطان د البحر د السعيدية'],
       centre: ['الروجي ديال الحجر (Rouget de roche)', 'روجي الواليدية والجديدة'],
       sud: ['أزواغ ن ييل (Azwagh بالأمازيغية)', 'روجي أكادير وسيدي إفني'],
     },
@@ -2695,6 +2715,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Dakhla', 'Laâyoune', 'Agadir', 'Tanger', 'Larache', 'M’diq', 'Casablanca'],
     regionalNames: {
       chamal: ['التشوكو (Choco - طنجة وتطوان وأصيلة والعرائش)', 'خبيزات البحر'],
+      oriental: ['سيبيا (Sepia)', 'خيبيا (Jibia)', 'نوافة مارشيكا'],
       centre: ['السيبيا (Es-Sepia)', 'أوم الحبر (Oum L’7ber)'],
       sud: ['تاسيبيا (Tasipia)', 'سيبيا الداخلة وبوجدور'],
     },
@@ -2824,6 +2845,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Essaouira', 'Oualidia', 'Safi', 'Agadir', 'Taghazout', 'Sidi Ifni', 'Tanger', 'Al Hoceima'],
     regionalNames: {
       chamal: ['الميخيلون (Mejillón - طنجة وتطوان والناظور)', 'بوزروك البوغاز'],
+      oriental: ['ميخيونيس (Mejillones)', 'بوزروك رأس كبدانة', 'تامسريست (Tamsrist بالريفية)'],
       centre: ['بوزروك (Bouzroug - الصويرة والواليدية وآسفي والجديدة)', 'بوزروك الحجر'],
       sud: ['تيغري (Tighri بالأمازيغية - تغازوت وأكادير وإمسوان)', 'أكوكيل (Agouguil)'],
     },
@@ -2953,6 +2975,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Safi', 'Essaouira', 'El Jadida', 'Oualidia', 'Agadir', 'Sidi Ifni', 'Tanger', 'Al Hoceima'],
     regionalNames: {
       chamal: ['السارغو (Sargo - طنجة وتطوان والمضيق)', 'الحداد (El Haddad)'],
+      oriental: ['سارغو (Sargo)', 'الشرغو د الحجرة', 'سارغو د رأس كبدانة'],
       centre: ['الشرغو ديال الحجر (Chergou - الدار البيضاء، الجديدة، آسفي والصويرة)', 'الشرغو الملكي'],
       sud: ['أزاغار (Azaghar بالأمازيغية - أكادير وسيدي إفني وتغازوت)', 'شرغو المصيد'],
     },
@@ -3082,6 +3105,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Casablanca', 'Agadir', 'Safi', 'Tanger', 'Larache', 'Dakhla'],
     regionalNames: {
       chamal: ['الكالو (El Gallo - طنجة وتطوان والعرائش)', 'سان بيير (Saint-Pierre)'],
+      oriental: ['سان بيدرو (San Pedro)', 'حوتة مريم د المتوسط', 'المرآة د بني نصار'],
       centre: ['حوت سيدنا سليمان (7out Sidna Slimane - الدار البيضاء والرباط)', 'حوت البصمة'],
       sud: ['أزلمزا ن سليمان', 'سان بيير أكادير والداخلة'],
     },
@@ -3211,6 +3235,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Al Hoceima', 'M’diq', 'Tanger', 'Dakhla', 'Agadir', 'Safi'],
     regionalNames: {
       chamal: ['الدنتي (El Denti - الحسيمة والمضيق وطنجة)', 'المرجان الملكي'],
+      oriental: ['دينتون (Denton)', 'دونتري الحجرة د الناظور', 'المرجان الكبير'],
       centre: ['المرجان الحر (El Merjane - الدار البيضاء والرباط وآسفي)', 'الباجو الكبير'],
       sud: ['أزواغ ن تيسليت (بالأمازيغية)', 'مرجان الداخلة وأكادير'],
     },
@@ -3340,6 +3365,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Larache', 'Tanger', 'M’diq', 'Al Hoceima', 'Safi', 'Essaouira', 'Agadir'],
     regionalNames: {
       chamal: ['البونيتو (El Bonito - طنجة وتطوان والعرائش)', 'الباكورا (El Bacora)'],
+      oriental: ['بونيتو (Bonito)', 'الباكورة د السعيدية', 'ساردا المتوسط'],
       centre: ['الساردا (Es-Sarda - الدار البيضاء وآسفي والجديدة)', 'البونيتو المخطط'],
       sud: ['تاساردات (Tasardat بالأمازيغية - أكادير والصويرة)', 'أزلمزا ن تونة'],
     },
@@ -3469,6 +3495,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Casablanca', 'Safi', 'El Jadida', 'Essaouira', 'Agadir', 'Larache', 'Tanger'],
     regionalNames: {
       chamal: ['كلب البحر (Kelb L’B7er)', 'القط البحري (Gato de mar)'],
+      oriental: ['بينتاروجا (Pintarroja)', 'كلب البحر د بني نصار', 'تازمارت'],
       centre: ['التول (Et-Toul - آسفي والدار البيضاء والجديدة)', 'فرخ القرش الصغير'],
       sud: ['أغرين (Aghrine بالأمازيغية)', 'تول الصويرة وأكادير'],
     },
@@ -3598,6 +3625,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Dakhla', 'Lagouira', 'Boujdour', 'Agadir', 'Al Hoceima', 'M’diq', 'Oualidia'],
     regionalNames: {
       chamal: ['اللانكوستا (La Langosta - الحسيمة والمضيق وطنجة)', 'جراد البحر الأحمر'],
+      oriental: ['لانغوسطا (Langosta)', 'جراد البحر الناظوري', 'أكاز د الحجرة د رأس كبدانة'],
       centre: ['اللانكوست الملكي (الوليدية والدار البيضاء والرباط)', 'لانكوست الحجر'],
       sud: ['أزيفون (Azifoun بالأمازيغية)', 'لانكوست الداخلة والكويرة الأخضر والملكي'],
     },
@@ -3727,6 +3755,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Oualidia', 'Essaouira', 'Safi', 'Tanger', 'M’diq', 'Al Hoceima', 'Dakhla'],
     regionalNames: {
       chamal: ['السنتولا (La Centolla - طنجة وتطوان والمضيق)', 'بوجنبة البوغاز'],
+      oriental: ['تشانكرو (Chancro)', 'عقرب البحر د مارشيكا', 'بوجنبة د الشوك'],
       centre: ['بوجنبة (Boujniba - الواليدية والجديدة وآسفي والدار البيضاء)', 'عقرب البحر'],
       sud: ['أوزوان (Ouzwane بالأمازيغية - أكادير والصويرة والداخلة)', 'بوجنبة الأطلسي'],
     },
@@ -3856,6 +3885,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Oualidia', 'Dakhla', 'Casablanca', 'Rabat', 'El Jadida', 'Agadir'],
     regionalNames: {
       chamal: ['ليزويتر (Les Huîtres)', 'أوستراس (Ostras - طنجة وتطوان)'],
+      oriental: ['أوستراس (Ostras)', 'محار بحيرة مارشيكا والسعيدية', 'إغلالن د البحر'],
       centre: ['محار الواليدية (Me7ar L’Oualidia)', 'ليزويتر ديال الواليدية رقم 2 و 3'],
       sud: ['محار خليج الداخلة الملكي (Huîtres de la Baie de Dakhla)', 'تيغري ن ووشن'],
     },
@@ -3985,6 +4015,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['M’diq', 'Tétouan', 'Nador', 'Larache', 'Moulay Bousselham', 'Oualidia', 'Dakhla'],
     regionalNames: {
       chamal: ['الألميخا (La Almeja - تطوان والمضيق والناظور وطنجة)', 'المتيل والبيبربير (Berberecho)'],
+      oriental: ['ألميخاس (Almejas)', 'المحار الصغير د مارشيكا', 'بوزروك الرمل د السعيدية'],
       centre: ['البيلوط / البالورد (La Palourde - مولاي بوسلهام والواليدية)', 'محار الرمل'],
       sud: ['تانكولت (Tangoult بالأمازيغية)', 'بالورد الداخلة وأكادير'],
     },
@@ -4114,6 +4145,7 @@ export const MOROCCAN_FISH: Fish[] = [
     mainPorts: ['Tanger', 'M’diq', 'Al Hoceima', 'Larache', 'Casablanca', 'Safi', 'Agadir'],
     regionalNames: {
       chamal: ['البوغا (La Boga - طنجة وتطوان والحسيمة والمضيق)', 'بوقة البوغاز'],
+      oriental: ['بوغا (Boga)', 'الباوقة د ملوية', 'تاتشوكارت د الناظور'],
       centre: ['البوقة الفضية (El Bouga - الدار البيضاء والرباط وآسفي)', 'بوقا ديال القلي'],
       sud: ['تابوقات (Tabouqat بالأمازيغية - أكادير والصويرة)', 'بوقة الساحل'],
     },

@@ -17,7 +17,7 @@ describe('L7OT App', () => {
     fireEvent.change(searchInput, { target: { value: 'صول' } })
 
     expect(screen.getByText('الصول')).toBeInTheDocument()
-    expect(screen.queryByText('سردين')).not.toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'سردين' })).not.toBeInTheDocument()
   })
 
   it('switches to coastal recipes tab', () => {
@@ -41,15 +41,15 @@ describe('L7OT App', () => {
     const frButton = screen.getByRole('button', { name: 'FR' })
     fireEvent.click(frButton)
 
-    expect(screen.getByText('Encyclopédie des Poissons')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Encyclopédie Poissons/i })).toBeInTheDocument()
   })
 
-  it('includes all 22 Moroccan fish species and supports regional dialect search', () => {
+  it('includes all 32 Moroccan fish species and supports regional dialect search including Oriental', () => {
     render(<App />)
-    expect(screen.getByText(/موسوعة الأسماك \(22\)/)).toBeInTheDocument()
+    expect(screen.getByText(/موسوعة الأسماك \(32\)/)).toBeInTheDocument()
 
     const searchInput = screen.getByPlaceholderText(/ابحث باسم الحوت/i)
-    fireEvent.change(searchInput, { target: { value: 'فوراسيرو' } })
+    fireEvent.change(searchInput, { target: { value: 'باخيل' } })
     expect(screen.getByText('الباجو الملكي')).toBeInTheDocument()
   })
 })

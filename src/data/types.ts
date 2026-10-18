@@ -18,7 +18,8 @@ export type CookingMethod =
   | 'pastilla'
 
 export interface RegionalNames {
-  chamal: string[] // North / Mediterranean (Tanger, Tetouan, Al Hoceima, Larache)
+  chamal: string[] // North / Mediterranean (Tanger, Tetouan, Larache)
+  oriental: string[] // Oriental / Mediterranean East (Nador, Saidia, Ras Kebdana, Berkane, Marchica lagoon)
   centre: string[] // Centre / Atlantic (Casablanca, Rabat, Safi, El Jadida)
   sud: string[] // South / Souss / Sahara / Amazigh (Agadir, Dakhla, Tan-Tan, Essaouira)
 }

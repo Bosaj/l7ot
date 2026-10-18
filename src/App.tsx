@@ -26,9 +26,11 @@ import { FISHERIES_AGREEMENTS } from './data/agreements'
 import type { Fish, Recipe } from './data/types'
 import type { SupportedLanguage } from './i18n/strings'
 import { STRINGS } from './i18n/strings'
+import { useUserPortLocation } from './hooks/useUserPortLocation'
 
 export const App: React.FC = () => {
   const [lang, setLang] = useState<SupportedLanguage>('ar')
+  const userPortLocation = useUserPortLocation()
   const [activeTab, setActiveTab] = useState<'fish' | 'recipes' | 'chef' | 'market' | 'agreements' | 'scanner' | 'marine-apis'>('fish')
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
@@ -49,6 +51,7 @@ export const App: React.FC = () => {
       const q = searchQuery.toLowerCase().trim()
       const allRegionalNames = [
         ...fish.regionalNames.chamal,
+        ...fish.regionalNames.oriental,
         ...fish.regionalNames.centre,
         ...fish.regionalNames.sud,
       ]
@@ -109,6 +112,7 @@ export const App: React.FC = () => {
         setActiveTab={setActiveTab}
         lang={lang}
         setLang={setLang}
+        userPortLocation={userPortLocation}
       />
 
       <main className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 space-y-10">
@@ -325,6 +329,46 @@ export const App: React.FC = () => {
               </span>
             </div>
 
+            {/* Moroccan Port Geolocation & Dialect Selector Bar */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-lg border border-[#f6f1e7]/10 bg-[#14110f] p-3 text-xs">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="font-mono text-[#a69b8d]">
+                  {lang === 'ar' ? 'الميناء المعتمد للأسعار واللهجة:' : 'Port Référent & Dialecte :'}
+                </span>
+                <select
+                  value={userPortLocation.selectedRegion.id}
+                  onChange={(e) => userPortLocation.setManualRegion(e.target.value)}
+                  className="rounded border border-[#f6f1e7]/15 bg-[#0b0908] px-2.5 py-1 font-semibold text-[#f2b47e] focus:border-[#d96b27] focus:outline-none"
+                >
+                  {userPortLocation.regions.map((reg) => (
+                    <option key={reg.id} value={reg.id}>
+                      {lang === 'ar' ? reg.nameAr : reg.nameFr}
+                    </option>
+                  ))}
+                </select>
+                {userPortLocation.isAutoDetected && userPortLocation.detectedDistanceKm !== null && (
+                  <span className="rounded bg-emerald-500/15 px-2 py-0.5 font-mono text-[10px] text-emerald-300 border border-emerald-500/20">
+                    {lang === 'ar' ? `✓ تم الرصد عبر GPS (${userPortLocation.detectedDistanceKm} كلم)` : `✓ Détecté GPS (${userPortLocation.detectedDistanceKm} km)`}
+                  </span>
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={userPortLocation.detectLocation}
+                disabled={userPortLocation.isLocating}
+                className="inline-flex items-center gap-1.5 rounded bg-[#d96b27] px-3 py-1 font-mono text-xs font-bold text-[#0b0908] transition hover:bg-[#b85318] shrink-0"
+              >
+                <Compass className={`h-3.5 w-3.5 ${userPortLocation.isLocating ? 'animate-spin' : ''}`} />
+                <span>
+                  {userPortLocation.isLocating
+                    ? (lang === 'ar' ? 'جاري الرصد...' : 'Localisation...')
+                    : (lang === 'ar' ? 'حدد موقعي تلقائياً (GPS)' : 'Détecter ma position')}
+                </span>
+              </button>
+            </div>
+
             {filteredFish.length > 0 ? (
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {filteredFish.map((fish, idx) => (
@@ -333,6 +377,7 @@ export const App: React.FC = () => {
                     fish={fish}
                     index={idx}
                     lang={lang}
+                    userRegion={userPortLocation.selectedRegion}
                     onSelectFish={(f) => {
                       setActiveFish(f)
                       setFishModalTab('overview')
@@ -440,6 +485,7 @@ export const App: React.FC = () => {
           allFish={MOROCCAN_FISH}
           allRecipes={MOROCCAN_RECIPES}
           lang={lang}
+          userRegion={userPortLocation.selectedRegion}
           initialTab={fishModalTab}
           onClose={() => setActiveFish(null)}
           onSelectFish={(f) => setActiveFish(f)}

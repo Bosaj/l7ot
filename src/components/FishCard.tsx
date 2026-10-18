@@ -15,11 +15,13 @@ import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
 import { speakDarija } from '../lib/speech'
 import { PriceBadge } from './PriceBadge'
+import { getLocalFishPriceMAD, type MoroccanPortRegion } from '../lib/moroccanRegions'
 
 interface FishCardProps {
   fish: Fish
   index?: number
   lang: SupportedLanguage
+  userRegion?: MoroccanPortRegion
   onSelectFish: (fish: Fish) => void
   onCookWithFish?: (fish: Fish) => void
   onOpenCleaningTutorial?: (fish: Fish) => void
@@ -30,6 +32,7 @@ export const FishCard: React.FC<FishCardProps> = ({
   fish,
   index = 0,
   lang,
+  userRegion,
   onSelectFish,
   onCookWithFish,
   onOpenCleaningTutorial,
@@ -234,49 +237,66 @@ export const FishCard: React.FC<FishCardProps> = ({
               </div>
             </div>
 
-            {/* Regional Moroccan Names Ledger */}
-            <div className="space-y-1.5 text-[11px]">
-              <div className="flex items-baseline justify-between gap-2 border-b border-[#f6f1e7]/5 pb-1">
+            {/* Regional Moroccan Names Ledger (Including Oriental & Highlighted User Port) */}
+            <div className="space-y-1 text-[11px]">
+              <div className={`flex items-baseline justify-between gap-2 border-b border-[#f6f1e7]/5 pb-0.5 ${userRegion?.dialectKey === 'chamal' ? 'bg-[#d96b27]/10 px-1 rounded' : ''}`}>
                 <span className="font-mono text-[10px] uppercase text-[#a69b8d] shrink-0">
                   {lang === 'ar' ? 'الشمال:' : lang === 'fr' ? 'Nord:' : 'North:'}
                 </span>
-                <span className="text-end font-medium text-[#e8e0d3] truncate">
+                <span className={`text-end font-medium truncate ${userRegion?.dialectKey === 'chamal' ? 'text-amber-300 font-bold' : 'text-[#e8e0d3]'}`}>
                   {fish.regionalNames.chamal[0]}
                 </span>
               </div>
-              <div className="flex items-baseline justify-between gap-2 border-b border-[#f6f1e7]/5 pb-1">
+              <div className={`flex items-baseline justify-between gap-2 border-b border-[#f6f1e7]/5 pb-0.5 ${userRegion?.dialectKey === 'oriental' ? 'bg-cyan-500/15 px-1 rounded ring-1 ring-cyan-500/30' : ''}`}>
+                <div className="flex items-center gap-1">
+                  <span className="font-mono text-[10px] uppercase text-cyan-400 shrink-0 font-bold">
+                    {lang === 'ar' ? 'الشرقية:' : lang === 'fr' ? 'Oriental:' : 'East:'}
+                  </span>
+                  <span className="text-[8px] bg-cyan-500/20 text-cyan-300 px-1 py-0.2 rounded font-mono">
+                    {lang === 'ar' ? 'الناظور' : 'Nador'}
+                  </span>
+                </div>
+                <span className={`text-end font-medium truncate ${userRegion?.dialectKey === 'oriental' ? 'text-cyan-200 font-bold' : 'text-[#e8e0d3]'}`}>
+                  {fish.regionalNames.oriental[0]}
+                </span>
+              </div>
+              <div className={`flex items-baseline justify-between gap-2 border-b border-[#f6f1e7]/5 pb-0.5 ${userRegion?.dialectKey === 'centre' ? 'bg-[#d96b27]/10 px-1 rounded' : ''}`}>
                 <span className="font-mono text-[10px] uppercase text-[#a69b8d] shrink-0">
                   {lang === 'ar' ? 'الوسط:' : lang === 'fr' ? 'Centre:' : 'Center:'}
                 </span>
-                <span className="text-end font-medium text-[#e8e0d3] truncate">
+                <span className={`text-end font-medium truncate ${userRegion?.dialectKey === 'centre' ? 'text-amber-300 font-bold' : 'text-[#e8e0d3]'}`}>
                   {fish.regionalNames.centre[0]}
                 </span>
               </div>
-              <div className="flex items-baseline justify-between gap-2">
+              <div className={`flex items-baseline justify-between gap-2 ${userRegion?.dialectKey === 'sud' ? 'bg-[#d96b27]/10 px-1 rounded' : ''}`}>
                 <span className="font-mono text-[10px] uppercase text-[#a69b8d] shrink-0">
                   {lang === 'ar' ? 'الجنوب:' : lang === 'fr' ? 'Sud:' : 'South:'}
                 </span>
-                <span className="text-end font-medium text-[#f2b47e] truncate">
+                <span className={`text-end font-medium truncate ${userRegion?.dialectKey === 'sud' ? 'text-amber-300 font-bold' : 'text-[#f2b47e]'}`}>
                   {fish.regionalNames.sud[0]}
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Monospace ONP Price & Sparkline Ledger (RTL/LTR Safe) */}
+          {/* Monospace ONP Price & Sparkline Ledger (RTL/LTR Safe & Region-aware) */}
           <div className="rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-3">
             <div className="flex items-center justify-between gap-2">
               <div className="text-start">
-                <span className="block font-mono text-[9px] uppercase text-[#a69b8d]">
-                  {lang === 'ar'
-                    ? 'سعر المرسى والأسواق'
-                    : lang === 'fr'
-                      ? 'COURS SOUK MAROC'
-                      : 'MOROCCAN SOUK PRICE'}
+                <span className="block font-mono text-[9px] uppercase text-[#e09f3e]">
+                  {userRegion
+                    ? lang === 'ar'
+                      ? `سعر ${userRegion.primaryPortAr}`
+                      : `Cours ${userRegion.primaryPortFr}`
+                    : lang === 'ar'
+                      ? 'سعر المرسى والأسواق'
+                      : lang === 'fr'
+                        ? 'COURS SOUK MAROC'
+                        : 'MOROCCAN SOUK PRICE'}
                 </span>
                 <div>
                   <PriceBadge
-                    amount={p.currentSpotMAD}
+                    amount={userRegion ? getLocalFishPriceMAD(p.currentSpotMAD, userRegion) : p.currentSpotMAD}
                     unit="kg"
                     lang={lang}
                     amountClassName="text-base font-bold text-emerald-400"
