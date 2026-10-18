@@ -120,6 +120,8 @@ export interface Fish {
   }
   imageUrl: string
   fallbackImageUrl?: string
+  /** YouTube video ID of a cleaning / preparation tutorial for this species. */
+  cleaningVideoId?: string
   audioPhonetic: string
   recommendedRecipeIds: string[]
 }

@@ -1,0 +1,128 @@
+{
+  "fish/sardine": {
+    "file": "Sardina pilchardus Italy.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Sardina_pilchardus_Italy.jpg",
+    "author": "margherita_bg",
+    "license": "CC0"
+  },
+  "fish/merlan": {
+    "file": "Merluccius merluccius.002 - Aquarium Finisterrae.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Merluccius_merluccius.002_-_Aquarium_Finisterrae.JPG",
+    "author": "Fernando Losada Rodríguez",
+    "license": "CC BY-SA 4.0"
+  },
+  "fish/dorade-royale": {
+    "file": "Daurades royales (Sparus aurata) en bassin (Ifremer 00633-74539 - 29681).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Daurades_royales_(Sparus_aurata)_en_bassin_(Ifremer_00633-74539_-_29681).jpg",
+    "author": "Isabelle Cheret",
+    "license": "CC BY 4.0"
+  },
+  "fish/sole": {
+    "file": "Solea solea 1.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Solea_solea_1.jpg",
+    "author": "Hans Hillewaert",
+    "license": "CC BY-SA 4.0"
+  },
+  "fish/courbine": {
+    "file": "Argyrosomus regius LoroParqueTenerife stone basse IMG 4963.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Argyrosomus_regius_LoroParqueTenerife_stone_basse_IMG_4963.JPG",
+    "author": "Bjoertvedt",
+    "license": "CC BY-SA 4.0"
+  },
+  "fish/espadon": {
+    "file": "Xiphias gladius in the sea.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Xiphias_gladius_in_the_sea.jpg",
+    "author": "sylvain_eichhorn",
+    "license": "CC BY 4.0"
+  },
+  "fish/calamar": {
+    "file": "Loligo vulgaris.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Loligo_vulgaris.jpg",
+    "author": "Hans Hillewaert",
+    "license": "CC BY-SA 4.0"
+  },
+  "fish/poulpe": {
+    "file": "Octopus vulgaris 03.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Octopus_vulgaris_03.jpg",
+    "author": "H. Zell",
+    "license": "CC BY-SA 3.0"
+  },
+  "fish/crevette": {
+    "file": "Crevette rose du large (Parapenaeus longirostris) (Ifremer 00682-79444 - 32243).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Crevette_rose_du_large_(Parapenaeus_longirostris)_(Ifremer_00682-79444_-_32243).jpg",
+    "author": "Isabelle Cheret",
+    "license": "CC BY 4.0"
+  },
+  "fish/anchois": {
+    "file": "Anchois commun (Engraulis encrasicolus) (Ifremer 00402-51364).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Anchois_commun_(Engraulis_encrasicolus)_(Ifremer_00402-51364).jpg",
+    "author": "Florence Sanchez",
+    "license": "CC BY 4.0"
+  },
+  "recipes/sardines-mchermline": {
+    "file": "Grilled sardines.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Grilled_sardines.jpg",
+    "author": "E4024",
+    "license": "CC BY-SA 4.0"
+  },
+  "recipes/tagine-kouari-sardine": {
+    "file": "Tajine kefta (8348397161).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Tajine_kefta_(8348397161).jpg",
+    "author": "Mzximvs VdB from Brussels, belgium",
+    "license": "CC BY-SA 2.0"
+  },
+  "recipes/tagine-l7ot-khodra": {
+    "file": "Tagine au poisson.jpeg",
+    "page": "https://commons.wikimedia.org/wiki/File:Tagine_au_poisson.jpeg",
+    "author": "Hamza MACHMOUME",
+    "license": "CC BY-SA 4.0"
+  },
+  "recipes/crevettes-pil-pil": {
+    "file": "Gambas al ajillo.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Gambas_al_ajillo.jpg",
+    "author": "Javier Lastras from España/Spain",
+    "license": "CC BY 2.0"
+  },
+  "recipes/pastilla-l7ot-royale": {
+    "file": "Pastilla Seafood.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Pastilla_Seafood.jpg",
+    "author": "AmelGhouila",
+    "license": "CC BY-SA 4.0"
+  },
+  "recipes/pageot-royal-au-four": {
+    "file": "Dorade royale grillée.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Dorade_royale_grill%C3%A9e.jpg",
+    "author": "Arnaud 25",
+    "license": "CC BY-SA 4.0"
+  },
+  "recipes/friture-mixte-marocaine": {
+    "file": "Fritto misto di pesce con limone.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Fritto_misto_di_pesce_con_limone.jpg",
+    "author": "Sergio Conti",
+    "license": "CC BY-SA 2.0"
+  },
+  "recipes/calamar-farci-marocain": {
+    "file": "Kalamar dolma.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kalamar_dolma.jpg",
+    "author": "E4024",
+    "license": "CC BY-SA 4.0"
+  },
+  "recipes/chorba-l7ot-marocaine": {
+    "file": "Seafood stew.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Seafood_stew.jpg",
+    "author": "CCFoodTravel.com",
+    "license": "CC BY 2.0"
+  },
+  "recipes/tagine-bouzroug-essaouira": {
+    "file": "Moules marinières.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Moules_marini%C3%A8res.jpg",
+    "author": "Thomon",
+    "license": "CC BY-SA 4.0"
+  },
+  "recipes/brochettes-espadon-grille": {
+    "file": "Brochette d'espadon à Georgioúpoli (Crète) en juillet 2021.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Brochette_d%27espadon_%C3%A0_Georgio%C3%BApoli_(Cr%C3%A8te)_en_juillet_2021.jpg",
+    "author": "Benoît Prieur",
+    "license": "CC0"
+  }
+}

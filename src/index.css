@@ -1,22 +1,56 @@
 @import 'tailwindcss';
 
+/*
+ * Unified typography.
+ * One stack for the whole app: Plus Jakarta Sans draws Latin glyphs, Readex Pro draws
+ * Arabic glyphs (the browser picks per-glyph), so mixed Darija/French/English text
+ * always looks like a single typeface. Wired into Tailwind's `font-sans`, so utility
+ * classes can no longer override it with the system font.
+ */
+@theme {
+  --font-sans: 'Plus Jakarta Sans Variable', 'Readex Pro Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Plus Jakarta Sans Variable', 'Readex Pro Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
     color-scheme: dark;
-    font-family: 'Plus Jakarta Sans Variable', system-ui, -apple-system, sans-serif;
-  }
-
-  [dir="rtl"] {
-    font-family: 'Readex Pro Variable', 'Cairo Variable', system-ui, -apple-system, sans-serif;
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
+    font-family: var(--font-sans);
+    font-feature-settings: 'kern' 1, 'liga' 1;
     background-color: #020617;
     color: #f8fafc;
     overflow-x: hidden;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  /* Arabic letters must stay joined: never apply tracking in RTL. */
+  [dir='rtl'] * {
+    letter-spacing: 0 !important;
+  }
+
+  [dir='rtl'] {
+    line-height: 1.75;
+  }
+
+  /* Tabular figures keep prices and nutrition numbers aligned. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
 }
+
 
 /* Double-bezel Machined Glass Utility */
 .double-bezel {

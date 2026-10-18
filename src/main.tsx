@@ -1,6 +1,5 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import '@fontsource-variable/cairo'
 import '@fontsource-variable/readex-pro'
 import '@fontsource-variable/plus-jakarta-sans'
 import './index.css'

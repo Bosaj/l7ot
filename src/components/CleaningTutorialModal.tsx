@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   X,
   Sparkles,
   Scissors,
   Lightbulb,
   Clock,
+  Play,
+  ExternalLink,
 } from 'lucide-react'
 import type { Fish } from '../data/types'
 import type { SupportedLanguage } from '../i18n/strings'
@@ -13,6 +15,58 @@ interface CleaningTutorialModalProps {
   fish: Fish
   lang: SupportedLanguage
   onClose: () => void
+}
+
+/** Click-to-play YouTube player: loads no third-party scripts until the user presses play. */
+const VideoPlayer: React.FC<{ videoId: string; title: string; lang: SupportedLanguage }> = ({
+  videoId,
+  title,
+  lang,
+}) => {
+  const [playing, setPlaying] = useState(false)
+  const watchLabel =
+    lang === 'fr' ? 'Ouvrir sur YouTube' : lang === 'en' ? 'Open on YouTube' : 'فتح على يوتيوب'
+  return (
+    <div className="space-y-2">
+      <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-xl">
+        {playing ? (
+          <iframe
+            className="absolute inset-0 h-full w-full"
+            src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
+            title={title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        ) : (
+          <button
+            type="button"
+            onClick={() => setPlaying(true)}
+            aria-label={title}
+            className="group absolute inset-0 h-full w-full"
+          >
+            <img
+              src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+              alt=""
+              className="h-full w-full object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
+            />
+            <span className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+            <span className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-cyan-500 text-white shadow-2xl shadow-cyan-500/40 ring-8 ring-cyan-500/20 transition group-hover:scale-110">
+              <Play className="h-7 w-7 translate-x-0.5 fill-current" />
+            </span>
+          </button>
+        )}
+      </div>
+      <a
+        href={`https://www.youtube.com/watch?v=${videoId}`}
+        target="_blank"
+        rel="noreferrer"
+        className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 transition hover:text-cyan-300"
+      >
+        <ExternalLink className="h-3.5 w-3.5" />
+        {watchLabel}
+      </a>
+    </div>
+  )
 }
 
 export const CleaningTutorialModal: React.FC<CleaningTutorialModalProps> = ({
@@ -86,6 +140,20 @@ export const CleaningTutorialModal: React.FC<CleaningTutorialModalProps> = ({
 
         {/* Modal Scrollable Body */}
         <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6">
+          {fish.cleaningVideoId && (
+            <VideoPlayer
+              videoId={fish.cleaningVideoId}
+              lang={lang}
+              title={
+                lang === 'fr'
+                  ? `Vidéo : nettoyer ${fish.nameFrench}`
+                  : lang === 'en'
+                  ? `Video: how to clean ${fish.nameEnglish}`
+                  : `فيديو: تنقية ${fish.nameDarijaArabic}`
+              }
+            />
+          )}
+
           {/* Tools Needed */}
           <div className="rounded-2xl border border-white/5 bg-slate-950/50 p-4">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">
