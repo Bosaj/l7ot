@@ -1,11 +1,10 @@
-import React from 'react'
-import { Fish as FishIcon, BookOpen, Utensils, Compass, Languages, Waves } from 'lucide-react'
+import { Fish as FishIcon, BookOpen, Utensils, Compass, Languages, Waves, Globe } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
 
 interface HeaderProps {
-  activeTab: 'fish' | 'recipes' | 'chef' | 'market'
-  setActiveTab: (tab: 'fish' | 'recipes' | 'chef' | 'market') => void
+  activeTab: 'fish' | 'recipes' | 'chef' | 'market' | 'agreements'
+  setActiveTab: (tab: 'fish' | 'recipes' | 'chef' | 'market' | 'agreements') => void
   lang: SupportedLanguage
   setLang: (lang: SupportedLanguage) => void
 }
@@ -96,6 +95,19 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <Compass className="h-4 w-4" />
             <span>{t.navMarket}</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab('agreements')}
+            className={`flex items-center gap-2 rounded-xl px-3.5 py-2 font-medium transition-all duration-200 ${
+              activeTab === 'agreements'
+                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20'
+                : 'text-slate-300 hover:bg-white/5 hover:text-white'
+            }`}
+          >
+            <Globe className="h-4 w-4" />
+            <span>{t.navAgreements}</span>
           </button>
         </nav>
 

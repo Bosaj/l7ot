@@ -11,6 +11,7 @@ import { RecipeCard } from './components/RecipeCard'
 import { RecipeModal } from './components/RecipeModal'
 import { ChefL7ot } from './components/ChefL7ot'
 import { MarketGuide } from './components/MarketGuide'
+import { AgreementsAndMarket } from './components/AgreementsAndMarket'
 
 import { MOROCCAN_FISH } from './data/fish'
 import { MOROCCAN_RECIPES } from './data/recipes'
@@ -20,7 +21,7 @@ import { STRINGS } from './i18n/strings'
 
 export const App: React.FC = () => {
   const [lang, setLang] = useState<SupportedLanguage>('ar')
-  const [activeTab, setActiveTab] = useState<'fish' | 'recipes' | 'chef' | 'market'>('fish')
+  const [activeTab, setActiveTab] = useState<'fish' | 'recipes' | 'chef' | 'market' | 'agreements'>('fish')
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [selectedCoast, setSelectedCoast] = useState<string>('all')
@@ -267,6 +268,9 @@ export const App: React.FC = () => {
 
         {/* Tab 4: Market Guide & Freshness Audit */}
         {activeTab === 'market' && <MarketGuide lang={lang} />}
+
+        {/* Tab 5: International Fisheries Agreements & Market Trends */}
+        {activeTab === 'agreements' && <AgreementsAndMarket lang={lang} />}
       </main>
 
       {/* Modals */}

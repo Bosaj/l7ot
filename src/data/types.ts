@@ -17,6 +17,40 @@ export type CookingMethod =
   | 'soup'
   | 'pastilla'
 
+export interface RegionalNames {
+  northChamal: string // Tangier, Tetouan, Al Hoceima, Nador
+  centreAtlantic: string // Casablanca, Rabat, Safi, Essaouira
+  southSoussSahara: string // Agadir, Tan-Tan, Laayoune, Dakhla
+}
+
+export interface PricingDetails {
+  wholesalePortMAD: { min: number; max: number; unit: 'kg' | 'piece' }
+  retailMarketMAD: { min: number; max: number; unit: 'kg' | 'piece' }
+  globalExportEUR: { min: number; max: number; unit: 'kg' | 'piece'; referenceMarket: string }
+}
+
+export interface NutritionPer100g {
+  caloriesKcal: number
+  proteinGrams: number
+  lipidsGrams: number
+  omega3Mg: number // EPA + DHA
+  vitaminD_mcg: number
+  vitaminB12_mcg: number
+  iodine_mcg: number
+  selenium_mcg: number
+  phosphorus_mg: number
+  calcium_mg: number
+  iron_mg: number
+  zinc_mg: number
+  magnesium_mg: number
+  potassium_mg: number
+  healthHighlights: {
+    ar: string[]
+    fr: string[]
+    en: string[]
+  }
+}
+
 export interface Fish {
   id: string
   nameDarijaArabic: string
@@ -36,6 +70,9 @@ export interface Fish {
     max: number
     unit: 'kg' | 'piece'
   }
+  pricingDetails?: PricingDetails
+  regionalNames?: RegionalNames
+  nutritionPer100g?: NutritionPer100g
   culinaryProfile: {
     flavor: 'mild' | 'rich' | 'sweet' | 'oily' | 'delicate'
     texture: 'tender' | 'firm' | 'flaky' | 'meaty'
@@ -56,6 +93,44 @@ export interface Fish {
   fallbackImageUrl?: string
   audioPhonetic: string
   recommendedRecipeIds: string[]
+}
+
+export interface FisheriesAgreement {
+  id: string
+  partnerName: { ar: string; fr: string; en: string }
+  flag: string
+  status: 'active' | 'suspended_under_renegotiation' | 'framework'
+  period: string
+  economicValue: { ar: string; fr: string; en: string }
+  targetSpecies: string[]
+  keyTerms: { ar: string[]; fr: string[]; en: string[] }
+  strategicContext: { ar: string; fr: string; en: string }
+  moroccoGains: { ar: string[]; fr: string[]; en: string[] }
+}
+
+export interface MarketTrend {
+  id: string
+  speciesId: string
+  speciesName: { ar: string; fr: string; en: string }
+  pastTrend: {
+    priceRangeMAD: string
+    summary: { ar: string; fr: string; en: string }
+  }
+  presentStatus: {
+    priceRangeMAD: string
+    supplyStatus: 'abundant' | 'moderate' | 'scarce'
+    trendDirection: 'up' | 'down' | 'stable'
+    summary: { ar: string; fr: string; en: string }
+  }
+  futureForecast: {
+    outlook: 'up' | 'down' | 'stable'
+    driverFactors: { ar: string[]; fr: string[]; en: string[] }
+    projection: { ar: string; fr: string; en: string }
+  }
+  biologicalRestPeriod?: {
+    months: string
+    description: { ar: string; fr: string; en: string }
+  }
 }
 
 export interface CharmoulaFormula {
