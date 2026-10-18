@@ -170,3 +170,35 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #d96b27;
 }
+
+/* Continuous Auto-Scrolling Ticker (Marquee) with Pause on Hover */
+@keyframes ticker-marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-33.333333%);
+  }
+}
+
+.animate-marquee {
+  display: inline-flex;
+  width: max-content;
+  animation: ticker-marquee 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover,
+.group:hover .animate-marquee {
+  animation-play-state: paused !important;
+}
+
+/* Clean scrollbar suppression for modern UI elements */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+

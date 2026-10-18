@@ -1,5 +1,14 @@
 import React from 'react'
-import { Camera, MapPin } from 'lucide-react'
+import {
+  Camera,
+  MapPin,
+  Fish,
+  UtensilsCrossed,
+  ChefHat,
+  ShoppingBag,
+  Globe2,
+  Waves,
+} from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
 import type { MoroccanPortRegion } from '../lib/moroccanRegions'
@@ -35,51 +44,59 @@ export const Header: React.FC<HeaderProps> = ({
     id: NavTab
     index: string
     label: string
-    meta: string
+    shortLabel: string
+    icon: React.ComponentType<{ className?: string }>
     highlight?: boolean
   }> = [
     {
       id: 'fish',
       index: '01',
       label: t.navFish,
-      meta: lang === 'ar' ? '32 نوعاً' : lang === 'fr' ? '32 Espèces' : '32 Species',
+      shortLabel: lang === 'ar' ? 'الأسماك' : lang === 'fr' ? 'Poissons' : 'Species',
+      icon: Fish,
     },
     {
       id: 'scanner',
       index: '02',
       label: t.navScanner,
-      meta: lang === 'ar' ? 'كاميرا ذكية' : lang === 'fr' ? 'Vision IA' : 'Camera AI',
+      shortLabel: lang === 'ar' ? 'ماسح الكاميرا' : lang === 'fr' ? 'Vision IA' : 'Scanner',
+      icon: Camera,
       highlight: true,
     },
     {
       id: 'recipes',
       index: '03',
       label: t.navRecipes,
-      meta: lang === 'ar' ? '16 وصفة' : lang === 'fr' ? '16 Recettes' : '16 Recipes',
+      shortLabel: lang === 'ar' ? 'الوصفات' : lang === 'fr' ? 'Recettes' : 'Recipes',
+      icon: UtensilsCrossed,
     },
     {
       id: 'chef',
       index: '04',
       label: t.navChef,
-      meta: lang === 'ar' ? 'ميزان التوابل' : lang === 'fr' ? 'Atelier' : 'Spice Lab',
+      shortLabel: lang === 'ar' ? 'شيف التوابل' : lang === 'fr' ? 'Chef Épices' : 'Spice Lab',
+      icon: ChefHat,
     },
     {
       id: 'market',
       index: '05',
       label: t.navMarket,
-      meta: lang === 'ar' ? 'فحص الطراوة' : lang === 'fr' ? 'Guide Criée' : 'Freshness',
+      shortLabel: lang === 'ar' ? 'دليل المارشي' : lang === 'fr' ? 'Guide Criée' : 'Market',
+      icon: ShoppingBag,
     },
     {
       id: 'agreements',
       index: '06',
       label: t.navAgreements,
-      meta: lang === 'ar' ? '10 معاهدات' : lang === 'fr' ? '10 Traités' : '10 Treaties',
+      shortLabel: lang === 'ar' ? 'المعاهدات' : lang === 'fr' ? 'Traités' : 'Treaties',
+      icon: Globe2,
     },
     {
       id: 'marine-apis',
       index: '07',
       label: t.navMarineApis,
-      meta: lang === 'ar' ? 'طقس مباشر & APIs' : lang === 'fr' ? 'Météo & APIs' : 'Live Waves & APIs',
+      shortLabel: lang === 'ar' ? 'طقس الموانئ' : lang === 'fr' ? 'Météo Mer' : 'Port Radar',
+      icon: Waves,
     },
   ]
 
@@ -110,44 +127,55 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-0 z-40 border-b border-[#f6f1e7]/12 bg-[#0b0908]/95 backdrop-blur-md">
-      {/* Top Maritime Telemetry Strip (Localized & RTL/LTR Safe) */}
-      <div className="border-b border-[#f6f1e7]/8 bg-[#120f0d] px-4 py-1.5 sm:px-6">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 text-[11px]">
-          <div className="flex items-center gap-2.5 overflow-x-auto whitespace-nowrap font-mono text-[#a69b8d]">
-            <span className="inline-flex items-center gap-1.5 font-semibold text-[#e68a45]">
+      {/* Top Maritime Telemetry Strip (Auto-scrolling Marquee with Pause on Hover, Zero Scrollbar) */}
+      <div className="border-b border-[#f6f1e7]/8 bg-[#120f0d] px-3 py-1.5 sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 text-[11px]">
+          {/* Pinned Left Header Badge */}
+          <div className="flex items-center gap-2 shrink-0 border-e border-[#f6f1e7]/10 pe-3 z-10 bg-[#120f0d]">
+            <span className="inline-flex items-center gap-1.5 font-mono font-bold text-[#e68a45] text-[10px] sm:text-[11px]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#e68a45] animate-pulse" />
               {lang === 'ar'
-                ? 'بورصة الموانئ المغربية (ONP مباشر)'
+                ? 'بورصة الموانئ (ONP)'
                 : lang === 'fr'
-                  ? 'ONP CRIÉE MAROC EN DIRECT'
-                  : 'ONP MOROCCO PORT AUCTION LIVE'}
+                  ? 'CRIÉE ONP DIRECT'
+                  : 'ONP LIVE AUCTION'}
             </span>
+          </div>
 
-            {tickerItems.map((item, idx) => (
-              <React.Fragment key={idx}>
-                <span className="text-[#f6f1e7]/20">|</span>
-                <span className="inline-flex items-center gap-1.5">
-                  <span className="text-[#d4cbbd]">{item.port}</span>
+          {/* Continuous Auto-Scrolling Ticker (Pauses immediately on hover!) */}
+          <div className="relative flex-1 overflow-hidden min-w-0 mx-2 group">
+            {/* Soft gradient edge masks */}
+            <div className="pointer-events-none absolute inset-y-0 start-0 w-8 bg-gradient-to-e from-[#120f0d] to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 end-0 w-8 bg-gradient-to-s from-[#120f0d] to-transparent z-10" />
+
+            <div
+              dir="ltr"
+              className="animate-marquee flex items-center gap-6 whitespace-nowrap font-mono text-[#a69b8d] cursor-pointer py-0.5"
+              title={lang === 'ar' ? 'مرر المؤشر لإيقاف الشريط وقراءة الأسعار' : 'Survolez pour mettre en pause'}
+            >
+              {[...tickerItems, ...tickerItems, ...tickerItems].map((item, idx) => (
+                <div key={idx} className="inline-flex items-center gap-2">
+                  <span className="text-[#f6f1e7]/20">•</span>
+                  <span className="text-[#d4cbbd] font-medium text-[11px]">{item.port}</span>
                   <span
-                    dir={lang === 'ar' ? 'rtl' : 'ltr'}
                     className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold ${
                       item.down
-                        ? 'bg-emerald-500/10 text-emerald-400'
-                        : 'bg-amber-500/10 text-amber-300'
+                        ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20'
+                        : 'bg-amber-500/15 text-amber-300 border border-amber-500/20'
                     }`}
                   >
                     <span>{item.price}</span>
-                    <span className="text-[9px] opacity-80">{item.trend}</span>
+                    <span className="text-[9px] opacity-85">{item.trend}</span>
                   </span>
-                </span>
-              </React.Fragment>
-            ))}
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Location Port & Language Controls */}
-          <div className="flex items-center gap-3 font-mono text-[11px]">
+          {/* Location Port & Language Controls (Pinned at End) */}
+          <div className="flex items-center gap-2.5 font-mono text-[11px] shrink-0 z-10 bg-[#120f0d] ps-2">
             {userPortLocation && (
-              <div className="flex items-center gap-1 border-e border-[#f6f1e7]/15 pe-2.5">
+              <div className="flex items-center gap-1 border-e border-[#f6f1e7]/15 pe-2">
                 <button
                   type="button"
                   onClick={userPortLocation.detectLocation}
@@ -160,7 +188,7 @@ export const Header: React.FC<HeaderProps> = ({
                   }`}
                 >
                   <MapPin className={`h-3 w-3 text-cyan-400 ${userPortLocation.isLocating ? 'animate-spin' : ''}`} />
-                  <span>
+                  <span className="max-w-[130px] truncate">
                     {userPortLocation.isLocating
                       ? (lang === 'ar' ? 'جاري الرصد...' : 'GPS...')
                       : (lang === 'ar' ? userPortLocation.selectedRegion.primaryPortAr.split('/')[0] : userPortLocation.selectedRegion.primaryPortFr.split('/')[0])}
@@ -171,13 +199,10 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* Language Selector */}
             <div className="flex items-center gap-1">
-              <span className="me-1 hidden text-[#786c60] sm:inline">
-                {lang === 'ar' ? 'اللغة:' : lang === 'fr' ? 'ÉDITION:' : 'LANGUAGE:'}
-              </span>
               <button
                 type="button"
                 onClick={() => setLang('ar')}
-                className={`rounded px-2 py-0.5 font-semibold transition-colors ${
+                className={`rounded px-1.5 py-0.5 text-[10px] font-semibold transition-colors ${
                   lang === 'ar'
                     ? 'bg-[#d96b27] text-[#0b0908]'
                     : 'text-[#a69b8d] hover:text-[#f6f1e7]'
@@ -188,7 +213,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={() => setLang('fr')}
-                className={`rounded px-2 py-0.5 font-semibold transition-colors ${
+                className={`rounded px-1.5 py-0.5 text-[10px] font-semibold transition-colors ${
                   lang === 'fr'
                     ? 'bg-[#d96b27] text-[#0b0908]'
                     : 'text-[#a69b8d] hover:text-[#f6f1e7]'
@@ -199,7 +224,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={() => setLang('en')}
-                className={`rounded px-2 py-0.5 font-semibold transition-colors ${
+                className={`rounded px-1.5 py-0.5 text-[10px] font-semibold transition-colors ${
                   lang === 'en'
                     ? 'bg-[#d96b27] text-[#0b0908]'
                     : 'text-[#a69b8d] hover:text-[#f6f1e7]'
@@ -242,51 +267,46 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          {/* Numbered Editorial Index Navigation */}
+          {/* Numbered Editorial Index Navigation (Zero scrollbar, responsive wrapping pills) */}
           <nav
             aria-label="Main Navigation"
-            className="flex items-stretch gap-1 overflow-x-auto border border-[#f6f1e7]/10 bg-[#14110f] p-1 rounded-lg"
+            className="flex flex-wrap items-center gap-1.5 rounded-xl border border-[#f6f1e7]/10 bg-[#14110f] p-1.5 shadow-inner no-scrollbar"
           >
             {navItems.map((item) => {
               const isActive = activeTab === item.id
+              const Icon = item.icon
               return (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => setActiveTab(item.id)}
-                  className={`group relative flex items-center gap-2 whitespace-nowrap rounded-md px-3 py-2 text-xs transition-all duration-200 ${
+                  className={`group relative flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs transition-all duration-200 ${
                     isActive
-                      ? 'bg-[#d96b27] text-[#0b0908] font-bold shadow-sm'
+                      ? 'bg-[#d96b27] text-[#0b0908] font-bold shadow-md shadow-[#d96b27]/20 ring-1 ring-[#e68a45]'
                       : item.highlight
                         ? 'border border-[#e68a45]/40 bg-[#e68a45]/10 text-[#f2b47e] hover:bg-[#e68a45]/20'
-                        : 'text-[#d4cbbd] hover:bg-[#f6f1e7]/5 hover:text-[#f6f1e7]'
+                        : 'text-[#d4cbbd] hover:bg-[#f6f1e7]/8 hover:text-[#f6f1e7]'
                   }`}
                 >
-                  {item.id === 'scanner' ? (
-                    <Camera
-                      className={`h-3.5 w-3.5 ${
-                        isActive ? 'text-[#0b0908]' : 'text-[#e68a45]'
-                      }`}
-                    />
-                  ) : (
-                    <span
-                      dir="ltr"
-                      className={`font-mono text-[10px] ${
-                        isActive ? 'text-[#0b0908]/80 font-bold' : 'text-[#e68a45]'
-                      }`}
-                    >
-                      {item.index}
-                    </span>
-                  )}
-                  <span className="text-xs sm:text-[13px]">{item.label}</span>
-                  <span
-                    className={`hidden rounded px-1.5 py-0.5 font-mono text-[9px] 2xl:inline-block ${
+                  <Icon
+                    className={`h-3.5 w-3.5 shrink-0 transition-transform group-hover:scale-110 ${
                       isActive
-                        ? 'bg-[#0b0908]/15 text-[#0b0908]'
-                        : 'bg-[#f6f1e7]/5 text-[#a69b8d]'
+                        ? 'text-[#0b0908]'
+                        : item.highlight
+                          ? 'text-[#e68a45]'
+                          : 'text-[#a69b8d] group-hover:text-[#f6f1e7]'
+                    }`}
+                  />
+                  <span
+                    dir="ltr"
+                    className={`font-mono text-[9px] ${
+                      isActive ? 'text-[#0b0908]/80 font-bold' : 'text-[#e68a45]/80'
                     }`}
                   >
-                    {item.meta}
+                    {item.index}
+                  </span>
+                  <span className="font-medium text-xs whitespace-nowrap">
+                    {item.label}
                   </span>
                 </button>
               )
