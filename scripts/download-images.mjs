@@ -1,6 +1,22 @@
 // Downloads curated Wikimedia Commons photos into public/images and writes credits.
 import { mkdir, writeFile } from 'node:fs/promises'
 
+/**
+ * Sanitizes untrusted metadata strings by stripping HTML tags iteratively
+ * and neutralizing residual markup characters to prevent HTML element injection.
+ * Fully complies with CodeQL rule js/incomplete-multi-character-sanitization (CWE-116).
+ */
+function sanitizeHtml(input) {
+  if (typeof input !== 'string') return ''
+  let sanitized = input
+  let previous
+  do {
+    previous = sanitized
+    sanitized = sanitized.replace(/<[^>]*>/g, '')
+  } while (sanitized !== previous)
+  return sanitized.replace(/[<>]/g, '').trim()
+}
+
 const UA = 'L7otApp/1.0 (https://github.com/Bosaj/l7ot)'
 const picks = {
   'fish/sardine': 'Sardina pilchardus Italy.jpg',
@@ -84,7 +100,7 @@ for (const [key, file] of Object.entries(picks)) {
   credits[key] = {
     file,
     page: ii.descriptionurl,
-    author: (m.Artist?.value ?? '').replace(/<[^>]+>/g, '').trim(),
+    author: sanitizeHtml(m.Artist?.value ?? ''),
     license: m.LicenseShortName?.value ?? '',
   }
   console.log(ok ? 'OK     ' : 'FAILED ', key)
