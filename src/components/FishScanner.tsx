@@ -17,6 +17,7 @@ import {
 import type { Fish } from '../data/types'
 import type { SupportedLanguage } from '../i18n/strings'
 import { speakDarija } from '../lib/speech'
+import { PriceBadge } from './PriceBadge'
 
 interface FishScannerProps {
   allFish: Fish[]
@@ -658,9 +659,15 @@ export const FishScanner: React.FC<FishScannerProps> = ({
                         <span className="block font-mono text-[10px] uppercase text-emerald-300">
                           {lang === 'ar' ? 'ثمن السوق المغربي' : 'Prix Souk Maroc'}
                         </span>
-                        <span dir="ltr" className="mt-1 block font-mono text-lg font-bold text-emerald-400">
-                          {primaryMatch.fish.pricing.currentSpotMAD} MAD/kg
-                        </span>
+                        <div className="mt-1">
+                          <PriceBadge
+                            amount={primaryMatch.fish.pricing.currentSpotMAD}
+                            unit="kg"
+                            lang={lang}
+                            amountClassName="text-lg font-bold text-emerald-400"
+                            unitClassName="text-xs text-emerald-300"
+                          />
+                        </div>
                       </div>
 
                       <div className="rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-3">

@@ -15,6 +15,7 @@ import {
 import type { Fish } from '../data/types'
 import type { Language } from '../i18n/strings'
 import { speakDarija } from '../lib/speech'
+import { PriceBadge } from './PriceBadge'
 
 interface SoukBasketAndComparatorProps {
   fishList?: Fish[]
@@ -62,7 +63,6 @@ export const SoukBasketAndComparator: React.FC<SoukBasketAndComparatorProps> = (
     return fish.nameEnglish
   }
 
-  const currencyUnit = lang === 'ar' ? 'درهم/كلغ' : 'MAD/kg'
   const currencyShort = lang === 'ar' ? 'درهم' : 'MAD'
 
   const addToBasket = (fishId: string) => {
@@ -201,7 +201,7 @@ export const SoukBasketAndComparator: React.FC<SoukBasketAndComparatorProps> = (
               className="inline-flex items-center gap-1.5 rounded-sm border border-[#332822] bg-[#120e0c] px-3 py-1.5 font-mono text-xs text-[#e09f3e] transition hover:border-[#c85a32]"
             >
               <ArrowLeftRight className="h-3.5 w-3.5" />
-              {lang === 'ar' ? 'قلب المقارنة' : lang === 'fr' ? 'Inverser' : 'Swap'}
+              {lang === 'ar' ? 'تبديل السمكتين' : lang === 'fr' ? 'Inverser' : 'Swap'}
             </button>
           </div>
 
@@ -223,7 +223,7 @@ export const SoukBasketAndComparator: React.FC<SoukBasketAndComparatorProps> = (
                 >
                   {fishList.map((f) => (
                     <option key={f.id} value={f.id}>
-                      {f.nameDarijaArabic} · {f.nameFrench} ({f.pricing.currentSpotMAD} MAD)
+                      {f.nameDarijaArabic} · {lang === 'ar' ? `${f.pricing.currentSpotMAD} درهم/كلغ` : `${f.nameFrench} (${f.pricing.currentSpotMAD} MAD)`}
                     </option>
                   ))}
                 </select>
@@ -250,7 +250,7 @@ export const SoukBasketAndComparator: React.FC<SoukBasketAndComparatorProps> = (
                           speakDarija(fish.nameDarijaArabic, fish.audioPhonetic, fish.id)
                         }
                         className="rounded-sm border border-[#2a211c] p-1 text-[#e09f3e] hover:border-[#c85a32]"
-                        title="Listen Darija"
+                        title={lang === 'ar' ? 'استمع للاسم بالدارجة' : 'Listen Darija'}
                       >
                         <Volume2 className="h-3.5 w-3.5" />
                       </button>
@@ -258,12 +258,16 @@ export const SoukBasketAndComparator: React.FC<SoukBasketAndComparatorProps> = (
                     <p className="truncate font-mono text-[11px] text-[#8c7d6b]">
                       {fish.nameDarijaLatin}
                     </p>
-                    <p
-                      dir="ltr"
-                      className="mt-1 inline-block rounded-sm bg-[#c85a32]/15 px-2 py-0.5 font-mono text-xs font-bold text-[#e09f3e]"
-                    >
-                      {fish.pricing.currentSpotMAD} {currencyUnit}
-                    </p>
+                    <div className="mt-1">
+                      <PriceBadge
+                        amount={fish.pricing.currentSpotMAD}
+                        unit="kg"
+                        lang={lang}
+                        amountClassName="text-xs font-bold text-[#e09f3e]"
+                        unitClassName="text-[10px] text-[#e09f3e]/80"
+                        className="rounded-sm bg-[#c85a32]/15 px-2 py-0.5"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -272,118 +276,146 @@ export const SoukBasketAndComparator: React.FC<SoukBasketAndComparatorProps> = (
 
           {/* Comparison Metrics Table */}
           <div className="space-y-2.5 text-xs">
-            {[
-              {
-                label:
-                  lang === 'ar'
-                    ? 'ثمن السوق المغربي (الأوفر)'
-                    : lang === 'fr'
-                      ? 'Prix Souk Maroc (Plus économique)'
-                      : 'Moroccan Souk Price (Best Value)',
-                leftVal: `${leftFish.pricing.currentSpotMAD} ${currencyUnit}`,
-                rightVal: `${rightFish.pricing.currentSpotMAD} ${currencyUnit}`,
-                winner:
-                  leftFish.pricing.currentSpotMAD < rightFish.pricing.currentSpotMAD
-                    ? 'left'
-                    : leftFish.pricing.currentSpotMAD > rightFish.pricing.currentSpotMAD
-                      ? 'right'
-                      : 'tie',
-              },
-              {
-                label:
-                  lang === 'ar'
-                    ? 'أوميغا 3 (لكل 100 غرام)'
-                    : lang === 'fr'
-                      ? 'Oméga-3 EPA/DHA (pour 100g)'
-                      : 'Omega-3 EPA/DHA (per 100g)',
-                leftVal: `${leftFish.nutrition.omega3Mg} mg`,
-                rightVal: `${rightFish.nutrition.omega3Mg} mg`,
-                winner:
-                  leftFish.nutrition.omega3Mg > rightFish.nutrition.omega3Mg
-                    ? 'left'
-                    : leftFish.nutrition.omega3Mg < rightFish.nutrition.omega3Mg
-                      ? 'right'
-                      : 'tie',
-              },
-              {
-                label:
-                  lang === 'ar'
-                    ? 'البروتين الصافي (لكل 100 غرام)'
-                    : lang === 'fr'
-                      ? 'Protéines Marines (pour 100g)'
-                      : 'Marine Protein (per 100g)',
-                leftVal: `${leftFish.nutrition.proteinGrams} g`,
-                rightVal: `${rightFish.nutrition.proteinGrams} g`,
-                winner:
-                  leftFish.nutrition.proteinGrams > rightFish.nutrition.proteinGrams
-                    ? 'left'
-                    : leftFish.nutrition.proteinGrams < rightFish.nutrition.proteinGrams
-                      ? 'right'
-                      : 'tie',
-              },
-              {
-                label:
-                  lang === 'ar'
-                    ? 'قيمة التصدير العالمي'
-                    : lang === 'fr'
-                      ? 'Cote Export International'
-                      : 'Global Export Valuation',
-                leftVal: `$${leftFish.pricing.globalExportUSD.avg.toFixed(1)}/kg`,
-                rightVal: `$${rightFish.pricing.globalExportUSD.avg.toFixed(1)}/kg`,
-                winner:
-                  leftFish.pricing.globalExportUSD.avg >
-                  rightFish.pricing.globalExportUSD.avg
-                    ? 'left'
-                    : leftFish.pricing.globalExportUSD.avg <
-                        rightFish.pricing.globalExportUSD.avg
-                      ? 'right'
-                      : 'tie',
-              },
-              {
-                label:
-                  lang === 'ar'
-                    ? 'فيتامين B12 والحديد (لكل 100 غرام)'
-                    : lang === 'fr'
-                      ? 'Vitamine B12 & Fer (pour 100g)'
-                      : 'Vitamin B12 & Iron (per 100g)',
-                leftVal: `${leftFish.nutrition.vitaminB12_mcg}µg · ${leftFish.nutrition.ironMg}mg`,
-                rightVal: `${rightFish.nutrition.vitaminB12_mcg}µg · ${rightFish.nutrition.ironMg}mg`,
-                winner:
-                  leftFish.nutrition.vitaminB12_mcg + leftFish.nutrition.ironMg >
-                  rightFish.nutrition.vitaminB12_mcg + rightFish.nutrition.ironMg
-                    ? 'left'
-                    : 'right',
-              },
-            ].map((row, i) => (
+            {/* Row 1: Moroccan Market Price */}
+            <div className="grid grid-cols-3 items-center gap-2 rounded-sm border border-[#241d19] bg-[#120e0c] px-3 py-2.5">
               <div
-                key={i}
-                className="grid grid-cols-3 items-center gap-2 rounded-sm border border-[#241d19] bg-[#120e0c] px-3 py-2.5"
+                className={`flex items-center gap-1.5 font-mono text-xs font-bold ${
+                  leftFish.pricing.currentSpotMAD < rightFish.pricing.currentSpotMAD ? 'text-[#52b788]' : 'text-[#b5a592]'
+                }`}
               >
-                <div
-                  dir="ltr"
-                  className={`flex items-center gap-1.5 font-mono text-xs font-bold ${
-                    row.winner === 'left' ? 'text-[#52b788]' : 'text-[#b5a592]'
-                  }`}
-                >
-                  <span>{row.leftVal}</span>
-                  {row.winner === 'left' && <Award className="h-3.5 w-3.5 text-[#52b788]" />}
-                </div>
-                <div className="text-center text-[11px] font-medium text-[#8c7d6b]">
-                  {row.label}
-                </div>
-                <div
-                  dir="ltr"
-                  className={`flex items-center justify-end gap-1.5 font-mono text-xs font-bold ${
-                    row.winner === 'right' ? 'text-[#52b788]' : 'text-[#b5a592]'
-                  }`}
-                >
-                  {row.winner === 'right' && (
-                    <Award className="h-3.5 w-3.5 text-[#52b788]" />
-                  )}
-                  <span>{row.rightVal}</span>
-                </div>
+                <PriceBadge
+                  amount={leftFish.pricing.currentSpotMAD}
+                  unit="kg"
+                  lang={lang}
+                  amountClassName="text-xs font-bold"
+                  unitClassName="text-[10px]"
+                />
+                {leftFish.pricing.currentSpotMAD < rightFish.pricing.currentSpotMAD && (
+                  <Award className="h-3.5 w-3.5 text-[#52b788] shrink-0" />
+                )}
               </div>
-            ))}
+              <div className="text-center text-[11px] font-medium text-[#8c7d6b]">
+                {lang === 'ar' ? 'ثمن السوق المغربي (الأوفر)' : lang === 'fr' ? 'Prix Souk Maroc (Plus économique)' : 'Moroccan Souk Price (Best Value)'}
+              </div>
+              <div
+                className={`flex items-center justify-end gap-1.5 font-mono text-xs font-bold ${
+                  rightFish.pricing.currentSpotMAD < leftFish.pricing.currentSpotMAD ? 'text-[#52b788]' : 'text-[#b5a592]'
+                }`}
+              >
+                <PriceBadge
+                  amount={rightFish.pricing.currentSpotMAD}
+                  unit="kg"
+                  lang={lang}
+                  amountClassName="text-xs font-bold"
+                  unitClassName="text-[10px]"
+                />
+                {rightFish.pricing.currentSpotMAD < leftFish.pricing.currentSpotMAD && (
+                  <Award className="h-3.5 w-3.5 text-[#52b788] shrink-0" />
+                )}
+              </div>
+            </div>
+
+            {/* Row 2: Omega-3 */}
+            <div className="grid grid-cols-3 items-center gap-2 rounded-sm border border-[#241d19] bg-[#120e0c] px-3 py-2.5">
+              <div
+                className={`flex items-center gap-1.5 font-mono text-xs font-bold ${
+                  leftFish.nutrition.omega3Mg > rightFish.nutrition.omega3Mg ? 'text-[#52b788]' : 'text-[#b5a592]'
+                }`}
+              >
+                <span>{leftFish.nutrition.omega3Mg} {lang === 'ar' ? 'ملغ' : 'mg'}</span>
+                {leftFish.nutrition.omega3Mg > rightFish.nutrition.omega3Mg && (
+                  <Award className="h-3.5 w-3.5 text-[#52b788] shrink-0" />
+                )}
+              </div>
+              <div className="text-center text-[11px] font-medium text-[#8c7d6b]">
+                {lang === 'ar' ? 'أوميغا 3 (لكل 100 غرام)' : lang === 'fr' ? 'Oméga-3 EPA/DHA (pour 100g)' : 'Omega-3 EPA/DHA (per 100g)'}
+              </div>
+              <div
+                className={`flex items-center justify-end gap-1.5 font-mono text-xs font-bold ${
+                  rightFish.nutrition.omega3Mg > leftFish.nutrition.omega3Mg ? 'text-[#52b788]' : 'text-[#b5a592]'
+                }`}
+              >
+                <span>{rightFish.nutrition.omega3Mg} {lang === 'ar' ? 'ملغ' : 'mg'}</span>
+                {rightFish.nutrition.omega3Mg > leftFish.nutrition.omega3Mg && (
+                  <Award className="h-3.5 w-3.5 text-[#52b788] shrink-0" />
+                )}
+              </div>
+            </div>
+
+            {/* Row 3: Protein */}
+            <div className="grid grid-cols-3 items-center gap-2 rounded-sm border border-[#241d19] bg-[#120e0c] px-3 py-2.5">
+              <div
+                className={`flex items-center gap-1.5 font-mono text-xs font-bold ${
+                  leftFish.nutrition.proteinGrams > rightFish.nutrition.proteinGrams ? 'text-[#52b788]' : 'text-[#b5a592]'
+                }`}
+              >
+                <span>{leftFish.nutrition.proteinGrams} {lang === 'ar' ? 'غرام' : 'g'}</span>
+                {leftFish.nutrition.proteinGrams > rightFish.nutrition.proteinGrams && (
+                  <Award className="h-3.5 w-3.5 text-[#52b788] shrink-0" />
+                )}
+              </div>
+              <div className="text-center text-[11px] font-medium text-[#8c7d6b]">
+                {lang === 'ar' ? 'البروتين الصافي (لكل 100 غرام)' : lang === 'fr' ? 'Protéines Marines (pour 100g)' : 'Marine Protein (per 100g)'}
+              </div>
+              <div
+                className={`flex items-center justify-end gap-1.5 font-mono text-xs font-bold ${
+                  rightFish.nutrition.proteinGrams > leftFish.nutrition.proteinGrams ? 'text-[#52b788]' : 'text-[#b5a592]'
+                }`}
+              >
+                <span>{rightFish.nutrition.proteinGrams} {lang === 'ar' ? 'غرام' : 'g'}</span>
+                {rightFish.nutrition.proteinGrams > leftFish.nutrition.proteinGrams && (
+                  <Award className="h-3.5 w-3.5 text-[#52b788] shrink-0" />
+                )}
+              </div>
+            </div>
+
+            {/* Row 4: Global Export */}
+            <div className="grid grid-cols-3 items-center gap-2 rounded-sm border border-[#241d19] bg-[#120e0c] px-3 py-2.5">
+              <div
+                className={`flex items-center gap-1.5 font-mono text-xs font-bold ${
+                  leftFish.pricing.globalExportUSD.avg > rightFish.pricing.globalExportUSD.avg ? 'text-[#52b788]' : 'text-[#b5a592]'
+                }`}
+              >
+                <span dir="ltr">${leftFish.pricing.globalExportUSD.avg.toFixed(1)}/kg</span>
+                {leftFish.pricing.globalExportUSD.avg > rightFish.pricing.globalExportUSD.avg && (
+                  <Award className="h-3.5 w-3.5 text-[#52b788] shrink-0" />
+                )}
+              </div>
+              <div className="text-center text-[11px] font-medium text-[#8c7d6b]">
+                {lang === 'ar' ? 'قيمة التصدير العالمي' : lang === 'fr' ? 'Cote Export International' : 'Global Export Valuation'}
+              </div>
+              <div
+                className={`flex items-center justify-end gap-1.5 font-mono text-xs font-bold ${
+                  rightFish.pricing.globalExportUSD.avg > leftFish.pricing.globalExportUSD.avg ? 'text-[#52b788]' : 'text-[#b5a592]'
+                }`}
+              >
+                <span dir="ltr">${rightFish.pricing.globalExportUSD.avg.toFixed(1)}/kg</span>
+                {rightFish.pricing.globalExportUSD.avg > leftFish.pricing.globalExportUSD.avg && (
+                  <Award className="h-3.5 w-3.5 text-[#52b788] shrink-0" />
+                )}
+              </div>
+            </div>
+
+            {/* Row 5: Vitamin B12 & Iron */}
+            <div className="grid grid-cols-3 items-center gap-2 rounded-sm border border-[#241d19] bg-[#120e0c] px-3 py-2.5">
+              <div
+                className={`flex items-center gap-1.5 font-mono text-xs font-bold ${
+                  leftFish.nutrition.vitaminB12_mcg + leftFish.nutrition.ironMg > rightFish.nutrition.vitaminB12_mcg + rightFish.nutrition.ironMg ? 'text-[#52b788]' : 'text-[#b5a592]'
+                }`}
+              >
+                <span dir="ltr">{leftFish.nutrition.vitaminB12_mcg}µg · {leftFish.nutrition.ironMg}mg</span>
+              </div>
+              <div className="text-center text-[11px] font-medium text-[#8c7d6b]">
+                {lang === 'ar' ? 'فيتامين B12 والحديد (لكل 100 غرام)' : lang === 'fr' ? 'Vitamine B12 & Fer (pour 100g)' : 'Vitamin B12 & Iron (per 100g)'}
+              </div>
+              <div
+                className={`flex items-center justify-end gap-1.5 font-mono text-xs font-bold ${
+                  rightFish.nutrition.vitaminB12_mcg + rightFish.nutrition.ironMg > leftFish.nutrition.vitaminB12_mcg + leftFish.nutrition.ironMg ? 'text-[#52b788]' : 'text-[#b5a592]'
+                }`}
+              >
+                <span dir="ltr">{rightFish.nutrition.vitaminB12_mcg}µg · {rightFish.nutrition.ironMg}mg</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -419,31 +451,31 @@ export const SoukBasketAndComparator: React.FC<SoukBasketAndComparatorProps> = (
             </div>
 
             {/* Add fish bar */}
-            <div className="mb-4 flex gap-2">
+            <div className="mb-4 flex items-center gap-2">
               <select
                 value={selectedAddFishId}
                 onChange={(e) => setSelectedAddFishId(e.target.value)}
                 aria-label="Select fish to add to basket"
-                className="flex-1 rounded-sm border border-[#2a211c] bg-[#120e0c] px-3 py-2 text-xs text-[#f4ede2] focus:border-[#c85a32] focus:outline-none"
+                className="min-w-0 flex-1 truncate rounded-sm border border-[#2a211c] bg-[#120e0c] px-3 py-2 text-xs text-[#f4ede2] focus:border-[#c85a32] focus:outline-none"
               >
                 {fishList.map((f) => (
                   <option key={f.id} value={f.id}>
-                    {f.nameDarijaArabic} — {f.nameFrench} ({f.pricing.currentSpotMAD} MAD/kg)
+                    {f.nameDarijaArabic} — {lang === 'ar' ? `${f.pricing.currentSpotMAD} درهم/كلغ` : `${f.nameFrench} (${f.pricing.currentSpotMAD} MAD/kg)`}
                   </option>
                 ))}
               </select>
               <button
                 type="button"
                 onClick={() => addToBasket(selectedAddFishId)}
-                className="inline-flex items-center gap-1.5 rounded-sm bg-[#c85a32] px-3.5 py-2 text-xs font-bold text-[#f4ede2] transition hover:bg-[#b04b25]"
+                className="shrink-0 inline-flex items-center gap-1.5 rounded-sm bg-[#c85a32] px-3.5 py-2 text-xs font-bold text-[#f4ede2] transition hover:bg-[#b04b25]"
               >
                 <Plus className="h-4 w-4" />
-                {lang === 'ar' ? 'أضف للقفة' : lang === 'fr' ? 'Ajouter' : 'Add'}
+                <span>{lang === 'ar' ? 'أضف للقفة' : lang === 'fr' ? 'Ajouter' : 'Add'}</span>
               </button>
             </div>
 
             {/* Basket Items */}
-            <div className="max-h-64 space-y-2.5 overflow-y-auto pe-1">
+            <div className="max-h-72 space-y-2.5 overflow-y-auto pe-1">
               {basket.map((item) => {
                 const fish = fishList.find((f) => f.id === item.fishId)
                 if (!fish) return null
@@ -451,22 +483,22 @@ export const SoukBasketAndComparator: React.FC<SoukBasketAndComparatorProps> = (
                 return (
                   <div
                     key={item.fishId}
-                    className="flex flex-wrap items-center justify-between gap-2 rounded-sm border border-[#241d19] bg-[#120e0c] p-2.5"
+                    className="flex items-center justify-between gap-3 rounded-sm border border-[#241d19] bg-[#120e0c] p-2.5"
                   >
-                    <div className="flex items-center gap-2.5">
+                    <div className="flex items-center gap-2.5 min-w-0 flex-1">
                       <img
                         src={fish.imageUrl}
                         alt={getLocalizedName(fish)}
-                        className="h-10 w-12 rounded-sm object-cover"
+                        className="h-10 w-12 shrink-0 rounded-sm object-cover border border-[#2a211c]"
                       />
-                      <div>
-                        <p className="font-editorial text-sm font-bold text-[#f4ede2]">
+                      <div className="min-w-0">
+                        <p className="truncate font-editorial text-sm font-bold text-[#f4ede2]">
                           {getLocalizedName(fish)}
                         </p>
                         <button
                           type="button"
                           onClick={() => toggleKessal(item.fishId)}
-                          className={`mt-0.5 text-[10px] underline ${
+                          className={`mt-0.5 block truncate text-[10px] underline ${
                             item.includeKessalCleaning
                               ? 'text-[#52b788]'
                               : 'text-[#8c7d6b]'
@@ -474,7 +506,7 @@ export const SoukBasketAndComparator: React.FC<SoukBasketAndComparatorProps> = (
                         >
                           {item.includeKessalCleaning
                             ? lang === 'ar'
-                              ? '✓ مع تنقية الكسال (+5 درهم/كلغ)'
+                              ? '✓ مع تنقية الكسال (+5 دراهم/كلغ)'
                               : '✓ + Kessal cleaning (+5 MAD/kg)'
                             : lang === 'ar'
                               ? '+ إضافة تنقية الكسال'
@@ -483,42 +515,46 @@ export const SoukBasketAndComparator: React.FC<SoukBasketAndComparatorProps> = (
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 shrink-0">
                       <div
-                        dir="ltr"
                         className="flex items-center rounded-sm border border-[#2a211c] bg-[#181310]"
                       >
                         <button
                           type="button"
                           onClick={() => updateKg(item.fishId, -0.5)}
+                          aria-label="Decrease quantity"
                           className="px-2 py-1 text-[#b5a592] hover:text-[#f4ede2]"
                         >
                           <Minus className="h-3 w-3" />
                         </button>
-                        <span className="px-2 font-mono text-xs font-bold text-[#f4ede2]">
-                          {item.kg} kg
+                        <span className="px-2 font-mono text-xs font-bold text-[#f4ede2] whitespace-nowrap">
+                          {item.kg} {lang === 'ar' ? 'كلغ' : 'kg'}
                         </span>
                         <button
                           type="button"
                           onClick={() => updateKg(item.fishId, 0.5)}
+                          aria-label="Increase quantity"
                           className="px-2 py-1 text-[#b5a592] hover:text-[#f4ede2]"
                         >
                           <Plus className="h-3 w-3" />
                         </button>
                       </div>
 
-                      <span
-                        dir="ltr"
-                        className="min-w-[68px] text-end font-mono text-xs font-bold text-[#e09f3e]"
-                      >
-                        {lineMAD} {currencyShort}
-                      </span>
+                      <div className="min-w-[64px] text-end">
+                        <PriceBadge
+                          amount={lineMAD}
+                          unit="none"
+                          lang={lang}
+                          amountClassName="text-xs font-bold text-[#e09f3e]"
+                          unitClassName="text-[10px] text-[#e09f3e]/80"
+                        />
+                      </div>
 
                       <button
                         type="button"
                         onClick={() => removeFromBasket(item.fishId)}
                         className="p-1 text-[#8c7d6b] hover:text-rose-400"
-                        title="Remove"
+                        title={lang === 'ar' ? 'حذف من القفة' : 'Supprimer'}
                       >
                         <Trash2 className="h-3.5 w-3.5" />
                       </button>
@@ -536,46 +572,51 @@ export const SoukBasketAndComparator: React.FC<SoukBasketAndComparatorProps> = (
                 <span className="block text-[10px] text-[#8c7d6b]">
                   {lang === 'ar' ? 'الوزن الإجمالي' : lang === 'fr' ? 'Poids Total' : 'Total Weight'}
                 </span>
-                <span dir="ltr" className="font-mono text-sm font-bold text-[#f4ede2]">
-                  {basketTotals.totalKg} kg
+                <span className="font-mono text-sm font-bold text-[#f4ede2]">
+                  {basketTotals.totalKg} {lang === 'ar' ? 'كلغ' : 'kg'}
                 </span>
               </div>
               <div>
                 <span className="block text-[10px] text-[#8c7d6b]">
-                  {lang === 'ar' ? 'البروتين العائلي' : lang === 'fr' ? 'Protéines' : 'Total Protein'}
+                  {lang === 'ar' ? 'البروتين الصافي' : lang === 'fr' ? 'Protéines' : 'Total Protein'}
                 </span>
-                <span dir="ltr" className="font-mono text-sm font-bold text-[#52b788]">
-                  {basketTotals.totalProteinGrams} g
+                <span className="font-mono text-sm font-bold text-[#52b788]">
+                  {basketTotals.totalProteinGrams} {lang === 'ar' ? 'غرام' : 'g'}
                 </span>
               </div>
               <div>
                 <span className="block text-[10px] text-[#8c7d6b]">
                   {lang === 'ar' ? 'أوميغا 3' : 'Omega-3'}
                 </span>
-                <span dir="ltr" className="font-mono text-sm font-bold text-[#38bdf8]">
-                  {basketTotals.totalOmega3Grams} g
+                <span className="font-mono text-sm font-bold text-[#38bdf8]">
+                  {basketTotals.totalOmega3Grams} {lang === 'ar' ? 'غرام' : 'g'}
                 </span>
               </div>
             </div>
 
-            <div className="mt-3 flex items-center justify-between">
-              <div>
-                <span className="block text-xs font-semibold text-[#b5a592]">
+            <div className="mt-3 flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <span className="block text-xs font-semibold text-[#b5a592] truncate">
                   {lang === 'ar'
-                    ? 'الميزانية التقديرية في المرسى (شاملة الكسال)'
+                    ? 'الميزانية التقديرية في المرسى (شاملة الكسال):'
                     : lang === 'fr'
-                      ? 'Budget Estimé au Souk (Kessal inclus)'
-                      : 'Estimated Souk Total (incl. Kessal)'}
+                      ? 'Budget Estimé au Souk (Kessal inclus) :'
+                      : 'Estimated Souk Total (incl. Kessal) :'}
                 </span>
-                <span dir="ltr" className="font-mono text-[11px] text-[#8c7d6b]">
-                  {basketTotals.fishCostMAD} + {basketTotals.kessalCostMAD} Kessal
+                <span className="font-mono text-[11px] text-[#8c7d6b]">
+                  {lang === 'ar'
+                    ? `${basketTotals.fishCostMAD} درهم للحوت + ${basketTotals.kessalCostMAD} درهم للكسال`
+                    : `${basketTotals.fishCostMAD} MAD poisson + ${basketTotals.kessalCostMAD} MAD Kessal`}
                 </span>
               </div>
-              <div
-                dir="ltr"
-                className="font-mono text-xl font-extrabold text-[#e09f3e]"
-              >
-                {basketTotals.grandTotalMAD} {currencyShort}
+              <div className="shrink-0">
+                <PriceBadge
+                  amount={basketTotals.grandTotalMAD}
+                  unit="none"
+                  lang={lang}
+                  amountClassName="text-2xl font-extrabold text-[#e09f3e]"
+                  unitClassName="text-sm font-bold text-[#e09f3e]"
+                />
               </div>
             </div>
           </div>

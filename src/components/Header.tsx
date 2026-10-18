@@ -3,7 +3,7 @@ import { Camera } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
 
-export type NavTab = 'fish' | 'scanner' | 'recipes' | 'chef' | 'market' | 'agreements'
+export type NavTab = 'fish' | 'scanner' | 'recipes' | 'chef' | 'market' | 'agreements' | 'marine-apis'
 
 interface HeaderProps {
   activeTab: NavTab
@@ -64,28 +64,34 @@ export const Header: React.FC<HeaderProps> = ({
       label: t.navAgreements,
       meta: lang === 'ar' ? '10 معاهدات' : lang === 'fr' ? '10 Traités' : '10 Treaties',
     },
+    {
+      id: 'marine-apis',
+      index: '07',
+      label: t.navMarineApis,
+      meta: lang === 'ar' ? 'طقس مباشر & APIs' : lang === 'fr' ? 'Météo & APIs' : 'Live Waves & APIs',
+    },
   ]
 
   const tickerItems =
     lang === 'ar'
       ? [
-          { port: 'آسفي · السردين', price: '14 درهم/كلغ ▼', down: true },
-          { port: 'الداخلة · الأخطبوط', price: '95 درهم/كلغ ▲', down: false },
-          { port: 'طنجة المتوسط · الباجو الملكي', price: '110 درهم/كلغ ▲', down: false },
-          { port: 'الواليدية · المحار وبوجنبة', price: '70 درهم/كلغ ●', down: true },
+          { port: 'آسفي · السردين', price: '14 درهم/كلغ', trend: '▼', down: true },
+          { port: 'الداخلة · الأخطبوط', price: '95 درهم/كلغ', trend: '▲', down: false },
+          { port: 'طنجة المتوسط · الباجو الملكي', price: '110 درهم/كلغ', trend: '▲', down: false },
+          { port: 'الواليدية · المحار وبوجنبة', price: '70 درهم/كلغ', trend: '●', down: true },
         ]
       : lang === 'fr'
         ? [
-            { port: 'SAFI · SARDINE', price: '14 MAD/KG ▼', down: true },
-            { port: 'DAKHLA · POULPE', price: '95 MAD/KG ▲', down: false },
-            { port: 'TANGER MED · PAGEOT ROYAL', price: '110 MAD/KG ▲', down: false },
-            { port: 'OUALIDIA · HUÎTRES & BOUJNIBA', price: '70 MAD/KG ●', down: true },
+            { port: 'SAFI · SARDINE', price: '14 MAD/KG', trend: '▼', down: true },
+            { port: 'DAKHLA · POULPE', price: '95 MAD/KG', trend: '▲', down: false },
+            { port: 'TANGER MED · PAGEOT ROYAL', price: '110 MAD/KG', trend: '▲', down: false },
+            { port: 'OUALIDIA · HUÎTRES & CRABE', price: '70 MAD/KG', trend: '●', down: true },
           ]
         : [
-            { port: 'SAFI · SARDINE', price: '14 MAD/KG ▼', down: true },
-            { port: 'DAKHLA · OCTOPUS', price: '95 MAD/KG ▲', down: false },
-            { port: 'TANGIER MED · ROYAL BREAM', price: '110 MAD/KG ▲', down: false },
-            { port: 'OUALIDIA · OYSTERS & CRAB', price: '70 MAD/KG ●', down: true },
+            { port: 'SAFI · SARDINE', price: '14 MAD/KG', trend: '▼', down: true },
+            { port: 'DAKHLA · OCTOPUS', price: '95 MAD/KG', trend: '▲', down: false },
+            { port: 'TANGIER MED · ROYAL BREAM', price: '110 MAD/KG', trend: '▲', down: false },
+            { port: 'OUALIDIA · OYSTERS & CRAB', price: '70 MAD/KG', trend: '●', down: true },
           ]
 
   return (
@@ -109,14 +115,15 @@ export const Header: React.FC<HeaderProps> = ({
                 <span className="inline-flex items-center gap-1.5">
                   <span className="text-[#d4cbbd]">{item.port}</span>
                   <span
-                    dir="ltr"
-                    className={`rounded px-1.5 py-0.2 font-mono text-[10px] font-bold ${
+                    dir={lang === 'ar' ? 'rtl' : 'ltr'}
+                    className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold ${
                       item.down
                         ? 'bg-emerald-500/10 text-emerald-400'
                         : 'bg-amber-500/10 text-amber-300'
                     }`}
                   >
-                    {item.price}
+                    <span>{item.price}</span>
+                    <span className="text-[9px] opacity-80">{item.trend}</span>
                   </span>
                 </span>
               </React.Fragment>

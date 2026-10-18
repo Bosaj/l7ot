@@ -13,6 +13,7 @@ import type { Fish, CookingMethod } from '../data/types'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
 import { calculateCharmoula } from '../lib/charmoula'
+import { PriceBadge } from './PriceBadge'
 
 interface ChefL7otProps {
   allFish: Fish[]
@@ -136,9 +137,15 @@ export const ChefL7ot: React.FC<ChefL7otProps> = ({
                   {currentFish.nameDarijaArabic}
                 </h4>
                 <p className="text-xs text-cyan-400">{currentFish.nameFrench}</p>
-                <span className="text-[11px] text-slate-400">
-                  {currentFish.pricing.currentSpotMAD} MAD/kg
-                </span>
+                <div className="mt-0.5">
+                  <PriceBadge
+                    amount={currentFish.pricing.currentSpotMAD}
+                    unit="kg"
+                    lang={lang}
+                    amountClassName="text-[11px] font-bold text-slate-300"
+                    unitClassName="text-[10px] text-slate-400"
+                  />
+                </div>
               </div>
             </div>
           </div>

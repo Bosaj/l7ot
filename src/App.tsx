@@ -18,6 +18,7 @@ import { AgreementsAndMarket } from './components/AgreementsAndMarket'
 import { CleaningTutorialModal } from './components/CleaningTutorialModal'
 import { FishScanner } from './components/FishScanner'
 import { SoukBasketAndComparator } from './components/SoukBasketAndComparator'
+import { MarineWeatherAndApis } from './components/MarineWeatherAndApis'
 
 import { MOROCCAN_FISH } from './data/fish'
 import { MOROCCAN_RECIPES } from './data/recipes'
@@ -28,7 +29,7 @@ import { STRINGS } from './i18n/strings'
 
 export const App: React.FC = () => {
   const [lang, setLang] = useState<SupportedLanguage>('ar')
-  const [activeTab, setActiveTab] = useState<'fish' | 'recipes' | 'chef' | 'market' | 'agreements' | 'scanner'>('fish')
+  const [activeTab, setActiveTab] = useState<'fish' | 'recipes' | 'chef' | 'market' | 'agreements' | 'scanner' | 'marine-apis'>('fish')
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [selectedCoast, setSelectedCoast] = useState<string>('all')
@@ -425,6 +426,11 @@ export const App: React.FC = () => {
             }}
           />
         )}
+
+        {/* Tab 7: Live Moroccan Ports Marine Weather & Free Marine APIs Hub */}
+        {activeTab === 'marine-apis' && (
+          <MarineWeatherAndApis lang={lang} />
+        )}
       </main>
 
       {/* Modals with Clean Single-Level Transitions */}
@@ -485,7 +491,11 @@ export const App: React.FC = () => {
               L7OT · الحوت المغربي
             </span>
             <span className="font-mono text-[11px] text-[#786c60]">
-              — 32 ESPÈCES · 16 RECETTES · 10 TRAITÉS · 3,500 KM LITTORAL
+              {lang === 'ar'
+                ? '— 32 نوعاً بحرياً · 16 وصفة ساحلية · 10 معاهدات دولية · 3,500 كلم شريط ساحلي'
+                : lang === 'fr'
+                ? '— 32 espèces · 16 recettes côtières · 10 traités halieutiques · 3 500 km littoral'
+                : '— 32 Marine Species · 16 Coastal Recipes · 10 Sovereign Treaties · 3,500 km Coastline'}
             </span>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-3 font-mono text-[11px]">

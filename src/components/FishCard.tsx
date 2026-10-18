@@ -14,6 +14,7 @@ import type { Fish } from '../data/types'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
 import { speakDarija } from '../lib/speech'
+import { PriceBadge } from './PriceBadge'
 
 interface FishCardProps {
   fish: Fish
@@ -273,15 +274,15 @@ export const FishCard: React.FC<FishCardProps> = ({
                       ? 'COURS SOUK MAROC'
                       : 'MOROCCAN SOUK PRICE'}
                 </span>
-                <span
-                  dir="ltr"
-                  className="inline-block font-mono text-base font-bold text-emerald-400"
-                >
-                  {p.currentSpotMAD}{' '}
-                  <span className="text-[11px] font-semibold">
-                    {lang === 'ar' ? 'درهم/كلغ' : 'MAD/kg'}
-                  </span>
-                </span>
+                <div>
+                  <PriceBadge
+                    amount={p.currentSpotMAD}
+                    unit="kg"
+                    lang={lang}
+                    amountClassName="text-base font-bold text-emerald-400"
+                    unitClassName="text-[11px] font-semibold text-emerald-400/80"
+                  />
+                </div>
               </div>
 
               {/* 6-Month Sparkline */}

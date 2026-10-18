@@ -15,6 +15,7 @@ import { FRESHNESS_CRITERIA, MOROCCAN_PORTS } from '../data/freshness'
 import { MOROCCAN_FISH } from '../data/fish'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
+import { PriceBadge } from './PriceBadge'
 
 interface MarketGuideProps {
   lang: SupportedLanguage
@@ -190,9 +191,15 @@ export const MarketGuide: React.FC<MarketGuideProps> = ({ lang }) => {
                     {f.nameDarijaArabic}
                   </h5>
                   <span className="text-[11px] text-cyan-400">{f.nameDarijaLatin}</span>
-                  <span className="text-[10px] text-emerald-400 block font-semibold">
-                    {f.pricing.currentSpotMAD} MAD / kg
-                  </span>
+                  <div className="mt-0.5">
+                    <PriceBadge
+                      amount={f.pricing.currentSpotMAD}
+                      unit="kg"
+                      lang={lang}
+                      amountClassName="text-[10px] font-bold text-emerald-400"
+                      unitClassName="text-[9px] text-emerald-400/80"
+                    />
+                  </div>
                 </div>
               </div>
             ))}

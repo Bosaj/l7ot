@@ -20,6 +20,7 @@ import type { Fish, Recipe } from '../data/types'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
 import { speakDarija } from '../lib/speech'
+import { PriceBadge } from './PriceBadge'
 import { NutritionCalculator } from './NutritionCalculator'
 
 interface FishModalProps {
@@ -231,11 +232,19 @@ export const FishModal: React.FC<FishModalProps> = ({
               <span className="block font-mono text-[9px] uppercase tracking-wider text-[#8c7d6b]">
                 {lang === 'ar' ? 'سعر السوق بالمغرب' : 'Cours Spot Maroc'}
               </span>
-              <span dir="ltr" className="font-mono text-lg font-bold text-emerald-400">
-                {p.currentSpotMAD} {lang === 'ar' ? 'درهم/كلغ' : 'MAD/kg'}
-              </span>
-              <span dir="ltr" className="block font-mono text-[10px] text-[#b5a592]">
-                Export: ${p.globalExportUSD.avg}/kg
+              <div>
+                <PriceBadge
+                  amount={p.currentSpotMAD}
+                  unit="kg"
+                  lang={lang}
+                  amountClassName="text-lg font-bold text-emerald-400"
+                  unitClassName="text-[11px] text-emerald-400/80"
+                />
+              </div>
+              <span className="block font-mono text-[10px] text-[#b5a592]">
+                {lang === 'ar'
+                  ? `التصدير: $${p.globalExportUSD.avg} / كلغ`
+                  : `Export: $${p.globalExportUSD.avg}/kg`}
               </span>
             </div>
           </div>
@@ -621,30 +630,40 @@ export const FishModal: React.FC<FishModalProps> = ({
                 {/* Current Spot vs Global Export */}
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 pt-2">
                   <div className="rounded-sm border border-emerald-500/30 bg-emerald-950/20 p-4">
-                    <span className="font-mono text-xs text-emerald-300 font-bold block mb-1">
+                    <span className="font-mono text-xs text-emerald-300 font-bold block mb-1.5">
                       {lang === 'ar'
-                        ? 'السعر الحالي في الموانئ المغربية (Spot):'
+                        ? 'السعر الحالي في الموانئ المغربية (سوق الجملة):'
                         : 'Prix Criée Maroc (Spot) :'}
                     </span>
-                    <span dir="ltr" className="font-mono text-2xl font-black text-emerald-400">
-                      {p.currentSpotMAD} {lang === 'ar' ? 'درهم/كلغ' : 'MAD/kg'}
-                    </span>
-                    <span dir="ltr" className="font-mono text-xs text-[#8c7d6b] block mt-1">
-                      {lang === 'ar' ? 'توقعات القادم:' : 'Projection :'} {p.forecastFutureMAD} MAD
+                    <div className="text-2xl font-black text-emerald-400">
+                      <PriceBadge
+                        amount={p.currentSpotMAD}
+                        unit="kg"
+                        lang={lang}
+                        amountClassName="text-2xl font-black text-emerald-400"
+                        unitClassName="text-sm font-semibold text-emerald-300/80"
+                      />
+                    </div>
+                    <span className="font-mono text-xs text-[#a69b8d] block mt-1.5">
+                      {lang === 'ar'
+                        ? `توقعات الأسابيع القادمة: ${p.forecastFutureMAD} درهم`
+                        : `Projection : ${p.forecastFutureMAD} MAD`}
                     </span>
                   </div>
 
                   <div className="rounded-sm border border-[#2a211c] bg-[#120e0c] p-4">
-                    <span className="font-mono text-xs text-[#e09f3e] font-bold block mb-1">
+                    <span className="font-mono text-xs text-[#e09f3e] font-bold block mb-1.5">
                       {lang === 'ar'
-                        ? 'السعر العالمي المرجعي (Global Export):'
+                        ? 'السعر المرجعي للتصدير الدولي:'
                         : 'Cote Export International :'}
                     </span>
-                    <span dir="ltr" className="font-mono text-2xl font-black text-[#f4ede2]">
+                    <div dir="ltr" className="font-mono text-2xl font-black text-[#f4ede2]">
                       ${p.globalExportUSD.avg} / kg
-                    </span>
-                    <span className="font-mono text-xs text-[#8c7d6b] block mt-1">
-                      Hub: {p.globalExportUSD.hub}
+                    </div>
+                    <span className="font-mono text-xs text-[#a69b8d] block mt-1.5">
+                      {lang === 'ar'
+                        ? `المنصة الأوروبية الرئيسية: ${p.globalExportUSD.hub}`
+                        : `Plateforme : ${p.globalExportUSD.hub}`}
                     </span>
                   </div>
                 </div>
