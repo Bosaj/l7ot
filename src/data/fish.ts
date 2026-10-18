@@ -10,7 +10,121 @@ export const MOROCCAN_FISH: Fish[] = [
     scientificName: 'Sardina pilchardus',
     category: 'poisson_bleu',
     coast: 'both',
-    mainPorts: ['Safi', 'Essaouira', 'Tan-Tan', 'Agadir', 'Laâyoune', 'Al Hoceima'],
+    mainPorts: ['Safi', 'Essaouira', 'Tan-Tan', 'Agadir', 'Laâyoune', 'Al Hoceima', 'Larache'],
+    regionalNames: {
+      chamal: ['سردينة (Sardina)', 'شطون غليظ', 'سردين العرائش والحسيمة'],
+      centre: ['السردين (Serdine)', 'سردين آسفي الأصيل', 'السردين الفضي'],
+      sud: ['السردين السوسي', 'تازنكارت (Tazenkart بالأمازيغية)', 'سردين طانطان والعيون'],
+    },
+    pricing: {
+      trend: 'down',
+      past6MonthsMAD: [18, 22, 25, 20, 16, 14],
+      currentSpotMAD: 14,
+      forecastFutureMAD: 12,
+      globalExportUSD: {
+        min: 1.8,
+        max: 3.2,
+        avg: 2.4,
+        hub: 'Mercabarna (Barcelone) & Port de Rungis (Paris)',
+      },
+      driversAr: 'تراجع الأسعار إلى 12-15 درهم بسبب وفرة المصايد الصيفية بموانئ آسفي والعيون بعد استئناف رحلات مراكب السردين الساحلية.',
+      driversFr: 'Baisse des cours à 12-15 MAD grâce à l’abondance des débarquements estivaux à Safi et Laâyoune.',
+      driversEn: 'Price drop to 12-15 MAD driven by peak summer landings across Safi, Agadir, and Laâyoune ports.',
+    },
+    nutrition: {
+      calories: 208,
+      proteinGrams: 25.0,
+      lipidsGrams: 11.5,
+      omega3Mg: 1480, // High EPA & DHA
+      vitaminD_IU: 270,
+      vitaminB12_mcg: 8.9,
+      calciumMg: 382, // High from edible soft bones
+      ironMg: 2.9,
+      phosphorusMg: 490,
+      seleniumMcg: 52.7,
+      iodineMcg: 35.0,
+      zincMg: 1.3,
+      healthBenefits: {
+        ar: [
+          'أقوى مصدر طبيعي لأوميغا 3 لحماية القلب والشرايين وخفض الكولسترول الضار.',
+          'غني جداً بالكالسيوم وفيتامين D لتقوية العظام والمفاصل والوقاية من الهشاشة.',
+          'فيتامين B12 بكميات فائقة لتجديد خلايا الدم الحمراء ومحاربة فقر الدم والتعب.',
+          'السيلينيوم كمضاد أكسدة قوي يعزز المناعة ويحمي خلايا الدماغ من الشيخوخة.',
+        ],
+        fr: [
+          'Source royale d’oméga-3 (EPA/DHA) protégeant le cœur et réduisant les triglycérides.',
+          'Très riche en calcium biodisponible et vitamine D pour la densité osseuse.',
+          'Teneur exceptionnelle en vitamine B12 contre la fatigue et pour le système nerveux.',
+          'Puissant pouvoir antioxydant grâce au sélénium marin.',
+        ],
+        en: [
+          'One of nature’s richest sources of Omega-3 (EPA/DHA) for optimal cardiovascular protection.',
+          'Supercharged with bioavailable calcium and Vitamin D for superior bone density.',
+          'Outstanding Vitamin B12 levels combating anemia and supporting neurological function.',
+          'Abundant selenium providing strong cellular antioxidant defense.',
+        ],
+      },
+    },
+    cleaningTutorial: {
+      methodNameAr: 'تقنية التنقية المغربية بالصبع (التنياد) بدون سكين',
+      methodNameFr: 'Technique marocaine de désarêtage au pouce (sans couteau)',
+      methodNameEn: 'Traditional Moroccan Thumb-Filleting Technique',
+      difficulty: 'easy',
+      prepTimeMinutes: 10,
+      toolsNeededAr: ['وعاء ماء بارد', 'ليمون حامض وملح خشن', 'مصفاة شبكية'],
+      toolsNeededFr: ['Bol d’eau fraîche', 'Citron et gros sel marin', 'Passoire'],
+      toolsNeededEn: ['Bowl of cold water', 'Fresh lemon & coarse salt', 'Colander'],
+      steps: [
+        {
+          stepNumber: 1,
+          titleAr: 'إزالة القشور بمسحة خفيفة',
+          titleFr: 'Écaillage léger au doigt',
+          titleEn: 'Gentle Thumb Descaling',
+          instructionAr: 'تحت خيط ماء بارد ضعيف، اسحب إبهامك من الذيل نحو الرأس لإزالة القشور الفضية بسهولة دون تمزيق الجلد.',
+          instructionFr: 'Sous un filet d’eau fraîche, passer le pouce de la queue vers la tête pour éliminer les écailles en douceur.',
+          instructionEn: 'Under a gentle stream of cold water, stroke your thumb from tail to head to slide the scales off easily.',
+          kessalTipAr: 'لا تستعمل سكيناً حاداً مع السردين الطازج حتى لا تجرح اللحم الطري.',
+          kessalTipFr: 'Ne jamais utiliser de couteau rigide qui déchire la chair tendre de la sardine fraîche.',
+          kessalTipEn: 'Avoid knives for fresh sardines; human thumbs preserve the delicate skin intact.',
+        },
+        {
+          stepNumber: 2,
+          titleAr: 'كسر الرأس وسحب الأحشاء دفعة واحدة',
+          titleFr: 'Étêtage et éviscération en un geste',
+          titleEn: 'Snap Head & Gut Extraction',
+          instructionAr: 'اضغط بين رأس السردينة ورقبتها بأصابعك واكسر الرأس مائلاً نحو البطن واسحبه برفق لتخرج كل الأحشاء متصلة به.',
+          instructionFr: 'Pincer la tête derrière les ouïes, plier vers le ventre et tirer d’un coup sec : les viscères viennent avec.',
+          instructionEn: 'Pinch behind the gills, snap the head downward toward the belly, and pull gently: the guts come out attached.',
+          kessalTipAr: 'حركة السحب الواحدة تحافظ على نظافة جوف الحوتة دون أن تتلوث بالمرارة.',
+          kessalTipFr: 'Ce geste d’artisan évite de percer la vésicule biliaire amère.',
+          kessalTipEn: 'This swift pull prevents rupturing the bitter bile sac inside the belly.',
+        },
+        {
+          stepNumber: 3,
+          titleAr: 'فتح البطن ونزع السلسول (الحسك المركزي)',
+          titleFr: 'Ouverture en portefeuille et retrait de l’arête',
+          titleEn: 'Butterflying & Spine Removal',
+          instructionAr: 'مرر إبهامك على طول السلسول المركزي من جهة الرأس حتى الذيل، ثم افصل العظم بحركة لولبية واقطعه عند قاعدة الذيل لتفتح السردينة كالفراشة.',
+          instructionFr: 'Glisser le pouce le long de l’arête centrale de haut en bas, pincer l’arête et la soulever : la sardine s’ouvre en papillon.',
+          instructionEn: 'Slide thumb along the central backbone from throat to tail, lift the spine free, and snap it near the tail to butterfly.',
+          kessalTipAr: 'اترك ذيل السردينة ملتصقاً إذا كنت تحضر السردين المشرمل والملاصق (ملاصقين).',
+          kessalTipFr: 'Conserver la petite nageoire caudale pour sceller les sardines en portefeuille (mlasqine).',
+          kessalTipEn: 'Leave the tiny tail fin attached if preparing double-stuffed sardines (mlasqine).',
+        },
+        {
+          stepNumber: 4,
+          titleAr: 'الغسل السريع والتعقيم بالحامض',
+          titleFr: 'Rinçage éclair et bain au citron',
+          titleEn: 'Flash Rinse & Lemon Rest',
+          instructionAr: 'اشطف الفيليهات سريعاً في ماء مملح، ثم صفها فوراً ورش عليها قطرات ليمون حامض لتثبيت اللحم وتطهيره.',
+          instructionFr: 'Rincer très vite dans une eau froide salée, égoutter et arroser de jus de citron pour raffermir la chair.',
+          instructionEn: 'Rinse briefly in cold salted water, drain thoroughly, and sprinkle with lemon juice to firm the fillets.',
+          kessalTipAr: 'لا تنقع السردين في الماء طويلاً حتى لا يفقد زيوته الأوميغا الطبيعية وطعمه البحري.',
+          kessalTipFr: 'Ne jamais laisser tremper la sardine dans l’eau au risque de diluer ses précieux lipides.',
+          kessalTipEn: 'Never soak sardines in standing water; prolonged soaking washes away vital omega oils.',
+        },
+      ],
+    },
     seasonality: {
       peakMonths: [5, 6, 7, 8, 9, 10],
       description: {
@@ -19,63 +133,6 @@ export const MOROCCAN_FISH: Fish[] = [
         en: 'Peak season from May to October: sardines are plump, fatty, and packed with Omega-3.',
       },
     },
-    priceRangeMAD: { min: 10, max: 25, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "بوقيرون / Sardina / بيلتشارد (طنجة، تطوان، الحسيمة)",
-    "centreAtlantic": "سردين / Serdine (أسفي، الصويرة، الدار البيضاء)",
-    "southSoussSahara": "سردين بلدي / تسكالت (أكادير، طانطان، العيون، الداخلة)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 5,
-        "max": 12,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 12,
-        "max": 25,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 3.5,
-        "max": 6,
-        "unit": "kg",
-        "referenceMarket": "Mercamadrid & Rungis"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 208,
-    "proteinGrams": 24.6,
-    "lipidsGrams": 11.5,
-    "omega3Mg": 1480,
-    "vitaminD_mcg": 4.8,
-    "vitaminB12_mcg": 8.9,
-    "iodine_mcg": 40,
-    "selenium_mcg": 52.7,
-    "phosphorus_mg": 490,
-    "calcium_mg": 382,
-    "iron_mg": 2.9,
-    "zinc_mg": 1.3,
-    "magnesium_mg": 39,
-    "potassium_mg": 397,
-    "healthHighlights": {
-        "ar": [
-            "أعلى تركيز طبيعي لأحماض أوميغا 3 لحماية القلب والشرايين وخفض الكولسترول الضار",
-            "غني بالكالسيوم والفسفور لتعزيز الكثافة العظمية والوقاية من الهشاشة",
-            "جرعة مكثفة من فيتامين B12 وفيتامين D3 الطبيعي النادر في الأطعمة الأرضية"
-        ],
-        "fr": [
-            "Teneur exceptionnelle en acides gras Oméga-3 (EPA/DHA) cardioprotecteurs",
-            "Source majeure de calcium bio-assimilable et de phosphore osseux",
-            "Concentration record en vitamine B12 (370% des AJR) et vitamine D3 naturelle"
-        ],
-        "en": [
-            "Unrivaled natural density of cardioprotective Omega-3 (EPA/DHA) fatty acids",
-            "Superior bioavailable calcium and phosphorus fortifying bone density",
-            "Exceptional Vitamin B12 and rare natural Vitamin D3 powering neurological vitality"
-        ]
-    }
-},
     culinaryProfile: {
       flavor: 'rich',
       texture: 'tender',
@@ -92,8 +149,8 @@ export const MOROCCAN_FISH: Fish[] = [
       fr: "Fierté maritime du Maroc, premier exportateur mondial. Incontournable en friture farcie de chermoula (mlasqine), en tagine de boulettes (kouari) ou grillé sur braises.",
       en: "The pride of Moroccan waters; Morocco is the world's #1 exporter. Best served char-grilled, stuffed in pairs with charmoula, or rolled into spiced tomato kefta balls.",
     },
-    imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sardina_pilchardus_Genoa.jpg/1200px-Sardina_pilchardus_Genoa.jpg',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Sardina_pilchardus_2011.jpg/800px-Sardina_pilchardus_2011.jpg',
+    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sardina_pilchardus_Genoa.jpg/800px-Sardina_pilchardus_Genoa.jpg',
     audioPhonetic: 'Ser-dine',
     recommendedRecipeIds: ['sardines-mchermline', 'tagine-kouari-sardine', 'sardine-mechwi-grillade'],
   },
@@ -101,12 +158,114 @@ export const MOROCCAN_FISH: Fish[] = [
     id: 'merlan',
     nameDarijaArabic: 'ميرلا',
     nameDarijaLatin: 'Mirla',
-    nameFrench: 'Merlan',
-    nameEnglish: 'Whiting / Hake',
-    scientificName: 'Merlangius merlangus',
+    nameFrench: 'Merlan / Merlu blanc',
+    nameEnglish: 'European Hake / Whiting',
+    scientificName: 'Merluccius merluccius',
     category: 'poisson_blanc',
     coast: 'both',
     mainPorts: ['Casablanca', 'Mehdia', 'Larache', 'Tanger', 'Agadir', 'Nador'],
+    regionalNames: {
+      chamal: ['ميرلوثة (Merluza بالأسبانية)', 'الميرلا الشمالية', 'ميرلا طنجة والعرائش'],
+      centre: ['الميرلا البيضاء (Mirla)', 'ميرلا المهدية والرباط', 'ميرلا الشواطئ'],
+      sud: ['ميرلا أكادير', 'إسْلِم أومليل (Islem oumellil بالأمازيغية)', 'ميرلا الصويرة'],
+    },
+    pricing: {
+      trend: 'stable',
+      past6MonthsMAD: [55, 60, 65, 70, 65, 60],
+      currentSpotMAD: 60,
+      forecastFutureMAD: 65,
+      globalExportUSD: {
+        min: 6.5,
+        max: 11.0,
+        avg: 8.5,
+        hub: 'Mercamadrid (Madrid) & Rungis (Paris)',
+      },
+      driversAr: 'استقرار نسبي في الأسواق عند 55-70 درهم/كلغ بفضل انتظام صيد مراكب الجر الساحلية بالمهدية والدار البيضاء.',
+      driversFr: 'Prix stables entre 55 et 70 MAD/kg grâce aux débarquements réguliers des chalutiers de Mehdia et Casablanca.',
+      driversEn: 'Stable pricing between 55-70 MAD/kg maintained by steady trawler landings in Mehdia and Casablanca.',
+    },
+    nutrition: {
+      calories: 90,
+      proteinGrams: 19.8,
+      lipidsGrams: 1.2, // Ultra low fat
+      omega3Mg: 310,
+      vitaminD_IU: 85,
+      vitaminB12_mcg: 2.1,
+      calciumMg: 35,
+      ironMg: 0.8,
+      phosphorusMg: 210,
+      seleniumMcg: 36.5,
+      iodineMcg: 45.0,
+      zincMg: 0.6,
+      healthBenefits: {
+        ar: [
+          'بروتين صافٍ عالي الجودة وسهل الهضم جداً، مثالي للأطفال والرياضيين والحميات.',
+          'نسبة دهون شبه منعدمة (1%) مع غنى بأملاح اليود المنشطة للغدة الدرقية.',
+          'يحافظ على الرشاقة وصحة العضلات دون أي عبء على الجهاز الهضمي.',
+          'غني بالفسفور وفيتامين B لدعم التركيز العقلي والذاكرة.',
+        ],
+        fr: [
+          'Protéines pures ultra-digestes, idéales pour sportifs, convalescents et enfants.',
+          'Très faible teneur en lipides (1%) avec forte densité en iode pour la thyroïde.',
+          'Allié minceur exceptionnel préservant la masse musculaire.',
+          'Phosphore marin favorisant la mémoire et les fonctions cognitives.',
+        ],
+        en: [
+          'Ultra-lean pure protein, easily assimilated and ideal for fitness and convalescence.',
+          'Virtually fat-free (1%) with rich marine iodine optimizing thyroid function.',
+          'Exceptional low-calorie nourishment preserving muscle tone without digestive strain.',
+          'Rich in phosphorus supporting mental focus and cognitive clarity.',
+        ],
+      },
+    },
+    cleaningTutorial: {
+      methodNameAr: 'طريقة تنقية الميرلا وسلخ جلدها أو فتحها للفرن',
+      methodNameFr: 'Éviscération et découpe en tronçons du merlan',
+      methodNameEn: 'Hake Gutting & Filleting Technique',
+      difficulty: 'easy',
+      prepTimeMinutes: 8,
+      toolsNeededAr: ['سكين خفيف ماضي', 'مقص مطبخ', 'ورق تنشيف'],
+      toolsNeededFr: ['Couteau effilé bien aiguisé', 'Ciseaux de cuisine', 'Papier essuie-tout'],
+      toolsNeededEn: ['Sharp flexible filleting knife', 'Kitchen shears', 'Paper towels'],
+      steps: [
+        {
+          stepNumber: 1,
+          titleAr: 'قص الزعانف بالمقص',
+          titleFr: 'Ébarbage des nageoires',
+          titleEn: 'Trimming Spiny Fins',
+          instructionAr: 'باستعمال مقص المطبخ، قص الزعانف الظهرية والبطنية والجانبية لتسهيل الإمساك بها وتنظيفها بأمان.',
+          instructionFr: 'À l’aide de ciseaux, couper net les nageoires dorsales, ventrales et pectorales.',
+          instructionEn: 'Using kitchen shears, snip off all dorsal, ventral, and pectoral fins flush with the body.',
+          kessalTipAr: 'قص الزعانف يحمي أصابعك من الشوكات الدقيقة عند التنقية.',
+          kessalTipFr: 'Couper les nageoires évite les petites piqûres désagréables.',
+          kessalTipEn: 'Trimming fins first protects your fingers from prickling during filleting.',
+        },
+        {
+          stepNumber: 2,
+          titleAr: 'شق البطن وإزالة الأحشاء والغشاء الأسود',
+          titleFr: 'Incision ventrale et nettoyage du voile noir',
+          titleEn: 'Slit Belly & Clear Dark Peritoneum',
+          instructionAr: 'أدخل رأس السكين من المخرج نحو الخياشيم بشق طولي خفيف، أفرغ الأحشاء واكشط الغشاء الأسود الداخلي المبطن للبطن تماماً بظهر السكين.',
+          instructionFr: 'Inciser de l’anus vers la gorge. Retirer les viscères et gratter méticuleusement le voile noir intérieur qui donne de l’amertume.',
+          instructionEn: 'Slit from anal vent to throat, remove viscera, and scrape away the black inner membrane completely.',
+          kessalTipAr: 'الغشاء الأسود الداخلي هو المسؤول الأول عن أي مرارة، كشطه بالملح يترك بطن الحوتة بيضاء كالحليب.',
+          kessalTipFr: 'Le voile noir est la source d’amertume : un frottement au sel le dissout immédiatement.',
+          kessalTipEn: 'The black peritoneal lining is bitter: rub it with a pinch of salt to wipe it away clean.',
+        },
+        {
+          stepNumber: 3,
+          titleAr: 'التقطيع حسب طريقة الطهي',
+          titleFr: 'Découpe selon cuisson (friture ou papillote)',
+          titleEn: 'Portioning for Fry or Bake',
+          instructionAr: 'للقلي: قطّع الميرلا إلى أسطوانات متساوية (رونديلات) بسماكة 4 سم، أو افتحها كفيليه كامل مفرود لنزع الشوك المركزي.',
+          instructionFr: 'Pour la friture : couper en tronçons réguliers de 4 cm ou lever en filets sans arête.',
+          instructionEn: 'For frying: slice into 4cm medallions or butterfly down the spine to debone completely.',
+          kessalTipAr: 'جفف لحم الميرلا بورق المطبخ قبل القلي لتكتسب قشرة مقرمشة دون أن تتفتت في الزيت.',
+          kessalTipFr: 'Bien essuyer les tronçons au papier absorbant avant panure pour éviter qu’ils ne s’émiettent.',
+          kessalTipEn: 'Thoroughly pat the flesh dry before flouring so it stays intact and crisps golden.',
+        },
+      ],
+    },
     seasonality: {
       peakMonths: [10, 11, 12, 1, 2, 3, 4],
       description: {
@@ -115,63 +274,6 @@ export const MOROCCAN_FISH: Fish[] = [
         en: 'Available year-round with superior quality in autumn and winter months.',
       },
     },
-    priceRangeMAD: { min: 45, max: 85, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Pescadilla / بيسكادييا / Merluzo (طنجة، الناظور)",
-    "centreAtlantic": "ميرلا / Mirla (المهدية، الدار البيضاء، الجديدة)",
-    "southSoussSahara": "الميرلا الجنوبية / النزالي / Nazali (طانطان، الداخلة)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 25,
-        "max": 45,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 45,
-        "max": 85,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 7.5,
-        "max": 12,
-        "unit": "kg",
-        "referenceMarket": "Rungis & Madrid"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 90,
-    "proteinGrams": 19.4,
-    "lipidsGrams": 0.8,
-    "omega3Mg": 310,
-    "vitaminD_mcg": 1,
-    "vitaminB12_mcg": 2.1,
-    "iodine_mcg": 110,
-    "selenium_mcg": 38,
-    "phosphorus_mg": 210,
-    "calcium_mg": 25,
-    "iron_mg": 0.4,
-    "zinc_mg": 0.5,
-    "magnesium_mg": 26,
-    "potassium_mg": 320,
-    "healthHighlights": {
-        "ar": [
-            "بروتين نقي فائق الهضم بأقل من 1% دهون، مثالي للحميات وتغذية الرياضيين",
-            "تركيز عالٍ من اليود الطبيعي المنشط لوظائف الغدة الدرقية وحرق السعرات",
-            "سيلينيوم عضوي قوي لحماية الخلايا ومكافحة الإجهاد التأكسدي"
-        ],
-        "fr": [
-            "Protéines pures ultra-digestes avec moins de 1% de lipides",
-            "Teneur exceptionnelle en iode soutenant le métabolisme thyroïdien",
-            "Forte teneur en sélénium antioxydant protecteur cellulaire"
-        ],
-        "en": [
-            "Ultra-lean digestible pure protein under 1% fat, ideal for athlete diets",
-            "Abundant marine iodine fueling thyroid function and metabolic efficiency",
-            "High antioxidant selenium safeguarding cellular structures"
-        ]
-    }
-},
     culinaryProfile: {
       flavor: 'delicate',
       texture: 'flaky',
@@ -188,8 +290,8 @@ export const MOROCCAN_FISH: Fish[] = [
       fr: 'Poisson blanc doux et très apprécié pour sa chair fine et digeste. Reine des fritures croustillantes marocaines avec zaalouk et rondelles de citron.',
       en: 'Beloved Moroccan white fish known for its tender, easy-to-digest flakes and mild sweetness. King of crispy fried fish platters served with zaalouk.',
     },
-    imageUrl: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Merlangius_merlangus.jpg/1200px-Merlangius_merlangus.jpg',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Merluccius_merluccius.002_-_Aquarium_Finisterrae.JPG/800px-Merluccius_merluccius.002_-_Aquarium_Finisterrae.JPG',
+    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Merlangius_merlangus.jpg/800px-Merlangius_merlangus.jpg',
     audioPhonetic: 'Meer-la',
     recommendedRecipeIds: ['friture-mixte-marocaine', 'merlan-au-four-charmoula'],
   },
@@ -203,6 +305,105 @@ export const MOROCCAN_FISH: Fish[] = [
     category: 'poisson_blanc',
     coast: 'both',
     mainPorts: ['Al Hoceima', 'Nador', 'Tanger', 'Dakhla', 'Essaouira', 'Agadir'],
+    regionalNames: {
+      chamal: ['دورادا (Dorada)', 'زريقة الشمال', 'أورادا بالحسيمة والناظور'],
+      centre: ['الزريقة الملكية', 'الدوراد (Dorade)', 'دوراد آسفي والجديدة'],
+      sud: ['زريقة سوس', 'تيزيرقت (Tizireqt بالأمازيغية)', 'دوراد خليج الداخلة'],
+    },
+    pricing: {
+      trend: 'up',
+      past6MonthsMAD: [90, 95, 110, 120, 130, 140],
+      currentSpotMAD: 130,
+      forecastFutureMAD: 145,
+      globalExportUSD: {
+        min: 12.0,
+        max: 20.0,
+        avg: 16.0,
+        hub: 'Mercabarna (Espagne) & Rungis International',
+      },
+      driversAr: 'ارتفاع الطلب في المطاعم السياحية والمناسبات الصيفية مع قلة مصايد الصيد بالخيط الطبيعي (الدوراد الحر).',
+      driversFr: 'Forte hausse due à la demande estivale des restaurants côtiers et à la rareté de la daurade royale sauvage de ligne.',
+      driversEn: 'Strong upward trend fueled by summer culinary demand and scarcity of wild line-caught specimens.',
+    },
+    nutrition: {
+      calories: 128,
+      proteinGrams: 21.5,
+      lipidsGrams: 4.6,
+      omega3Mg: 820,
+      vitaminD_IU: 140,
+      vitaminB12_mcg: 3.4,
+      calciumMg: 42,
+      ironMg: 1.1,
+      phosphorusMg: 260,
+      seleniumMcg: 44.0,
+      iodineMcg: 48.0,
+      zincMg: 0.9,
+      healthBenefits: {
+        ar: [
+          'توازن مثالي بين البروتينات النبيلة والدهون الأحادية غير المشبعة الصحية للقلب.',
+          'غنية بالزنك والفسفور لتجديد خلايا البشرة والشعر وتعزيز الخصوبة والمناعة.',
+          'طعم سكري لذيذ ولحم متماسك يمنح طاقة بدنية مستدامة بدون دهون ضارة.',
+        ],
+        fr: [
+          'Équilibre remarquable en protéines nobles et acides gras mono-insaturés.',
+          'Riche en zinc et sélénium pour la santé de la peau et le tonus immunitaire.',
+          'Saveur noble et chair juteuse idéale pour un repas gastronomique sain.',
+        ],
+        en: [
+          'Superb balance of complete noble protein and heart-protective monounsaturated fats.',
+          'Rich in zinc and selenium promoting radiant skin, hair, and immune resilience.',
+          'Naturally sweet succulent meat providing sustainable energy without heavy saturated fat.',
+        ],
+      },
+    },
+    cleaningTutorial: {
+      methodNameAr: 'طريقة تنقية وتفليح الدوراد الملكية للفرن بالشرمولة',
+      methodNameFr: 'Écaillage renforcé et incision de la daurade royale',
+      methodNameEn: 'Heavy Scaling & Diamond Incision for Seabream',
+      difficulty: 'medium',
+      prepTimeMinutes: 12,
+      toolsNeededAr: ['مكشطة قشور حديدية', 'سكين شيف ماضي', 'ملح خشن وحامض'],
+      toolsNeededFr: ['Écailleur à poisson robuste', 'Couteau de chef rigide', 'Gros sel marin et citron'],
+      toolsNeededEn: ['Sturdy fish descaler', 'Chef knife', 'Coarse sea salt & lime'],
+      steps: [
+        {
+          stepNumber: 1,
+          titleAr: 'إزالة القشور القوية الصلبة',
+          titleFr: 'Écaillage énergique sous l’eau',
+          titleEn: 'Firm Descaling Under Water',
+          instructionAr: 'قشور الدوراد سميكة ودروعية؛ أمسك الذيل بإحكام واكشط بمكشطة القشور بحركات قصيرة وقوية من الذيل للرأس، مع التركيز على جانبي الظهر وتحت الرقبة.',
+          instructionFr: 'Les écailles de daurade sont épaisses : gratter fermement de la queue vers la tête avec un écailleur sous un filet d’eau.',
+          instructionEn: 'Seabream scales are thick armor: scrape firmly from tail to head using a fish scaler under running water.',
+          kessalTipAr: 'اكشط داخل حوض ماء أو كيس بلاستيكي حتى لا تتطاير القشور في المطبخ.',
+          kessalTipFr: 'Écailler dans une bassine évite de projeter des écailles partout dans la cuisine.',
+          kessalTipEn: 'Scale inside a tub of cold water to prevent stubborn scales from flying across the counter.',
+        },
+        {
+          stepNumber: 2,
+          titleAr: 'فتح البطن ونزع الخياشيم',
+          titleFr: 'Éviscération et ablation des ouïes',
+          titleEn: 'Gutting and Gill Removal',
+          instructionAr: 'افتح شقاً من فتحة الشرج حتى أسفل الفك، اسحب الأحشاء برفق، ثم أدخل أصابعك لقص الخياشيم الحمراء من جذورها ونزعها بالكامل.',
+          instructionFr: 'Ouvrir le ventre de l’anus à la gorge, retirer viscères et couper les ouïes à leur base pour éliminer tout résidu sanguin.',
+          instructionEn: 'Slit from vent to jaw, extract entrails, and snip out the gills at their base to eliminate blood residues.',
+          kessalTipAr: 'إزالة الخياشيم تمنع أي طعم دموي أثناء الشواء في الفرن.',
+          kessalTipFr: 'Retirer les ouïes élimine toute odeur sanguine lors de la cuisson au four.',
+          kessalTipEn: 'Excising gills prevents bitter blood flavor during long oven roasting.',
+        },
+        {
+          stepNumber: 3,
+          titleAr: 'التفليح المائل للشرمولة (التشقيط)',
+          titleFr: 'Incisions obliques croisées (les cheqqat)',
+          titleEn: 'Diagonal Flank Slashing',
+          instructionAr: 'أحدث 3 شقوق مائلة عميقة بالسكين في كل جانب حتى تصل إلى عظم السلسول؛ هذا يسمح للشرمولة بالوصول إلى أعمق ألياف اللحم وضمان نضج متساوٍ.',
+          instructionFr: 'Pratiquer 3 entailles diagonales profondes sur chaque flanc jusqu’à l’arête pour une pénétration parfaite de la chermoula.',
+          instructionEn: 'Cut 3 deep diagonal slits into both flanks down to the spine to allow marinade penetration and even baking.',
+          kessalTipAr: 'ادهن الشرمولة داخل الشقوق وداخل تجويف البطن واتركها 20 دقيقة قبل إدخالها للفرن.',
+          kessalTipFr: 'Farcir les fentes de chermoula et laisser reposer 20 min au frais.',
+          kessalTipEn: 'Pack charmoula inside slits and belly cavity; chill 20 minutes before oven roasting.',
+        },
+      ],
+    },
     seasonality: {
       peakMonths: [9, 10, 11, 12, 1],
       description: {
@@ -211,63 +412,6 @@ export const MOROCCAN_FISH: Fish[] = [
         en: 'Prime season from September to January with exceptionally firm and juicy meat.',
       },
     },
-    priceRangeMAD: { min: 80, max: 150, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Dorada / دورادا / الزريقة الشمالية (المتوسط، طنجة)",
-    "centreAtlantic": "الدوراد الملكية / الزريقة (الرباط، الجديدة، آسفي)",
-    "southSoussSahara": "أبراغ / Abragh / الحوتة الذهبية (سوس، طرفاية)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 50,
-        "max": 80,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 80,
-        "max": 130,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 12,
-        "max": 18,
-        "unit": "kg",
-        "referenceMarket": "Marchés européens de gros"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 121,
-    "proteinGrams": 20.5,
-    "lipidsGrams": 3.8,
-    "omega3Mg": 650,
-    "vitaminD_mcg": 2.5,
-    "vitaminB12_mcg": 3.2,
-    "iodine_mcg": 65,
-    "selenium_mcg": 45,
-    "phosphorus_mg": 240,
-    "calcium_mg": 30,
-    "iron_mg": 0.8,
-    "zinc_mg": 0.7,
-    "magnesium_mg": 30,
-    "potassium_mg": 380,
-    "healthHighlights": {
-        "ar": [
-            "توازن مثالي بين البروتين والأحماض الدهنية الأساسية لصحة الدماغ",
-            "غني بالفسفور والمغنيسيوم لتجديد طاقة الخلايا ومقاومة التعب",
-            "لحم صحي يساعد على بناء الكتلة العضلية النقية"
-        ],
-        "fr": [
-            "Équilibre parfait en protéines nobles et acides gras essentiels",
-            "Source de magnésium et phosphore contre la fatigue chronique",
-            "Chair noble idéale pour le développement musculaire sain"
-        ],
-        "en": [
-            "Ideal balance of noble protein and essential fatty acids for brain function",
-            "Rich in magnesium and phosphorus recharging cellular energy",
-            "Premium fish supporting lean muscle mass and endurance"
-        ]
-    }
-},
     culinaryProfile: {
       flavor: 'sweet',
       texture: 'firm',
@@ -284,8 +428,8 @@ export const MOROCCAN_FISH: Fish[] = [
       fr: "Reine des tables festives au Maroc. Reconnaissable à son bandeau doré frontal. Sublime rôtie entière au four sur lit de poivrons et tomates à la chermoula.",
       en: "Regal fish famous for the golden band across its forehead. Prepared whole in the oven over sliced peppers, potatoes, and fragrant herb charmoula.",
     },
-    imageUrl: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Sparus_aurata_2.JPG/1200px-Sparus_aurata_2.JPG',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Sparus_aurata%2C_Alpes-Maritimes%2C_Provence-Alpes-C%C3%B4te_d%27Azur%2C_FR_imported_from_iNaturalist_photo_207799710.jpg/800px-Sparus_aurata%2C_Alpes-Maritimes%2C_Provence-Alpes-C%C3%B4te_d%27Azur%2C_FR_imported_from_iNaturalist_photo_207799710.jpg',
+    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Sparus_aurata_2.JPG/800px-Sparus_aurata_2.JPG',
     audioPhonetic: 'Do-rade / Zree-qa',
     recommendedRecipeIds: ['dorade-royale-au-four', 'tagine-l7ot-khodra'],
   },
@@ -299,6 +443,105 @@ export const MOROCCAN_FISH: Fish[] = [
     category: 'poisson_blanc',
     coast: 'both',
     mainPorts: ['Mehdia', 'Casablanca', 'Larache', 'Safi', 'Agadir'],
+    regionalNames: {
+      chamal: ['لينغوادو (Lenguado بالأسبانية)', 'الصول المتوسطي', 'صول طنجة والعرائش'],
+      centre: ['الصول (Sol)', 'صول المهدية الشهير', 'الصول الدكالي'],
+      sud: ['صول أكادير وميرلفت', 'تاسلمت (Taslemt بالأمازيغية)', 'صول الرمال الذهبية'],
+    },
+    pricing: {
+      trend: 'stable',
+      past6MonthsMAD: [110, 120, 130, 125, 120, 125],
+      currentSpotMAD: 125,
+      forecastFutureMAD: 130,
+      globalExportUSD: {
+        min: 15.0,
+        max: 26.0,
+        avg: 20.0,
+        hub: 'Mercabarna (Espagne) & Billingsgate (Londres)',
+      },
+      driversAr: 'استقرار في حدود 110-140 درهم/كلغ، وتعتبر صول مصب نهر سبو بالمهدية الأغلى والأكثر طلباً لجودتها الاستثنائية.',
+      driversFr: 'Cours fermes autour de 125 MAD/kg. La sole de l’embouchure du Sebou à Mehdia est la plus cotée du Royaume.',
+      driversEn: 'Firm pricing around 125 MAD/kg. Dover sole from Mehdia estuary commands the highest prestige.',
+    },
+    nutrition: {
+      calories: 91,
+      proteinGrams: 18.8,
+      lipidsGrams: 1.4,
+      omega3Mg: 280,
+      vitaminD_IU: 60,
+      vitaminB12_mcg: 1.8,
+      calciumMg: 30,
+      ironMg: 0.7,
+      phosphorusMg: 195,
+      seleniumMcg: 31.0,
+      iodineMcg: 50.0,
+      zincMg: 0.5,
+      healthBenefits: {
+        ar: [
+          'أنقى أنواع اللحوم البيضاء هضماً وأقلها دهوناً على الإطلاق.',
+          'خالية تقريباً من الشوك الداخلي ومثالية لتغذية كبار السن والأطفال.',
+          'تمنح شعوراً بالخفة والحيوية دون إرهاق المعدة أو رفع الكولسترول.',
+        ],
+        fr: [
+          'Chair délicate et soyeuse d’une digestibilité incomparable.',
+          'Quasi exempte de petites arêtes, idéale pour tous les âges.',
+          'Apport minéral et protéique haut de gamme pour un contrôle parfait du poids.',
+        ],
+        en: [
+          'Ultra-delicate silky white flesh with unmatched digestive ease.',
+          'Completely free of pinbones; ideal for children and elderly nutrition.',
+          'Clean mineral and amino acid fuel supporting light, energized well-being.',
+        ],
+      },
+    },
+    cleaningTutorial: {
+      methodNameAr: 'طريقة سلخ جلد الصول ونزع الرأس في خطوة واحدة',
+      methodNameFr: 'Dépouillage de la sole (retrait de la peau brune et blanche)',
+      methodNameEn: 'Skinning Dover Sole (Tail-to-Head Pull)',
+      difficulty: 'medium',
+      prepTimeMinutes: 10,
+      toolsNeededAr: ['قطعة قماش خشنة أو ورق مطبخ للإمساك', 'مقص مطبخ', 'سكين'],
+      toolsNeededFr: ['Chiffon propre ou gros sel pour prise', 'Ciseaux de cuisine', 'Couteau'],
+      toolsNeededEn: ['Clean coarse towel for grip', 'Kitchen shears', 'Small knife'],
+      steps: [
+        {
+          stepNumber: 1,
+          titleAr: 'إحداث شق عند قاعدة الذيل',
+          titleFr: 'Incision à la base de la queue',
+          titleEn: 'Tail Base Nick',
+          instructionAr: 'ضع السمكة على الجانب الأبيض السفلي. أحدث شقاً عرضياً خفيفاً بالسكين عند قاعدة الذيل دون قطع اللحم، لفصل طرف الجلد البني الداكن.',
+          instructionFr: 'Poser la sole côté blanc en bas. Inciser légèrement la peau brune près de la queue sans entailler la chair.',
+          instructionEn: 'Lay sole brown side up. Make a slight horizontal slit near the tail base without cutting the meat.',
+          kessalTipAr: 'استعمل قبضة يد محكمة مع قليل من الملح الخشن في أصابعك لتثبيت طرف الجلد الزلق.',
+          kessalTipFr: 'Tremper ses doigts dans du gros sel permet de saisir la peau glissante avec une adhérence parfaite.',
+          kessalTipEn: 'Dip fingers in coarse salt to grip the slippery skin firmly.',
+        },
+        {
+          stepNumber: 2,
+          titleAr: 'سلخ الجلد البني بسحبة واحدة متواصلة',
+          titleFr: 'Arrachage d’un coup sec de la queue vers la tête',
+          titleEn: 'Single Fluid Skin Strip',
+          instructionAr: 'أمسك طرف الجلد بقطعة قماش أو بأصابعك المملحة واسحب بقوة وحزم وثبات نحو الرأس في حركة متصلة، سيخرج الجلد بالكامل تاركاً اللحم أبيض ناصعاً.',
+          instructionFr: 'Tenir fermement la queue d’une main, tirer la peau vers la tête d’un geste énergique et régulier.',
+          instructionEn: 'Hold tail firmly with one hand, grasp skin flap with a towel, and pull firmly towards the head in one motion.',
+          kessalTipAr: 'يمكن ترك الجلد الأبيض السفلي لأنه طري ورقيق ويتحمر بروعة عند القلي.',
+          kessalTipFr: 'On peut laisser la peau blanche inférieure : elle est très fine et devient délicieusement croustillante.',
+          kessalTipEn: 'You can keep the white underside skin on; it crisps beautifully when sautéed.',
+        },
+        {
+          stepNumber: 3,
+          titleAr: 'قص الرأس والزعانف الهامشية',
+          titleFr: 'Ébarbage des nageoires périphériques',
+          titleEn: 'Trimming Fringe Fins & Head',
+          instructionAr: 'بالمقص، قص الرأس بشكل نصف دائري مع الأحشاء المجاورة، ثم قص الزعانف الجانبية الدقيقة المحيطة بكامل حافة الصول.',
+          instructionFr: 'Couper la tête en arrondi avec les ciseaux en emportant les viscères, puis rogner les petites arêtes de bordure.',
+          instructionEn: 'Clip off head along with tiny belly pocket, then shear off the fringe fins encircling the fish.',
+          kessalTipAr: 'اغسل سريعاً بالماء البارد وجفف جيداً قبل التتبيل بالكمون وعصير الليمون.',
+          kessalTipFr: 'Sécher parfaitement avant de poêler au beurre ou de frire à la marocaine.',
+          kessalTipEn: 'Dry completely before dredging in semolina or pan-frying.',
+        },
+      ],
+    },
     seasonality: {
       peakMonths: [11, 12, 1, 2, 3, 4],
       description: {
@@ -307,63 +550,6 @@ export const MOROCCAN_FISH: Fish[] = [
         en: 'Optimal in late autumn through winter and spring with dense, sweet meat.',
       },
     },
-    priceRangeMAD: { min: 90, max: 160, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Lenguado / لينغوادو (طنجة، أصيلة، العرائش)",
-    "centreAtlantic": "الصول / لسان الثور / Sole (الدار البيضاء، المهدية)",
-    "southSoussSahara": "إيلس / Iles / لسان البحر (سوس، سيدي إفني)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 55,
-        "max": 85,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 90,
-        "max": 150,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 16,
-        "max": 24,
-        "unit": "kg",
-        "referenceMarket": "Rungis & Paris"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 86,
-    "proteinGrams": 18.2,
-    "lipidsGrams": 1.2,
-    "omega3Mg": 280,
-    "vitaminD_mcg": 1.2,
-    "vitaminB12_mcg": 1.8,
-    "iodine_mcg": 80,
-    "selenium_mcg": 32,
-    "phosphorus_mg": 230,
-    "calcium_mg": 28,
-    "iron_mg": 0.6,
-    "zinc_mg": 0.6,
-    "magnesium_mg": 24,
-    "potassium_mg": 310,
-    "healthHighlights": {
-        "ar": [
-            "أخف أنواع الأسماك على الجهاز الهضمي، ممتاز للمعدة الحساسة وفترة النقاهة",
-            "سعرات منخفضة جداً (86 سعرة) مع أحماض أمينية كاملة",
-            "يدعم صحة القلب والشرايين بنسبة صوديوم متوازنة"
-        ],
-        "fr": [
-            "Digestibilité suprême pour estomacs sensibles et convalescents",
-            "Très faible apport calorique (86 kcal) avec profil protéique complet",
-            "Soutien cardiovasculaire par un équilibre minéral parfait"
-        ],
-        "en": [
-            "Supreme gastro-intestinal digestibility for recovery and sensitive stomachs",
-            "Ultra-low calorie density (86 kcal) with complete amino acid profile",
-            "Maintains vascular equilibrium via natural electrolyte balance"
-        ]
-    }
-},
     culinaryProfile: {
       flavor: 'sweet',
       texture: 'tender',
@@ -380,8 +566,8 @@ export const MOROCCAN_FISH: Fish[] = [
       fr: 'Poisson plat noble par excellence. Chair d’une finesse incomparable qui se détache facilement de l’arête centrale. Idéal poêlé au beurre ou frit.',
       en: 'Noble flatfish renowned for exquisite sweet tenderness and easy center-bone release. Classically pan-seared or crisped with lemon and cumin.',
     },
-    imageUrl: 'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Solea_solea.jpg/1200px-Solea_solea.jpg',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Solea_solea_1.jpg/800px-Solea_solea_1.jpg',
+    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Solea_solea.jpg/800px-Solea_solea.jpg',
     audioPhonetic: 'Sole',
     recommendedRecipeIds: ['sole-meuniere-marocaine', 'friture-mixte-marocaine'],
   },
@@ -395,6 +581,105 @@ export const MOROCCAN_FISH: Fish[] = [
     category: 'poisson_blanc',
     coast: 'atlantic',
     mainPorts: ['Dakhla', 'Taghazout', 'Tan-Tan', 'Agadir', 'Essaouira'],
+    regionalNames: {
+      chamal: ['كوربينا (Corvina)', 'قرب الشمال (نادر)'],
+      centre: ['القرب (Qorb)', 'كوربين المحيط', 'حوت العواشر'],
+      sud: ['قرب الداخلة الذهبي', 'حوتة الصحراء الملكية', 'تاكوربيت (Takourbit بالأمازيغية)'],
+    },
+    pricing: {
+      trend: 'up',
+      past6MonthsMAD: [75, 80, 85, 95, 105, 100],
+      currentSpotMAD: 100,
+      forecastFutureMAD: 110,
+      globalExportUSD: {
+        min: 9.0,
+        max: 15.0,
+        avg: 12.0,
+        hub: 'Mercamadrid & Mercabarna (Espagne)',
+      },
+      driversAr: 'استقرار نسبي حول 90-110 درهم/كلغ للأسماك البرية المصطادة بقوارب الداخلة وتاغازوت.',
+      driversFr: 'Tension haussière sur la courbine sauvage de Dakhla, prisée pour sa chair ferme dans les grands restaurants.',
+      driversEn: 'Premium valuation around 100 MAD/kg driven by high gastronomic appeal of wild Dakhla catches.',
+    },
+    nutrition: {
+      calories: 104,
+      proteinGrams: 21.0,
+      lipidsGrams: 2.2,
+      omega3Mg: 540,
+      vitaminD_IU: 110,
+      vitaminB12_mcg: 2.8,
+      calciumMg: 38,
+      ironMg: 1.0,
+      phosphorusMg: 240,
+      seleniumMcg: 41.0,
+      iodineMcg: 42.0,
+      zincMg: 0.8,
+      healthBenefits: {
+        ar: [
+          'لحم هبر متماسك غني بالأحماض الأمينية الأساسية لبناء العضلات والأنسجة.',
+          'نسبة دهون منخفضة جداً مع نسبة عالية من الكولاجين البحري الطبيعي لدعم المفاصل.',
+          'يتحمل الطهي الطويل دون أن يفقد عناصره الغذائية أو طراوته.',
+        ],
+        fr: [
+          'Chair dense très riche en acides aminés essentiels et collagène marin.',
+          'Faible taux de lipides et haute valeur biologique pour la régénération tissulaire.',
+          'Conserve l’intégralité de ses vitamines même après un long mijotage en tagine.',
+        ],
+        en: [
+          'Meaty firm muscle tissue packed with essential amino acids and natural marine collagen.',
+          'Low fat density supporting joint health and clean metabolic fuel.',
+          'Maintains full nutritional integrity and succulence even during slow clay tagine braising.',
+        ],
+      },
+    },
+    cleaningTutorial: {
+      methodNameAr: 'تقطيع لحم القرب الكبير إلى طرنشات هبرة سميكة للطاجين',
+      methodNameFr: 'Découpe en gros pavés réguliers de la courbine',
+      methodNameEn: 'Portioning Heavy Meagre Steaks for Tagine',
+      difficulty: 'pro',
+      prepTimeMinutes: 15,
+      toolsNeededAr: ['ساطور ثقيل لقطع السلسول', 'سكين شيف كبير', 'مكشطة قشور'],
+      toolsNeededFr: ['Feuille de boucher (couperet)', 'Grand couteau de chef', 'Écailleur'],
+      toolsNeededEn: ['Heavy cleaver for spine', 'Large chef knife', 'Sturdy scaler'],
+      steps: [
+        {
+          stepNumber: 1,
+          titleAr: 'كشط القشور الكبيرة القوية',
+          titleFr: 'Écaillage vigoureux des flancs épais',
+          titleEn: 'Heavy Duty Scaling',
+          instructionAr: 'قشور القرب كبيرة كحراشف الدروع؛ اكشط بقوة بحركات أفقية منتظمة من الذيل حتى الخياشيم مع مسح السمكة بالماء البارد.',
+          instructionFr: 'Écailler énergiquement les larges écailles argentées à l’aide d’un écailleur dentelé.',
+          instructionEn: 'Scrape the large shield-like scales vigorously from tail to gills using a heavy serrated scaler.',
+          kessalTipAr: 'جلد القرب سميك ويمكن تركه على الطرنشات لأنه يحفظ تماسك اللحم داخل الطاجين.',
+          kessalTipFr: 'Garder la peau sur les pavés : elle empêche le poisson de se défaire lors du mijotage.',
+          kessalTipEn: 'Leave the thick skin on steaks; it prevents the meat from flaking apart during stewing.',
+        },
+        {
+          stepNumber: 2,
+          titleAr: 'قطع الرأس والاحتفاظ به للمرق',
+          titleFr: 'Séparation de la tête pour le fumet',
+          titleEn: 'Head Separation for Stock',
+          instructionAr: 'اقطع الرأس خلف الزعانف الصدرية مباشرة باستعمال الساطور، واحتفظ به لتحضير مرق سمك مركز لا يضاهى.',
+          instructionFr: 'Trancher la tête d’un coup de fendoir derrière les opercules. La réserver pour réaliser un fumet magistral.',
+          instructionEn: 'Chop off the massive head behind the pectoral fins using a cleaver; save it for sublime seafood stock.',
+          kessalTipAr: 'رأس القرب مليء بالهبر اللذيذ والجيلاتين الطبيعي الذي يجعل مرق الشوربة خاثراً وغنياً.',
+          kessalTipFr: 'Les joues et la tête de courbine sont riches en gélatine naturelle qui épaissit les soupes.',
+          kessalTipEn: 'Meagre cheeks and head cavities contain gelatin that yields an intensely rich broth.',
+        },
+        {
+          stepNumber: 3,
+          titleAr: 'تقطيع الهبرة إلى شرائح أسطوانية (طرنشات)',
+          titleFr: 'Découpe en tranches épaisses (darnes de 3 cm)',
+          titleEn: 'Slicing Uniform 3cm Steaks',
+          instructionAr: 'باستعمال الساطور أو سكين مسنن قوي، اقطع جسم القرب إلى طرنشات متساوية بسماكة 3 إلى 4 سم حول فقرات السلسول.',
+          instructionFr: 'Détailler le corps en pavés réguliers de 3 à 4 cm d’épaisseur en tranchant net la colonne vertébrale.',
+          instructionEn: 'Slice the body across the spine into uniform 3-4cm thick steaks with a single decisive stroke.',
+          kessalTipAr: 'الطرنشات السميكة هي السر لكي تتشرب الشرمولة والبصل المعسل دون أن تجف.',
+          kessalTipFr: 'Des tranches épaisses garantissent un moelleux incomparable avec les oignons caramélisés.',
+          kessalTipEn: 'Thick steaks remain juicy and absorb sweet caramelized onion juices flawlessly.',
+        },
+      ],
+    },
     seasonality: {
       peakMonths: [4, 5, 6, 7, 8, 9, 10],
       description: {
@@ -403,63 +688,6 @@ export const MOROCCAN_FISH: Fish[] = [
         en: 'Iconic Atlantic giant abundant in Dakhla Bay and southern coasts during warm months.',
       },
     },
-    priceRangeMAD: { min: 65, max: 110, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Corvina / كوربينا (مضيق جبل طارق، الناظور)",
-    "centreAtlantic": "القرب / Qorb / المعزة البحرية (الدار البيضاء، أسفي)",
-    "southSoussSahara": "الكوربين / كربانة / عيشة (طانطان، العيون، الداخلة)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 40,
-        "max": 70,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 70,
-        "max": 120,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 10,
-        "max": 16,
-        "unit": "kg",
-        "referenceMarket": "Mercamadrid & Portugal"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 105,
-    "proteinGrams": 21,
-    "lipidsGrams": 2.1,
-    "omega3Mg": 450,
-    "vitaminD_mcg": 2,
-    "vitaminB12_mcg": 2.8,
-    "iodine_mcg": 75,
-    "selenium_mcg": 40,
-    "phosphorus_mg": 220,
-    "calcium_mg": 22,
-    "iron_mg": 0.9,
-    "zinc_mg": 0.8,
-    "magnesium_mg": 28,
-    "potassium_mg": 360,
-    "healthHighlights": {
-        "ar": [
-            "لحم أبيض كثيف غني بالكولاجين الطبيعي لتقوية المفاصل والغضاريف",
-            "غني بالبوتاسيوم لدعم انقباض عضلة القلب وضبط الضغط الشرياني",
-            "بروتينات بنائية تسهم في التئام الأنسجة وتجديد خلايا الجلد"
-        ],
-        "fr": [
-            "Riche en collagène marin fortifiant les articulations",
-            "Teneur élevée en potassium régulant la pression artérielle",
-            "Excellente densité nutritionnelle stimulant la régénération cellulaire"
-        ],
-        "en": [
-            "Dense meat rich in natural marine collagen strengthening cartilage",
-            "High potassium content supporting healthy blood pressure",
-            "Promotes rapid tissue repair and skin vitality"
-        ]
-    }
-},
     culinaryProfile: {
       flavor: 'rich',
       texture: 'meaty',
@@ -476,8 +704,8 @@ export const MOROCCAN_FISH: Fish[] = [
       fr: "Géant des côtes atlantiques marocaines (jusqu'à 40 kg). Sa chair dense et fondante ne s'effrite jamais, parfaite en tagine aux oignons caramélisés et pruneaux.",
       en: "The heavyweight champion of Atlantic Morocco. Firm, steak-like white flesh that holds beautifully in slow-simmered vegetable or caramelized onion tagines.",
     },
-    imageUrl: 'https://images.unsplash.com/photo-1510137600163-2729bc6959a6?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Argyrosomus_regius.jpg/1200px-Argyrosomus_regius.jpg',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Lisbon%2C_Oceanarium%2C_Argyrosomus_regius.JPG/800px-Lisbon%2C_Oceanarium%2C_Argyrosomus_regius.JPG',
+    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Argyrosomus_regius.jpg/800px-Argyrosomus_regius.jpg',
     audioPhonetic: 'Qorb',
     recommendedRecipeIds: ['tagine-qorb-m3assel', 'tagine-l7ot-khodra'],
   },
@@ -491,6 +719,105 @@ export const MOROCCAN_FISH: Fish[] = [
     category: 'poisson_bleu',
     coast: 'both',
     mainPorts: ['Tanger', 'Al Hoceima', 'Larache', 'Nador', 'Casablanca'],
+    regionalNames: {
+      chamal: ['إمبيرادور (Emperador بالأسبانية)', 'بيث إسبادا (Pez Espada)', 'بوسف بمضيق طنجة'],
+      centre: ['الإسبادون (Spadon)', 'بوسف (Bousif)', 'ستيك البحر'],
+      sud: ['إسبادون أكادير', 'أسيف ن ومان (Asif n waman بالأمازيغية)', 'بوسف الجنوب'],
+    },
+    pricing: {
+      trend: 'up',
+      past6MonthsMAD: [90, 100, 110, 125, 135, 130],
+      currentSpotMAD: 130,
+      forecastFutureMAD: 140,
+      globalExportUSD: {
+        min: 14.0,
+        max: 24.0,
+        avg: 18.0,
+        hub: 'Mercamadrid & Mercabarna (Espagne) & Marché de Rome',
+      },
+      driversAr: 'ارتفاع أسعار شرائح الإسبادون الطازجة إلى 120-140 درهم مع الإقبال القياسي في مطاعم طنجة والمضيق.',
+      driversFr: 'Cours soutenus à 130 MAD/kg portés par la haute saison touristique et les exportations vers l’Andalousie.',
+      driversEn: 'Strong market price around 130 MAD/kg driven by high summer restaurant demand and export to Spain.',
+    },
+    nutrition: {
+      calories: 144,
+      proteinGrams: 23.5,
+      lipidsGrams: 5.1,
+      omega3Mg: 780,
+      vitaminD_IU: 660, // Exceptional Vitamin D
+      vitaminB12_mcg: 2.5,
+      calciumMg: 12,
+      ironMg: 0.9,
+      phosphorusMg: 280,
+      seleniumMcg: 68.5, // Super high selenium
+      iodineMcg: 40.0,
+      zincMg: 1.1,
+      healthBenefits: {
+        ar: [
+          'أعلى نسبة فيتامين D طبيعي بين الأسماك لتعزيز امتصاص الكالسيوم وتقوية جهاز المناعة.',
+          'لحم هبر نقي خالي تماماً من الشوك الداخلي غني بالسيلينيوم لمحاربة الإجهاد التأكسدي.',
+          'بروتين ممتاز للرياضيين لترميم الألياف العضلية بعد التمارين الشاقة.',
+        ],
+        fr: [
+          'Teneur exceptionnelle en vitamine D naturelle pour la minéralisation et l’immunité.',
+          'Chair steak noble sans arêtes, extrêmement riche en sélénium antioxydant.',
+          'Protéines complètes haute performance pour les sportifs.',
+        ],
+        en: [
+          'Outstanding natural Vitamin D concentration boosting bone strength and immunity.',
+          'Pure boneless meat steaks delivering potent antioxidant selenium.',
+          'High biological value protein supporting athletic muscular recovery.',
+        ],
+      },
+    },
+    cleaningTutorial: {
+      methodNameAr: 'تقطيع شريحة الإسبادون ونزع الجلد الخارجي وعروق الدم',
+      methodNameFr: 'Parage et découpe en dés pour brochettes d’espadon',
+      methodNameEn: 'Trimming Swordfish Loin & Dicing for Skewers',
+      difficulty: 'easy',
+      prepTimeMinutes: 8,
+      toolsNeededAr: ['سكين شيف حاد جداً', 'لوح تقطيع خشبي صلب', 'حامض طازج'],
+      toolsNeededFr: ['Couteau de chef très effilé', 'Planche à découper stable', 'Citron frais'],
+      toolsNeededEn: ['Razor-sharp chef knife', 'Heavy cutting board', 'Fresh lemon'],
+      steps: [
+        {
+          stepNumber: 1,
+          titleAr: 'إزالة الجلد الخشن الجانبي',
+          titleFr: 'Ablation de la peau coriace',
+          titleEn: 'Removing Tough Outer Skin',
+          instructionAr: 'ضع شريحة الإسبادون مسطحة على لوح التقطيع، وأدخل نصل السكين بزاوية مائلة بين الجلد واللحم وافصل الجلد الخشن بحركة منشارية سلسة.',
+          instructionFr: 'Poser la tranche à plat, glisser la lame entre la peau dure et la chair pour la détacher d’un trait.',
+          instructionEn: 'Lay swordfish steak flat, angle the knife blade flat between skin and meat, and slice off the tough rind.',
+          kessalTipAr: 'جلد الإسبادون قاسٍ جداً ولا يؤكل؛ نزعه يسمح للشواء بتوزيع الحرارة بالتساوي.',
+          kessalTipFr: 'La peau de l’espadon est très coriace : la retirer garantit une cuisson homogène sur la braise.',
+          kessalTipEn: 'Swordfish skin is leathery; trimming it ensures uniform heat distribution on the grill.',
+        },
+        {
+          stepNumber: 2,
+          titleAr: 'تنظيف البقعة الدموية المركزية (اختياري)',
+          titleFr: 'Parage du muscle rouge foncé (muscle sanguin)',
+          titleEn: 'Trimming Dark Bloodline Pocket',
+          instructionAr: 'إذا كانت هناك منطقة دموية بنية داكنة حول مركز الفقرة، اقطعها بخفة بالسكين إذا كنت تفضل نكهة بحرية ناعمة وخفيفة جداً.',
+          instructionFr: 'Pour un goût plus raffiné, ôter la petite zone sanguine rouge foncé située près du centre.',
+          instructionEn: 'Trim away the small dark red bloodline muscle if you prefer a milder, sweeter flavor profile.',
+          kessalTipAr: 'المنطقة الدموية غنية بالحديد، لكن نزعها يجعل لحم القطبان أبيض بلورياً كالعاج.',
+          kessalTipFr: 'Enlever ce muscle donne des dés d’un blanc ivoire immaculé sur les brochettes.',
+          kessalTipEn: 'Removing this muscle results in pristine ivory-white cubes for skewering.',
+        },
+        {
+          stepNumber: 3,
+          titleAr: 'التقطيع إلى مكعبات منتظمة للشواء (قطبان)',
+          titleFr: 'Découpe en cubes réguliers de 3 cm',
+          titleEn: 'Dicing into Uniform 3cm Skewer Cubes',
+          instructionAr: 'قطّع الهبرة إلى مكعبات متساوية الحجم (3×3 سم) حتى تنضج كلها في نفس التوقيت فوق جمر الفحم دون أن تحترق.',
+          instructionFr: 'Tailler en cubes homogènes de 3 cm pour une cuisson parfaitement synchronisée sur le barbecue.',
+          instructionEn: 'Dice the loin into uniform 3x3cm cubes to ensure simultaneous searing without overcooking.',
+          kessalTipAr: 'انقع المكعبات في ماء البصلة المحكوكة وزيت الزيتون والكمون 20 دقيقة قبل الشك في القطبان.',
+          kessalTipFr: 'Mariner avec du jus d’oignon râpé, cumin et huile d’olive pour un moelleux incomparable.',
+          kessalTipEn: 'Toss with grated onion juice, olive oil, and cumin for supreme juiciness.',
+        },
+      ],
+    },
     seasonality: {
       peakMonths: [6, 7, 8, 9, 10],
       description: {
@@ -499,63 +826,6 @@ export const MOROCCAN_FISH: Fish[] = [
         en: 'Strait of Gibraltar migration peak through summer and early autumn.',
       },
     },
-    priceRangeMAD: { min: 85, max: 140, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Pez Espada / بيث إسبادا (طنجة، أصيلة، العرائش)",
-    "centreAtlantic": "الإسبادون / بوسف / Bousif (الدار البيضاء، المهدية)",
-    "southSoussSahara": "بومشفا / سياف البحر (أكادير، طرفاية، العيون)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 60,
-        "max": 95,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 100,
-        "max": 160,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 14,
-        "max": 22,
-        "unit": "kg",
-        "referenceMarket": "Espagne & Italie"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 144,
-    "proteinGrams": 23.5,
-    "lipidsGrams": 5.1,
-    "omega3Mg": 950,
-    "vitaminD_mcg": 6.2,
-    "vitaminB12_mcg": 3.5,
-    "iodine_mcg": 50,
-    "selenium_mcg": 68.5,
-    "phosphorus_mg": 280,
-    "calcium_mg": 18,
-    "iron_mg": 1.1,
-    "zinc_mg": 1.2,
-    "magnesium_mg": 35,
-    "potassium_mg": 420,
-    "healthHighlights": {
-        "ar": [
-            "نسبة استثنائية من السيلينيوم المضاد للشيخوخة والمعزز للمناعة الطبيعية",
-            "جرعة قوية من فيتامين D لتثبيت الكالسيوم وتقوية الهيكل العظمي",
-            "شرائح لحمية خالية من الحسك غنية بالحديد لمكافحة فقر الدم والإرهاق"
-        ],
-        "fr": [
-            "Teneur record en sélénium antioxydant renforçant l’immunité",
-            "Excellente réserve de vitamine D pour la fixation osseuse",
-            "Steak marin riche en fer héminique prévenant l’anémie"
-        ],
-        "en": [
-            "Remarkable selenium density boosting immunity and longevity",
-            "Potent dose of Vitamin D optimizing bone calcium retention",
-            "Steak-like boneless meat rich in iron combating anemia and fatigue"
-        ]
-    }
-},
     culinaryProfile: {
       flavor: 'rich',
       texture: 'meaty',
@@ -572,106 +842,10 @@ export const MOROCCAN_FISH: Fish[] = [
       fr: "Seigneur du détroit de Tanger. Chair steak noble sans arêtes. Découpé en pavés ou brochettes marinées à la chermoula dorées au barbecue.",
       en: "Legendary swordfish of the Strait of Tangier. Pure boneless steaks marinated in cumin, paprika, garlic, and cold-pressed olive oil for charcoal grilling.",
     },
-    imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Xiphias_gladius1.jpg/1200px-Xiphias_gladius1.jpg',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/98/Xiphias_gladius1.jpg',
+    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Xiphias_gladius1.jpg/800px-Xiphias_gladius1.jpg',
     audioPhonetic: 'Bou-seef / Spa-don',
     recommendedRecipeIds: ['brochettes-espadon-grille', 'tagine-l7ot-khodra'],
-  },
-  {
-    id: 'thon-rouge',
-    nameDarijaArabic: 'التونة الحمراء / التون',
-    nameDarijaLatin: 'Tona / Toun',
-    nameFrench: 'Thon rouge de Méditerranée',
-    nameEnglish: 'Atlantic Bluefin Tuna',
-    scientificName: 'Thunnus thynnus',
-    category: 'poisson_bleu',
-    coast: 'both',
-    mainPorts: ['Larache', 'Tanger', 'Kénitra', 'Al Hoceima', 'Asilah'],
-    seasonality: {
-      peakMonths: [4, 5, 6, 7],
-      description: {
-        ar: 'موسم المضربة التقليدية الشهيرة في العرائش وأصيلا وطنجة في أواخر الربيع والصيف.',
-        fr: 'Saison mythique de la madrague à Larache et Asilah entre avril et juillet.',
-        en: 'Iconic traditional madrague net trap season around Larache and Asilah (April-July).',
-      },
-    },
-    priceRangeMAD: { min: 90, max: 180, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Atún Rojo / التون الأحمر (أصيلة، القصر الصغير، طنجة)",
-    "centreAtlantic": "التونة الملكية / التون الطري (الدار البيضاء)",
-    "southSoussSahara": "أزوكا الكبير / أوتون (أكادير، سيدي إفني، الداخلة)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 70,
-        "max": 120,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 120,
-        "max": 200,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 25,
-        "max": 65,
-        "unit": "kg",
-        "referenceMarket": "Tokyo Toyosu & Rungis"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 144,
-    "proteinGrams": 23.3,
-    "lipidsGrams": 4.9,
-    "omega3Mg": 1250,
-    "vitaminD_mcg": 5.5,
-    "vitaminB12_mcg": 9.4,
-    "iodine_mcg": 45,
-    "selenium_mcg": 90,
-    "phosphorus_mg": 280,
-    "calcium_mg": 15,
-    "iron_mg": 1.4,
-    "zinc_mg": 0.9,
-    "magnesium_mg": 40,
-    "potassium_mg": 440,
-    "healthHighlights": {
-        "ar": [
-            "غذاء النخبة الرياضية: بروتين فائق الجودة وسريع الامتصاص",
-            "أعلى تركيز فيتامين B12 وسيلينيوم لدعم الذاكرة وتدفق الدم",
-            "أحماض دهنية أوميغا 3 نقية تحمي الدماغ والشرايين التاجية"
-        ],
-        "fr": [
-            "Protéines complètes d’élite pour sportifs de haut niveau",
-            "Apport exceptionnel en vitamine B12 et sélénium pour la vitalité",
-            "Dose massive d’Oméga-3 préservant la santé cognitive et cardiaque"
-        ],
-        "en": [
-            "Elite athletic protein source with rapid absorption and complete amino acids",
-            "Top-tier Vitamin B12 and selenium density fueling brain vitality",
-            "Massive Omega-3 reservoir protecting coronary and cognitive health"
-        ]
-    }
-},
-    culinaryProfile: {
-      flavor: 'rich',
-      texture: 'meaty',
-      bonesDifficulty: 'low',
-      bestCookingMethods: ['grillade', 'tagine', 'four'],
-    },
-    freshnessKeys: {
-      ar: ['لون أحمر ياقوتي عميق لامع مثل العقيق', 'رائحة نسيم البحر الصافي دون أي حموضة', 'قوام طري ومرن عند اللمس'],
-      fr: ['Couleur rouge rubis profond et brillante', 'Odeur marine fraîche exempte de toute acidité', 'Texture élastique et souple'],
-      en: ['Deep ruby-red sheen with lustrous marbling', 'Clean ocean breeze fragrance with no sour notes', 'Supple elasticity under gentle touch'],
-    },
-    description: {
-      ar: 'التونة المغربية من أجود أنواع التونة في العالم بفضل التيارات الغذائية بين المتوسط والأطلسي. تصنع منها أطباق الطاجين مع الفلفل والطماطم أو تشوى كستيك.',
-      fr: "Joyau des profondeurs marocaines réputé dans le monde entier. Chair fondante gorgée de saveur, préparée en tagine mijoté ou saisie mi-cuite à la plancha.",
-      en: "World-renowned delicacy caught along Moroccan migration corridors. Exceptionally flavorful whether seared rare on a plancha or braised in rich tomato sauce.",
-    },
-    imageUrl: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Bluefin-big.jpg/1200px-Bluefin-big.jpg',
-    audioPhonetic: 'Tou-na',
-    recommendedRecipeIds: ['tagine-thon-rouge-chermoula', 'brochettes-espadon-grille'],
   },
   {
     id: 'calamar',
@@ -683,6 +857,105 @@ export const MOROCCAN_FISH: Fish[] = [
     category: 'cephalopode',
     coast: 'both',
     mainPorts: ['Dakhla', 'Agadir', 'Safi', 'Nador', 'Casablanca', 'Tanger'],
+    regionalNames: {
+      chamal: ['كالاماريس (Calamares)', 'تشيبيرون (Chipiron)', 'كالامار طنجة والناظور'],
+      centre: ['الكالامار (Kalamar)', 'حوت القرطاس', 'كالامار الشواطئ'],
+      sud: ['كالامار خليج الداخلة', 'أبو ركاس الأطلسي', 'كالامار السوس'],
+    },
+    pricing: {
+      trend: 'up',
+      past6MonthsMAD: [90, 100, 115, 125, 130, 120],
+      currentSpotMAD: 120,
+      forecastFutureMAD: 135,
+      globalExportUSD: {
+        min: 10.0,
+        max: 18.0,
+        avg: 14.5,
+        hub: 'Vigo (Espagne) & Marché de Rome',
+      },
+      driversAr: 'استقرار نسبي حول 110-130 درهم/كلغ بفضل تفريغات مراكب الصيد بأعالي البحار بميناء أكادير والداخلة.',
+      driversFr: 'Cours fermes autour de 120 MAD/kg tirés par les exportations de céphalopodes vers l’Espagne et l’Asie.',
+      driversEn: 'Solid pricing around 120 MAD/kg supported by strong export demand for Atlantic frozen squid.',
+    },
+    nutrition: {
+      calories: 92,
+      proteinGrams: 17.5,
+      lipidsGrams: 1.4,
+      omega3Mg: 490,
+      vitaminD_IU: 40,
+      vitaminB12_mcg: 3.1,
+      calciumMg: 32,
+      ironMg: 1.2,
+      phosphorusMg: 220,
+      seleniumMcg: 44.8,
+      iodineMcg: 52.0,
+      zincMg: 1.5,
+      healthBenefits: {
+        ar: [
+          'بروتين خفيف عالي الكفاءة مع نسبة نحاس وزنك ممتازة لتعزيز إنتاج الكولاجين الطبيعي.',
+          'سعرات حرارية منخفضة جداً (92 سعرة/100غ) مع إحساس عالٍ بالشبع.',
+          'غني باليود المنشط للتمثيل الغذائي وحرق الدهون.',
+        ],
+        fr: [
+          'Protéines digestes très riches en cuivre et zinc pour la vitalité cellulaire.',
+          'Faible apport calorique (92 kcal/100g) favorisant le contrôle du poids.',
+          'Teneur exceptionnelle en iode marin stimulant le métabolisme.',
+        ],
+        en: [
+          'Lean bioavailable protein rich in copper and zinc promoting collagen production.',
+          'Very low calorie density (92 kcal/100g) providing prolonged satiety.',
+          'High concentration of dietary iodine supporting active metabolic rate.',
+        ],
+      },
+    },
+    cleaningTutorial: {
+      methodNameAr: 'طريقة تنظيف الكالامار ونزع السيف وكيس الحبر والجلد',
+      methodNameFr: 'Nettoyage complet du calamar (plume, poche d’encre et peau)',
+      methodNameEn: 'Complete Squid Cleaning (Quill, Ink Sac & Skinning)',
+      difficulty: 'medium',
+      prepTimeMinutes: 10,
+      toolsNeededAr: ['وعاء ماء بارد', 'لوح تقطيع', 'سكين صغير'],
+      toolsNeededFr: ['Bol d’eau froide', 'Planche propre', 'Petit couteau d’office'],
+      toolsNeededEn: ['Bowl of cold water', 'Cutting board', 'Paring knife'],
+      steps: [
+        {
+          stepNumber: 1,
+          titleAr: 'فصل الرأس والمجسات عن الأنبوب',
+          titleFr: 'Séparation de la tête et des tentacules',
+          titleEn: 'Separating Head & Tentacles',
+          instructionAr: 'أمسك أنبوب الكالامار بيد والرأس بيد أخرى، واسحب برفق وبثبات؛ ستخرج الأحشاء وكيس الحبر ملتصقين بالرأس.',
+          instructionFr: 'Tenir le corps d’une main et la tête de l’autre. Tirer doucement : les viscères et la poche d’encre viennent d’un seul bloc.',
+          instructionEn: 'Hold mantle tube in one hand and head in the other; pull gently to separate tentacles and entrails in one piece.',
+          kessalTipAr: 'احذر تمزيق كيس الحبر الأسود الفضي الصغير إذا أردت استخدامه في تلوين الأرز أو الصلصة.',
+          kessalTipFr: 'Ne pas percer la petite poche argentée si vous souhaitez cuisiner à l’encre noire.',
+          kessalTipEn: 'Be careful not to pierce the small silvery ink sac if you wish to use it for black risotto or sauce.',
+        },
+        {
+          stepNumber: 2,
+          titleAr: 'سحب السيف البلاستيكي الشفاف (الغلافي)',
+          titleFr: 'Retrait de la plume transparente (gladius)',
+          titleEn: 'Extracting the Transparent Quill',
+          instructionAr: 'أدخل أصابعك داخل أنبوب الكالامار واسحب عظم الغضروف الشفاف الشبيه بالمسطرة البلاستيكية (السيف) واغسل التجويف الداخلي بالماء.',
+          instructionFr: 'Glisser les doigts dans le tube et extraire la fine plume transparente semblable à du plastique. Rincer l’intérieur.',
+          instructionEn: 'Reach inside the mantle tube, grasp the clear feather-like cartilage quill (gladius), and pull it out smoothly.',
+          kessalTipAr: 'تأكد من فرك التجويف الداخلي بالإبهام لإزالة أي بقايا جيلاتينية شفافة.',
+          kessalTipFr: 'Passer le doigt à l’intérieur sous l’eau pour éliminer tout résidu gélatineux.',
+          kessalTipEn: 'Rub the inner cavity under running water to clear any transparent gelatinous residue.',
+        },
+        {
+          stepNumber: 3,
+          titleAr: 'سلخ الجلد البنفسجي وتقطيع الحلقات أو الحشو',
+          titleFr: 'Pelliculage et découpe en anneaux',
+          titleEn: 'Skinning & Ring Slicing',
+          instructionAr: 'اسحب الغشاء الجلدي الرقيق المرقط بلون بنفسجي من الخارج وسينسلخ معك كالجورب، ثم اقطع منقار الفم الصلب من بين المجسات.',
+          instructionFr: 'Peler la fine peau marbrée violette qui s’enlève comme une chaussette. Retirer le bec corné au centre des tentacules.',
+          instructionEn: 'Peel the speckled purplish outer membrane off like a sleeve. Pop out the hard beak from the center of tentacles.',
+          kessalTipAr: 'اترك الأنبوب كاملاً إذا أردت تحضير الكالامار المعمر بالأرز والكروفيت، أو قطعه حلقات بسماكة 1 سم للقلي.',
+          kessalTipFr: 'Garder le tube entier pour farcir, ou trancher en rondelles régulières de 1 cm pour friture.',
+          kessalTipEn: 'Keep tube whole for stuffing with rice and prawns, or slice into 1cm rings for crisp calamari.',
+        },
+      ],
+    },
     seasonality: {
       peakMonths: [10, 11, 12, 1, 2, 3],
       description: {
@@ -691,63 +964,6 @@ export const MOROCCAN_FISH: Fish[] = [
         en: 'Prime winter season yielding plump, tender calamari in southern Moroccan waters.',
       },
     },
-    priceRangeMAD: { min: 80, max: 140, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Calamar de Playa / كالامار بلبايا (طنجة، المضيق، تطوان)",
-    "centreAtlantic": "الكالامار البلدي / Kalamar (الدار البيضاء، أسفي)",
-    "southSoussSahara": "تيكيت / Tikit / سبييا الجنوب (الداخلة، بوجدور)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 60,
-        "max": 100,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 90,
-        "max": 160,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 13,
-        "max": 20,
-        "unit": "kg",
-        "referenceMarket": "Mercamadrid & Barcelone"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 92,
-    "proteinGrams": 15.6,
-    "lipidsGrams": 1.4,
-    "omega3Mg": 490,
-    "vitaminD_mcg": 0.5,
-    "vitaminB12_mcg": 1.3,
-    "iodine_mcg": 65,
-    "selenium_mcg": 44.8,
-    "phosphorus_mg": 220,
-    "calcium_mg": 32,
-    "iron_mg": 0.7,
-    "zinc_mg": 1.5,
-    "magnesium_mg": 33,
-    "potassium_mg": 280,
-    "healthHighlights": {
-        "ar": [
-            "غني بالزنك والنحاس العضوي الضروريين لصحة المناعة وتكوين الدم",
-            "منخفض السعرات مع ملمس لحمي مشبع يساعد في إنقاص الوزن",
-            "مصدر للتورين الطبيعي المنظم لضربات القلب والأوعية"
-        ],
-        "fr": [
-            "Concentré en zinc et cuivre stimulant l’immunité et l’hématopoïèse",
-            "Faible en calories avec texture rassasiante idéale pour la ligne",
-            "Source naturelle de taurine régulatrice du rythme cardiovasculaire"
-        ],
-        "en": [
-            "Concentrated in zinc and copper powering immunity and blood synthesis",
-            "Low-calorie satiating protein aiding healthy weight loss",
-            "Natural source of taurine regulating cardiac rhythm"
-        ]
-    }
-},
     culinaryProfile: {
       flavor: 'sweet',
       texture: 'tender',
@@ -764,8 +980,8 @@ export const MOROCCAN_FISH: Fish[] = [
       fr: 'Ingrédient noble de la prestigieuse Pastilla marocaine aux fruits de mer. Délicieux également farci au riz parfumé ou doré en beignets croustillants.',
       en: 'Cornerstone of festive Moroccan Seafood Pastilla. Equally sensational stuffed with seasoned rice and shrimp or lightly dusted and fried into golden rings.',
     },
-    imageUrl: 'https://images.unsplash.com/photo-1545671913-b89ac1b4ac10?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Loligo_vulgaris.jpg/1200px-Loligo_vulgaris.jpg',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Loligo_vulgaris.jpg/800px-Loligo_vulgaris.jpg',
+    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Loligo_vulgaris.jpg/800px-Loligo_vulgaris.jpg',
     audioPhonetic: 'Ka-la-mar',
     recommendedRecipeIds: ['calamar-farci-marocain', 'pastilla-l7ot-royale', 'friture-mixte-marocaine'],
   },
@@ -779,6 +995,105 @@ export const MOROCCAN_FISH: Fish[] = [
     category: 'cephalopode',
     coast: 'atlantic',
     mainPorts: ['Dakhla', 'Boujdour', 'Laâyoune', 'Essaouira', 'Agadir'],
+    regionalNames: {
+      chamal: ['بولبو (Pulpo بالأسبانية)', 'الأخطبوط الصخري', 'بولبو الحسيمة وطنجة'],
+      centre: ['الأخطبوط (Poulpe)', 'حوت ثمانية رجلين', 'البويلب'],
+      sud: ['آزايز (Azayz بالأمازيغية)', 'الروكاس (Rokas بالداخلة)', 'أخطبوط وادي الذهب'],
+    },
+    pricing: {
+      trend: 'up',
+      past6MonthsMAD: [80, 95, 110, 130, 140, 135],
+      currentSpotMAD: 135,
+      forecastFutureMAD: 145,
+      globalExportUSD: {
+        min: 12.0,
+        max: 22.0,
+        avg: 16.5,
+        hub: 'Tokyo Toyosu (Japon) & Vigo (Espagne)',
+      },
+      driversAr: 'ارتفاع الأسعار بسبب الطلب العالمي القياسي على أخطبوط الداخلة وبدء فترة الراحة البيولوجية لحماية صغار الأخطبوط.',
+      driversFr: 'Forte valorisation à 135 MAD/kg sous l’effet de la demande japonaise et espagnole et des repos biologiques stricts.',
+      driversEn: 'Premium export valuation around $16/kg driven by intense Japanese demand for Dakhla sashimi grade octopus.',
+    },
+    nutrition: {
+      calories: 82,
+      proteinGrams: 14.9,
+      lipidsGrams: 1.0,
+      omega3Mg: 210,
+      vitaminD_IU: 48,
+      vitaminB12_mcg: 20.0, // World record B12 concentration!
+      calciumMg: 53,
+      ironMg: 5.3, // Super high iron
+      phosphorusMg: 186,
+      seleniumMcg: 44.8,
+      iodineMcg: 65.0,
+      zincMg: 1.7,
+      healthBenefits: {
+        ar: [
+          'أعلى تركيز لفيتامين B12 بين جميع الكائنات البحرية (800% من الاحتياج اليومي) لمحاربة فقر الدم والإرهاق العصبي.',
+          'غني بالحديد العضوي والنحاس لتنشيط الدورة الدموية ومقاومة الأنيميا.',
+          'سعرات قليلة جداً ودهون شبه منعدمة مع مرونة وطاقة حيوية ممتدة.',
+        ],
+        fr: [
+          'Record absolu de vitamine B12 (plus de 800% des AJR) pour le système nerveux.',
+          'Excellente source de fer biodisponible contre l’anémie et la baisse d’énergie.',
+          'Protéines pures pauvres en calories et hautement rassasiantes.',
+        ],
+        en: [
+          'Record-breaking Vitamin B12 concentration (over 800% daily value) revitalizing nerves and blood cells.',
+          'Rich in bioavailable heme iron combating fatigue and anemia.',
+          'Ultra-lean, satisfying nourishment with near-zero fat and high cellular vitality.',
+        ],
+      },
+    },
+    cleaningTutorial: {
+      methodNameAr: 'طريقة تطويع ودق الأخطبوط وسلقه على الطريقة الساحلية',
+      methodNameFr: 'Attendrissement traditionnel et cuisson du poulpe',
+      methodNameEn: 'Tenderizing & Boiling Moroccan Coastal Octopus',
+      difficulty: 'pro',
+      prepTimeMinutes: 20,
+      toolsNeededAr: ['طنجرة ماء مغلي', 'ملح خشن وخل طبيعي', 'ورق غار وليمون'],
+      toolsNeededFr: ['Grande marmite d’eau bouillante', 'Gros sel et vinaigre', 'Laurier et citron'],
+      toolsNeededEn: ['Large pot of boiling water', 'Coarse salt & vinegar', 'Bay leaves & lemon'],
+      steps: [
+        {
+          stepNumber: 1,
+          titleAr: 'تطويع ألياف الأخطبوط (التجميد أو الدق)',
+          titleFr: 'Attendrissement des fibres musculaires',
+          titleEn: 'Breaking Collagen Fibers (Freeze or Tap)',
+          instructionAr: 'ألياف الأخطبوط صلبة وغنية بالكولاجين؛ السر المغربي هو تجميده لمدة 48 ساعة في المجمد ثم تذويبه، أو دقه بمهراز خشبي خفيف لتليين عضلاته.',
+          instructionFr: 'Congeler le poulpe 48h au préalable brise naturellement les fibres de collagène pour une tendreté garantie.',
+          instructionEn: 'Freezing for 48 hours beforehand naturally ruptures the tough collagen fibers ensuring succulent tenderness.',
+          kessalTipAr: 'التجميد لـ48 ساعة يغنيك تماماً عن ضرب الأخطبوط على الصخور.',
+          kessalTipFr: 'La congélation préalable évite de battre le poulpe contre les rochers.',
+          kessalTipEn: 'Freezing is the modern fishmonger secret that replaces bashing on beach rocks.',
+        },
+        {
+          stepNumber: 2,
+          titleAr: 'إزالة المنقار والعينين وتنظيف الرأس',
+          titleFr: 'Nettoyage de la tête, des yeux et du bec',
+          titleEn: 'Removing Beak, Eyes & Inverting Head',
+          instructionAr: 'اقلب الرأس كالقفاز ونظف التجويف الداخلي، ثم اضغط على المركز بين المجسات ليخرج المنقار العظمي الأسود واقطعه، واقطع العينين بالسكين.',
+          instructionFr: 'Retourner la poche de la tête pour la vider. Presser au centre des tentacules pour expulser le bec dur, puis retirer les yeux.',
+          instructionEn: 'Turn head inside out to clean, push from behind tentacles to pop out the hard black beak, and trim eyes.',
+          kessalTipAr: 'افرك المجسات بملح خشن وقليل من الخل للتخلص من أي لزوجة بحرية.',
+          kessalTipFr: 'Frotter les ventouses au gros sel pour éliminer tout mucus.',
+          kessalTipEn: 'Rub suckers with coarse salt to strip away any residual beach slime.',
+        },
+        {
+          stepNumber: 3,
+          titleAr: 'تقنية التغطيس الثلاثي (التخويف) والسلق',
+          titleFr: 'Technique des 3 bains de saisie et pochage',
+          titleEn: 'The 3-Dip Shock Technique & Simmering',
+          instructionAr: 'في ماء مغلي مع ورق الرند وشرائح الحامض، أمسك الأخطبوط من رأسه وغطس مجساته 3 ثوانٍ وارفعها 3 مرات متتالية حتى تلتف المجسات بحلقات حلزونية جميلة، ثم اتركه يطهى على نار هادئة 40 دقيقة.',
+          instructionFr: 'Tremper les tentacules 3 fois de suite 3 secondes dans l’eau bouillante pour les friser, puis laisser mijoter 40 min à feu doux.',
+          instructionEn: 'Dip tentacles in boiling water 3 times for 3 seconds each to curl them gracefully, then simmer gently for 40 minutes.',
+          kessalTipAr: 'اغرز سكيناً في أسمك جزء من المجس؛ إذا دخل بسهولة كأنه زبدة فهو جاهز للطاجين أو السلطة.',
+          kessalTipFr: 'Piquer la base d’un tentacule : si la lame pénètre comme dans du beurre, c’est prêt.',
+          kessalTipEn: 'Pierce the thickest tentacle with a knife tip; if it glides like soft butter, it is ready.',
+        },
+      ],
+    },
     seasonality: {
       peakMonths: [1, 2, 3, 6, 7, 8],
       description: {
@@ -787,63 +1102,6 @@ export const MOROCCAN_FISH: Fish[] = [
         en: 'Dakhla is the global epicenter of wild octopus fisheries with strict biological resting windows.',
       },
     },
-    priceRangeMAD: { min: 70, max: 130, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Pulpo / بولبو (الناظور، الحسيمة، طنجة)",
-    "centreAtlantic": "الأخطبوط / الروكاس / Pwilp (الدار البيضاء، الصويرة)",
-    "southSoussSahara": "أزوكا / أزايز / Azayz (الداخلة وبوجدور عاصمة الأخطبوط)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 65,
-        "max": 110,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 90,
-        "max": 150,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 14,
-        "max": 21,
-        "unit": "kg",
-        "referenceMarket": "Tokyo & Espagne"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 82,
-    "proteinGrams": 14.9,
-    "lipidsGrams": 1,
-    "omega3Mg": 350,
-    "vitaminD_mcg": 0.8,
-    "vitaminB12_mcg": 20,
-    "iodine_mcg": 90,
-    "selenium_mcg": 44.8,
-    "phosphorus_mg": 186,
-    "calcium_mg": 53,
-    "iron_mg": 5.3,
-    "zinc_mg": 1.7,
-    "magnesium_mg": 30,
-    "potassium_mg": 350,
-    "healthHighlights": {
-        "ar": [
-            "قنبلة فيتامين B12 الطبيعي (800% من الاحتياج اليومي) لمحاربة الإرهاق العصبي",
-            "أعلى مصدر للحديد البحري (5.3 ملغ) لعلاج فقر الدم وتجديد النشاط",
-            "خالٍ من الدهون المشبعة والسكريات ومناسب جداً لمرضى السكري والضغط"
-        ],
-        "fr": [
-            "Teneur vertigineuse en vitamine B12 (plus de 800% des AJR) contre l’épuisement",
-            "Source record de fer héminique marin (5,3 mg) pour vaincre l’anémie",
-            "Aliment diététique pur sans graisses saturées ni sucres"
-        ],
-        "en": [
-            "Astounding Vitamin B12 density (over 800% Daily Value) eliminating fatigue",
-            "Top-tier marine iron source (5.3 mg) rapidly reversing anemia",
-            "Super-lean pure dietary food with zero saturated fat, diabetic-friendly"
-        ]
-    }
-},
     culinaryProfile: {
       flavor: 'rich',
       texture: 'firm',
@@ -860,86 +1118,131 @@ export const MOROCCAN_FISH: Fish[] = [
       fr: 'Le poulpe de Dakhla est prisé par les plus grands chefs au monde. Poché aux aromates puis sauté en tagine épicé à la chermoula ou en salade tiède.',
       en: 'Octopus from Dakhla Bay commands premium acclaim worldwide. Tenderized gently with bay leaf and lemon, then simmered in rich spicy charmoula sauce.',
     },
-    imageUrl: 'https://images.unsplash.com/photo-1545671913-b89ac1b4ac10?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Octopus_vulgaris2.jpg/1200px-Octopus_vulgaris2.jpg',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Octopus2.jpg/800px-Octopus2.jpg',
+    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Octopus_vulgaris2.jpg/800px-Octopus_vulgaris2.jpg',
     audioPhonetic: 'Poulpe / Ro-kas',
     recommendedRecipeIds: ['tagine-poulpe-charmoula', 'chorba-l7ot-marocaine'],
   },
   {
     id: 'crevette',
-    nameDarijaArabic: 'الكروفيت',
-    nameDarijaLatin: 'Krovit',
-    nameFrench: 'Crevette rose / royale',
-    nameEnglish: 'Deep-water Rose Shrimp',
+    nameDarijaArabic: 'كروفيت',
+    nameDarijaLatin: 'Krovette',
+    nameFrench: 'Crevette rose du large',
+    nameEnglish: 'Deepwater Rose Shrimp',
     scientificName: 'Parapenaeus longirostris',
     category: 'crustace',
     coast: 'both',
-    mainPorts: ['Larache', 'Kénitra', 'Agadir', 'Casablanca', 'Tanger', 'Al Hoceima'],
-    seasonality: {
-      peakMonths: [3, 4, 5, 6, 9, 10, 11],
-      description: {
-        ar: 'متوفرة بجودة عالية على طول الساحل الأطلسي والمتوسطي معظم أشهر السنة.',
-        fr: 'Excellente fraîcheur printanière et automnale sur les côtes de Larache et Agadir.',
-        en: 'Outstanding spring and autumn harvest along the rich Larache and Agadir banks.',
+    mainPorts: ['Larache', 'Kenitra', 'Casablanca', 'Agadir', 'Tan-Tan'],
+    regionalNames: {
+      chamal: ['ڭامباس (Gambas)', 'ڭامبا بلانكا (Gamba Blanca)', 'كروفيت العرائش والمهدية'],
+      centre: ['كروفيت (Krovette)', 'كروفيت وردي ملكي', 'الروبيان المغربي'],
+      sud: ['كروفيت طانطان وأكادير', 'إفران بالأمازيغية (Ifran)', 'جمبري الجنوب'],
+    },
+    pricing: {
+      trend: 'up',
+      past6MonthsMAD: [90, 95, 110, 105, 120, 130],
+      currentSpotMAD: 120,
+      forecastFutureMAD: 140,
+      globalExportUSD: {
+        min: 12.0,
+        max: 18.5,
+        avg: 15.2,
+        hub: 'Mercabarna (Barcelone) & Mercamadrid (Espagne)',
+      },
+      driversAr: 'طلب سياحي وتصديري كثيف نحو المطاعم الإسبانية والأوروبية مع ارتفاع استهلاك المناسبات ورمضان.',
+      driversFr: 'Forte pression à l’export vers la péninsule ibérique et pic de demande festif.',
+      driversEn: 'Heavy export demand from Spanish gastronomy coupled with peak domestic festive consumption.',
+    },
+    nutrition: {
+      calories: 106,
+      proteinGrams: 24.2,
+      lipidsGrams: 1.7,
+      omega3Mg: 540,
+      vitaminD_IU: 152,
+      vitaminB12_mcg: 3.2,
+      calciumMg: 91,
+      ironMg: 2.4,
+      phosphorusMg: 237,
+      seleniumMcg: 48.6,
+      iodineMcg: 100.0,
+      zincMg: 1.6,
+      healthBenefits: {
+        ar: [
+          'مصدر نقي للبروتين عالي الامتصاص مع سعرات ودهون شبه منعدمة لبناء العضلات.',
+          'غني بمضاد الأكسدة الفريد "أستازانتين" الذي يحمي خلايا الجلد ويحارب الالتهابات.',
+          'تركيز قياسي من اليود والسيلينيوم لتحفيز هرمونات الغدة الدرقية وزيادة الحرق.',
+          'فيتامين B12 مع الحديد العضوي لمحاربة الخمول وتنشيط الدورة الدموية.',
+        ],
+        fr: [
+          'Protéines pures ultra-digestes avec teneur minime en matières grasses.',
+          'Source rare d’astaxanthine, caroténoïde antioxydant protecteur des cellules et de la peau.',
+          'Richesse remarquable en iode marin et sélénium régulateurs de la thyroïde.',
+          'Apport puissant en vitamine B12 contre la fatigue chronique.',
+        ],
+        en: [
+          'Ultra-pure bioavailable lean protein optimal for muscle repair with negligible fats.',
+          'Abundant in astaxanthin, one of the most powerful natural marine antioxidants.',
+          'Exceptional iodine and selenium density supporting thyroid hormonal balance.',
+          'High bioavailable Vitamin B12 and iron invigorating stamina and oxygen transport.',
+        ],
       },
     },
-    priceRangeMAD: { min: 70, max: 140, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Gamba Blanca / غامبا بلانكا (العرائش، أصيلة، طنجة)",
-    "centreAtlantic": "الكروفيت / Krovit (الدار البيضاء، المهدية، أسفي)",
-    "southSoussSahara": "القريدس الملكي / كروفيت رويال (طانطان، بوجدور)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 60,
-        "max": 110,
-        "unit": "kg"
+    cleaningTutorial: {
+      methodNameAr: 'تقشير الكروفيت ونزع خيط الرمل (المصران الأسود)',
+      methodNameFr: 'Décorticage de la crevette et retrait du boyau sableux',
+      methodNameEn: 'Deveining and Shelling Moroccan Coastal Shrimp',
+      difficulty: 'easy',
+      prepTimeMinutes: 12,
+      toolsNeededAr: ['خلال أسنان خشبي أو عود رفيع', 'وعاء ماء مثلج', 'منشفة ورقية'],
+      toolsNeededFr: ['Cure-dent en bois', 'Bol d’eau glacée', 'Papier absorbant'],
+      toolsNeededEn: ['Wooden toothpick', 'Bowl of iced water', 'Paper towels'],
+      steps: [
+        {
+          stepNumber: 1,
+          titleAr: 'فصل الرأس ونزع القشرة الخارجية',
+          titleFr: 'Retrait de la tête et de la carapace',
+          titleEn: 'Head Twist & Shell Removal',
+          instructionAr: 'أدر الرأس بحركة نصف دائرية ليفصل عن الجسد، ثم افتح القشور من جهة الأرجل واسحبها حتى مفصل الذيل.',
+          instructionFr: 'Faire pivoter la tête d’un quart de tour pour la détacher, puis écarter la carapace par le ventre.',
+          instructionEn: 'Twist the head gently to separate, peel open the shell from underneath the legs toward the tail.',
+          kessalTipAr: 'احتفظ برؤوس وقشور الكروفيت لتحضير ألذ بيسك (Bisque) أو مرق لشوربة الحوت وبسطيلة السمك.',
+          kessalTipFr: 'Ne jetez jamais les têtes : faites-les dorer pour un fumet de poisson royal pour pastilla.',
+          kessalTipEn: 'Never discard heads and shells; roast them into an exquisite crustacean stock for pastilla.',
+        },
+        {
+          stepNumber: 2,
+          titleAr: 'سحب خيط الرمل (المصران الأسود)',
+          titleFr: 'Extraction du boyau dorsal',
+          titleEn: 'Deveining the Sand Vein',
+          instructionAr: 'أدخل عود الأسنان الخشبي تحت القناة الهضمية السوداء في ظهر الكروفيت عند الفقرة الثانية واسحب للأعلى برفق ليخرج الخيط كاملاً.',
+          instructionFr: 'Insérer la pointe d’un cure-dent sous le fil noir dorsal à la deuxième articulation et tirer délicatement.',
+          instructionEn: 'Slide a toothpick under the dark dorsal vein at the second segment and lift upward gently.',
+          kessalTipAr: 'نزع خيط الرمل يحميك من أي قرمشة رملية غير مستحبة أثناء الأكل ويمنح الكروفيت طعماً حلواً نقياً.',
+          kessalTipFr: 'Retirer ce boyau garantit une texture soyeuse sans aucune sensation de sable sous la dent.',
+          kessalTipEn: 'Deveining prevents grit and reveals the pristine sweetness of the tender flesh.',
+        },
+        {
+          stepNumber: 3,
+          titleAr: 'شطف بالماء المثلج والتنشيف',
+          titleFr: 'Bain glacé et séchage immédiat',
+          titleEn: 'Ice Bath & Pat Dry',
+          instructionAr: 'اغمر حبات الكروفيت المنقاة في وعاء ماء بارد جداً لثوانٍ معدودة، ثم جففها فوراً بورق الطهي قبل إضافتها للمقلاة.',
+          instructionFr: 'Plonger brièvement dans l’eau glacée puis essuyer soigneusement avec du papier absorbant.',
+          instructionEn: 'Plunge briefly into ice-cold water, then pat completely dry on paper towels before cooking.',
+          kessalTipAr: 'تجفيف الكروفيت جيداً هو السر ليتحمر في المقلاة بسرعة (بيل-بيل) ولا يفقد عصارته الداخلية.',
+          kessalTipFr: 'Une crevette bien sèche saute à haute température sans bouillir dans son eau.',
+          kessalTipEn: 'Thoroughly dried shrimp sears beautifully in sizzling garlic oil without turning rubbery.',
+        },
+      ],
     },
-    "retailMarketMAD": {
-        "min": 90,
-        "max": 180,
-        "unit": "kg"
+    seasonality: {
+      peakMonths: [3, 4, 5, 9, 10, 11],
+      description: {
+        ar: 'متوفرة طوال العام مع ذروة الربيع والخريف في موانئ العرائش والمهدية وأكادير.',
+        fr: 'Disponible toute l’année avec de très beaux calibres au printemps et à l’automne.',
+        en: 'Available year-round with peak plump catches landed in Larache, Mehdia, and Agadir in spring and autumn.',
+      },
     },
-    "globalExportEUR": {
-        "min": 15,
-        "max": 28,
-        "unit": "kg",
-        "referenceMarket": "Marchés européens de la marée"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 99,
-    "proteinGrams": 20.9,
-    "lipidsGrams": 1.1,
-    "omega3Mg": 540,
-    "vitaminD_mcg": 0.2,
-    "vitaminB12_mcg": 1.5,
-    "iodine_mcg": 100,
-    "selenium_mcg": 48,
-    "phosphorus_mg": 250,
-    "calcium_mg": 70,
-    "iron_mg": 2.4,
-    "zinc_mg": 1.6,
-    "magnesium_mg": 35,
-    "potassium_mg": 260,
-    "healthHighlights": {
-        "ar": [
-            "مضاد أكسدة فريد (الأستازانتين Astaxanthin) يحمي البشرة والعينين من التلف",
-            "غني باليود والزنك لدعم صحة الغدة الدرقية والخصوبة وتجدد الخلايا",
-            "بروتين نقي بنسبة 21% بأقل من 100 سعرة حرارية لكل 100 غرام"
-        ],
-        "fr": [
-            "Richesse en astaxanthine antioxydante protégeant la peau et la vision",
-            "Haute teneur en iode et zinc pour l’équilibre hormonal et métabolique",
-            "Protéines pures (21%) avec moins de 100 calories aux 100g"
-        ],
-        "en": [
-            "Rich in astaxanthin antioxidant shielding skin and eyesight from degradation",
-            "High iodine and zinc content promoting hormonal and metabolic balance",
-            "Pure concentrated protein (21%) with under 100 calories per 100g"
-        ]
-    }
-},
     culinaryProfile: {
       flavor: 'sweet',
       texture: 'tender',
@@ -947,1362 +1250,147 @@ export const MOROCCAN_FISH: Fish[] = [
       bestCookingMethods: ['pil_pil', 'pastilla', 'soup'],
     },
     freshnessKeys: {
-      ar: ['الرأس متصل بالجسم بقوة دون أي اسوداد', 'العيون سوداء براقة كحبات اللؤلؤ', 'القشرة صلبة وزهرية لامعة'],
-      fr: ['Tête solidement attachée au corps sans noircissement', 'Yeux noirs brillants bien nets', 'Carapace translucide rosée et ferme'],
-      en: ['Head firmly attached to thorax with no darkening', 'Glistening jet-black beads for eyes', 'Translucent rose-tinted firm shell'],
+      ar: ['الرأس متصل ومشدود بالجسم غير مسود أو رخو', 'قشرة وردية شفافة لامعة برائحة يود بحرية نقية', 'قوام اللحم متماسك ومرن يرتد عند لمسه'],
+      fr: ['Tête solidement attachée au corps sans noircissement', 'Carapace brillante rose translucide', 'Chair ferme et élastique au toucher'],
+      en: ['Head firmly attached to body with no blackening around neck', 'Translucent rosy shell smelling purely of fresh sea breeze', 'Firm resilient flesh that bounces back on touch'],
     },
     description: {
-      ar: 'سلطانة فواكه البحر في المطبخ المغربي. بطلة طبق "كروفيت بيل-بيل" الشهير بالثوم والتحميرة والمعدنوس وزيت الزيتون الحار.',
-      fr: "Reine des entrées marocaines. Vedette incontestée des crevettes pil-pil mijotées dans l'huile d'olive bouillonnante à l'ail, paprika et piment.",
-      en: "The jewel of Moroccan seafood appetizers. Immortalized in sizzling Crevettes Pil-Pil cooked with crushed garlic, sweet paprika, chili, and olive oil.",
+      ar: 'كروفيت السواحل المغربية مشهور بجودته ولحمه الوردي الحلو. يتألق في طاجين بيل-بيل بالثوم والهريسة وزيت الزيتون، أو كعنصر أساسي في البسطيلة الملكية.',
+      fr: 'La crevette rose marocaine est une référence gastronomique internationale. Elle sublime le fameux Pil-Pil aillé et la prestigieuse pastilla festive.',
+      en: 'Moroccan deepwater rose shrimp is celebrated for its natural sweetness and succulent crunch. It shines in garlic-chili Pil-Pil and festive royal pastilla.',
     },
-    imageUrl: 'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Parapenaeus_longirostris.jpg/1200px-Parapenaeus_longirostris.jpg',
-    audioPhonetic: 'Kro-veet',
-    recommendedRecipeIds: ['crevettes-pil-pil-marocaine', 'pastilla-l7ot-royale', 'chorba-l7ot-marocaine'],
-  },
-  {
-    id: 'sar',
-    nameDarijaArabic: 'الشرغو',
-    nameDarijaLatin: 'Chargho',
-    nameFrench: 'Sar commun',
-    nameEnglish: 'White Seabream',
-    scientificName: 'Diplodus sargus',
-    category: 'poisson_blanc',
-    coast: 'both',
-    mainPorts: ['Essaouira', 'Safi', 'Al Hoceima', 'Tanger', 'Agadir', 'Mirleft'],
-    seasonality: {
-      peakMonths: [4, 5, 6, 7, 8, 9],
-      description: {
-        ar: 'سمك صخري يتغذى على القشريات والمحار، لحمه قمة في الطراوة في الربيع والصيف.',
-        fr: 'Poisson des falaises rocheuses, sublime au printemps et en été.',
-        en: 'Rocky shoreline dweller that feeds on crustaceans, peaking in spring and summer.',
-      },
-    },
-    priceRangeMAD: { min: 55, max: 95, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Sargo / سارغو صخري (الجبهة، الحسيمة، كاب سبارتيل)",
-    "centreAtlantic": "الشرغو / Chargho بلدي (أسفي، الصويرة، الدار البيضاء)",
-    "southSoussSahara": "تافروخ / الشرغو الحجري (ميرلفت، أكادير، الداخلة)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 35,
-        "max": 60,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 60,
-        "max": 95,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 9,
-        "max": 14,
-        "unit": "kg",
-        "referenceMarket": "Mercamadrid & Lisbonne"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 120,
-    "proteinGrams": 20.8,
-    "lipidsGrams": 3.2,
-    "omega3Mg": 680,
-    "vitaminD_mcg": 2.2,
-    "vitaminB12_mcg": 2.9,
-    "iodine_mcg": 60,
-    "selenium_mcg": 42,
-    "phosphorus_mg": 230,
-    "calcium_mg": 35,
-    "iron_mg": 0.9,
-    "zinc_mg": 0.8,
-    "magnesium_mg": 31,
-    "potassium_mg": 370,
-    "healthHighlights": {
-        "ar": [
-            "لحم بحري أبيض غني بالمعادن المستخلصة من القشريات التي يتغذى عليها الشرغو بين الصخور",
-            "يعزز مناعة الجسم بفضل السيلينيوم والزنك العضوي",
-            "بروتين مثالي لبناء النسيج العضلي بدون شحوم زائدة"
-        ],
-        "fr": [
-            "Saveur iodée intense issue de son alimentation en crustacés rocheux",
-            "Renforce l’immunité par un apport équilibré en zinc et sélénium",
-            "Protéine idéale pour le développement musculaire sans graisse"
-        ],
-        "en": [
-            "Intense mineral richness derived from its rocky shellfish diet",
-            "Strengthens immunity through balanced zinc and organic selenium",
-            "Ideal lean protein for muscle development without excess fat"
-        ]
-    }
-},
-    culinaryProfile: {
-      flavor: 'sweet',
-      texture: 'firm',
-      bonesDifficulty: 'medium',
-      bestCookingMethods: ['four', 'grillade', 'tagine'],
-    },
-    freshnessKeys: {
-      ar: ['شريط أسود واضح عند قاعدة الذيل والغطاء الخيشومي', 'خطوط عمودية فضية ورمادية مرسومة بدقة', 'لحم صلب ومرن'],
-      fr: ['Tache noire franche sur le pédoncule caudal', 'Rayures verticales zébrées nettes', 'Corps compact et musclé'],
-      en: ['Sharp black saddle mark near tail and gill edge', 'Crisp vertical silver-grey stripes', 'Muscular, resilient body'],
-    },
-    description: {
-      ar: 'السمك المفضل لدى هواة الصيد بالقصبة والغطس على طول صخور الصويرة والحسيمة. لحمه معطر بنكهة الرخويات البحرية التي يتغذى عليها.',
-      fr: 'Le grand favori des pêcheurs de falaise marocains. Nourri de coquillages, sa chair possède un parfum marin délicatement iodé.',
-      en: 'Beloved by coastal cliff anglers across Morocco. Nourished on sea mollusks and crustaceans, giving its meat a rich, naturally savory depth.',
-    },
-    imageUrl: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Diplodus_sargus_2.JPG/1200px-Diplodus_sargus_2.JPG',
-    audioPhonetic: 'Shar-gho',
-    recommendedRecipeIds: ['tagine-l7ot-khodra', 'dorade-royale-au-four'],
-  },
-  {
-    id: 'pageot',
-    nameDarijaArabic: 'الباجو',
-    nameDarijaLatin: 'Bajo',
-    nameFrench: 'Pageot rouge',
-    nameEnglish: 'Common Pandora',
-    scientificName: 'Pagellus erythrinus',
-    category: 'poisson_blanc',
-    coast: 'both',
-    mainPorts: ['Al Hoceima', 'Nador', 'Larache', 'Tanger', 'Casablanca', 'Safi'],
-    seasonality: {
-      peakMonths: [5, 6, 7, 8, 9, 10],
-      description: {
-        ar: 'ينشط صيده في مياه البحر الأبيض المتوسط والأطلسي الشمالي خلال الأشهر المعتدلة والدافئة.',
-        fr: 'Très prisé en Méditerranée et Atlantique durant la belle saison estivale.',
-        en: 'Prized in Mediterranean and northern Atlantic waters during warm summer months.',
-      },
-    },
-    priceRangeMAD: { min: 75, max: 130, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Besugo / بيسوغو / Pagel (طنجة، العرائش، القصر الصغير)",
-    "centreAtlantic": "الباجو / الغزال / Pageot Rouge (الدار البيضاء، أسفي)",
-    "southSoussSahara": "ورغل / Werghel / باجو الجنوب (سيدي إفني، بوجدور)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 45,
-        "max": 75,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 75,
-        "max": 130,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 11,
-        "max": 17,
-        "unit": "kg",
-        "referenceMarket": "Mercamadrid & Rungis"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 105,
-    "proteinGrams": 19.8,
-    "lipidsGrams": 2.5,
-    "omega3Mg": 550,
-    "vitaminD_mcg": 2,
-    "vitaminB12_mcg": 2.6,
-    "iodine_mcg": 70,
-    "selenium_mcg": 38,
-    "phosphorus_mg": 220,
-    "calcium_mg": 32,
-    "iron_mg": 0.8,
-    "zinc_mg": 0.7,
-    "magnesium_mg": 29,
-    "potassium_mg": 350,
-    "healthHighlights": {
-        "ar": [
-            "لحم وردي شهي سهل الامتصاص مناسب لجميع الفئات العمرية",
-            "غني باليود والفسفور لتنشيط الذاكرة والقدرات الذهنية",
-            "أحماض دهنية أوميغا 3 تحافظ على مرونة الشرايين"
-        ],
-        "fr": [
-            "Chair fine et rosée hautement digestible pour toute la famille",
-            "Richesse en iode et phosphore stimulant la concentration",
-            "Acides gras Oméga-3 préservant la souplesse artérielle"
-        ],
-        "en": [
-            "Delicate pink flesh effortlessly digested across all ages",
-            "Rich in iodine and phosphorus boosting mental acuity and focus",
-            "Omega-3 fatty acids preserving arterial elasticity"
-        ]
-    }
-},
-    culinaryProfile: {
-      flavor: 'sweet',
-      texture: 'tender',
-      bonesDifficulty: 'low',
-      bestCookingMethods: ['four', 'tagine'],
-    },
-    freshnessKeys: {
-      ar: ['لون وردي ياقوتي برّاق مع بريق فضي على البطن', 'عيون صافية خالية من أي غشاوة', 'خياشيم بلون الكرز الأحمر'],
-      fr: ['Robe rose carminée brillante avec reflets argentés', 'Oeil limpide sans voile terne', 'Ouïes couleur cerise'],
-      en: ['Brilliant carmine pink coat with silvery flanks', 'Clear pupil free of cloudiness', 'Deep cherry-red gills'],
-    },
-    description: {
-      ar: 'سمك نبيل بلونه الوردي الجذاب ولحمه الأبيض الطري الخالي من الدهون الزائدة. يطهى في الفرن مع شرمولة خفيفة وزيت العود وشرائح الطماطم.',
-      fr: 'Poisson noble réputé pour sa chair douce et fondante. Magnifié au four à la marocaine avec tomates fraîches, huile d’olive et citron confit.',
-      en: 'Noble pink sea bream adored for its succulent, delicate white meat. Baked whole in the oven draped in fresh tomatoes, olive oil, and preserved lemon.',
-    },
-    imageUrl: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Pagellus_erythrinus.jpg/1200px-Pagellus_erythrinus.jpg',
-    audioPhonetic: 'Ba-jo',
-    recommendedRecipeIds: ['pageot-royal-au-four', 'tagine-l7ot-khodra'],
-  },
-  {
-    id: 'rouget',
-    nameDarijaArabic: 'الروجي',
-    nameDarijaLatin: 'Rouji',
-    nameFrench: 'Rouget-barbet',
-    nameEnglish: 'Red Mullet',
-    scientificName: 'Mullus surmuletus',
-    category: 'poisson_blanc',
-    coast: 'both',
-    mainPorts: ['Al Hoceima', 'Nador', 'Tanger', 'Larache', 'Mehdia', 'Essaouira'],
-    seasonality: {
-      peakMonths: [6, 7, 8, 9, 10, 11],
-      description: {
-        ar: 'موسم الصيف والخريف هو الأفضل لتذوق الروجي بنكهته الغنية.',
-        fr: 'Plein éclat estival et automnal, chair parfumée et fondante.',
-        en: 'Summer through autumn delivers intensely flavorful, aromatic red mullets.',
-      },
-    },
-    priceRangeMAD: { min: 80, max: 140, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Salmonete / سالمونيتي دي روكا (طنجة، الناظور، الحسيمة)",
-    "centreAtlantic": "الروجي الصخري / Rouget-Barbet (الدار البيضاء، أسفي)",
-    "southSoussSahara": "سلطان الحوت / أزمار (أكادير، الداخلة)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 50,
-        "max": 80,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 80,
-        "max": 140,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 14,
-        "max": 22,
-        "unit": "kg",
-        "referenceMarket": "Gastronomie française & espagnole"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 117,
-    "proteinGrams": 19.4,
-    "lipidsGrams": 3.9,
-    "omega3Mg": 820,
-    "vitaminD_mcg": 3,
-    "vitaminB12_mcg": 3.8,
-    "iodine_mcg": 85,
-    "selenium_mcg": 46,
-    "phosphorus_mg": 240,
-    "calcium_mg": 40,
-    "iron_mg": 1.2,
-    "zinc_mg": 0.9,
-    "magnesium_mg": 32,
-    "potassium_mg": 360,
-    "healthHighlights": {
-        "ar": [
-            "نكهة يودية عميقة ومحتوى استثنائي من فيتامين B12 المنشط",
-            "غني بالحديد العضوي وفيتامين D لحماية العظام وتجديد الدم",
-            "أوميغا 3 عالية تمنح اللحم مذاقاً فاخراً ومنافع قلبية متقدمة"
-        ],
-        "fr": [
-            "Goût iodé raffiné avec un apport tonifiant en vitamine B12",
-            "Riche en fer biodisponible et vitamine D protectrice des os",
-            "Teneur élevée en Oméga-3 alliant gastronomie et bienfaits vasculaires"
-        ],
-        "en": [
-            "Deep iodized gourmet flavor paired with invigorating Vitamin B12",
-            "Rich in bioavailable iron and bone-protecting Vitamin D",
-            "Generous Omega-3 content merging epicurean pleasure with heart health"
-        ]
-    }
-},
-    culinaryProfile: {
-      flavor: 'rich',
-      texture: 'tender',
-      bonesDifficulty: 'medium',
-      bestCookingMethods: ['friture', 'four', 'grillade'],
-    },
-    freshnessKeys: {
-      ar: ['شاربان استشعاريان سليمين تحت الفك السفلي', 'قشور حمراء ذهبية رطبة لا تتساقط بسهولة', 'رائحة كبد البحر العطرية المميزة'],
-      fr: ['Barbillon mentonnier bien intact sous la mâchoire', 'Écailles rougeoyantes et fermement attachées', 'Parfum marin raffiné'],
-      en: ['Intact sensory chin barbels under jaw', 'Glistening red-gold scales firmly anchored', 'Refined shellfish-like marine perfume'],
-    },
-    description: {
-      ar: 'يعتبر "بندق البحر" لنكهته العطرية الغنية التي تشبه طعم الكبد والقشريات. يقلى حبات كاملة بزيت الزيتون مع رشة كمون أو يخبز في ورق الطهي.',
-      fr: 'Surnommé la bécasse de mer pour son goût typé et raffiné. Cuisiné poêlé à l’huile d’olive avec ail doux et coriandre fraîche.',
-      en: 'Nicknamed the sea snipe for its intensely fragrant, liver-crustacean depth. Pan-crisped in Moroccan olive oil with crushed garlic and fresh cilantro.',
-    },
-    imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Mullus_surmuletus.jpg/1200px-Mullus_surmuletus.jpg',
-    audioPhonetic: 'Rou-jee',
-    recommendedRecipeIds: ['friture-mixte-marocaine', 'pageot-royal-au-four'],
-  },
-  {
-    id: 'merou',
-    nameDarijaArabic: 'الميرو',
-    nameDarijaLatin: 'Miro',
-    nameFrench: 'Mérou blanc / brun',
-    nameEnglish: 'Dusky Grouper',
-    scientificName: 'Epinephelus marginatus',
-    category: 'poisson_blanc',
-    coast: 'both',
-    mainPorts: ['Al Hoceima', 'Tanger', 'Cala Iris', 'Dakhla', 'Taghazout'],
-    seasonality: {
-      peakMonths: [6, 7, 8, 9],
-      description: {
-        ar: 'سمك نادر محمي يظهر بكثرة في المياه العميقة الصخرية صيفاً.',
-        fr: 'Poisson noble des profondeurs rocheuses, pêché en été.',
-        en: 'Prestigious deep-reef predator caught primarily during summer months.',
-      },
-    },
-    priceRangeMAD: { min: 120, max: 220, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Mero / ميرو / Cherna عملاقة (طنجة، الفنيدق، الجبهة)",
-    "centreAtlantic": "الميرو الصخري / Mérou Blanc / الهامور",
-    "southSoussSahara": "إيغير / Ighir / ميرو الجنوب (الداخلة، كاب بارباس)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 90,
-        "max": 150,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 150,
-        "max": 240,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 20,
-        "max": 35,
-        "unit": "kg",
-        "referenceMarket": "Haute gastronomie méditerranéenne"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 118,
-    "proteinGrams": 24.8,
-    "lipidsGrams": 1.8,
-    "omega3Mg": 420,
-    "vitaminD_mcg": 1.8,
-    "vitaminB12_mcg": 3.4,
-    "iodine_mcg": 70,
-    "selenium_mcg": 50,
-    "phosphorus_mg": 260,
-    "calcium_mg": 20,
-    "iron_mg": 1,
-    "zinc_mg": 1.1,
-    "magnesium_mg": 38,
-    "potassium_mg": 460,
-    "healthHighlights": {
-        "ar": [
-            "سيد الأسماك الصخرية بتركيز بروتيني عملاق (25 غرام) لبناء الألياف العضلية",
-            "غني بالبوتاسيوم والمغنيسيوم لتنظيم كهرباء القلب ومكافحة الشد العضلي",
-            "قليل الدهون المشبعة ومصدر رائع للكولاجين البحري المقوي للأوتار"
-        ],
-        "fr": [
-            "Roi des fonds rocheux avec un apport protéique colossal (25g)",
-            "Teneur élevée en potassium et magnésium prévenant les crampes musculaires",
-            "Très faible en graisses avec un collagène marin fortifiant les tendons"
-        ],
-        "en": [
-            "King of rocky sea bottoms packing a massive 25g protein concentration",
-            "Rich in potassium and magnesium preventing muscle cramps and fatigue",
-            "Very lean with valuable marine collagen reinforcing joint tendons"
-        ]
-    }
-},
-    culinaryProfile: {
-      flavor: 'rich',
-      texture: 'firm',
-      bonesDifficulty: 'low',
-      bestCookingMethods: ['tagine', 'four'],
-    },
-    freshnessKeys: {
-      ar: ['جلد سميك مرقط بني وزيتوني لامع', 'لحم أبيض ناصع سميك ومتماسك جداً', 'عيون كروية كبيرة براقة'],
-      fr: ['Peau épaisse mouchetée d’or et de brun sombre', 'Chair blanche très dense et compacte', 'Gros yeux sphériques étincelants'],
-      en: ['Thick mottled olive-gold and bronze skin', 'Dense, snow-white compact muscle tissue', 'Large brilliant spherical eyes'],
-    },
-    description: {
-      ar: 'زعيم الكهوف الصخرية البحرية وأفخر الأسماك المغربية على الإطلاق. لحمه طري ومكتنز يذوب في الفم ويصلح لأفخم طواجن المناسبات الكبرى.',
-      fr: 'Seigneur des grottes sous-marines et sommet du raffinement gastronomique marocain. Chair succulente et moelleuse, fleuron des tagines royaux.',
-      en: 'The legendary sovereign of undersea caves and pinnacle of Moroccan seafood luxury. Luscious, gelatin-rich meat crafted into celebratory royal tagines.',
-    },
-    imageUrl: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Epinephelus_marginatus.jpg/1200px-Epinephelus_marginatus.jpg',
-    audioPhonetic: 'Mee-ro',
-    recommendedRecipeIds: ['tagine-l7ot-khodra', 'pageot-royal-au-four'],
-  },
-  {
-    id: 'bar-loup',
-    nameDarijaArabic: 'الدرعي / اللوبين',
-    nameDarijaLatin: 'Dr3i / Loubine',
-    nameFrench: 'Bar européen / Loup de mer',
-    nameEnglish: 'European Seabass',
-    scientificName: 'Dicentrarchus labrax',
-    category: 'poisson_blanc',
-    coast: 'both',
-    mainPorts: ['Moulay Bousselham', 'Oualidia', 'Dakhla', 'Larache', 'Tanger', 'Agadir'],
-    seasonality: {
-      peakMonths: [10, 11, 12, 1, 2, 3],
-      description: {
-        ar: 'موسم الخريف والشتاء في مصبات الأنهار وبحيرات الوليدية والداخلة.',
-        fr: 'Saison d’automne et hiver dans les estuaires et lagunes marocaines.',
-        en: 'Autumn and winter season around coastal lagoons, estuaries, and ocean beaches.',
-      },
-    },
-    priceRangeMAD: { min: 90, max: 160, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Lubina / لوبينا مياه البوغاز (أصيلة، مارينا سمير)",
-    "centreAtlantic": "الدرعي / اللوبين / Drâa (المهدية، شواطئ سلا، الوليدية)",
-    "southSoussSahara": "أغيد / Aghed / درعي رملي (شاطئ أخفنير، وادي الشبيكة)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 55,
-        "max": 90,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 90,
-        "max": 150,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 13,
-        "max": 21,
-        "unit": "kg",
-        "referenceMarket": "Mercamadrid & France"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 97,
-    "proteinGrams": 18.4,
-    "lipidsGrams": 2,
-    "omega3Mg": 710,
-    "vitaminD_mcg": 2.1,
-    "vitaminB12_mcg": 2.7,
-    "iodine_mcg": 65,
-    "selenium_mcg": 41,
-    "phosphorus_mg": 215,
-    "calcium_mg": 25,
-    "iron_mg": 0.7,
-    "zinc_mg": 0.8,
-    "magnesium_mg": 30,
-    "potassium_mg": 340,
-    "healthHighlights": {
-        "ar": [
-            "سمك رياضي مفترس يتميز بلحم متماسك وسهل الهضم منخفض الكوليسترول",
-            "غني بالأوميغا 3 المفيدة لتقوية الذاكرة والوقاية من السكتات القلبية",
-            "سعرات معتدلة مناسبة جداً للوجبات الخفيفة الصحية وعشاق اللياقة"
-        ],
-        "fr": [
-            "Poisson de chasse à la chair ferme, digeste et pauvre en cholestérol",
-            "Riche en acides gras Oméga-3 favorisant la mémoire et la santé artérielle",
-            "Apport calorique modéré idéal pour l’alimentation santé et minceur"
-        ],
-        "en": [
-            "Agile predatory fish with firm, easy-to-digest low-cholesterol flesh",
-            "High Omega-3 levels boosting memory and cardiovascular resilience",
-            "Moderate calorie density perfectly suited for health and fitness lifestyles"
-        ]
-    }
-},
-    culinaryProfile: {
-      flavor: 'sweet',
-      texture: 'flaky',
-      bonesDifficulty: 'low',
-      bestCookingMethods: ['four', 'grillade', 'tagine'],
-    },
-    freshnessKeys: {
-      ar: ['قشور فضية لامعة تشبه المرآة الصقيلة', 'زعانف شوكية قوية وسليمة', 'لحم صلب ومرن'],
-      fr: ['Robe argentée étincelante sans ternissure', 'Nageoires dorsales rigides et intactes', 'Fermeté exemplaire au toucher'],
-      en: ['Mirror-like silvery metallic reflections', 'Crisp, intact spiny dorsal fins', 'Superb resilience under finger touch'],
-    },
-    description: {
-      ar: 'سمك رياضي شجاع يعيش عند تلاقي الأمواج بالشواطئ. لحمه أبيض نقي ذو نكهة بحرية عذبة، يطهى كاملاً في الفرن بالملح الصخري أو بالشرمولة.',
-      fr: 'Poisson combatif des vagues de l’Atlantique. Sa chair blanche et floconneuse est sublimée en croûte de sel marin ou rôtie avec des herbes fraîches.',
-      en: 'Dynamic gamefish prized in Moroccan coastal lagoons. Pure white, flaky flesh celebrated when roasted whole in a sea-salt crust or with lemon herbs.',
-    },
-    imageUrl: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Dicentrarchus_labrax.jpg/1200px-Dicentrarchus_labrax.jpg',
-    audioPhonetic: 'Dr-ee / Lou-bine',
-    recommendedRecipeIds: ['dorade-royale-au-four', 'tagine-l7ot-khodra'],
-  },
-  {
-    id: 'chinchard',
-    nameDarijaArabic: 'الشرن',
-    nameDarijaLatin: 'Chren',
-    nameFrench: 'Chinchard commun',
-    nameEnglish: 'Atlantic Horse Mackerel',
-    scientificName: 'Trachurus trachurus',
-    category: 'poisson_bleu',
-    coast: 'both',
-    mainPorts: ['Safi', 'Essaouira', 'Agadir', 'Casablanca', 'Al Hoceima', 'Nador'],
-    seasonality: {
-      peakMonths: [4, 5, 6, 7, 8, 9],
-      description: {
-        ar: 'متوفر بكثرة وبأسعار شعبية طوال فصلي الربيع والصيف.',
-        fr: 'Abondant et très accessible du printemps à la fin de l’été.',
-        en: 'Plentiful and wallet-friendly throughout spring and late summer.',
-      },
-    },
-    priceRangeMAD: { min: 15, max: 35, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Jurel / خوريل (طنجة، الجبهة، الفنيدق)",
-    "centreAtlantic": "الشرن / Chrene أطلسي (الدار البيضاء، المهدية، الجديدة)",
-    "southSoussSahara": "تاوريكت / الشرن الأصفر (طانطان، طرفاية، العيون)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 8,
-        "max": 18,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 18,
-        "max": 35,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 3.5,
-        "max": 6.5,
-        "unit": "kg",
-        "referenceMarket": "Espagne & Afrique de l’Ouest"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 114,
-    "proteinGrams": 19.8,
-    "lipidsGrams": 3.8,
-    "omega3Mg": 920,
-    "vitaminD_mcg": 3.5,
-    "vitaminB12_mcg": 5.2,
-    "iodine_mcg": 50,
-    "selenium_mcg": 48,
-    "phosphorus_mg": 230,
-    "calcium_mg": 45,
-    "iron_mg": 1.5,
-    "zinc_mg": 1,
-    "magnesium_mg": 32,
-    "potassium_mg": 360,
-    "healthHighlights": {
-        "ar": [
-            "سمك أزرق شعبي بقيمة غذائية مذهلة تضاهي أغلى الأسماك البحرية",
-            "تركيز قوي من أوميغا 3 والحديد لمكافحة فقر الدم وتنشيط الدورة الدموية",
-            "فيتامين B12 وفيتامين D بأسعار اقتصادية في متناول جميع العائلات"
-        ],
-        "fr": [
-            "Poisson bleu économique avec une densité nutritionnelle remarquable",
-            "Teneur élevée en Oméga-3 et fer luttant contre l’anémie",
-            "Richesse accessible en vitamines D et B12 pour toute la famille"
-        ],
-        "en": [
-            "Affordable blue fish matching the nutritional prestige of expensive species",
-            "Potent Omega-3 and iron synergy combating anemia and fatigue",
-            "Cost-effective powerhouse of Vitamins D and B12 for everyday wellbeing"
-        ]
-    }
-},
-    culinaryProfile: {
-      flavor: 'rich',
-      texture: 'firm',
-      bonesDifficulty: 'medium',
-      bestCookingMethods: ['grillade', 'friture', 'tagine'],
-    },
-    freshnessKeys: {
-      ar: ['الخط الجانبي الشوكي بارز وقوي', 'لون أزرق مخضر براق على الظهر', 'خياشيم حمراء طرية'],
-      fr: ['Ligne latérale d’écussons osseux bien nette', 'Dos vert-bleuté irisé', 'Ouïes rouge carmin fraîches'],
-      en: ['Sharp bony scutes along the lateral line', 'Iridescent blue-green dorsal surface', 'Bright carmine moist gills'],
-    },
-    description: {
-      ar: 'سمك شعبي بامتياز في أسواق السمك المغربية. غني بأحماض أوميغا 3 والدهون الصحية، يشوى على الجمر مع الملح والكمون وعصرة حامض.',
-      fr: 'Poisson populaire très apprécié au Maroc. Riche en nutriments, délicieux grillé entier sur charbon de bois avec cumin et gros sel.',
-      en: 'Popular staple across Moroccan fish markets. Exceptionally rich in healthy omega fatty acids, roasted over charcoal with cumin and coarse sea salt.',
-    },
-    imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Trachurus_trachurus.jpg/1200px-Trachurus_trachurus.jpg',
-    audioPhonetic: 'Chr-en',
-    recommendedRecipeIds: ['sardine-mechwi-grillade', 'friture-mixte-marocaine'],
-  },
-  {
-    id: 'maquereau',
-    nameDarijaArabic: 'الكابايلا',
-    nameDarijaLatin: 'Kabayla',
-    nameFrench: 'Maquereau commun',
-    nameEnglish: 'Atlantic Mackerel',
-    scientificName: 'Scomber scombrus',
-    category: 'poisson_bleu',
-    coast: 'both',
-    mainPorts: ['Safi', 'Essaouira', 'Agadir', 'Larache', 'Tanger', 'Al Hoceima'],
-    seasonality: {
-      peakMonths: [3, 4, 5, 6, 7, 8, 9],
-      description: {
-        ar: 'موسم الهجرة والوفرة في الربيع والصيف.',
-        fr: 'Haute saison printanière et estivale, chair grasse et nutritive.',
-        en: 'Prime spring and summer schools migrating along Atlantic coasts.',
-      },
-    },
-    priceRangeMAD: { min: 15, max: 30, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Caballa / كابايا الشمالية (طنجة، تطوان، الحسيمة)",
-    "centreAtlantic": "الكابايلا / Kabayla (أسفي، الصويرة، سلا، المهدية)",
-    "southSoussSahara": "تاسارغالت / سمك الإسقمري (أكادير، سيدي إفني)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 7,
-        "max": 15,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 15,
-        "max": 30,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 3,
-        "max": 5.5,
-        "unit": "kg",
-        "referenceMarket": "Marchés de conserve d’Europe"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 205,
-    "proteinGrams": 18.6,
-    "lipidsGrams": 13.9,
-    "omega3Mg": 2500,
-    "vitaminD_mcg": 16.1,
-    "vitaminB12_mcg": 8.7,
-    "iodine_mcg": 50,
-    "selenium_mcg": 44,
-    "phosphorus_mg": 240,
-    "calcium_mg": 15,
-    "iron_mg": 1.6,
-    "zinc_mg": 0.9,
-    "magnesium_mg": 33,
-    "potassium_mg": 350,
-    "healthHighlights": {
-        "ar": [
-            "بطل العالم في الأوميغا 3 وفيتامين D3 (16.1 ميكروغرام = 100% من الاحتياج اليومي)",
-            "يقوي الجهاز المناعي ويحمي الشرايين من التصلب والجلطات",
-            "يحسن الحالة المزاجية والوظائف العصبية بفضل الأحماض الدهنية الأساسية"
-        ],
-        "fr": [
-            "Champion absolu des Oméga-3 et de la vitamine D3 (100% des besoins quotidiens)",
-            "Renforce l’immunité et prévient l’athérosclérose vasculaire",
-            "Soutient l’humeur et la transmission synaptique cérébrale"
-        ],
-        "en": [
-            "World champion in natural Omega-3 and Vitamin D3 (100% of daily requirement)",
-            "Bolsters immunity and actively shields arteries from plaque buildup",
-            "Elevates mood and synaptic transmission through concentrated essential fatty acids"
-        ]
-    }
-},
-    culinaryProfile: {
-      flavor: 'rich',
-      texture: 'tender',
-      bonesDifficulty: 'medium',
-      bestCookingMethods: ['four', 'grillade', 'tagine'],
-    },
-    freshnessKeys: {
-      ar: ['تموجات النمر الزرقاء والخضراء براقة وحادة التباين', 'بطن أبيض لؤلؤي لا يحمل أي بقع', 'عيون دائرية واضحة'],
-      fr: ['Zébrures tigrées vert et bleu acier très contrastées', 'Ventre blanc nacré immaculé', 'Oeil clair et vif'],
-      en: ['Sharp tiger-like blue and metallic green stripes', 'Pristine pearly white abdomen', 'Crisp, bright circular eyes'],
-    },
-    description: {
-      ar: 'سمك دهني لذيذ ومفيد جداً للقلب. يطهى في المغرب في طواجن الخضار أو يشرمل ويدخل للفرن مع شرائح الليمون وورق الرند ومطيشة.',
-      fr: 'Poisson bleu aux vertus cardiovasculaires reconnues. Se prête à merveille aux tagines mijotés, en papillote au four ou mariné au vinaigre façon escabèche.',
-      en: 'Hearty blue fish cherished for its rich, satisfying character. Baked in the oven with sliced onions, bay leaves, vine tomatoes, and Moroccan spices.',
-    },
-    imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Scomber_scombrus.jpg/1200px-Scomber_scombrus.jpg',
-    audioPhonetic: 'Ka-bay-la',
-    recommendedRecipeIds: ['tagine-l7ot-khodra', 'sardine-mechwi-grillade'],
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Crevette_rose_du_large_%28Parapenaeus_longirostris%29_%28Ifremer_00682-79444_-_32243%29.jpg/800px-Crevette_rose_du_large_%28Parapenaeus_longirostris%29_%28Ifremer_00682-79444_-_32243%29.jpg',
+    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Crevette_rose_du_large_%28Parapenaeus_longirostris%29_%28Ifremer_00682-79444_-_32243%29.jpg/800px-Crevette_rose_du_large_%28Parapenaeus_longirostris%29_%28Ifremer_00682-79444_-_32243%29.jpg',
+    audioPhonetic: 'Kro-vette / Gam-bas',
+    recommendedRecipeIds: ['crevettes-pil-pil', 'pastilla-fruits-de-mer-royale'],
   },
   {
     id: 'anchois',
-    nameDarijaArabic: 'الأنشوبة / الشطون',
-    nameDarijaLatin: 'Anchouba / Chtoun',
-    nameFrench: 'Anchois européen',
+    nameDarijaArabic: 'شطون',
+    nameDarijaLatin: 'Chtoun',
+    nameFrench: 'Anchois commun',
     nameEnglish: 'European Anchovy',
     scientificName: 'Engraulis encrasicolus',
     category: 'poisson_bleu',
     coast: 'both',
-    mainPorts: ['Al Hoceima', 'Nador', 'Larache', 'Tanger', 'Agadir', 'Essaouira'],
+    mainPorts: ['Al Hoceima', 'Nador', 'Larache', 'Safi', 'Essaouira'],
+    regionalNames: {
+      chamal: ['بوكيرون (Boquerón)', 'أنشوا (Anchoa)', 'شطون الحسيمة وطنجة'],
+      centre: ['شطون (Chtoun)', 'سردين رقيق', 'شطون الساحل'],
+      sud: ['شطون سوسي', 'أنشوا الصويرة وأكادير', 'إيسلمان إيمزيلن'],
+    },
+    pricing: {
+      trend: 'stable',
+      past6MonthsMAD: [20, 25, 22, 24, 25, 20],
+      currentSpotMAD: 22,
+      forecastFutureMAD: 20,
+      globalExportUSD: {
+        min: 3.0,
+        max: 5.5,
+        avg: 4.2,
+        hub: 'Mercabarna (Barcelone) & Gênes (Italie)',
+      },
+      driversAr: 'إنتاج وفير لمراكب السردين والشطون المتوسطية مع توازن بين استهلاك المارشي ومصانع التمليح بالخل والزيت.',
+      driversFr: 'Abondance des captures côtières équilibrée entre le marché frais et les conserveries de salaison.',
+      driversEn: 'Healthy coastal landings balancing domestic fresh souk retail and premium vinegar-curing canneries.',
+    },
+    nutrition: {
+      calories: 131,
+      proteinGrams: 20.4,
+      lipidsGrams: 4.8,
+      omega3Mg: 1478,
+      vitaminD_IU: 69,
+      vitaminB12_mcg: 0.9,
+      calciumMg: 147,
+      ironMg: 3.3,
+      phosphorusMg: 174,
+      seleniumMcg: 36.5,
+      iodineMcg: 45.0,
+      zincMg: 1.7,
+      healthBenefits: {
+        ar: [
+          'جرعة مكثفة من دهون أوميغا 3 لحماية صمامات القلب والوقاية من الجلطات.',
+          'نسبة عالية من الكالسيوم القابل للامتصاص الكامل عند أكل الشطون المقلي بحسكه الرقيق.',
+          'عنصر الحديد البحري المفيد جداً لزيادة الهيموغلوبين والتخلص من الإرهاق.',
+          'مستوى زئبق منخفض جداً نظراً لصغر حجم السمكة وموقعها في أسفل السلسلة الغذائية.',
+        ],
+        fr: [
+          'Charge colossale en acides gras oméga-3 cardioprotecteurs.',
+          'Calcium hautement biodisponible grâce aux fines arêtes comestibles.',
+          'Teneur exceptionnelle en fer héminique antianémique.',
+          'Très faible concentration en métaux lourds et mercure.',
+        ],
+        en: [
+          'Massive concentration of EPA & DHA Omega-3 shielding arterial and cardiovascular tissue.',
+          'Bioavailable dietary calcium provided by the delicate edible soft bones.',
+          'High heme iron density boosting oxygen delivery and red blood cell count.',
+          'Clean low-trophic fish naturally devoid of heavy metal accumulation.',
+        ],
+      },
+    },
+    cleaningTutorial: {
+      methodNameAr: 'تنياد الشطون بالخلال وفتحه فيليه ملاصق',
+      methodNameFr: 'Filetage express de l’anchois en papillon au doigt',
+      methodNameEn: 'Fast Butterfly Filleting of Anchovies',
+      difficulty: 'easy',
+      prepTimeMinutes: 10,
+      toolsNeededAr: ['وعاء ماء بارد', 'خل أبيض وملح', 'مصفاة صغيرة'],
+      toolsNeededFr: ['Bol d’eau fraîche', 'Vinaigre blanc et sel', 'Petite passoire'],
+      toolsNeededEn: ['Bowl of cold water', 'White vinegar & sea salt', 'Small colander'],
+      steps: [
+        {
+          stepNumber: 1,
+          titleAr: 'سحب الرأس والأحشاء بحركة إصبع واحدة',
+          titleFr: 'Étêtage par pincement',
+          titleEn: 'Snap & Pull Guts',
+          instructionAr: 'اضغط خلف الرأس بالإبهام والسبابة واسحب مائلاً نحو البطن؛ سيخرج الرأس حاملاً معه كل الأحشاء دون الحاجة لسكين.',
+          instructionFr: 'Pincer l’arrière des ouïes et tirer : la tête s’enlève en emportant le viscère entier.',
+          instructionEn: 'Pinch behind the gills and pull downward; the head detaches with all digestive entrails smoothly.',
+          kessalTipAr: 'حركة سريعة بالإصبعين تجعلك تنقي كيلوغراماً كاملاً في أقل من عشر دقائق.',
+          kessalTipFr: 'Ce geste traditionnel permet d’éviscérer un kilo d’anchois en moins de 10 minutes.',
+          kessalTipEn: 'This swift finger pinch allows preparing a whole kilogram in under ten minutes.',
+        },
+        {
+          stepNumber: 2,
+          titleAr: 'نزع السلسول بحركة الإبهام اللولبية',
+          titleFr: 'Retrait de l’arête centrale',
+          titleEn: 'Thumb Slide Bone Removal',
+          instructionAr: 'مرر إبهامك على طول السلسول الشفاف من الأعلى نحو الأسفل واقطعه عند قاعدة الذيل لتترك الفيليهات ملتصقة كالفراشة.',
+          instructionFr: 'Glisser le pouce le long de l’arête et pincer à la queue pour garder les deux filets unis.',
+          instructionEn: 'Slide your thumb gently beneath the spine and snap it at the tail base to keep the fillets linked.',
+          kessalTipAr: 'اترك الذيل متصلاً إذا أردت تحضير الشطون المقرمش المزدوج بالشرمولة الحارة.',
+          kessalTipFr: 'Garder la queue unie permet de frire les anchois en éventail croustillant.',
+          kessalTipEn: 'Leaving the tail attached lets you fry the anchovies in gorgeous crispy butterflied pairs.',
+        },
+      ],
+    },
     seasonality: {
       peakMonths: [4, 5, 6, 7, 8, 9],
       description: {
-        ar: 'فصل الصيف هو قمة صيد الشطون في خليج الحسيمة والعرائش.',
-        fr: 'Apogée estivale dans la baie d’Al Hoceima et Larache.',
-        en: 'Summer bounty, especially famous in the Bay of Al Hoceima and Larache.',
+        ar: 'موسم الصيف والربيع هو ذروة صيد الشطون في البحر الأبيض المتوسط والأطلسي الشمالي.',
+        fr: 'Période estivale très riche avec des poissons luisants et charnus.',
+        en: 'Spring and summer offer prime plump hauls across Al Hoceima, Larache, and Tangier.',
       },
     },
-    priceRangeMAD: { min: 20, max: 45, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Boquerón / بوقيرون أندلسي (طنجة، المضيق، الحسيمة)",
-    "centreAtlantic": "الشطون / Chteba / الأنشوبة (الدار البيضاء، الجديدة، أسفي)",
-    "southSoussSahara": "شطوبة الصحراء / تيميست (طانطان، بوجدور)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 15,
-        "max": 30,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 30,
-        "max": 55,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 5.5,
-        "max": 9,
-        "unit": "kg",
-        "referenceMarket": "Conserveries Espagne & Italie"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 131,
-    "proteinGrams": 20.4,
-    "lipidsGrams": 4.8,
-    "omega3Mg": 1480,
-    "vitaminD_mcg": 1.7,
-    "vitaminB12_mcg": 3.5,
-    "iodine_mcg": 55,
-    "selenium_mcg": 36.5,
-    "phosphorus_mg": 250,
-    "calcium_mg": 147,
-    "iron_mg": 3.3,
-    "zinc_mg": 1.7,
-    "magnesium_mg": 41,
-    "potassium_mg": 380,
-    "healthHighlights": {
-        "ar": [
-            "غني بالكالسيوم والحديد لدعم صحة الدم وتقوية عظام الأطفال والبالغين",
-            "تركيز قوي من دهون EPA و DHA المفيدة لصحة شبكية العين والدماغ",
-            "سمك نقي من الملوثات بفضل صغر حجمه وقصر دورة حياته في البحر"
-        ],
-        "fr": [
-            "Riche en calcium et fer pour la vitalité sanguine et osseuse",
-            "Concentré en EPA/DHA protégeant la rétine et la mémoire",
-            "Poisson pur et sain sans accumulation de métaux lourds"
-        ],
-        "en": [
-            "Rich in calcium and iron fortifying blood health and bone matrix",
-            "Packed with EPA and DHA protecting retinal acuity and cognitive health",
-            "Clean ocean fish naturally free of heavy metal accumulation"
-        ]
-    }
-},
     culinaryProfile: {
       flavor: 'rich',
       texture: 'tender',
       bonesDifficulty: 'low',
-      bestCookingMethods: ['friture', 'four'],
+      bestCookingMethods: ['friture', 'tagine'],
     },
     freshnessKeys: {
-      ar: ['جسم فضي مائل للأزرق لامع ومستقيم', 'رائحة منعشة كأمواج الشاطئ', 'بطن سليم غير متمزق'],
-      fr: ['Ligne argentée latérale brillante', 'Odeur saline fraîche', 'Ventre intact sans déchirure'],
-      en: ['Silvery iridescent side band', 'Clean seaside breeze odor', 'Intact belly with no ruptures'],
+      ar: ['بطن مشدود غير مفتوح ولا مفرقع', 'خط أزرق فضي لامع يمتد على جانبي السمكة', 'رائحة البحر النقي خالية من أي زنخ'],
+      fr: ['Ventre ferme et non éclaté', 'Ligne latérale bleu-argentée éclatante', 'Odeur fraîche marine sans relent d’huile rance'],
+      en: ['Intact firm belly with zero rupture', 'Luminous silver-blue lateral band shimmering in light', 'Clean ocean aroma with no rancidity'],
     },
     description: {
-      ar: 'سمك صغير الحجم ذو نكهة عميقة. يُقلى في باقات مرتبطة بالذيل للحصول على قرمشة لا تقاوم، أو يُخلل بزيت الزيتون والثوم والخل.',
-      fr: 'Petit poisson gorgé de soleil. Délicieux frit en éventails dorés croustillants ou mariné au vinaigre, ail et huile d’olive.',
-      en: 'Petite fish with profound depth of flavor. Often grouped by their tails into bouquets, dusted in semolina, and deep-fried to crispy perfection.',
+      ar: 'شطون السواحل المغربية هو أمير الأسماك الزيتية الصغيرة، يقلى مقرمشاً بالسميدة بعد تتبيله بالشرمولة والخل، أو يرقّد في زيت الزيتون والثوم والحامض على الطريقة الطنجاوية.',
+      fr: 'L’anchois marocain est un trésor culinaire, frit croustillant en éventail à la semoule ou mariné au vinaigre et à l’huile d’olive comme à Tanger.',
+      en: 'Moroccan anchovies are prized small pelagics, delicious when dusted in semolina and flash-fried, or marinated Tangier-style in vinegar and olive oil.',
     },
-    imageUrl: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Engraulis_encrasicolus.jpg/1200px-Engraulis_encrasicolus.jpg',
-    audioPhonetic: 'An-chou-ba / Chtoun',
-    recommendedRecipeIds: ['friture-mixte-marocaine', 'sardines-mchermline'],
-  },
-  {
-    id: 'raie',
-    nameDarijaArabic: 'الراية',
-    nameDarijaLatin: 'Raya',
-    nameFrench: 'Raie bouclée',
-    nameEnglish: 'Thornback Ray / Skate',
-    scientificName: 'Raja clavata',
-    category: 'cartilagineux',
-    coast: 'both',
-    mainPorts: ['Casablanca', 'Mehdia', 'Safi', 'Essaouira', 'Agadir', 'Tanger'],
-    seasonality: {
-      peakMonths: [11, 12, 1, 2, 3, 4],
-      description: {
-        ar: 'فصل الشتاء والربيع هما أفضل أوقات صيد الراية في مياه الأطلسي.',
-        fr: 'Saison hivernale et printanière optimale sur la côte atlantique.',
-        en: 'Prime winter and spring seasons in Moroccan Atlantic continental shelves.',
-      },
-    },
-    priceRangeMAD: { min: 40, max: 75, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Raya / رايا (المتوسط، كاب سبارتيل، طنجة)",
-    "centreAtlantic": "الراية / جناح البحر / Raie (الدار البيضاء، المهدية، أسفي)",
-    "southSoussSahara": "تيفيرت / راية الرمال (الداخلة، طرفاية)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 20,
-        "max": 40,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 40,
-        "max": 70,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 6.5,
-        "max": 11,
-        "unit": "kg",
-        "referenceMarket": "Marchés de l’Atlantique nord"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 89,
-    "proteinGrams": 20.5,
-    "lipidsGrams": 0.7,
-    "omega3Mg": 220,
-    "vitaminD_mcg": 0.8,
-    "vitaminB12_mcg": 2.2,
-    "iodine_mcg": 60,
-    "selenium_mcg": 34,
-    "phosphorus_mg": 200,
-    "calcium_mg": 30,
-    "iron_mg": 0.8,
-    "zinc_mg": 0.9,
-    "magnesium_mg": 28,
-    "potassium_mg": 320,
-    "healthHighlights": {
-        "ar": [
-            "خالية تماماً من العظام الصلبة؛ أجنحتها مكونة من غضاريف نقية مغذية",
-            "بروتين خفيف عالي النقاء بأقل من 1% دهون مناسب لحميات التخسيس",
-            "غضاريفها غنية بالكوندرويتين والجيلاتين الطبيعي لصحة المفاصل"
-        ],
-        "fr": [
-            "Dépourvue d’arêtes dures, ailes composées de cartilage noble",
-            "Protéines ultra-pures à moins de 1% de graisses pour la minceur",
-            "Cartilage riche en chondroïtine naturelle préservant les articulations"
-        ],
-        "en": [
-            "Completely free of pin-bones; wings formed of noble edible cartilage",
-            "Ultra-pure protein with under 1% lipids perfect for lean diets",
-            "Cartilage naturally loaded with chondroitin protecting joint mobility"
-        ]
-    }
-},
-    culinaryProfile: {
-      flavor: 'sweet',
-      texture: 'tender',
-      bonesDifficulty: 'low',
-      bestCookingMethods: ['tagine', 'four'],
-    },
-    freshnessKeys: {
-      ar: ['خلو الجناح تماماً من أي رائحة أمونياك', 'لحم لزج برطوبة طبيعية بيضاء', 'قوام طري مشدود'],
-      fr: ['Absence totale d’odeur d’ammoniaque', 'Chair nacrée avec mucus protecteur clair', 'Texture gélatineuse et tendre'],
-      en: ['Zero traces of ammonia smell', 'Pearly cartilage with clean protective moisture', 'Supple, tender wing texture'],
-    },
-    description: {
-      ar: 'سمك غضروفي فريد خالي من الشوك العظمي. تُطهى أجنحتها في طاجين بالشرمولة الحارة وعصير الحامض والزيتون الأحمر، حيث يذوب اللحم بين الغضاريف.',
-      fr: "Poisson cartilagineux sans arêtes osseuses. Ses ailes fondent littéralement dans un tagine relevé à la chermoula, olives rouges et citron confit.",
-      en: 'Cartilaginous fish with no bones, only soft central fibers. Its wings melt into tender strips when simmered in zesty charmoula and cured red olives.',
-    },
-    imageUrl: 'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Raja_clavata.jpg/1200px-Raja_clavata.jpg',
-    audioPhonetic: 'Ra-ya',
-    recommendedRecipeIds: ['tagine-l7ot-khodra', 'merlan-au-four-charmoula'],
-  },
-  {
-    id: 'saint-pierre',
-    nameDarijaArabic: 'حوتة سيدنا موسى / الديك',
-    nameDarijaLatin: 'Ddik / Houtat Sidna Moussa',
-    nameFrench: 'Saint-Pierre',
-    nameEnglish: "John Dory / St Peter's Fish",
-    scientificName: 'Zeus faber',
-    category: 'poisson_blanc',
-    coast: 'both',
-    mainPorts: ['Tanger', 'Al Hoceima', 'Casablanca', 'Safi', 'Agadir'],
-    seasonality: {
-      peakMonths: [10, 11, 12, 1, 2, 3],
-      description: {
-        ar: 'سمك أعماق نبيل يظهر بكثرة في مواسم البرد.',
-        fr: 'Poisson noble d’eaux profondes très apprécié en hiver.',
-        en: 'Prestigious deep-water fish captured predominantly during colder months.',
-      },
-    },
-    priceRangeMAD: { min: 110, max: 200, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Pez de San Pedro / سان بيدرو (طنجة، العرائش)",
-    "centreAtlantic": "حوتة سيدنا موسى / الديك / Saint-Pierre (الدار البيضاء، أسفي)",
-    "southSoussSahara": "أم الشعور / الحوتة المباركة (الصويرة، أكادير، الداخلة)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 80,
-        "max": 140,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 140,
-        "max": 220,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 18,
-        "max": 32,
-        "unit": "kg",
-        "referenceMarket": "Rungis & Gastronomie européenne"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 95,
-    "proteinGrams": 19.8,
-    "lipidsGrams": 1.4,
-    "omega3Mg": 380,
-    "vitaminD_mcg": 1.5,
-    "vitaminB12_mcg": 2.5,
-    "iodine_mcg": 75,
-    "selenium_mcg": 40,
-    "phosphorus_mg": 210,
-    "calcium_mg": 25,
-    "iron_mg": 0.7,
-    "zinc_mg": 0.8,
-    "magnesium_mg": 27,
-    "potassium_mg": 330,
-    "healthHighlights": {
-        "ar": [
-            "لحم أرستقراطي أبيض فائق النعومة والصفاء بمذاق بحري راقٍ",
-            "قليل السعرات وغني بالفيتامينات والمعادن النادرة",
-            "يدعم الجهاز القلبي الوعائي ويمنح طاقة نظيفة بدون كولسترول ضار"
-        ],
-        "fr": [
-            "Chair aristocratique blanche d’une finesse gastronomique rare",
-            "Faible en calories et riche en oligo-éléments marins essentiels",
-            "Soutien cardiovasculaire et vitalité musculaire sans graisses superflues"
-        ],
-        "en": [
-            "Aristocratic white meat of exquisite culinary delicacy",
-            "Low calorie density loaded with essential marine micro-nutrients",
-            "Fosters cardiovascular wellbeing and clean muscular stamina"
-        ]
-    }
-},
-    culinaryProfile: {
-      flavor: 'sweet',
-      texture: 'tender',
-      bonesDifficulty: 'low',
-      bestCookingMethods: ['four', 'tagine'],
-    },
-    freshnessKeys: {
-      ar: ['البقعة السوداء الدائرية الشهيرة واضحة على جانبي الجسم', 'الزعانف الظهرية الطويلة الخيطية غير مكسورة', 'لحم صلب بلون أبيض ناصع'],
-      fr: ['Célèbre ocelle noire bien définie sur chaque flanc', 'Longs filaments dorsaux intacts', 'Chair dense et très blanche'],
-      en: ["The famous dark 'fingerprint' spot distinct on flanks", 'Intact long dorsal filaments', 'Firm, snow-white meat'],
-    },
-    description: {
-      ar: 'سمك أسطوري بلحمه الأبيض الفاخر الخفيف الذي يقارن بلحم الكركند. يطهى في الفرن مع زيت الزيتون البكر والزعفران الحر والليمون المخلل.',
-      fr: 'Poisson de légende à la chair délicate et savoureuse rivalisant avec le homard. Rôti au four avec safran pur de Taliouine et citron confit.',
-      en: 'Legendary delicacy with firm yet yielding flakes often compared to lobster. Roasted gently with Taliouine saffron, virgin olive oil, and cured lemon.',
-    },
-    imageUrl: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Zeus_faber_2.JPG/1200px-Zeus_faber_2.JPG',
-    audioPhonetic: 'Ddeek / Saint-Pierre',
-    recommendedRecipeIds: ['pageot-royal-au-four', 'tagine-l7ot-khodra'],
-  },
-  {
-    id: 'lotte',
-    nameDarijaArabic: 'الراسكاس / اللوط',
-    nameDarijaLatin: 'Lotte / Baudroie',
-    nameFrench: 'Baudroie commune / Lotte de mer',
-    nameEnglish: 'Monkfish / Anglerfish',
-    scientificName: 'Lophius piscatorius',
-    category: 'poisson_blanc',
-    coast: 'both',
-    mainPorts: ['Tanger', 'Larache', 'Casablanca', 'Safi', 'Al Hoceima', 'Agadir'],
-    seasonality: {
-      peakMonths: [11, 12, 1, 2, 3, 4],
-      description: {
-        ar: 'موسم الشتاء والربيع هو ذروة صيد اللوط في الأعماق.',
-        fr: 'Haute saison en hiver et début du printemps.',
-        en: 'Prime deep-trawling season throughout winter and early spring.',
-      },
-    },
-    priceRangeMAD: { min: 80, max: 140, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Rape / رابي (مضيق جبل طارق، طنجة، الحسيمة)",
-    "centreAtlantic": "اللوط / الراسكاس الأسود / Baudroie (الدار البيضاء، أسفي)",
-    "southSoussSahara": "أكراز / وحش القاع (الداخلة، طانطان، العيون)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 50,
-        "max": 85,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 85,
-        "max": 140,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 14,
-        "max": 24,
-        "unit": "kg",
-        "referenceMarket": "Marchés de gros français & espagnols"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 76,
-    "proteinGrams": 14.8,
-    "lipidsGrams": 1.5,
-    "omega3Mg": 260,
-    "vitaminD_mcg": 1,
-    "vitaminB12_mcg": 1.8,
-    "iodine_mcg": 65,
-    "selenium_mcg": 35,
-    "phosphorus_mg": 190,
-    "calcium_mg": 20,
-    "iron_mg": 0.5,
-    "zinc_mg": 0.6,
-    "magnesium_mg": 22,
-    "potassium_mg": 300,
-    "healthHighlights": {
-        "ar": [
-            "لحم ذيل اللوط خالٍ تماماً من الحسك وله قوام يشبه لحم الكركند الفاخر",
-            "من أخفض الأسماك في السعرات الحرارية (76 سعرة) مع نسبة دهون شبه منعدمة",
-            "رأسها وعظامها المركزية كنز لصنع أشهى حساء بحري مقوي للمناعة"
-        ],
-        "fr": [
-            "Queue de lotte sans aucune arête à texture proche de la langouste",
-            "L’un des poissons les plus légers du littoral (76 kcal) sans matières grasses",
-            "Base idéale pour des fumets et bouillons marins riches en minéraux"
-        ],
-        "en": [
-            "Boneless tail meat delivering a lobster-like culinary texture",
-            "Among the leanest ocean catches (76 kcal) with negligible fat",
-            "Exceptional base for mineral-rich restorative marine broths"
-        ]
-    }
-},
-    culinaryProfile: {
-      flavor: 'sweet',
-      texture: 'meaty',
-      bonesDifficulty: 'low',
-      bestCookingMethods: ['tagine', 'four', 'soup'],
-    },
-    freshnessKeys: {
-      ar: ['ذيل اللوط صلب ولحمه متماسك كالمطاط الطبيعي المرن', 'لون الجلد رمادي موحد وخالٍ من الاسوداد', 'خلوه من أي رائحة كريهة'],
-      fr: ['Queue de lotte très ferme et rebondie', 'Peau grisâtre uniforme', 'Odeur d’iode pure'],
-      en: ['Firm, bouncy monkfish tail that springs back immediately', 'Uniform healthy grey tone', 'Pure, refreshing iodine sea breeze aroma'],
-    },
-    description: {
-      ar: 'يطلق عليها في المطاعم "كركند الفقراء" لأن قوام لحمها يشبه لحم فواكه البحر الصلب. أفضل سمك لطاجين الخضار لأن لحمها لا يتفتت أبداً.',
-      fr: "Chair ferme et gélatineuse remarquable, souvent comparée à la langouste. Idéale pour les tagines mijotés car elle ne s'effrite jamais à la cuisson.",
-      en: "Prized for its firm, meaty texture reminiscent of lobster tail. The ultimate fish for Moroccan tagines as it never breaks down during slow simmering.",
-    },
-    imageUrl: 'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Lophius_piscatorius.jpg/1200px-Lophius_piscatorius.jpg',
-    audioPhonetic: 'Lotte / Baw-drway',
-    recommendedRecipeIds: ['tagine-l7ot-khodra', 'chorba-l7ot-marocaine'],
-  },
-  {
-    id: 'moules-bouzroug',
-    nameDarijaArabic: 'بوزروك',
-    nameDarijaLatin: 'Bouzroug',
-    nameFrench: 'Moule méditerranéenne / atlantique',
-    nameEnglish: 'Mediterranean Mussel',
-    scientificName: 'Mytilus galloprovincialis',
-    category: 'mollusque',
-    coast: 'both',
-    mainPorts: ['Essaouira', 'Taghazout', 'Oualidia', 'Imssouane', 'Al Hoceima', 'Mirleft'],
-    seasonality: {
-      peakMonths: [7, 8, 9, 10, 11],
-      description: {
-        ar: 'موسم الصيف والخريف هو وقت قطف بوزروك من الصخور الشاطئية.',
-        fr: 'Récolte estivale et automnale sur les rochers battus par la houle.',
-        en: 'Summer and autumn wild harvest on surf-swept rocky outcroppings.',
-      },
-    },
-    priceRangeMAD: { min: 25, max: 50, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Mejillones / ميخيونيس (كاب سبارتيل، مارتيل، الناظور)",
-    "centreAtlantic": "بوزروك / Bouzroug بلدي (الصويرة، تامري، إموران)",
-    "southSoussSahara": "تيفريت / صدف الصخور (ميرلفت، سيدي إفني، بوجدور)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 10,
-        "max": 20,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 20,
-        "max": 40,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 4,
-        "max": 8,
-        "unit": "kg",
-        "referenceMarket": "Espagne & France"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 86,
-    "proteinGrams": 11.9,
-    "lipidsGrams": 2.2,
-    "omega3Mg": 780,
-    "vitaminD_mcg": 1.1,
-    "vitaminB12_mcg": 12,
-    "iodine_mcg": 140,
-    "selenium_mcg": 56,
-    "phosphorus_mg": 240,
-    "calcium_mg": 33,
-    "iron_mg": 4,
-    "zinc_mg": 1.6,
-    "magnesium_mg": 34,
-    "potassium_mg": 320,
-    "healthHighlights": {
-        "ar": [
-            "قنبلة الحديد واليود وفيتامين B12 (500% من الاحتياج اليومي) لمحاربة الأنيميا والتعب",
-            "غني بالسيلينيوم والأوميغا 3 البحرية لدعم صحة القلب وتنشيط المناعة",
-            "صدفيات برية طبيعية غنية بالمعادن النادرة المفيدة لتوازن الهرمونات"
-        ],
-        "fr": [
-            "Concentré puissant en fer (4,0 mg), iode et vitamine B12 (500% des AJR)",
-            "Riche en sélénium antioxydant et acides gras protecteurs",
-            "Mollusque sauvage gorgé d’oligo-éléments marins revigorants"
-        ],
-        "en": [
-            "Potent reservoir of bioavailable iron (4.0 mg), iodine, and Vitamin B12 (500% DV)",
-            "Rich in antioxidant selenium and cardioprotective marine lipids",
-            "Wild ocean shellfish packed with invigorating trace elements"
-        ]
-    }
-},
-    culinaryProfile: {
-      flavor: 'rich',
-      texture: 'tender',
-      bonesDifficulty: 'low',
-      bestCookingMethods: ['tagine', 'soup', 'pastilla'],
-    },
-    freshnessKeys: {
-      ar: ['الصدفات مغلقة بإحكام أو تنغلق فور النقر عليها', 'رائحة أمواج المحيط النظيفة', 'ثقل الصدفة الدال على احتوائها على ماء البحر الطبيعي'],
-      fr: ['Coquilles fermées ou se refermant net au toucher', 'Odeur d’écume marine', 'Coquille lourde et pleine d’eau'],
-      en: ['Tightly closed shells that snap shut on tapping', 'Pristine ocean foam scent', 'Heavy weight signifying fresh sea liquor inside'],
-    },
-    description: {
-      ar: 'عشيق أهالي الصويرة وتغازوت. يُطهى بوزروك في طويجين صويري حار مع مطيشة محكوكة، الثوم، الفلفل الحار، والكمون مع زيت الزيتون المعصور.',
-      fr: "Trésor des rochers d’Essaouira et du Souss. Préparé en petit tagine mijoté à la sauce tomate épicée, ail, cumin et piment fort.",
-      en: "Beloved treasure of Essaouira and coastal Souss. Simmered into a fiery tomato-cumin tagine packed with garlic, fresh herbs, and spicy chili.",
-    },
-    imageUrl: 'https://images.unsplash.com/photo-1545671913-b89ac1b4ac10?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Mytilus_galloprovincialis_1.JPG/1200px-Mytilus_galloprovincialis_1.JPG',
-    audioPhonetic: 'Bouz-roug',
-    recommendedRecipeIds: ['tagine-bouzroug-essaouira', 'pastilla-l7ot-royale'],
-  },
-  {
-    id: 'huitres-dakhla',
-    nameDarijaArabic: 'المحار / لي كخيطخ',
-    nameDarijaLatin: 'L-M7ar / Huitres',
-    nameFrench: 'Huître creuse de Dakhla & Oualidia',
-    nameEnglish: 'Pacific Oyster (Dakhla / Oualidia)',
-    scientificName: 'Crassostrea gigas',
-    category: 'mollusque',
-    coast: 'atlantic',
-    mainPorts: ['Dakhla', 'Oualidia', 'Taghazout'],
-    seasonality: {
-      peakMonths: [9, 10, 11, 12, 1, 2, 3, 4],
-      description: {
-        ar: 'أشهر الأشهر الباردة هي الأفضل لتذوق محار خليج الداخلة وبحيرة الوليدية.',
-        fr: 'Saison reine des mois en « r » (septembre à avril) dans les parcs de Dakhla.',
-        en: 'Prime oyster season spanning September through April in the pristine Dakhla Bay.',
-      },
-    },
-    priceRangeMAD: { min: 6, max: 15, unit: 'piece' },
-    regionalNames: {
-    "northChamal": "Ostras / أوستراس (مارتيل، مارينا سمير)",
-    "centreAtlantic": "المحار / محار الوليدية الشهير (بحيرة الوليدية)",
-    "southSoussSahara": "محار خليج الداخلة النقي / L-M7ar (خليج وادي الذهب)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 40,
-        "max": 70,
-        "unit": "piece"
-    },
-    "retailMarketMAD": {
-        "min": 70,
-        "max": 130,
-        "unit": "piece"
-    },
-    "globalExportEUR": {
-        "min": 12,
-        "max": 22,
-        "unit": "piece",
-        "referenceMarket": "Export européen haut de gamme"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 68,
-    "proteinGrams": 9.5,
-    "lipidsGrams": 2.5,
-    "omega3Mg": 680,
-    "vitaminD_mcg": 2.3,
-    "vitaminB12_mcg": 16,
-    "iodine_mcg": 110,
-    "selenium_mcg": 77,
-    "phosphorus_mg": 160,
-    "calcium_mg": 60,
-    "iron_mg": 6,
-    "zinc_mg": 16.6,
-    "magnesium_mg": 45,
-    "potassium_mg": 220,
-    "healthHighlights": {
-        "ar": [
-            "أعلى تركيز للزنك في الطبيعة (16.6 ملغ = 150% من الاحتياج اليومي) للخصوبة وتقوية المناعة",
-            "مصدر ممتاز للحديد العضوي وفيتامين B12 لمحاربة الوهن وتجديد الخلايا",
-            "مياه خليج الداخلة النقية المصنفة دولياً تمنحه نقاءً بيولوجياً استثنائياً"
-        ],
-        "fr": [
-            "Teneur absolue en zinc organique (16,6 mg) pour l’immunité et la vitalité",
-            "Source record de fer biodisponible et vitamine B12 anti-fatigue",
-            "Purifié dans les eaux cristallines de la baie de Dakhla classées d’excellence"
-        ],
-        "en": [
-            "Highest natural zinc concentration on Earth (16.6 mg) boosting endocrine and immune power",
-            "Record level of bioavailable iron and Vitamin B12 revitalizing stamina",
-            "Cultivated in the pristine, globally-certified waters of Dakhla lagoon"
-        ]
-    }
-},
-    culinaryProfile: {
-      flavor: 'sweet',
-      texture: 'tender',
-      bonesDifficulty: 'low',
-      bestCookingMethods: ['pil_pil'],
-    },
-    freshnessKeys: {
-      ar: ['صدفة مغلقة بإحكام تقاوم الفتح', 'امتلاء الصدفة بماء البحر الشفاف', 'تقلص طرف المحارة عند لمسه برأس سكين أو قطرة ليمون'],
-      fr: ['Coquille hermétique qui résiste à l’ouverture', 'Présence d’une eau de mer claire et abondante', 'Rétraction immédiate du manteau au jus de citron'],
-      en: ['Hermetically locked shell', 'Filled with crystal-clear natural sea water', 'Instant retraction of mantle border when touched by lemon drop'],
-    },
-    description: {
-      ar: 'محار خليج الداخلة النقي وبحيرة الوليدية يصنف ضمن أرقى أنواع المحار عالمياً بفضل المياه الخالية من التلوث. يؤكل طازجاً مع قطرات ليمون حامض.',
-      fr: 'Élevées dans les eaux pures et oxygénées de la baie de Dakhla et la lagune de Oualidia. Dégustées vivantes avec une goutte de citron vert.',
-      en: 'Cultivated in the pristine waters of Dakhla Bay and Oualidia lagoon. Savored fresh and raw on the half shell with a squeeze of fresh lime.',
-    },
-    imageUrl: 'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Crassostrea_gigas_p1040858.jpg/1200px-Crassostrea_gigas_p1040858.jpg',
-    audioPhonetic: 'L-M7ar',
-    recommendedRecipeIds: ['crevettes-pil-pil-marocaine'],
-  },
-  {
-    id: 'langouste',
-    nameDarijaArabic: 'اللانڭوست',
-    nameDarijaLatin: 'Langoust',
-    nameFrench: 'Langouste rouge',
-    nameEnglish: 'European Spiny Lobster',
-    scientificName: 'Palinurus elephas',
-    category: 'crustace',
-    coast: 'both',
-    mainPorts: ['Essaouira', 'Mirleft', 'Sidi Ifni', 'Al Hoceima', 'Dakhla'],
-    seasonality: {
-      peakMonths: [4, 5, 6, 7, 8],
-      description: {
-        ar: 'موسم الصيد البحري في الصيف مع احترام فترات التوالد.',
-        fr: 'Pêche estivale sélective respectant les périodes de ponte.',
-        en: 'Selective summer catch adhering to strict breeding regulations.',
-      },
-    },
-    priceRangeMAD: { min: 250, max: 450, unit: 'kg' },
-    regionalNames: {
-    "northChamal": "Langosta Roja / لانغوسطا حمراء (الحسيمة، طنجة، كاب كيراتس)",
-    "centreAtlantic": "اللانڭوست الملكي / Langouste (الصويرة، كاب سيم، آسفي)",
-    "southSoussSahara": "جراد البحر الملكي / أزايز ن وومان (الداخلة، بوجدور)"
-},
-    pricingDetails: {
-    "wholesalePortMAD": {
-        "min": 150,
-        "max": 260,
-        "unit": "kg"
-    },
-    "retailMarketMAD": {
-        "min": 260,
-        "max": 420,
-        "unit": "kg"
-    },
-    "globalExportEUR": {
-        "min": 35,
-        "max": 65,
-        "unit": "kg",
-        "referenceMarket": "Haute gastronomie internationale"
-    }
-},
-    nutritionPer100g: {
-    "caloriesKcal": 112,
-    "proteinGrams": 20.6,
-    "lipidsGrams": 1.5,
-    "omega3Mg": 410,
-    "vitaminD_mcg": 0.5,
-    "vitaminB12_mcg": 2.8,
-    "iodine_mcg": 95,
-    "selenium_mcg": 58,
-    "phosphorus_mg": 250,
-    "calcium_mg": 65,
-    "iron_mg": 1.1,
-    "zinc_mg": 2.8,
-    "magnesium_mg": 42,
-    "potassium_mg": 350,
-    "healthHighlights": {
-        "ar": [
-            "لحم ملكي فاخر قليل الدهون مشحون بالزنك والسيلينيوم ومضادات الأكسدة",
-            "بروتينات بحرية راقية تدعم تجديد الأنسجة والعضلات",
-            "غني باليود والنحاس العضوي لدعم الجهاز المناعي والحيوية البدنية"
-        ],
-        "fr": [
-            "Mets royal d’une grande pureté protéique pauvre en lipides",
-            "Richesse remarquable en zinc, sélénium et antioxydants marins",
-            "Excellente source d’iode et de cuivre pour la vitalité cellulaire"
-        ],
-        "en": [
-            "Regal marine delicacy delivering pure lean protein with minimal lipids",
-            "Outstanding density of zinc, selenium, and marine antioxidants",
-            "Abundant in iodine and organic copper supporting vitality and stamina"
-        ]
-    }
-},
-    culinaryProfile: {
-      flavor: 'sweet',
-      texture: 'meaty',
-      bonesDifficulty: 'low',
-      bestCookingMethods: ['grillade', 'four'],
-    },
-    freshnessKeys: {
-      ar: ['حركة القرون الاستشعارية عند لمسها (حية)', 'ذيل ملتف بقوة تحت البطن', 'قشرة شوكية صلبة بلون بني محمر ناصع'],
-      fr: ['Mouvement vigoureux des antennes (spécimen vivant)', 'Queue fermement repliée sous le thorax', 'Carapace épineuse pourpre et saine'],
-      en: ['Vigorous antenna twitching (live)', 'Tail tightly curved under the body', 'Rich reddish-purple spiny shell'],
-    },
-    description: {
-      ar: 'تاج المأكولات البحرية المغربية الفاخرة. تشوى على الفحم مشقوقة إلى نصفين ومدهونة بزبدة الثوم والأعشاب المنسمة أو زيت الزيتون البكر.',
-      fr: 'Sommet du luxe gastronomique côtier. Fendue en deux et grillée sur braises au beurre persillé d’ail et citron frais.',
-      en: 'The crown of Moroccan coastal luxury. Split lengthwise and flame-grilled with herb-garlic butter or olive oil and fresh lemon.',
-    },
-    imageUrl: 'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=1200&q=80',
-    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Palinurus_elephas.jpg/1200px-Palinurus_elephas.jpg',
-    audioPhonetic: 'Lan-goust',
-    recommendedRecipeIds: ['brochettes-espadon-grille', 'pageot-royal-au-four'],
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Boquerones_%28Engraulis_encrasicolus%29%2C_Set%C3%BAbal%2C_Portugal%2C_2020-08-01%2C_DD_16.jpg/800px-Boquerones_%28Engraulis_encrasicolus%29%2C_Set%C3%BAbal%2C_Portugal%2C_2020-08-01%2C_DD_16.jpg',
+    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Boquerones_%28Engraulis_encrasicolus%29%2C_Set%C3%BAbal%2C_Portugal%2C_2020-08-01%2C_DD_16.jpg/800px-Boquerones_%28Engraulis_encrasicolus%29%2C_Set%C3%BAbal%2C_Portugal%2C_2020-08-01%2C_DD_16.jpg',
+    audioPhonetic: 'Ch-toun / Bo-que-ron',
+    recommendedRecipeIds: ['friture-mixte-marocaine', 'sardines-charmoula-four'],
   },
 ]

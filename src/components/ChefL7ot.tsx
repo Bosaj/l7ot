@@ -137,7 +137,7 @@ export const ChefL7ot: React.FC<ChefL7otProps> = ({
                 </h4>
                 <p className="text-xs text-cyan-400">{currentFish.nameFrench}</p>
                 <span className="text-[11px] text-slate-400">
-                  {currentFish.priceRangeMAD.min}-{currentFish.priceRangeMAD.max} MAD/kg
+                  {currentFish.pricing.currentSpotMAD} MAD/kg
                 </span>
               </div>
             </div>

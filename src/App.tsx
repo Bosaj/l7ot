@@ -12,6 +12,7 @@ import { RecipeModal } from './components/RecipeModal'
 import { ChefL7ot } from './components/ChefL7ot'
 import { MarketGuide } from './components/MarketGuide'
 import { AgreementsAndMarket } from './components/AgreementsAndMarket'
+import { CleaningTutorialModal } from './components/CleaningTutorialModal'
 
 import { MOROCCAN_FISH } from './data/fish'
 import { MOROCCAN_RECIPES } from './data/recipes'
@@ -27,6 +28,8 @@ export const App: React.FC = () => {
   const [selectedCoast, setSelectedCoast] = useState<string>('all')
 
   const [activeFish, setActiveFish] = useState<Fish | null>(null)
+  const [fishModalTab, setFishModalTab] = useState<'overview' | 'nutrition' | 'cleaning' | 'market'>('overview')
+  const [cleaningFish, setCleaningFish] = useState<Fish | null>(null)
   const [activeRecipe, setActiveRecipe] = useState<Recipe | null>(null)
   const [chefFishId, setChefFishId] = useState<string>('sardine')
 
@@ -211,8 +214,16 @@ export const App: React.FC = () => {
                     key={fish.id}
                     fish={fish}
                     lang={lang}
-                    onSelectFish={(f) => setActiveFish(f)}
+                    onSelectFish={(f) => {
+                      setActiveFish(f)
+                      setFishModalTab('overview')
+                    }}
                     onCookWithFish={handleCookWithFish}
+                    onOpenCleaningTutorial={(f) => setCleaningFish(f)}
+                    onOpenNutrition={(f) => {
+                      setActiveFish(f)
+                      setFishModalTab('nutrition')
+                    }}
                   />
                 ))}
               </div>
@@ -279,9 +290,19 @@ export const App: React.FC = () => {
           fish={activeFish}
           allRecipes={MOROCCAN_RECIPES}
           lang={lang}
+          initialTab={fishModalTab}
           onClose={() => setActiveFish(null)}
           onSelectRecipe={(r) => setActiveRecipe(r)}
           onCookWithFish={handleCookWithFish}
+          onOpenCleaningTutorial={(f) => setCleaningFish(f)}
+        />
+      )}
+
+      {cleaningFish && (
+        <CleaningTutorialModal
+          fish={cleaningFish}
+          lang={lang}
+          onClose={() => setCleaningFish(null)}
         />
       )}
 

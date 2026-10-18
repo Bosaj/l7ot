@@ -191,7 +191,7 @@ export const MarketGuide: React.FC<MarketGuideProps> = ({ lang }) => {
                   </h5>
                   <span className="text-[11px] text-cyan-400">{f.nameDarijaLatin}</span>
                   <span className="text-[10px] text-emerald-400 block font-semibold">
-                    {f.priceRangeMAD.min}-{f.priceRangeMAD.max} MAD
+                    {f.pricing.currentSpotMAD} MAD / kg
                   </span>
                 </div>
               </div>

@@ -18,37 +18,70 @@ export type CookingMethod =
   | 'pastilla'
 
 export interface RegionalNames {
-  northChamal: string // Tangier, Tetouan, Al Hoceima, Nador
-  centreAtlantic: string // Casablanca, Rabat, Safi, Essaouira
-  southSoussSahara: string // Agadir, Tan-Tan, Laayoune, Dakhla
+  chamal: string[] // North / Mediterranean (Tanger, Tetouan, Al Hoceima, Larache)
+  centre: string[] // Centre / Atlantic (Casablanca, Rabat, Safi, El Jadida)
+  sud: string[] // South / Souss / Sahara / Amazigh (Agadir, Dakhla, Tan-Tan, Essaouira)
 }
 
-export interface PricingDetails {
-  wholesalePortMAD: { min: number; max: number; unit: 'kg' | 'piece' }
-  retailMarketMAD: { min: number; max: number; unit: 'kg' | 'piece' }
-  globalExportEUR: { min: number; max: number; unit: 'kg' | 'piece'; referenceMarket: string }
+export interface MarketPriceTrend {
+  trend: 'up' | 'down' | 'stable'
+  past6MonthsMAD: number[] // monthly historical prices
+  currentSpotMAD: number
+  forecastFutureMAD: number // next quarter projection
+  globalExportUSD: {
+    min: number
+    max: number
+    avg: number
+    hub: string // e.g. "Mercabarna (Spain)", "Rungis (France)", "Tokyo Toyosu"
+  }
+  driversAr: string
+  driversFr: string
+  driversEn: string
 }
 
-export interface NutritionPer100g {
-  caloriesKcal: number
+export interface FishNutrition100g {
+  calories: number
   proteinGrams: number
   lipidsGrams: number
-  omega3Mg: number // EPA + DHA
-  vitaminD_mcg: number
+  omega3Mg: number // EPA & DHA
+  vitaminD_IU: number
   vitaminB12_mcg: number
-  iodine_mcg: number
-  selenium_mcg: number
-  phosphorus_mg: number
-  calcium_mg: number
-  iron_mg: number
-  zinc_mg: number
-  magnesium_mg: number
-  potassium_mg: number
-  healthHighlights: {
+  calciumMg: number
+  ironMg: number
+  phosphorusMg: number
+  seleniumMcg: number
+  iodineMcg: number
+  zincMg: number
+  healthBenefits: {
     ar: string[]
     fr: string[]
     en: string[]
   }
+}
+
+export interface CleaningStep {
+  stepNumber: number
+  titleAr: string
+  titleFr: string
+  titleEn: string
+  instructionAr: string
+  instructionFr: string
+  instructionEn: string
+  kessalTipAr: string // Secret from Moroccan market fish cleaner
+  kessalTipFr: string
+  kessalTipEn: string
+}
+
+export interface CleaningTutorial {
+  methodNameAr: string
+  methodNameFr: string
+  methodNameEn: string
+  difficulty: 'easy' | 'medium' | 'pro'
+  prepTimeMinutes: number
+  toolsNeededAr: string[]
+  toolsNeededFr: string[]
+  toolsNeededEn: string[]
+  steps: CleaningStep[]
 }
 
 export interface Fish {
@@ -61,18 +94,14 @@ export interface Fish {
   category: FishCategory
   coast: CoastType
   mainPorts: string[]
+  regionalNames: RegionalNames
+  pricing: MarketPriceTrend
+  nutrition: FishNutrition100g
+  cleaningTutorial: CleaningTutorial
   seasonality: {
     peakMonths: number[] // 1-12
     description: { ar: string; fr: string; en: string }
   }
-  priceRangeMAD: {
-    min: number
-    max: number
-    unit: 'kg' | 'piece'
-  }
-  pricingDetails?: PricingDetails
-  regionalNames?: RegionalNames
-  nutritionPer100g?: NutritionPer100g
   culinaryProfile: {
     flavor: 'mild' | 'rich' | 'sweet' | 'oily' | 'delicate'
     texture: 'tender' | 'firm' | 'flaky' | 'meaty'
@@ -93,44 +122,6 @@ export interface Fish {
   fallbackImageUrl?: string
   audioPhonetic: string
   recommendedRecipeIds: string[]
-}
-
-export interface FisheriesAgreement {
-  id: string
-  partnerName: { ar: string; fr: string; en: string }
-  flag: string
-  status: 'active' | 'suspended_under_renegotiation' | 'framework'
-  period: string
-  economicValue: { ar: string; fr: string; en: string }
-  targetSpecies: string[]
-  keyTerms: { ar: string[]; fr: string[]; en: string[] }
-  strategicContext: { ar: string; fr: string; en: string }
-  moroccoGains: { ar: string[]; fr: string[]; en: string[] }
-}
-
-export interface MarketTrend {
-  id: string
-  speciesId: string
-  speciesName: { ar: string; fr: string; en: string }
-  pastTrend: {
-    priceRangeMAD: string
-    summary: { ar: string; fr: string; en: string }
-  }
-  presentStatus: {
-    priceRangeMAD: string
-    supplyStatus: 'abundant' | 'moderate' | 'scarce'
-    trendDirection: 'up' | 'down' | 'stable'
-    summary: { ar: string; fr: string; en: string }
-  }
-  futureForecast: {
-    outlook: 'up' | 'down' | 'stable'
-    driverFactors: { ar: string[]; fr: string[]; en: string[] }
-    projection: { ar: string; fr: string; en: string }
-  }
-  biologicalRestPeriod?: {
-    months: string
-    description: { ar: string; fr: string; en: string }
-  }
 }
 
 export interface CharmoulaFormula {
@@ -205,4 +196,66 @@ export interface MarketFreshnessCriterion {
   staleIndicatorFr: string
   staleIndicatorEn: string
   iconName: string
+}
+
+export interface InternationalContract {
+  id: string
+  partnerNameAr: string
+  partnerNameFr: string
+  partnerNameEn: string
+  flagEmoji: string
+  titleAr: string
+  titleFr: string
+  titleEn: string
+  datesActive: string
+  status: 'active' | 'expired_negotiating' | 'permanent_cooperation'
+  financialCompensation: string
+  vesselsQuota: string
+  keyClausesAr: string[]
+  keyClausesFr: string[]
+  keyClausesEn: string[]
+  geopoliticalContextAr: string
+  geopoliticalContextFr: string
+  geopoliticalContextEn: string
+  impactOnMoroccanMarketAr: string
+  impactOnMoroccanMarketFr: string
+  impactOnMoroccanMarketEn: string
+}
+
+export interface FisheriesAgreement {
+  id: string
+  partnerName: { ar: string; fr: string; en: string }
+  flag: string
+  status: 'active' | 'suspended_under_renegotiation' | 'framework'
+  period: string
+  economicValue: { ar: string; fr: string; en: string }
+  targetSpecies: string[]
+  keyTerms: { ar: string[]; fr: string[]; en: string[] }
+  strategicContext: { ar: string; fr: string; en: string }
+  moroccoGains: { ar: string[]; fr: string[]; en: string[] }
+}
+
+export interface MarketTrend {
+  id: string
+  speciesId: string
+  speciesName: { ar: string; fr: string; en: string }
+  pastTrend: {
+    priceRangeMAD: string
+    summary: { ar: string; fr: string; en: string }
+  }
+  presentStatus: {
+    priceRangeMAD: string
+    supplyStatus: 'abundant' | 'moderate' | 'scarce'
+    trendDirection: 'up' | 'down' | 'stable'
+    summary: { ar: string; fr: string; en: string }
+  }
+  futureForecast: {
+    outlook: 'up' | 'down' | 'stable'
+    driverFactors: { ar: string[]; fr: string[]; en: string[] }
+    projection: { ar: string; fr: string; en: string }
+  }
+  biologicalRestPeriod?: {
+    months: string
+    description: { ar: string; fr: string; en: string }
+  }
 }

@@ -149,7 +149,7 @@ export function calculateCharmoula(
     })
   }
 
-  if (fish.priceRangeMAD.min >= 80) {
+  if (fish.pricing.currentSpotMAD >= 80) {
     specialAdditions.push({
       ar: 'شعيرات من الزعفران الحر الأصيل من تاليوين منقوعة في ماء دافئ',
       fr: 'Pincée de safran pur de Taliouine infusée dans l’eau tiède',

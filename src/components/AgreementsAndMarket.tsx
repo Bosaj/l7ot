@@ -40,6 +40,11 @@ export const AgreementsAndMarket: React.FC<AgreementsAndMarketProps> = ({ lang }
           bg: 'border-cyan-500/30 bg-cyan-500/10 text-cyan-300',
           label: lang === 'fr' ? 'Cadre permanent' : lang === 'en' ? 'Permanent Framework' : 'إطار تعاون دائم',
         }
+      default:
+        return {
+          bg: 'border-slate-500/30 bg-slate-500/10 text-slate-300',
+          label: lang === 'fr' ? 'Accord' : lang === 'en' ? 'Treaty' : 'معاهدة',
+        }
     }
   }
 
@@ -198,7 +203,7 @@ export const AgreementsAndMarket: React.FC<AgreementsAndMarketProps> = ({ lang }
                           : 'أبرز الشروط والالتزامات والحصص:'}
                       </span>
                       <ul className="space-y-1.5 text-xs text-slate-300">
-                        {agreement.keyTerms[lang].map((term, i) => (
+                        {agreement.keyTerms[lang].map((term: string, i: number) => (
                           <li key={i} className="flex items-start gap-2">
                             <span className="text-cyan-400 mt-0.5">•</span>
                             <span>{term}</span>
@@ -217,7 +222,7 @@ export const AgreementsAndMarket: React.FC<AgreementsAndMarketProps> = ({ lang }
                           : 'المكاسب المباشرة لقطاع الصيد والبحارة المغاربة'}
                       </span>
                       <ul className="space-y-1 text-xs text-amber-100">
-                        {agreement.moroccoGains[lang].map((gain, idx) => (
+                        {agreement.moroccoGains[lang].map((gain: string, idx: number) => (
                           <li key={idx} className="flex items-start gap-2">
                             <span className="text-amber-400">✓</span>
                             <span>{gain}</span>
@@ -383,7 +388,7 @@ export const AgreementsAndMarket: React.FC<AgreementsAndMarketProps> = ({ lang }
                         : 'عوامل التطور وبرامج الدولة لدعم المخزون:'}
                     </span>
                     <ul className="space-y-1 text-xs text-slate-300">
-                      {trend.futureForecast.driverFactors[lang].map((factor, i) => (
+                      {trend.futureForecast.driverFactors[lang].map((factor: string, i: number) => (
                         <li key={i} className="flex items-start gap-2">
                           <span className="text-cyan-400">✓</span>
                           <span>{factor}</span>
