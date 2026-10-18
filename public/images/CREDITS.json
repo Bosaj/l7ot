@@ -196,5 +196,95 @@
     "page": "https://commons.wikimedia.org/wiki/File:Perna_perna_02.jpg",
     "author": "H. Zell",
     "license": "CC BY-SA 3.0"
+  },
+  "fish/sar-sargo": {
+    "file": "Sargo común (Diplodus sargus), Parque natural de la Arrábida, Portugal, 2020-07-21, DD 56.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Sargo_com%C3%BAn_(Diplodus_sargus),_Parque_natural_de_la_Arr%C3%A1bida,_Portugal,_2020-07-21,_DD_56.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0"
+  },
+  "fish/saint-pierre": {
+    "file": "Zeus.faber.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Zeus.faber.jpg",
+    "author": "de:Benutzer:Kleines.Opossum",
+    "license": "CC BY-SA 3.0"
+  },
+  "fish/dentex-merjane": {
+    "file": "Dentón común (Dentex dentex), Cabo de Palos, España, 2022-07-15, DD 59.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Dent%C3%B3n_com%C3%BAn_(Dentex_dentex),_Cabo_de_Palos,_Espa%C3%B1a,_2022-07-15,_DD_59.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0"
+  },
+  "fish/bonite-sarda": {
+    "file": "Sarda sarda.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Sarda_sarda.jpg",
+    "author": "Sherman Foote Denton",
+    "license": "Public domain"
+  },
+  "fish/roussette-chien": {
+    "file": "Scyliorhinus canicula.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Scyliorhinus_canicula.jpg",
+    "author": "Hans Hillewaert",
+    "license": "CC BY-SA 4.0"
+  },
+  "fish/langouste-royale": {
+    "file": "Langosta común (Palinurus elephas), Parque natural de la Arrábida, Portugal, 2023-07-27, DD 12.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Langosta_com%C3%BAn_(Palinurus_elephas),_Parque_natural_de_la_Arr%C3%A1bida,_Portugal,_2023-07-27,_DD_12.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0"
+  },
+  "fish/crabe-araignee": {
+    "file": "Maja squinado.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Maja_squinado.jpg",
+    "author": "Govern de les Illes Balears",
+    "license": "CC BY-SA 3.0"
+  },
+  "fish/huitre-oualidia": {
+    "file": "Crassostrea gigas 01.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Crassostrea_gigas_01.jpg",
+    "author": "Llez",
+    "license": "CC BY-SA 3.0"
+  },
+  "fish/palourde-coquillage": {
+    "file": "Ruditapes decussatus 01.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Ruditapes_decussatus_01.jpg",
+    "author": "H. Zell",
+    "license": "CC BY-SA 3.0"
+  },
+  "fish/bogue-bouga": {
+    "file": "Boga (Boops boops), franja marina Teno-Rasca, Tenerife, España, 2022-01-08, DD 99.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Boga_(Boops_boops),_franja_marina_Teno-Rasca,_Tenerife,_Espa%C3%B1a,_2022-01-08,_DD_99.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0"
+  },
+  "recipes/tagine-farkh-zbib": {
+    "file": "Octopus Tagine.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Octopus_Tagine.jpg",
+    "author": "Anass Sedrati",
+    "license": "CC BY-SA 4.0"
+  },
+  "recipes/raie-mchermla-citron": {
+    "file": "Raie au beurre et câpres.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Raie_au_beurre_et_c%C3%A2pres.jpg",
+    "author": "René Hourdry",
+    "license": "CC0"
+  },
+  "recipes/thon-confit-maison": {
+    "file": "12-atun-encebollado1.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:12-atun-encebollado1.jpg",
+    "author": "Soledadsanjose",
+    "license": "CC BY-SA 3.0"
+  },
+  "recipes/chergou-farci-vermicelle": {
+    "file": "Poisson au four.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Poisson_au_four.JPG",
+    "author": "Likikouet Raïssa",
+    "license": "CC BY-SA 4.0"
+  },
+  "recipes/choco-seiche-tangeroise": {
+    "file": "Hot butter cuttlefish in a bowl.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Hot_butter_cuttlefish_in_a_bowl.jpg",
+    "author": "NandaAbeysekera",
+    "license": "CC0"
   }
 }

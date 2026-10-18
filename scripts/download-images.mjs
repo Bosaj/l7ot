@@ -25,6 +25,16 @@ const picks = {
   'fish/rouget': 'Salmonete de roca (Mullus surmuletus), Parque natural de la Arrábida, Portugal, 2020-07-21, DD 59.jpg',
   'fish/seiche': 'Sepia común (Sepia officinalis), Parque natural de la Arrábida, Portugal, 2020-07-21, DD 62.jpg',
   'fish/moules-bouzroug': 'Perna perna 02.jpg',
+  'fish/sar-sargo': 'Sargo común (Diplodus sargus), Parque natural de la Arrábida, Portugal, 2020-07-21, DD 56.jpg',
+  'fish/saint-pierre': 'Zeus.faber.jpg',
+  'fish/dentex-merjane': 'Dentón común (Dentex dentex), Cabo de Palos, España, 2022-07-15, DD 59.jpg',
+  'fish/bonite-sarda': 'Sarda sarda.jpg',
+  'fish/roussette-chien': 'Scyliorhinus canicula.jpg',
+  'fish/langouste-royale': 'Langosta común (Palinurus elephas), Parque natural de la Arrábida, Portugal, 2023-07-27, DD 12.jpg',
+  'fish/crabe-araignee': 'Maja squinado.jpg',
+  'fish/huitre-oualidia': 'Crassostrea gigas 01.jpg',
+  'fish/palourde-coquillage': 'Ruditapes decussatus 01.jpg',
+  'fish/bogue-bouga': 'Boga (Boops boops), franja marina Teno-Rasca, Tenerife, España, 2022-01-08, DD 99.jpg',
   'recipes/sardines-mchermline': 'Grilled sardines.jpg',
   'recipes/tagine-kouari-sardine': 'Tajine kefta (8348397161).jpg',
   'recipes/tagine-l7ot-khodra': 'Tagine au poisson.jpeg',
@@ -36,6 +46,11 @@ const picks = {
   'recipes/chorba-l7ot-marocaine': 'Seafood stew.jpg',
   'recipes/tagine-bouzroug-essaouira': 'Moules marinières.jpg',
   'recipes/brochettes-espadon-grille': "Brochette d'espadon à Georgioúpoli (Crète) en juillet 2021.jpg",
+  'recipes/tagine-farkh-zbib': 'Octopus Tagine.jpg',
+  'recipes/raie-mchermla-citron': 'Raie au beurre et câpres.jpg',
+  'recipes/thon-confit-maison': '12-atun-encebollado1.jpg',
+  'recipes/chergou-farci-vermicelle': 'Poisson au four.JPG',
+  'recipes/choco-seiche-tangeroise': 'Hot butter cuttlefish in a bowl.jpg',
 }
 // Optional: node download-images.mjs key1 key2  -> only (re)download those keys and merge credits
 const only = process.argv.slice(2)

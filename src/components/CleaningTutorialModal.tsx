@@ -50,8 +50,8 @@ const VideoPlayer: React.FC<{ videoId: string; title: string; lang: SupportedLan
               className="h-full w-full object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
             />
             <span className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-            <span className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-cyan-500 text-white shadow-2xl shadow-cyan-500/40 ring-8 ring-cyan-500/20 transition group-hover:scale-110">
-              <Play className="h-7 w-7 translate-x-0.5 fill-current" />
+            <span className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#d96b27] text-[#0b0908] shadow-2xl shadow-[#d96b27]/40 ring-8 ring-[#d96b27]/20 transition group-hover:scale-110">
+              <Play className="h-7 w-7 translate-x-0.5 fill-current text-[#0b0908]" />
             </span>
           </button>
         )}
@@ -60,7 +60,7 @@ const VideoPlayer: React.FC<{ videoId: string; title: string; lang: SupportedLan
         href={`https://www.youtube.com/watch?v=${videoId}`}
         target="_blank"
         rel="noreferrer"
-        className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 transition hover:text-cyan-300"
+        className="inline-flex items-center gap-1.5 text-xs font-medium text-[#a69b8d] transition hover:text-[#f2b47e]"
       >
         <ExternalLink className="h-3.5 w-3.5" />
         {watchLabel}
@@ -86,19 +86,19 @@ export const CleaningTutorialModal: React.FC<CleaningTutorialModalProps> = ({
         className="fixed inset-0 bg-slate-950/85 backdrop-blur-md transition-opacity"
       />
 
-      <div className="relative z-10 flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl border border-white/10 bg-slate-900 shadow-2xl">
+      <div className="relative z-10 flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl border border-[#2a211c] bg-[#120e0c] shadow-2xl">
         {/* Header Hero */}
-        <div className="relative border-b border-white/10 bg-gradient-to-br from-slate-900 via-cyan-950 to-blue-950 p-6 sm:p-8">
+        <div className="relative border-b border-[#2a211c] bg-gradient-to-br from-[#1b1512] via-[#14100e] to-[#0b0908] p-6 sm:p-8">
           <button
             type="button"
             onClick={onClose}
-            className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-slate-900/80 text-white backdrop-blur-md transition-colors hover:bg-rose-500"
+            className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-[#0b0908]/80 text-[#f6f1e7] backdrop-blur-md transition-colors hover:bg-rose-500 hover:text-white"
           >
             <X className="h-5 w-5" />
           </button>
 
           <div className="space-y-2 max-w-xl">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/30 bg-cyan-500/10 px-3 py-1 text-xs font-bold text-cyan-300">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#d96b27]/40 bg-[#d96b27]/15 px-3 py-1 text-xs font-bold text-[#f2b47e]">
               <Scissors className="h-3.5 w-3.5" />
               {lang === 'fr'
                 ? 'Tutoriel de nettoyage marocain (L’Kessal)'
@@ -106,10 +106,10 @@ export const CleaningTutorialModal: React.FC<CleaningTutorialModalProps> = ({
                 ? 'Moroccan Fishmonger Cleaning Tutorial'
                 : 'دليل تنقية الحوت بالمغرب (طريقة الكسال)'}
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-white">
+            <h2 className="font-editorial text-2xl sm:text-3xl font-bold text-[#f6f1e7]">
               {title}
             </h2>
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-[#a69b8d] leading-relaxed">
               {lang === 'fr'
                 ? `Technique artisanale des maîtres écaillers marocains pour préparer ${fish.nameFrench} sans abîmer la chair.`
                 : lang === 'en'
@@ -118,16 +118,16 @@ export const CleaningTutorialModal: React.FC<CleaningTutorialModalProps> = ({
             </p>
           </div>
 
-          <div className="mt-4 flex flex-wrap items-center gap-4 text-xs font-medium text-slate-300">
-            <span className="flex items-center gap-1.5 rounded-xl bg-slate-950/60 px-3 py-1.5 border border-white/5">
-              <Clock className="h-3.5 w-3.5 text-cyan-400" />
+          <div className="mt-4 flex flex-wrap items-center gap-4 text-xs font-medium text-[#a69b8d]">
+            <span className="flex items-center gap-1.5 rounded-xl bg-[#0b0908] px-3 py-1.5 border border-[#2a211c]">
+              <Clock className="h-3.5 w-3.5 text-[#e68a45]" />
               {lang === 'fr'
                 ? `Durée : ~${tut.prepTimeMinutes} min`
                 : lang === 'en'
                 ? `Estimated: ~${tut.prepTimeMinutes} mins`
                 : `المدة المقدرة: ${tut.prepTimeMinutes} دقائق`}
             </span>
-            <span className="flex items-center gap-1.5 rounded-xl bg-slate-950/60 px-3 py-1.5 border border-white/5">
+            <span className="flex items-center gap-1.5 rounded-xl bg-[#0b0908] px-3 py-1.5 border border-[#2a211c]">
               <Sparkles className="h-3.5 w-3.5 text-amber-400" />
               {lang === 'fr'
                 ? `Difficulté : ${tut.difficulty === 'easy' ? 'Facile' : tut.difficulty === 'medium' ? 'Moyenne' : 'Professionnel'}`
@@ -155,15 +155,15 @@ export const CleaningTutorialModal: React.FC<CleaningTutorialModalProps> = ({
           )}
 
           {/* Tools Needed */}
-          <div className="rounded-2xl border border-white/5 bg-slate-950/50 p-4">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">
+          <div className="rounded-2xl border border-[#2a211c] bg-[#0b0908] p-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#a69b8d] mb-2.5">
               {lang === 'fr' ? 'Matériel requis :' : lang === 'en' ? 'Required tools :' : 'الأدوات والمواد المطلوبة:'}
             </h4>
             <div className="flex flex-wrap gap-2">
               {tools.map((tool, i) => (
                 <span
                   key={i}
-                  className="rounded-xl border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-300"
+                  className="rounded-xl border border-[#d96b27]/30 bg-[#d96b27]/10 px-3 py-1 text-xs font-semibold text-[#f2b47e]"
                 >
                   ✓ {tool}
                 </span>
@@ -173,7 +173,7 @@ export const CleaningTutorialModal: React.FC<CleaningTutorialModalProps> = ({
 
           {/* Step-by-Step Instructions */}
           <div className="space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#f6f1e7]">
               {lang === 'fr'
                 ? 'Étapes de découpe et préparation :'
                 : lang === 'en'
@@ -189,23 +189,23 @@ export const CleaningTutorialModal: React.FC<CleaningTutorialModalProps> = ({
               return (
                 <div
                   key={step.stepNumber}
-                  className="rounded-3xl border border-white/5 bg-slate-950/60 p-5 space-y-3"
+                  className="rounded-2xl border border-[#2a211c] bg-[#0b0908] p-5 space-y-3"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-cyan-500 text-xs font-black text-slate-950">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-[#d96b27] text-xs font-black text-[#0b0908]">
                       {step.stepNumber}
                     </span>
-                    <h5 className="text-sm font-bold text-white">
+                    <h5 className="font-editorial text-base font-bold text-[#f6f1e7]">
                       {stepTitle}
                     </h5>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#c4b8aa] leading-relaxed">
                     {stepInstruction}
                   </p>
 
                   {/* Kessal Secret Box */}
-                  <div className="rounded-2xl border border-amber-500/20 bg-amber-950/20 p-3 flex items-start gap-2.5">
+                  <div className="rounded-xl border border-amber-500/25 bg-amber-950/25 p-3 flex items-start gap-2.5">
                     <Lightbulb className="h-4 w-4 text-amber-400 shrink-0 mt-0.5" />
                     <div>
                       <span className="text-[11px] font-bold text-amber-300 block">

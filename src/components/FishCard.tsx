@@ -66,6 +66,12 @@ export const FishCard: React.FC<FishCardProps> = ({
 
   const p = fish.pricing
   const specimenCode = `N° ${String(index + 1).padStart(2, '0')}`
+  const localizedPrimaryName =
+    lang === 'ar'
+      ? fish.nameDarijaArabic
+      : lang === 'fr'
+        ? fish.nameFrench
+        : fish.nameEnglish
 
   // Compute SVG sparkline path from past6MonthsMAD
   const prices = p.past6MonthsMAD
@@ -88,7 +94,7 @@ export const FishCard: React.FC<FishCardProps> = ({
       <div className="double-bezel-inner flex h-full flex-col justify-between overflow-hidden">
         {/* Top Specimen Index Header */}
         <div className="flex items-center justify-between border-b border-[#f6f1e7]/10 bg-[#100d0b] px-4 py-2.5 text-[11px]">
-          <div className="flex items-center gap-2 font-mono">
+          <div dir="ltr" className="flex items-center gap-2 font-mono">
             <span className="font-bold text-[#e68a45]">{specimenCode}</span>
             <span className="text-[#f6f1e7]/20">/</span>
             <span className="italic font-serif text-[#a69b8d]">{fish.scientificName}</span>
@@ -121,9 +127,12 @@ export const FishCard: React.FC<FishCardProps> = ({
           {/* Subtle Editorial Vignette */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#14110f] via-transparent to-black/25" />
 
-          {/* Top-Left Ports Strip */}
-          <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-2">
-            <span className="rounded bg-[#0b0908]/85 border border-[#f6f1e7]/15 px-2 py-0.5 font-mono text-[10px] text-[#e8e0d3] backdrop-blur-sm">
+          {/* Top Ports & Price Trend Strip */}
+          <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between gap-2">
+            <span
+              dir="ltr"
+              className="rounded bg-[#0b0908]/85 border border-[#f6f1e7]/15 px-2 py-0.5 font-mono text-[10px] text-[#e8e0d3] backdrop-blur-sm"
+            >
               {fish.mainPorts.slice(0, 2).join(' · ')}
             </span>
 
@@ -133,24 +142,30 @@ export const FishCard: React.FC<FishCardProps> = ({
                 p.trend === 'up'
                   ? 'border-amber-500/40 bg-[#0b0908]/85 text-amber-300'
                   : p.trend === 'down'
-                  ? 'border-emerald-500/40 bg-[#0b0908]/85 text-emerald-300'
-                  : 'border-[#f6f1e7]/20 bg-[#0b0908]/85 text-[#d4cbbd]'
+                    ? 'border-emerald-500/40 bg-[#0b0908]/85 text-emerald-300'
+                    : 'border-[#f6f1e7]/20 bg-[#0b0908]/85 text-[#d4cbbd]'
               }`}
             >
               {p.trend === 'up' ? (
                 <>
                   <TrendingUp className="h-3 w-3" />
-                  <span>{lang === 'ar' ? 'طالع' : 'HAUSSE'}</span>
+                  <span>
+                    {lang === 'ar' ? 'طالع' : lang === 'fr' ? 'HAUSSE' : 'RISING'}
+                  </span>
                 </>
               ) : p.trend === 'down' ? (
                 <>
                   <TrendingDown className="h-3 w-3" />
-                  <span>{lang === 'ar' ? 'هابط' : 'BAISSE'}</span>
+                  <span>
+                    {lang === 'ar' ? 'هابط' : lang === 'fr' ? 'BAISSE' : 'FALLING'}
+                  </span>
                 </>
               ) : (
                 <>
                   <Minus className="h-3 w-3" />
-                  <span>{lang === 'ar' ? 'مستقر' : 'STABLE'}</span>
+                  <span>
+                    {lang === 'ar' ? 'مستقر' : lang === 'fr' ? 'STABLE' : 'STABLE'}
+                  </span>
                 </>
               )}
             </span>
@@ -161,7 +176,7 @@ export const FishCard: React.FC<FishCardProps> = ({
             type="button"
             onClick={handleAudio}
             title={t.listenPronunciation}
-            className={`absolute bottom-3 right-3 flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold shadow-lg backdrop-blur-md transition-all ${
+            className={`absolute bottom-3 end-3 flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold shadow-lg backdrop-blur-md transition-all ${
               isPlayingAudio
                 ? 'border-[#e68a45] bg-[#d96b27] text-[#0b0908] ring-4 ring-[#d96b27]/30'
                 : 'border-[#f6f1e7]/25 bg-[#0b0908]/85 text-[#f6f1e7] hover:border-[#e68a45] hover:bg-[#d96b27] hover:text-[#0b0908]'
@@ -180,10 +195,14 @@ export const FishCard: React.FC<FishCardProps> = ({
               {isPlayingAudio
                 ? lang === 'ar'
                   ? 'ينطق بالدارجة...'
-                  : 'Audio...'
+                  : lang === 'fr'
+                    ? 'Audio...'
+                    : 'Playing...'
                 : lang === 'ar'
-                ? 'نطق بالدارجة'
-                : 'Écouter'}
+                  ? 'نطق بالدارجة'
+                  : lang === 'fr'
+                    ? 'Écouter'
+                    : 'Listen'}
             </span>
           </button>
         </div>
@@ -197,13 +216,20 @@ export const FishCard: React.FC<FishCardProps> = ({
                 <h3 className="font-editorial text-2xl font-bold text-[#f6f1e7] group-hover:text-[#e68a45] transition-colors">
                   {fish.nameDarijaArabic}
                 </h3>
-                <span className="font-mono text-xs font-semibold text-[#e68a45]">
+                <span
+                  dir="ltr"
+                  className="font-mono text-xs font-semibold text-[#e68a45]"
+                >
                   {fish.nameDarijaLatin}
                 </span>
               </div>
               <div className="mt-1 flex items-center justify-between text-xs text-[#a69b8d]">
-                <span className="font-medium text-[#d4cbbd]">{fish.nameFrench}</span>
-                <span className="text-[11px]">{fish.nameEnglish}</span>
+                <span className="font-medium text-[#d4cbbd]">
+                  {lang === 'en' ? fish.nameEnglish : fish.nameFrench}
+                </span>
+                <span className="text-[11px]">
+                  {lang === 'en' ? fish.nameFrench : localizedPrimaryName !== fish.nameEnglish ? fish.nameEnglish : fish.nameFrench}
+                </span>
               </div>
             </div>
 
@@ -211,41 +237,50 @@ export const FishCard: React.FC<FishCardProps> = ({
             <div className="space-y-1.5 text-[11px]">
               <div className="flex items-baseline justify-between gap-2 border-b border-[#f6f1e7]/5 pb-1">
                 <span className="font-mono text-[10px] uppercase text-[#a69b8d] shrink-0">
-                  {lang === 'ar' ? 'الشمال:' : 'Nord:'}
+                  {lang === 'ar' ? 'الشمال:' : lang === 'fr' ? 'Nord:' : 'North:'}
                 </span>
-                <span className="text-right font-medium text-[#e8e0d3] truncate">
+                <span className="text-end font-medium text-[#e8e0d3] truncate">
                   {fish.regionalNames.chamal[0]}
                 </span>
               </div>
               <div className="flex items-baseline justify-between gap-2 border-b border-[#f6f1e7]/5 pb-1">
                 <span className="font-mono text-[10px] uppercase text-[#a69b8d] shrink-0">
-                  {lang === 'ar' ? 'الوسط:' : 'Centre:'}
+                  {lang === 'ar' ? 'الوسط:' : lang === 'fr' ? 'Centre:' : 'Center:'}
                 </span>
-                <span className="text-right font-medium text-[#e8e0d3] truncate">
+                <span className="text-end font-medium text-[#e8e0d3] truncate">
                   {fish.regionalNames.centre[0]}
                 </span>
               </div>
               <div className="flex items-baseline justify-between gap-2">
                 <span className="font-mono text-[10px] uppercase text-[#a69b8d] shrink-0">
-                  {lang === 'ar' ? 'الجنوب:' : 'Sud:'}
+                  {lang === 'ar' ? 'الجنوب:' : lang === 'fr' ? 'Sud:' : 'South:'}
                 </span>
-                <span className="text-right font-medium text-[#f2b47e] truncate">
+                <span className="text-end font-medium text-[#f2b47e] truncate">
                   {fish.regionalNames.sud[0]}
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Monospace ONP Price & Sparkline Ledger */}
+          {/* Monospace ONP Price & Sparkline Ledger (RTL/LTR Safe) */}
           <div className="rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-3">
             <div className="flex items-center justify-between gap-2">
-              <div>
+              <div className="text-start">
                 <span className="block font-mono text-[9px] uppercase text-[#a69b8d]">
-                  {lang === 'ar' ? 'سعر المرسى والأسواق' : 'COURS SOUK MAROC'}
+                  {lang === 'ar'
+                    ? 'سعر المرسى والأسواق'
+                    : lang === 'fr'
+                      ? 'COURS SOUK MAROC'
+                      : 'MOROCCAN SOUK PRICE'}
                 </span>
-                <span className="font-mono text-base font-bold text-emerald-400">
-                  {p.currentSpotMAD} MAD
-                  <span className="text-[10px] font-normal text-[#a69b8d]">/kg</span>
+                <span
+                  dir="ltr"
+                  className="inline-block font-mono text-base font-bold text-emerald-400"
+                >
+                  {p.currentSpotMAD}{' '}
+                  <span className="text-[11px] font-semibold">
+                    {lang === 'ar' ? 'درهم/كلغ' : 'MAD/kg'}
+                  </span>
                 </span>
               </div>
 
@@ -254,21 +289,36 @@ export const FishCard: React.FC<FishCardProps> = ({
                 <svg width="74" height="22" className="overflow-visible">
                   <polyline
                     fill="none"
-                    stroke={p.trend === 'up' ? '#f59e0b' : p.trend === 'down' ? '#34d399' : '#e68a45'}
+                    stroke={
+                      p.trend === 'up'
+                        ? '#f59e0b'
+                        : p.trend === 'down'
+                          ? '#34d399'
+                          : '#e68a45'
+                    }
                     strokeWidth="1.75"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     points={sparkPoints}
                   />
                 </svg>
-                <span className="font-mono text-[8px] text-[#786c60]">6M TREND</span>
+                <span dir="ltr" className="font-mono text-[8px] text-[#786c60]">
+                  {lang === 'ar' ? 'منحنى 6 أشهر' : '6M TREND'}
+                </span>
               </div>
 
-              <div className="text-right">
+              <div className="text-end">
                 <span className="block font-mono text-[9px] uppercase text-[#a69b8d]">
-                  {lang === 'ar' ? 'التصدير الدولي' : 'EXPORT GLOBAL'}
+                  {lang === 'ar'
+                    ? 'التصدير الدولي'
+                    : lang === 'fr'
+                      ? 'EXPORT GLOBAL'
+                      : 'GLOBAL EXPORT'}
                 </span>
-                <span className="font-mono text-xs font-bold text-[#f2b47e]">
+                <span
+                  dir="ltr"
+                  className="inline-block font-mono text-xs font-bold text-[#f2b47e]"
+                >
                   ${p.globalExportUSD.avg}
                   <span className="text-[10px] font-normal text-[#a69b8d]">/kg</span>
                 </span>
@@ -276,7 +326,10 @@ export const FishCard: React.FC<FishCardProps> = ({
             </div>
 
             {/* Quick Nutrition Strip */}
-            <div className="mt-2.5 flex items-center justify-between border-t border-[#f6f1e7]/8 pt-2 font-mono text-[10px] text-[#a69b8d]">
+            <div
+              dir="ltr"
+              className="mt-2.5 flex items-center justify-between border-t border-[#f6f1e7]/8 pt-2 font-mono text-[10px] text-[#a69b8d]"
+            >
               <span>{fish.nutrition.calories} kcal</span>
               <span>•</span>
               <span>{fish.nutrition.proteinGrams}g Prot</span>
@@ -295,12 +348,22 @@ export const FishCard: React.FC<FishCardProps> = ({
                     e.stopPropagation()
                     onOpenCleaningTutorial(fish)
                   }}
-                  title="طريقة تنقية الحوت بالمغرب"
+                  title={
+                    lang === 'ar'
+                      ? 'فيديو وطريقة تنقية الحوت بالمغرب'
+                      : lang === 'fr'
+                        ? 'Tutoriel vidéo de nettoyage'
+                        : 'Video Cleaning Tutorial'
+                  }
                   className="flex items-center gap-1 rounded border border-[#f6f1e7]/12 bg-[#1c1714] px-2.5 py-1.5 text-[11px] font-medium text-[#f2b47e] transition-colors hover:border-[#d96b27] hover:bg-[#d96b27] hover:text-[#0b0908]"
                 >
                   <Scissors className="h-3.5 w-3.5" />
                   <span className="hidden sm:inline">
-                    {lang === 'ar' ? 'فيديو التنقية' : 'Nettoyage'}
+                    {lang === 'ar'
+                      ? 'فيديو التنقية'
+                      : lang === 'fr'
+                        ? 'Nettoyage'
+                        : 'Cleaning Video'}
                   </span>
                 </button>
               )}
@@ -312,7 +375,11 @@ export const FishCard: React.FC<FishCardProps> = ({
                     e.stopPropagation()
                     onOpenNutrition(fish)
                   }}
-                  title="حاسبة القيمة الغذائية الحية (100غ / 1كلغ)"
+                  title={
+                    lang === 'ar'
+                      ? 'حاسبة القيمة الغذائية الحية (100غ / 1كلغ)'
+                      : '100g / 1kg Live Nutrition Calculator'
+                  }
                   className="flex h-8 w-8 items-center justify-center rounded border border-[#f6f1e7]/12 bg-[#1c1714] text-emerald-400 transition-colors hover:bg-emerald-500 hover:text-[#0b0908]"
                 >
                   <Zap className="h-3.5 w-3.5" />

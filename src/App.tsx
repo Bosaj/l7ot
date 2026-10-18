@@ -16,6 +16,8 @@ import { ChefL7ot } from './components/ChefL7ot'
 import { MarketGuide } from './components/MarketGuide'
 import { AgreementsAndMarket } from './components/AgreementsAndMarket'
 import { CleaningTutorialModal } from './components/CleaningTutorialModal'
+import { FishScanner } from './components/FishScanner'
+import { SoukBasketAndComparator } from './components/SoukBasketAndComparator'
 
 import { MOROCCAN_FISH } from './data/fish'
 import { MOROCCAN_RECIPES } from './data/recipes'
@@ -26,7 +28,7 @@ import { STRINGS } from './i18n/strings'
 
 export const App: React.FC = () => {
   const [lang, setLang] = useState<SupportedLanguage>('ar')
-  const [activeTab, setActiveTab] = useState<'fish' | 'recipes' | 'chef' | 'market' | 'agreements'>('fish')
+  const [activeTab, setActiveTab] = useState<'fish' | 'recipes' | 'chef' | 'market' | 'agreements' | 'scanner'>('fish')
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [selectedCoast, setSelectedCoast] = useState<string>('all')
@@ -142,10 +144,10 @@ export const App: React.FC = () => {
 
                 <p className="max-w-2xl text-sm leading-relaxed text-[#a69b8d]">
                   {lang === 'ar'
-                    ? 'دليل مرجعي يوثق 22 نوعاً من أشهر أسماك السواحل الأطلسية والمتوسطية بأسمائها الحقيقية في الشمال والوسط والجنوب والأمازيغية، مع نطق صوتي ناطق بالدارجة، وفيديوهات التنقية، وحاسبة القيمة الغذائية، و10 معاهدات صيد دولية.'
+                    ? 'دليل مرجعي شامل يوثق 32 نوعاً من ثروات السواحل المغربية (الأطلسية والمتوسطية) بأسمائها في الشمال والوسط والجنوب والأمازيغية، مع نطق صوتي ناطق بالدارجة، ماسح ذكي بالكاميرا، فيديوهات تنقية لكل سمكة، وحاسبة قفة الساحل.'
                     : lang === 'fr'
-                    ? 'Référentiel documentant 22 espèces emblématiques des côtes atlantiques et méditerranéennes avec leurs noms régionaux (Nord, Centre, Sud & Amazigh), prononciation audio native, vidéos de nettoyage, nutrition (100g/1kg) et 10 traités internationaux.'
-                    : 'Definitive reference covering 22 iconic Atlantic and Mediterranean species with regional Moroccan names (Chamal, Centre, Sud & Amazigh), native Arabic audio pronunciation, video cleaning guides, 100g/1kg nutrition, and 10 sovereign treaties.'}
+                    ? 'Référentiel documentant 32 espèces emblématiques des côtes marocaines avec leurs noms régionaux (Nord, Centre, Sud & Amazigh), prononciation audio native, scanner caméra IA, vidéos de découpe et panier du souk.'
+                    : 'Definitive reference covering 32 iconic Moroccan marine species with regional dialects, native Arabic audio, AI camera scanner, video filleting guides, and Souk market basket.'}
                 </p>
               </div>
 
@@ -354,6 +356,18 @@ export const App: React.FC = () => {
                 </p>
               </div>
             )}
+
+            {/* Interactive Souk Shopping Basket & Head-to-Head Species Comparator */}
+            <div className="pt-6">
+              <SoukBasketAndComparator
+                allFish={MOROCCAN_FISH}
+                lang={lang}
+                onSelectFish={(f) => {
+                  setActiveFish(f)
+                  setFishModalTab('overview')
+                }}
+              />
+            </div>
           </section>
         )}
 
@@ -399,19 +413,42 @@ export const App: React.FC = () => {
 
         {/* Tab 5: International Fisheries Agreements & Market Trends */}
         {activeTab === 'agreements' && <AgreementsAndMarket lang={lang} />}
+
+        {/* Tab 6: AI Phone Camera Fish Scanner */}
+        {activeTab === 'scanner' && (
+          <FishScanner
+            allFish={MOROCCAN_FISH}
+            lang={lang}
+            onSelectFish={(f) => {
+              setActiveFish(f)
+              setFishModalTab('overview')
+            }}
+          />
+        )}
       </main>
 
-      {/* Modals */}
+      {/* Modals with Clean Single-Level Transitions */}
       {activeFish && (
         <FishModal
           fish={activeFish}
+          allFish={MOROCCAN_FISH}
           allRecipes={MOROCCAN_RECIPES}
           lang={lang}
           initialTab={fishModalTab}
           onClose={() => setActiveFish(null)}
-          onSelectRecipe={(r) => setActiveRecipe(r)}
-          onCookWithFish={handleCookWithFish}
-          onOpenCleaningTutorial={(f) => setCleaningFish(f)}
+          onSelectFish={(f) => setActiveFish(f)}
+          onSelectRecipe={(r) => {
+            setActiveFish(null)
+            setActiveRecipe(r)
+          }}
+          onCookWithFish={(f) => {
+            setActiveFish(null)
+            handleCookWithFish(f)
+          }}
+          onOpenCleaningTutorial={(f) => {
+            setActiveFish(null)
+            setCleaningFish(f)
+          }}
         />
       )}
 
@@ -428,6 +465,14 @@ export const App: React.FC = () => {
           recipe={activeRecipe}
           lang={lang}
           onClose={() => setActiveRecipe(null)}
+          onSelectFishId={(fishId: string) => {
+            const found = MOROCCAN_FISH.find((f) => f.id === fishId)
+            if (found) {
+              setActiveRecipe(null)
+              setActiveFish(found)
+              setFishModalTab('overview')
+            }
+          }}
         />
       )}
 
@@ -440,10 +485,27 @@ export const App: React.FC = () => {
               L7OT · الحوت المغربي
             </span>
             <span className="font-mono text-[11px] text-[#786c60]">
-              — 22 ESPÈCES · 10 TRAITÉS · 3,500 KM LITTORAL
+              — 32 ESPÈCES · 16 RECETTES · 10 TRAITÉS · 3,500 KM LITTORAL
             </span>
           </div>
-          <p className="font-mono text-[11px]">{t.footerMadeWith}</p>
+          <div className="flex flex-col sm:flex-row items-center gap-3 font-mono text-[11px]">
+            <span>
+              {lang === 'ar'
+                ? 'تصميم وهندسة بواسطة'
+                : lang === 'fr'
+                ? 'Conçu & développé par'
+                : 'Designed & engineered by'}
+            </span>
+            <a
+              href="https://www.linkedin.com/in/oussama-elhadji"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-[#d96b27]/40 bg-[#d96b27]/10 px-3 py-1 font-semibold text-[#f2b47e] transition hover:border-[#d96b27] hover:bg-[#d96b27]/20 hover:text-white"
+            >
+              <span>Oussama EL HADJI</span>
+              <span className="text-[10px] text-[#d96b27]">in ↗</span>
+            </a>
+          </div>
         </div>
       </footer>
     </div>

@@ -25,6 +25,16 @@ const ARABIC_NAME_TO_ID: Record<string, string> = {
   الروجي: 'rouget',
   السيبيا: 'seiche',
   بوزروك: 'moules-bouzroug',
+  الشرغو: 'sar-sargo',
+  'حوت سيدنا سليمان': 'saint-pierre',
+  المرجان: 'dentex-merjane',
+  البونيتو: 'bonite-sarda',
+  'كلب البحر': 'roussette-chien',
+  لانكوست: 'langouste-royale',
+  بوجنبة: 'crabe-araignee',
+  'محار الواليدية': 'huitre-oualidia',
+  المتيل: 'palourde-coquillage',
+  البوقة: 'bogue-bouga',
 }
 
 export function speakDarija(

@@ -184,6 +184,8 @@ export interface Recipe {
     en: string[]
   }
   imageUrl: string
+  /** Verified YouTube video ID of a Moroccan recipe tutorial */
+  videoId?: string
 }
 
 export interface MarketFreshnessCriterion {
