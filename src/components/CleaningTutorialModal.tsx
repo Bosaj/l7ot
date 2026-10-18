@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   X,
   Sparkles,
@@ -7,6 +7,7 @@ import {
   Clock,
   Play,
   ExternalLink,
+  Search,
 } from 'lucide-react'
 import type { Fish } from '../data/types'
 import type { SupportedLanguage } from '../i18n/strings'
@@ -18,16 +19,78 @@ interface CleaningTutorialModalProps {
 }
 
 /** Click-to-play YouTube player: loads no third-party scripts until the user presses play. */
-const VideoPlayer: React.FC<{ videoId: string; title: string; lang: SupportedLanguage }> = ({
+const VideoPlayer: React.FC<{
+  videoId: string
+  title: string
+  lang: SupportedLanguage
+  videoLang: SupportedLanguage
+  onSelectVideoLang: (l: SupportedLanguage) => void
+  speciesName: string
+}> = ({
   videoId,
   title,
   lang,
+  videoLang,
+  onSelectVideoLang,
+  speciesName,
 }) => {
   const [playing, setPlaying] = useState(false)
   const watchLabel =
     lang === 'fr' ? 'Ouvrir sur YouTube' : lang === 'en' ? 'Open on YouTube' : 'فتح على يوتيوب'
+
+  const searchQuery =
+    videoLang === 'ar'
+      ? `طريقة تنقية وسلخ سمك ${speciesName}`
+      : videoLang === 'fr'
+        ? `Comment vider et nettoyer ${speciesName}`
+        : `How to clean and fillet ${speciesName}`
+
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
+      {/* Video Language Selector Buttons */}
+      <div className="flex items-center justify-between gap-2 flex-wrap text-xs">
+        <span className="font-mono text-[11px] text-[#a69b8d]">
+          {lang === 'ar' ? 'اختر لغة شرح الكسال:' : 'Langue du tutoriel :'}
+        </span>
+        <div className="inline-flex rounded-lg border border-[#2a211c] bg-[#0b0908] p-0.5">
+          <button
+            type="button"
+            onClick={() => {
+              setPlaying(false)
+              onSelectVideoLang('ar')
+            }}
+            className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition ${
+              videoLang === 'ar' ? 'bg-[#d96b27] text-[#0b0908]' : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+            }`}
+          >
+            🇲🇦 الدارجة / العربية
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setPlaying(false)
+              onSelectVideoLang('fr')
+            }}
+            className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition ${
+              videoLang === 'fr' ? 'bg-[#d96b27] text-[#0b0908]' : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+            }`}
+          >
+            🇫🇷 Français
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setPlaying(false)
+              onSelectVideoLang('en')
+            }}
+            className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition ${
+              videoLang === 'en' ? 'bg-[#d96b27] text-[#0b0908]' : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+            }`}
+          >
+            🇬🇧 English
+          </button>
+        </div>
+      </div>
       <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-xl">
         {playing ? (
           <iframe
@@ -56,15 +119,26 @@ const VideoPlayer: React.FC<{ videoId: string; title: string; lang: SupportedLan
           </button>
         )}
       </div>
-      <a
-        href={`https://www.youtube.com/watch?v=${videoId}`}
-        target="_blank"
-        rel="noreferrer"
-        className="inline-flex items-center gap-1.5 text-xs font-medium text-[#a69b8d] transition hover:text-[#f2b47e]"
-      >
-        <ExternalLink className="h-3.5 w-3.5" />
-        {watchLabel}
-      </a>
+      <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-[#a69b8d]">
+        <a
+          href={`https://www.youtube.com/results?search_query=${encodeURIComponent(searchQuery)}`}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-1 text-[11px] text-[#a69b8d] hover:text-[#f2b47e] transition"
+        >
+          <Search className="h-3 w-3" />
+          {lang === 'ar' ? 'المزيد من فيديوهات تنقية هذا الحوت' : 'Plus de vidéos de découpe'}
+        </a>
+        <a
+          href={`https://www.youtube.com/watch?v=${videoId}`}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-[#a69b8d] transition hover:text-[#f2b47e]"
+        >
+          <ExternalLink className="h-3.5 w-3.5" />
+          {watchLabel}
+        </a>
+      </div>
     </div>
   )
 }
@@ -74,10 +148,33 @@ export const CleaningTutorialModal: React.FC<CleaningTutorialModalProps> = ({
   lang,
   onClose,
 }) => {
+  const [videoLang, setVideoLang] = useState<SupportedLanguage>(lang)
+
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = originalOverflow
+    }
+  }, [])
+
+  useEffect(() => {
+    setVideoLang(lang)
+  }, [lang, fish.id])
+
   const tut = fish.cleaningTutorial
 
   const title = lang === 'fr' ? tut.methodNameFr : lang === 'en' ? tut.methodNameEn : tut.methodNameAr
   const tools = lang === 'fr' ? tut.toolsNeededFr : lang === 'en' ? tut.toolsNeededEn : tut.toolsNeededAr
+
+  const activeVideoId =
+    fish.cleaningVideos?.[videoLang] ||
+    (videoLang === 'ar'
+      ? fish.cleaningVideos?.ar
+      : videoLang === 'fr'
+        ? fish.cleaningVideos?.fr
+        : fish.cleaningVideos?.en) ||
+    fish.cleaningVideoId
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
@@ -140,10 +237,13 @@ export const CleaningTutorialModal: React.FC<CleaningTutorialModalProps> = ({
 
         {/* Modal Scrollable Body */}
         <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6">
-          {fish.cleaningVideoId && (
+          {activeVideoId && (
             <VideoPlayer
-              videoId={fish.cleaningVideoId}
+              videoId={activeVideoId}
               lang={lang}
+              videoLang={videoLang}
+              onSelectVideoLang={(l) => setVideoLang(l)}
+              speciesName={lang === 'ar' ? fish.nameDarijaArabic : lang === 'fr' ? fish.nameFrench : fish.nameEnglish}
               title={
                 lang === 'fr'
                   ? `Vidéo : nettoyer ${fish.nameFrench}`

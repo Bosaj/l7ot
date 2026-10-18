@@ -1,6 +1,7 @@
 import type { Fish } from './types'
+import { EXTRA_MOROCCAN_FISH } from './extraFish'
 
-export const MOROCCAN_FISH: Fish[] = [
+const INITIAL_MOROCCAN_FISH: Fish[] = [
   {
     id: 'sardine',
     nameDarijaArabic: 'سردين',
@@ -4263,6 +4264,11 @@ export const MOROCCAN_FISH: Fish[] = [
     audioPhonetic: 'El Bou-ga / La Bo-ga',
     recommendedRecipeIds: ['friture-mixte-marocaine', 'sardines-mchermline'],
   },
+]
+
+export const MOROCCAN_FISH: Fish[] = [
+  ...INITIAL_MOROCCAN_FISH,
+  ...EXTRA_MOROCCAN_FISH,
 ]
 
 

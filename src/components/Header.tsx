@@ -8,12 +8,13 @@ import {
   ShoppingBag,
   Globe2,
   Waves,
+  Scale,
 } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
 import type { MoroccanPortRegion } from '../lib/moroccanRegions'
 
-export type NavTab = 'fish' | 'scanner' | 'recipes' | 'chef' | 'market' | 'agreements' | 'marine-apis'
+export type NavTab = 'fish' | 'scanner' | 'recipes' | 'chef' | 'market' | 'agreements' | 'maritime-law' | 'marine-apis'
 
 interface HeaderProps {
   activeTab: NavTab
@@ -92,8 +93,15 @@ export const Header: React.FC<HeaderProps> = ({
       icon: Globe2,
     },
     {
-      id: 'marine-apis',
+      id: 'maritime-law',
       index: '07',
+      label: t.navMaritimeLaw,
+      shortLabel: lang === 'ar' ? 'قانون الصيد' : lang === 'fr' ? 'Lois & Tailles' : 'Fishing Law',
+      icon: Scale,
+    },
+    {
+      id: 'marine-apis',
+      index: '08',
       label: t.navMarineApis,
       shortLabel: lang === 'ar' ? 'طقس الموانئ' : lang === 'fr' ? 'Météo Mer' : 'Port Radar',
       icon: Waves,
@@ -103,47 +111,47 @@ export const Header: React.FC<HeaderProps> = ({
   const tickerItems =
     lang === 'ar'
       ? [
-          { port: 'بني نصار / الناظور · باخيل والغامبا', price: '85 درهم/كلغ', trend: '▲', down: false },
-          { port: 'طنجة المتوسط · الباجو الملكي والزريقة', price: '110 درهم/كلغ', trend: '▲', down: false },
-          { port: 'الحسيمة · الميرو والباسي', price: '130 درهم/كلغ', trend: '▲', down: false },
-          { port: 'العرائش · بيسبادا وروبيو', price: '65 درهم/كلغ', trend: '▼', down: true },
-          { port: 'الدار البيضاء · الكوربين والكلمار', price: '80 درهم/كلغ', trend: '●', down: true },
-          { port: 'الواليدية · المحار الملكي وبوجنبة', price: '70 درهم/كلغ', trend: '●', down: true },
-          { port: 'آسفي · السردين الطري', price: '14 درهم/كلغ', trend: '▼', down: true },
-          { port: 'الصويرة · الميرلا والصابر', price: '55 درهم/كلغ', trend: '▼', down: true },
-          { port: 'أكادير · الصول والكوكياج', price: '120 درهم/كلغ', trend: '▲', down: false },
-          { port: 'سيدي إفني وطانطان · الأخطبوط والكوربين', price: '90 درهم/كلغ', trend: '▲', down: false },
-          { port: 'العيون المرسى · كروفيت رويال وتونة', price: '140 درهم/كلغ', trend: '▼', down: true },
-          { port: 'الداخلة · الأخطبوط والسيبيا', price: '95 درهم/كلغ', trend: '▲', down: false },
+          { port: 'بني نصار / الناظور · باخيل والغامبا', amount: 85, unit: 'درهم/كلغ', trend: '▲', down: false },
+          { port: 'طنجة المتوسط · الباجو الملكي والزريقة', amount: 110, unit: 'درهم/كلغ', trend: '▲', down: false },
+          { port: 'الحسيمة · الميرو والباسي', amount: 130, unit: 'درهم/كلغ', trend: '▲', down: false },
+          { port: 'العرائش · بيسبادا وروبيو', amount: 65, unit: 'درهم/كلغ', trend: '▼', down: true },
+          { port: 'الدار البيضاء · الكوربين والكلمار', amount: 80, unit: 'درهم/كلغ', trend: '●', down: true },
+          { port: 'الواليدية · المحار الملكي وبوجنبة', amount: 70, unit: 'درهم/كلغ', trend: '●', down: true },
+          { port: 'آسفي · السردين الطري', amount: 14, unit: 'درهم/كلغ', trend: '▼', down: true },
+          { port: 'الصويرة · الميرلا والصابر', amount: 55, unit: 'درهم/كلغ', trend: '▼', down: true },
+          { port: 'أكادير · الصول والكوكياج', amount: 120, unit: 'درهم/كلغ', trend: '▲', down: false },
+          { port: 'سيدي إفني وطانطان · الأخطبوط والكوربين', amount: 90, unit: 'درهم/كلغ', trend: '▲', down: false },
+          { port: 'العيون المرسى · كروفيت رويال وتونة', amount: 140, unit: 'درهم/كلغ', trend: '▼', down: true },
+          { port: 'الداخلة · الأخطبوط والسيبيا', amount: 95, unit: 'درهم/كلغ', trend: '▲', down: false },
         ]
       : lang === 'fr'
         ? [
-            { port: 'NADOR / BENI ANSAR · PAGEOT & GAMBAS', price: '85 MAD/KG', trend: '▲', down: false },
-            { port: 'TANGER MED · DAURADE ROYALE', price: '110 MAD/KG', trend: '▲', down: false },
-            { port: 'AL HOCEIMA · MÉROU & PAGEOT', price: '130 MAD/KG', trend: '▲', down: false },
-            { port: 'LARACHE · ESPADON & ROUGET', price: '65 MAD/KG', trend: '▼', down: true },
-            { port: 'CASABLANCA · COURBINE & CALMAR', price: '80 MAD/KG', trend: '●', down: true },
-            { port: 'OUALIDIA · HUÎTRES & CRABE', price: '70 MAD/KG', trend: '●', down: true },
-            { port: 'SAFI · SARDINE ATLANTIQUE', price: '14 MAD/KG', trend: '▼', down: true },
-            { port: 'ESSAOUIRA · MERLU BLANC', price: '55 MAD/KG', trend: '▼', down: true },
-            { port: 'AGADIR · SOLE ROYALE & SEICHE', price: '120 MAD/KG', trend: '▲', down: false },
-            { port: 'TAN-TAN / SIDI IFNI · POULPE & COURBINE', price: '90 MAD/KG', trend: '▲', down: false },
-            { port: 'LAÂYOUNE · CREVETTE ROYALE', price: '140 MAD/KG', trend: '▼', down: true },
-            { port: 'DAKHLA · POULPE & THON', price: '95 MAD/KG', trend: '▲', down: false },
+            { port: 'NADOR / BENI ANSAR · PAGEOT & GAMBAS', amount: 85, unit: 'MAD/KG', trend: '▲', down: false },
+            { port: 'TANGER MED · DAURADE ROYALE', amount: 110, unit: 'MAD/KG', trend: '▲', down: false },
+            { port: 'AL HOCEIMA · MÉROU & PAGEOT', amount: 130, unit: 'MAD/KG', trend: '▲', down: false },
+            { port: 'LARACHE · ESPADON & ROUGET', amount: 65, unit: 'MAD/KG', trend: '▼', down: true },
+            { port: 'CASABLANCA · COURBINE & CALMAR', amount: 80, unit: 'MAD/KG', trend: '●', down: true },
+            { port: 'OUALIDIA · HUÎTRES & CRABE', amount: 70, unit: 'MAD/KG', trend: '●', down: true },
+            { port: 'SAFI · SARDINE ATLANTIQUE', amount: 14, unit: 'MAD/KG', trend: '▼', down: true },
+            { port: 'ESSAOUIRA · MERLU BLANC', amount: 55, unit: 'MAD/KG', trend: '▼', down: true },
+            { port: 'AGADIR · SOLE ROYALE & SEICHE', amount: 120, unit: 'MAD/KG', trend: '▲', down: false },
+            { port: 'TAN-TAN / SIDI IFNI · POULPE & COURBINE', amount: 90, unit: 'MAD/KG', trend: '▲', down: false },
+            { port: 'LAÂYOUNE · CREVETTE ROYALE', amount: 140, unit: 'MAD/KG', trend: '▼', down: true },
+            { port: 'DAKHLA · POULPE & THON', amount: 95, unit: 'MAD/KG', trend: '▲', down: false },
           ]
         : [
-            { port: 'NADOR / BENI ANSAR · ROYAL PAGEL & SHRIMPS', price: '85 MAD/KG', trend: '▲', down: false },
-            { port: 'TANGIER MED · ROYAL SEABREAM', price: '110 MAD/KG', trend: '▲', down: false },
-            { port: 'AL HOCEIMA · DUSKY GROUPER', price: '130 MAD/KG', trend: '▲', down: false },
-            { port: 'LARACHE · SWORDFISH & RED MULLET', price: '65 MAD/KG', trend: '▼', down: true },
-            { port: 'CASABLANCA · CROAKER & SQUID', price: '80 MAD/KG', trend: '●', down: true },
-            { port: 'OUALIDIA · ROYAL OYSTERS & CRAB', price: '70 MAD/KG', trend: '●', down: true },
-            { port: 'SAFI · ATLANTIC SARDINE', price: '14 MAD/KG', trend: '▼', down: true },
-            { port: 'ESSAOUIRA · SILVER HAKE', price: '55 MAD/KG', trend: '▼', down: true },
-            { port: 'AGADIR · DOVER SOLE & SEAFOOD', price: '120 MAD/KG', trend: '▲', down: false },
-            { port: 'TAN-TAN / SIDI IFNI · OCTOPUS & CROAKER', price: '90 MAD/KG', trend: '▲', down: false },
-            { port: 'LAAYOUNE · KING PRAWN & TUNA', price: '140 MAD/KG', trend: '▼', down: true },
-            { port: 'DAKHLA · SAHARA OCTOPUS', price: '95 MAD/KG', trend: '▲', down: false },
+            { port: 'NADOR / BENI ANSAR · ROYAL PAGEL & SHRIMPS', amount: 85, unit: 'MAD/KG', trend: '▲', down: false },
+            { port: 'TANGIER MED · ROYAL SEABREAM', amount: 110, unit: 'MAD/KG', trend: '▲', down: false },
+            { port: 'AL HOCEIMA · DUSKY GROUPER', amount: 130, unit: 'MAD/KG', trend: '▲', down: false },
+            { port: 'LARACHE · SWORDFISH & RED MULLET', amount: 65, unit: 'MAD/KG', trend: '▼', down: true },
+            { port: 'CASABLANCA · CROAKER & SQUID', amount: 80, unit: 'MAD/KG', trend: '●', down: true },
+            { port: 'OUALIDIA · ROYAL OYSTERS & CRAB', amount: 70, unit: 'MAD/KG', trend: '●', down: true },
+            { port: 'SAFI · ATLANTIC SARDINE', amount: 14, unit: 'MAD/KG', trend: '▼', down: true },
+            { port: 'ESSAOUIRA · SILVER HAKE', amount: 55, unit: 'MAD/KG', trend: '▼', down: true },
+            { port: 'AGADIR · DOVER SOLE & SEAFOOD', amount: 120, unit: 'MAD/KG', trend: '▲', down: false },
+            { port: 'TAN-TAN / SIDI IFNI · OCTOPUS & CROAKER', amount: 90, unit: 'MAD/KG', trend: '▲', down: false },
+            { port: 'LAAYOUNE · KING PRAWN & TUNA', amount: 140, unit: 'MAD/KG', trend: '▼', down: true },
+            { port: 'DAKHLA · SAHARA OCTOPUS', amount: 95, unit: 'MAD/KG', trend: '▲', down: false },
           ]
 
   return (
@@ -181,14 +189,15 @@ export const Header: React.FC<HeaderProps> = ({
                     <span className="text-[#f6f1e7]/20">•</span>
                     <span className="text-[#d4cbbd] font-medium text-[11px] whitespace-nowrap">{item.port}</span>
                     <span
-                      dir="ltr"
-                      className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold ${
+                      dir={lang === 'ar' ? 'rtl' : 'ltr'}
+                      className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 font-mono text-[10px] font-bold ${
                         item.down
                           ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20'
                           : 'bg-amber-500/15 text-amber-300 border border-amber-500/20'
                       }`}
                     >
-                      <span>{item.price}</span>
+                      <span className="font-bold tabular-nums">{item.amount}</span>
+                      <span className="text-[9px] font-normal opacity-90">{item.unit}</span>
                       <span className="text-[9px] opacity-85">{item.trend}</span>
                     </span>
                   </div>
@@ -202,14 +211,15 @@ export const Header: React.FC<HeaderProps> = ({
                     <span className="text-[#f6f1e7]/20">•</span>
                     <span className="text-[#d4cbbd] font-medium text-[11px] whitespace-nowrap">{item.port}</span>
                     <span
-                      dir="ltr"
-                      className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold ${
+                      dir={lang === 'ar' ? 'rtl' : 'ltr'}
+                      className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 font-mono text-[10px] font-bold ${
                         item.down
                           ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20'
                           : 'bg-amber-500/15 text-amber-300 border border-amber-500/20'
                       }`}
                     >
-                      <span>{item.price}</span>
+                      <span className="font-bold tabular-nums">{item.amount}</span>
+                      <span className="text-[9px] font-normal opacity-90">{item.unit}</span>
                       <span className="text-[9px] opacity-85">{item.trend}</span>
                     </span>
                   </div>

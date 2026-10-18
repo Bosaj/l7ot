@@ -85,6 +85,25 @@ export interface CleaningTutorial {
   steps: CleaningStep[]
 }
 
+export interface FishRegulation {
+  minimumCatchSizeCm?: number
+  minimumCatchWeightGrams?: number
+  isUnderBiologicalRest?: boolean
+  biologicalRestPeriod?: {
+    ar: string
+    fr: string
+    en: string
+  }
+  spearfishingAllowed: boolean
+  spearfishingNotes?: {
+    ar: string
+    fr: string
+    en: string
+  }
+  legalCategory: 'small_pelagic' | 'demersal' | 'cephalopod' | 'crustacean' | 'large_pelagic' | 'chondrichthyan' | 'bivalve'
+  dahirLawRef?: string
+}
+
 export interface Fish {
   id: string
   nameDarijaArabic: string
@@ -123,6 +142,14 @@ export interface Fish {
   fallbackImageUrl?: string
   /** YouTube video ID of a cleaning / preparation tutorial for this species. */
   cleaningVideoId?: string
+  /** Tailored cleaning video IDs per language (Darija/Arabic, French, English) */
+  cleaningVideos?: {
+    ar?: string
+    fr?: string
+    en?: string
+  }
+  /** Moroccan Maritime Law & Spearfishing regulations */
+  regulations?: FishRegulation
   audioPhonetic: string
   recommendedRecipeIds: string[]
 }

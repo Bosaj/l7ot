@@ -24,6 +24,8 @@ import { CleaningTutorialModal } from './components/CleaningTutorialModal'
 import { FishScanner } from './components/FishScanner'
 import { SoukBasketAndComparator } from './components/SoukBasketAndComparator'
 import { MarineWeatherAndApis } from './components/MarineWeatherAndApis'
+import { MaritimeLawGuide } from './components/MaritimeLawGuide'
+import type { NavTab } from './components/Header'
 
 import { MOROCCAN_FISH } from './data/fish'
 import { MOROCCAN_RECIPES } from './data/recipes'
@@ -36,7 +38,7 @@ import { useUserPortLocation } from './hooks/useUserPortLocation'
 export const App: React.FC = () => {
   const [lang, setLang] = useState<SupportedLanguage>('ar')
   const userPortLocation = useUserPortLocation()
-  const [activeTab, setActiveTab] = useState<'fish' | 'recipes' | 'chef' | 'market' | 'agreements' | 'scanner' | 'marine-apis'>('fish')
+  const [activeTab, setActiveTab] = useState<NavTab>('fish')
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [selectedCoast, setSelectedCoast] = useState<string>('all')
@@ -493,7 +495,12 @@ export const App: React.FC = () => {
           />
         )}
 
-        {/* Tab 7: Live Moroccan Ports Marine Weather & Free Marine APIs Hub */}
+        {/* Tab 7: Moroccan Maritime Law, Spearfishing Regulations & Minimum Sizes */}
+        {activeTab === 'maritime-law' && (
+          <MaritimeLawGuide lang={lang} />
+        )}
+
+        {/* Tab 8: Live Moroccan Ports Marine Weather & Free Marine APIs Hub */}
         {activeTab === 'marine-apis' && (
           <MarineWeatherAndApis lang={lang} />
         )}

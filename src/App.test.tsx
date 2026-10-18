@@ -44,13 +44,16 @@ describe('L7OT App', () => {
     expect(screen.getByRole('button', { name: /Encyclopédie Poissons/i })).toBeInTheDocument()
   })
 
-  it('includes all 32 Moroccan fish species and supports regional dialect search including Oriental', () => {
+  it('includes all 44 Moroccan fish species and supports regional dialect search including Oriental and new species', () => {
     render(<App />)
-    expect(screen.getByText(/موسوعة الأسماك \(32\)/)).toBeInTheDocument()
+    expect(screen.getByText(/موسوعة الأسماك \(44\)/)).toBeInTheDocument()
 
     const searchInput = screen.getByPlaceholderText(/ابحث باسم الحوت/i)
     fireEvent.change(searchInput, { target: { value: 'باخيل' } })
     expect(screen.getByText('الباجو الملكي')).toBeInTheDocument()
+
+    fireEvent.change(searchInput, { target: { value: 'بوجوخ' } })
+    expect(screen.getByText('بوجوخ')).toBeInTheDocument()
   })
 })
 

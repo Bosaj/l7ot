@@ -17,6 +17,12 @@ import {
   ExternalLink,
   Database,
   RefreshCw,
+  Scale,
+  ShieldCheck,
+  AlertTriangle,
+  Ruler,
+  Compass,
+  Search,
 } from 'lucide-react'
 import type { Fish, Recipe } from '../data/types'
 import type { SupportedLanguage } from '../i18n/strings'
@@ -45,7 +51,7 @@ interface FishModalProps {
   allRecipes: Recipe[]
   lang: SupportedLanguage
   userRegion?: MoroccanPortRegion
-  initialTab?: 'overview' | 'nutrition' | 'cleaning' | 'market' | 'science_api'
+  initialTab?: 'overview' | 'nutrition' | 'cleaning' | 'market' | 'science_api' | 'law'
   onClose: () => void
   onSelectFish?: (fish: Fish) => void
   onSelectRecipe: (recipe: Recipe) => void
@@ -58,13 +64,68 @@ const InlineVideoPlayer: React.FC<{
   videoId: string
   title: string
   lang: SupportedLanguage
-}> = ({ videoId, title, lang }) => {
+  videoLang: SupportedLanguage
+  onSelectVideoLang: (l: SupportedLanguage) => void
+  speciesName: string
+}> = ({ videoId, title, lang, videoLang, onSelectVideoLang, speciesName }) => {
   const [playing, setPlaying] = useState(false)
   const watchLabel =
     lang === 'ar' ? 'مشاهدة على يوتيوب' : lang === 'fr' ? 'Ouvrir sur YouTube' : 'Watch on YouTube'
 
+  const searchQuery =
+    videoLang === 'ar'
+      ? `طريقة تنقية وسلخ سمك ${speciesName}`
+      : videoLang === 'fr'
+        ? `Comment vider et nettoyer ${speciesName}`
+        : `How to clean and fillet ${speciesName}`
+
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
+      {/* Video Language Selector Buttons */}
+      <div className="flex items-center justify-between gap-2 flex-wrap text-xs">
+        <span className="font-mono text-[11px] text-[#a69b8d]">
+          {lang === 'ar' ? 'اختر لغة شرح التنقية والفيليه:' : 'Langue du tutoriel vidéo :'}
+        </span>
+        <div className="inline-flex rounded-lg border border-[#2a211c] bg-[#0b0908] p-0.5">
+          <button
+            type="button"
+            onClick={() => {
+              setPlaying(false)
+              onSelectVideoLang('ar')
+            }}
+            className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition ${
+              videoLang === 'ar' ? 'bg-[#d96b27] text-[#0b0908]' : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+            }`}
+          >
+            🇲🇦 الدارجة / العربية
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setPlaying(false)
+              onSelectVideoLang('fr')
+            }}
+            className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition ${
+              videoLang === 'fr' ? 'bg-[#d96b27] text-[#0b0908]' : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+            }`}
+          >
+            🇫🇷 Français
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setPlaying(false)
+              onSelectVideoLang('en')
+            }}
+            className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition ${
+              videoLang === 'en' ? 'bg-[#d96b27] text-[#0b0908]' : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+            }`}
+          >
+            🇬🇧 English
+          </button>
+        </div>
+      </div>
+
       <div className="relative aspect-video w-full overflow-hidden rounded-sm border border-[#2a211c] bg-[#0b0908] shadow-2xl">
         {playing ? (
           <iframe
@@ -93,19 +154,31 @@ const InlineVideoPlayer: React.FC<{
           </button>
         )}
       </div>
-      <div className="flex items-center justify-between text-xs text-[#a69b8d]">
+
+      <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-[#a69b8d]">
         <span className="font-mono text-[11px] text-[#e09f3e]">
-          {lang === 'ar' ? 'فيديو توضيحي بدقة عالية' : 'Tutoriel vidéo HD'}
+          {lang === 'ar' ? 'فيديو متخصص في تقطيع وتنقية هذا النوع' : 'Tutoriel vidéo HD spécifique'}
         </span>
-        <a
-          href={`https://www.youtube.com/watch?v=${videoId}`}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-1 hover:text-[#e09f3e]"
-        >
-          <ExternalLink className="h-3.5 w-3.5" />
-          {watchLabel}
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href={`https://www.youtube.com/results?search_query=${encodeURIComponent(searchQuery)}`}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1 text-[11px] text-[#a69b8d] hover:text-[#e09f3e] transition"
+          >
+            <Search className="h-3 w-3" />
+            {lang === 'ar' ? 'المزيد من فيديوهات تنقية هذا الحوت' : 'Plus de vidéos de découpe'}
+          </a>
+          <a
+            href={`https://www.youtube.com/watch?v=${videoId}`}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1 text-[11px] text-[#e09f3e] hover:underline"
+          >
+            <ExternalLink className="h-3.5 w-3.5" />
+            {watchLabel}
+          </a>
+        </div>
       </div>
     </div>
   )
@@ -126,9 +199,23 @@ export const FishModal: React.FC<FishModalProps> = ({
   const t = STRINGS[lang]
   const [isPlayingAudio, setIsPlayingAudio] = useState(false)
   const [imgError, setImgError] = useState(false)
-  const [modalTab, setModalTab] = useState<'overview' | 'nutrition' | 'cleaning' | 'market' | 'science_api'>(
+  const [modalTab, setModalTab] = useState<'overview' | 'nutrition' | 'cleaning' | 'market' | 'science_api' | 'law'>(
     initialTab
   )
+  const [videoLang, setVideoLang] = useState<SupportedLanguage>(lang)
+
+  // Lock background body scroll while modal is open
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = originalOverflow
+    }
+  }, [])
+
+  useEffect(() => {
+    setVideoLang(lang)
+  }, [lang, fish.id])
 
   const [scienceLoading, setScienceLoading] = useState(false)
   const [wormsRecords, setWormsRecords] = useState<WoRMSRecord[]>([])
@@ -165,6 +252,15 @@ export const FishModal: React.FC<FishModalProps> = ({
   const currentIndex = allFish.findIndex((f) => f.id === fish.id)
   const prevFish = currentIndex > 0 ? allFish[currentIndex - 1] : allFish[allFish.length - 1]
   const nextFish = currentIndex < allFish.length - 1 ? allFish[currentIndex + 1] : allFish[0]
+
+  const activeCleaningVideoId =
+    fish.cleaningVideos?.[videoLang] ||
+    (videoLang === 'ar'
+      ? fish.cleaningVideos?.ar
+      : videoLang === 'fr'
+        ? fish.cleaningVideos?.fr
+        : fish.cleaningVideos?.en) ||
+    fish.cleaningVideoId
 
   const handleAudio = () => {
     setIsPlayingAudio(true)
@@ -284,9 +380,23 @@ export const FishModal: React.FC<FishModalProps> = ({
                   <Volume2 className="h-4 w-4" />
                 </button>
               </div>
-              <p className="mt-1 font-mono text-xs text-[#e09f3e]">
-                {fish.nameDarijaLatin} · {fish.nameFrench} ({fish.nameEnglish})
-              </p>
+              <div className="mt-1 flex flex-wrap items-center gap-2">
+                <p className="font-mono text-xs text-[#e09f3e]">
+                  {fish.nameDarijaLatin} · {fish.nameFrench} ({fish.nameEnglish})
+                </p>
+                {fish.regulations?.minimumCatchSizeCm && (
+                  <span className="inline-flex items-center gap-1 rounded bg-emerald-500/15 border border-emerald-500/30 px-1.5 py-0.5 font-mono text-[10px] text-emerald-300 font-bold">
+                    <Ruler className="h-2.5 w-2.5" />
+                    {lang === 'ar' ? `مقاس أدنى: ${fish.regulations.minimumCatchSizeCm} سم` : `Min: ${fish.regulations.minimumCatchSizeCm}cm`}
+                  </span>
+                )}
+                {fish.regulations?.isUnderBiologicalRest && (
+                  <span className="inline-flex items-center gap-1 rounded bg-rose-500/20 border border-rose-500/40 px-1.5 py-0.5 font-mono text-[10px] text-rose-300 font-bold">
+                    <AlertTriangle className="h-2.5 w-2.5" />
+                    {lang === 'ar' ? 'راحة بيولوجية' : 'Repos bio'}
+                  </span>
+                )}
+              </div>
               <p className="font-serif italic text-xs text-[#8c7d6b]">{fish.scientificName}</p>
             </div>
 
@@ -318,70 +428,84 @@ export const FishModal: React.FC<FishModalProps> = ({
           </div>
         </div>
 
-        {/* Modal Section Navigation Tabs */}
-        <div className="flex items-center gap-1.5 border-b border-[#2a211c] bg-[#0b0908] p-2 text-xs font-semibold overflow-x-auto">
+        {/* Modal Section Navigation Tabs (Zero Scrollbar, Responsive Wrapping Layout) */}
+        <div className="flex flex-wrap items-center gap-1.5 border-b border-[#2a211c] bg-[#0b0908] p-2 text-xs font-semibold [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <button
             type="button"
             onClick={() => setModalTab('overview')}
-            className={`rounded-sm px-3.5 py-1.5 transition-all ${
+            className={`rounded-sm px-3 py-1.5 transition-all flex items-center gap-1.5 ${
               modalTab === 'overview'
                 ? 'bg-[#d96b27] text-[#0b0908] font-bold'
                 : 'text-[#b5a592] hover:text-[#f4ede2]'
             }`}
           >
-            {lang === 'ar' ? 'نظرة عامة والأسماء الجهوية' : 'Aperçu & Noms Régionaux'}
+            <BookOpen className="h-3.5 w-3.5" />
+            {lang === 'ar' ? 'نظرة عامة والأسماء' : 'Aperçu & Noms'}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setModalTab('law')}
+            className={`rounded-sm px-3 py-1.5 transition-all flex items-center gap-1.5 ${
+              modalTab === 'law'
+                ? 'bg-amber-500 text-[#0b0908] font-bold'
+                : 'text-amber-400/80 hover:text-amber-300'
+            }`}
+          >
+            <Scale className="h-3.5 w-3.5" />
+            {lang === 'ar' ? 'قانون الصيد والمقاسات' : 'Lois & Tailles Min.'}
           </button>
 
           <button
             type="button"
             onClick={() => setModalTab('cleaning')}
-            className={`rounded-sm px-3.5 py-1.5 transition-all flex items-center gap-1.5 ${
+            className={`rounded-sm px-3 py-1.5 transition-all flex items-center gap-1.5 ${
               modalTab === 'cleaning'
                 ? 'bg-[#d96b27] text-[#0b0908] font-bold'
                 : 'text-[#b5a592] hover:text-[#f4ede2]'
             }`}
           >
             <Scissors className="h-3.5 w-3.5" />
-            {lang === 'ar' ? 'فيديو ودليل التنقية (الكسال)' : 'Vidéo & Découpe (Kessal)'}
+            {lang === 'ar' ? 'دليل التنقية (الكسال)' : 'Vidéo & Découpe'}
           </button>
 
           <button
             type="button"
             onClick={() => setModalTab('nutrition')}
-            className={`rounded-sm px-3.5 py-1.5 transition-all flex items-center gap-1.5 ${
+            className={`rounded-sm px-3 py-1.5 transition-all flex items-center gap-1.5 ${
               modalTab === 'nutrition'
                 ? 'bg-[#d96b27] text-[#0b0908] font-bold'
                 : 'text-[#b5a592] hover:text-[#f4ede2]'
             }`}
           >
             <Zap className="h-3.5 w-3.5" />
-            {lang === 'ar' ? 'حاسبة القيمة الغذائية' : 'Nutrition (100g/1kg)'}
+            {lang === 'ar' ? 'القيمة الغذائية' : 'Nutrition'}
           </button>
 
           <button
             type="button"
             onClick={() => setModalTab('market')}
-            className={`rounded-sm px-3.5 py-1.5 transition-all flex items-center gap-1.5 ${
+            className={`rounded-sm px-3 py-1.5 transition-all flex items-center gap-1.5 ${
               modalTab === 'market'
                 ? 'bg-[#d96b27] text-[#0b0908] font-bold'
                 : 'text-[#b5a592] hover:text-[#f4ede2]'
             }`}
           >
             <TrendingUp className="h-3.5 w-3.5" />
-            {lang === 'ar' ? 'بورصة الأسعار والاتجاه' : 'Cours & Marchés'}
+            {lang === 'ar' ? 'بورصة الأسعار' : 'Bourse & Marchés'}
           </button>
 
           <button
             type="button"
             onClick={() => setModalTab('science_api')}
-            className={`rounded-sm px-3.5 py-1.5 transition-all flex items-center gap-1.5 ${
+            className={`rounded-sm px-3 py-1.5 transition-all flex items-center gap-1.5 ${
               modalTab === 'science_api'
                 ? 'bg-cyan-500 text-[#0b0908] font-bold'
                 : 'text-cyan-400/80 hover:text-cyan-300'
             }`}
           >
             <Database className="h-3.5 w-3.5" />
-            {lang === 'ar' ? 'البيولوجيا والسجلات البحرية (WoRMS/GBIF)' : 'Biologie & Registres Marins'}
+            {lang === 'ar' ? 'البيولوجيا (WoRMS)' : 'Biologie (APIs)'}
           </button>
         </div>
 
@@ -665,6 +789,223 @@ export const FishModal: React.FC<FishModalProps> = ({
             </>
           )}
 
+          {/* TAB: MARITIME LAW, MINIMUM SIZES & SPEARFISHING REGULATIONS */}
+          {modalTab === 'law' && (
+            <div className="space-y-6">
+              {/* Header Card */}
+              <div className="rounded-xl border border-amber-500/30 bg-gradient-to-br from-[#1b1510] via-[#14100e] to-[#0b0908] p-5 space-y-3">
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/15 px-3 py-1 font-mono text-xs font-bold text-amber-300">
+                    <Scale className="h-4 w-4" />
+                    {lang === 'ar' ? 'الضوابط القانونية المغربية (المقاسات والأحجام)' : 'Réglementation Marocaine des Tailles'}
+                  </div>
+
+                  <span className="font-mono text-xs text-[#a69b8d]">
+                    {fish.regulations?.dahirLawRef || 'Dahir 1-73-255 & Arrêté 1154-88'}
+                  </span>
+                </div>
+
+                <h3 className="font-editorial text-lg sm:text-xl font-bold text-[#f6f1e7]">
+                  {lang === 'ar'
+                    ? `المعايير القانونية لصيد وتسويق ${fish.nameDarijaArabic} (${fish.scientificName})`
+                    : `Normes légales de pêche et de taille pour ${fish.nameFrench}`}
+                </h3>
+
+                <p className="text-xs text-[#b5a592] leading-relaxed">
+                  {lang === 'ar'
+                    ? 'يخضع هذا النوع للمراقبة الصارمة من طرف مندوبيات الصيد البحري والمكتب الوطني للسلامة الصحية (ONSSA) لمنع استنزاف صغار الأسماك وضمان تجدد المخزون.'
+                    : 'Cette espèce fait l’objet d’un contrôle strict pour préserver les juvéniles et assurer la pérennité de la ressource halieutique.'}
+                </p>
+              </div>
+
+              {/* Minimum Catch Size Card with Graphical Fish Ruler */}
+              <div className="rounded-xl border border-[#2a211c] bg-[#14100e] p-5 space-y-4">
+                <div className="flex items-center justify-between flex-wrap gap-2 border-b border-[#2a211c] pb-3">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                      <Ruler className="h-4 w-4" />
+                    </span>
+                    <div>
+                      <h4 className="font-editorial text-sm font-bold text-[#f6f1e7]">
+                        {lang === 'ar' ? 'المقاس التجاري الأدنى المرخص (Taille Marchande Minimale)' : 'Taille Marchande Minimale Légale'}
+                      </h4>
+                      <p className="text-[11px] text-[#a69b8d]">
+                        {lang === 'ar' ? 'القرار الوزاري رقم 1154-88 الصادر في الجريدة الرسمية' : 'Arrêté ministériel n° 1154-88 fixant les tailles minimales'}
+                      </p>
+                    </div>
+                  </div>
+
+                  <span className="rounded-lg border border-emerald-500/40 bg-emerald-500/15 px-3 py-1 font-mono text-sm font-bold text-emerald-300">
+                    {fish.regulations?.minimumCatchSizeCm
+                      ? `≥ ${fish.regulations.minimumCatchSizeCm} cm`
+                      : fish.regulations?.minimumCatchWeightGrams
+                        ? `≥ ${fish.regulations.minimumCatchWeightGrams} g`
+                        : lang === 'ar' ? 'خاضع للحجم التجاري المعتاد' : 'Taille commerciale standard'}
+                  </span>
+                </div>
+
+                {/* Interactive Visual Scale / Ruler */}
+                <div className="space-y-2 pt-1">
+                  <div className="flex justify-between text-[11px] font-mono text-[#a69b8d]">
+                    <span className="text-rose-400 font-bold">
+                      {lang === 'ar' ? '❌ دون المقاس (مخالفة)' : '❌ Sous-taille (Interdit)'}
+                    </span>
+                    <span className="text-emerald-400 font-bold">
+                      {lang === 'ar'
+                        ? `الحد الأدنى: ${fish.regulations?.minimumCatchSizeCm ? `${fish.regulations.minimumCatchSizeCm} سم` : `${fish.regulations?.minimumCatchWeightGrams || 300} غرام`}`
+                        : `Seuil légal: ${fish.regulations?.minimumCatchSizeCm ? `${fish.regulations.minimumCatchSizeCm} cm` : `${fish.regulations?.minimumCatchWeightGrams || 300} g`}`}
+                    </span>
+                    <span className="text-emerald-300">
+                      {lang === 'ar' ? '✅ مرخص قانونياً (+)' : '✅ Taille légale (+)'}
+                    </span>
+                  </div>
+
+                  {/* Gradient Ruler Bar */}
+                  <div className="relative h-4 w-full overflow-hidden rounded-full bg-[#0b0908] border border-[#2a211c] flex">
+                    <div
+                      className="h-full bg-gradient-to-r from-rose-600/70 to-rose-500/50 flex items-center justify-center text-[9px] font-mono font-bold text-white/90"
+                      style={{ width: '38%' }}
+                    >
+                      {lang === 'ar' ? 'ممنوع صيده أو بيعه' : 'Infraction légale'}
+                    </div>
+                    <div
+                      className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 flex items-center justify-center text-[9px] font-mono font-bold text-[#0b0908]"
+                      style={{ width: '62%' }}
+                    >
+                      {lang === 'ar' ? 'مرخص في الموانئ والأسواق' : 'Commercialisable'}
+                    </div>
+                  </div>
+
+                  <p className="text-[11px] text-[#a69b8d] leading-relaxed pt-1">
+                    {lang === 'ar'
+                      ? 'يُقاس الطول من طرف الخطم (الفم المغلق) إلى نهاية الزعنفة الذيلية (أو انشقاق الذيل للأسماك السطحية كالإسبادون). بيع أو شراء سمك دون هذا الحجم يُعرّض لعقوبات ومصادرة فورية.'
+                      : 'Mesuré de la pointe du museau à l’extrémité de la nageoire caudale. La vente ou détention de spécimens sous-dimensionnés est passible de saisie et d’amendes.'}
+                  </p>
+                </div>
+              </div>
+
+              {/* Biological Rest Period Card (Repos Biologique) */}
+              <div className="rounded-xl border border-[#2a211c] bg-[#14100e] p-5 space-y-3">
+                <div className="flex items-center gap-2.5">
+                  <span className={`flex h-8 w-8 items-center justify-center rounded-lg border ${
+                    fish.regulations?.isUnderBiologicalRest
+                      ? 'bg-rose-500/15 text-rose-400 border-rose-500/30'
+                      : 'bg-cyan-500/15 text-cyan-400 border-cyan-500/30'
+                  }`}>
+                    {fish.regulations?.isUnderBiologicalRest ? (
+                      <AlertTriangle className="h-4 w-4" />
+                    ) : (
+                      <ShieldCheck className="h-4 w-4" />
+                    )}
+                  </span>
+                  <div>
+                    <h4 className="font-editorial text-sm font-bold text-[#f6f1e7]">
+                      {lang === 'ar' ? 'الراحة البيولوجية وحماية التكاثر (Repos Biologique)' : 'Repos Biologique & Protection de la Fraie'}
+                    </h4>
+                    <p className="text-[11px] text-[#a69b8d]">
+                      {fish.regulations?.isUnderBiologicalRest
+                        ? lang === 'ar'
+                          ? '⚠️ هذا النوع يخضع لفترة راحة بيولوجية سنوية صارمة'
+                          : '⚠️ Espèce soumise à une période de fermeture biologique officielle'
+                        : lang === 'ar'
+                          ? 'مفتوح للصيد المنظم وفق الكوطا والمقاسات'
+                          : 'Pêche autorisée dans le respect des quotas'}
+                    </p>
+                  </div>
+                </div>
+
+                {fish.regulations?.biologicalRestPeriod && (
+                  <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-3 text-xs text-amber-200">
+                    <span className="font-bold">
+                      {lang === 'ar' ? 'فترة المنع:' : 'Période d’interdiction :'}
+                    </span>{' '}
+                    {lang === 'ar'
+                      ? fish.regulations.biologicalRestPeriod.ar
+                      : lang === 'fr'
+                        ? fish.regulations.biologicalRestPeriod.fr
+                        : fish.regulations.biologicalRestPeriod.en}
+                  </div>
+                )}
+              </div>
+
+              {/* Spearfishing / Free-Diving Regulations for this fish */}
+              <div className="rounded-xl border border-[#2a211c] bg-[#14100e] p-5 space-y-3">
+                <div className="flex items-center gap-2.5 border-b border-[#2a211c] pb-3">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                    <Compass className="h-4 w-4" />
+                  </span>
+                  <div>
+                    <h4 className="font-editorial text-sm font-bold text-[#f6f1e7]">
+                      {lang === 'ar' ? 'قوانين الصيد بالغطس الحر (Chasse Sous-Marine)' : 'Réglementation Chasse Sous-Marine en Apnée'}
+                    </h4>
+                    <p className="text-[11px] text-[#a69b8d]">
+                      {lang === 'ar' ? 'الظهير الشريف رقم 1-73-255 وقوانين الملاحة البحرية' : 'Dahir n° 1-73-255 et règles maritimes de sécurité'}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid gap-2 sm:grid-cols-2 text-xs text-[#b5a592]">
+                  <div className="rounded-lg border border-[#2a211c] bg-[#0b0908] p-3 space-y-1">
+                    <span className="text-rose-400 font-bold block text-[11px]">
+                      {lang === 'ar' ? '1. الغطس بالرئة فقط (Apnée)' : '1. Apnée exclusive'}
+                    </span>
+                    <p className="text-[11px] leading-relaxed">
+                      {lang === 'ar'
+                        ? 'يُمنع استخدام قنينات الأكسجين أو أي عتاد اصطناعي؛ الغطس الحر بالرئة هو الوحيد المسموح به.'
+                        : 'L’usage de bouteilles d’oxygène ou compresseurs est un délit passible de poursuites.'}
+                    </p>
+                  </div>
+
+                  <div className="rounded-lg border border-[#2a211c] bg-[#0b0908] p-3 space-y-1">
+                    <span className="text-amber-400 font-bold block text-[11px]">
+                      {lang === 'ar' ? '2. استهلاك شخصي (منع البيع)' : '2. Zéro revente commerciale'}
+                    </span>
+                    <p className="text-[11px] leading-relaxed">
+                      {lang === 'ar'
+                        ? 'الصيد بالغطس مخصص للأكل العائلي فقط، ويمنع بيعه للمطاعم أو في الموانئ تحت طائلة العقوبة.'
+                        : 'Prises destinées exclusivement au foyer familial, revente strictement illégale.'}
+                    </p>
+                  </div>
+
+                  <div className="rounded-lg border border-[#2a211c] bg-[#0b0908] p-3 space-y-1">
+                    <span className="text-cyan-400 font-bold block text-[11px]">
+                      {lang === 'ar' ? '3. العوامة البرتقالية الإلزامية' : '3. Bouée de surface obligatoire'}
+                    </span>
+                    <p className="text-[11px] leading-relaxed">
+                      {lang === 'ar'
+                        ? 'إلزامية حمل عوامة سطحية برتقالية مع راية الغطس (Pavillon Alpha) لتفادي حوادث القوارب.'
+                        : 'Bouée de signalisation orange avec pavillon Alpha indispensable à la sécurité du plongeur.'}
+                    </p>
+                  </div>
+
+                  <div className="rounded-lg border border-[#2a211c] bg-[#0b0908] p-3 space-y-1">
+                    <span className="text-emerald-400 font-bold block text-[11px]">
+                      {lang === 'ar' ? '4. الصيد النهاري والرخصة' : '4. Chasse diurne & Licence DPM'}
+                    </span>
+                    <p className="text-[11px] leading-relaxed">
+                      {lang === 'ar'
+                        ? 'بين شروق الشمس وغروبها فقط مع رخصة سنوية مسلمة من مندوبية الصيد البحري.'
+                        : 'Entre le lever et le coucher du soleil avec licence annuelle valide de la DPM.'}
+                    </p>
+                  </div>
+                </div>
+
+                {fish.regulations?.spearfishingNotes && (
+                  <div className="rounded-lg border border-cyan-500/20 bg-cyan-500/10 p-3 text-xs text-cyan-200">
+                    <span className="font-bold">
+                      {lang === 'ar' ? 'ملاحظة خاصة بهذا النوع:' : 'Note spécifique à cette espèce :'}
+                    </span>{' '}
+                    {lang === 'ar'
+                      ? fish.regulations.spearfishingNotes.ar
+                      : lang === 'fr'
+                        ? fish.regulations.spearfishingNotes.fr
+                        : fish.regulations.spearfishingNotes.en}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* TAB 2: CLEANING TUTORIAL & VIDEO */}
           {modalTab === 'cleaning' && (
             <div className="space-y-6">
@@ -690,11 +1031,14 @@ export const FishModal: React.FC<FishModalProps> = ({
                 </div>
 
                 {/* Embedded Video */}
-                {fish.cleaningVideoId && (
+                {activeCleaningVideoId && (
                   <InlineVideoPlayer
-                    videoId={fish.cleaningVideoId}
+                    videoId={activeCleaningVideoId}
                     title={tut.methodNameAr}
                     lang={lang}
+                    videoLang={videoLang}
+                    onSelectVideoLang={(l) => setVideoLang(l)}
+                    speciesName={lang === 'ar' ? fish.nameDarijaArabic : lang === 'fr' ? fish.nameFrench : fish.nameEnglish}
                   />
                 )}
 

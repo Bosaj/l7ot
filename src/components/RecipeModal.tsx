@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   X,
   Clock,
@@ -34,6 +34,15 @@ export const RecipeModal: React.FC<RecipeModalProps> = ({
 }) => {
   const t = STRINGS[lang]
   const [playingVideo, setPlayingVideo] = useState(false)
+
+  // Lock background body scroll while modal is active
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = originalOverflow
+    }
+  }, [])
 
   const isRtl = lang === 'ar'
   const BackIcon = isRtl ? ArrowRight : ArrowLeft

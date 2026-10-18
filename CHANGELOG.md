@@ -4,6 +4,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-10-18
+
+### Added
+- **Expanded Marine Taxonomy (44 Moroccan Species):**
+  - Integrated 12 commercial and artisanal species: Mérou brun (*Epinephelus marginatus*), Lotte de mer / Baudroie (*Lophius piscatorius*), Turbot (*Scophthalmus maximus*), Marbré (*Lithognathus mormyrus*), Sar tambour (*Diplodus cervinus*), Liche amie (*Lichia amia*), Rascasse rouge (*Scorpaena scrofa*), Ombrine côtière (*Umbrina cirrosa*), Homard bleu (*Homarus gammarus*), Dorade grise (*Spondyliosoma cantharus*), Cernier commun (*Polyprion americanus*), and Grande vive (*Trachinus draco*).
+  - Sourced and verified 12 high-resolution Wikimedia Commons images stored locally in \`public/images/fish/\` with complete attribution metadata in \`CREDITS.json\`.
+  - Dialect mappings across Chamal, Oriental (Rif), Centre, and Sud/Souss.
+- **Multi-Language Cleaning & Filleting Video Guide:**
+  - Integrated localized multi-language video selector (\`🇲🇦 الدارجة / العربية\`, \`🇫🇷 Français\`, \`🇬🇧 English\`) in \`FishModal\` and \`CleaningTutorialModal\`.
+  - Embedded dynamic targeted YouTube search queries per species and language to prevent repetitive video playback.
+
+### Fixed
+- **Modal Navigation UX & Scrollbar Elimination:** Replaced horizontal overflow scrollbars with an elegant wrapping pill cluster (\`scrollbar-none\`) preventing clumsy scrollbars on mobile and desktop.
+- **Modal Background Scroll Locking:** Added \`document.body.style.overflow = 'hidden'\` on modal mount to prevent page background scrolling during modal interactions.
+- **Live Ticker Arabic BiDi Typography:** Restructured \`tickerItems\` to separate amount and unit, ensuring Arabic prices render naturally right-to-left (\`55 درهم/كلغ ▼\`) without character sequence flipping.
+
+---
+
+## [1.3.0] - 2026-10-18
+
+### Added
+- **Moroccan Maritime Law & Minimum Catch Size Engine:**
+  - Added dedicated \`MaritimeLawGuide\` navigation module based on Arrêté ministériel n° 1154-88, detailing commercial minimum catch sizes across pelagic, demersal, cephalopod, and crustacean species.
+  - Interactive visual dual-color fish size gauge illustrating sub-legal prohibited catch zones vs authorized mature catch zones.
+  - Official biological rest period calendar (Repos biologique) for Dusky Grouper (Mérou) and Common Octopus (Poulpe).
+- **Apnea Spearfishing (Chasse sous-marine) Code:**
+  - Interactive 6 golden rules checklist conforming to Moroccan maritime authority (DPM): apnea-only requirement, daytime-only operations, mandatory surface marker buoy with International Alpha flag, strict recreational non-commercial mandate, and mandatory administrative licensing.
+
+---
+
 ## [1.2.0] - 2026-10-18
 
 ### Added

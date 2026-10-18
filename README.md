@@ -28,12 +28,13 @@ From the artisanal ports of **Nador and Saïdia** in the Oriental, to **Tangier 
 
 ## ✨ Key Features
 
-### 1. 🐟 32 Documented Marine Species
-* **Real Photography & Latin Taxonomy:** Every species features high-definition imagery, official binomial nomenclature, and biological classification.
-* **Regional Moroccan Dialects (Including Oriental):** Comprehensive nomenclature cataloged across **4 Moroccan coastal regions**:
+### 1. 🐟 44 Documented Marine Species & Fruits de Mer
+* **Real Photography & Latin Taxonomy:** Every species features high-definition imagery, official binomial nomenclature, biological classification, and nutritional metrics.
+* **12 Newly Added Commercial & Artisanal Species:** Mérou brun (*Epinephelus marginatus*), Baudroie (*Lophius piscatorius*), Turbot (*Scophthalmus maximus*), Marbré (*Lithognathus mormyrus*), Sar tambour (*Diplodus cervinus*), Liche amie (*Lichia amia*), Rascasse rouge (*Scorpaena scrofa*), Ombrine côtière (*Umbrina cirrosa*), Homard bleu (*Homarus gammarus*), Dorade grise (*Spondyliosoma cantharus*), Cernier (*Polyprion americanus*), and Grande vive (*Trachinus draco*).
+* **Regional Moroccan Dialects (Including Oriental & Amazigh):** Comprehensive nomenclature cataloged across **4 Moroccan coastal regions**:
   * **Oriental & Rif (الجهة الشرقية):** Nador, Saidia, Ras Kebdana, Marchica lagoon (*Titchoukt*, *Pagel*, *Kamber*, *Lubina*, *Choco*, *Akharouy*).
-  * **Chamal (الشمال):** Tangier, Tetouan, Larache, Al Hoceima (*Sardina*, *Pez Espada*, *Lubina*).
-  * **Centre (الوسط):** Casablanca, Rabat, Safi, El Jadida (*Serdine*, *Merla*, *Crevette*).
+  * **Chamal (الشمال):** Tangier, Tetouan, Larache, Al Hoceima (*Sardina*, *Pez Espada*, *Lubina*, *Chbouk*).
+  * **Centre (الوسط):** Casablanca, Rabat, Safi, El Jadida (*Serdine*, *Merla*, *Bouchkache*, *Crevette*).
   * **Sud & Souss (الجنوب وسوس):** Agadir, Tan-Tan, Dakhla, Laâyoune (*Tazenkart*, *Azougar*, *Courbine*).
 * **Native Audio Pronunciation:** Built-in speech synthesis pronouncing each fish's name in authentic Moroccan Darija.
 
@@ -70,6 +71,17 @@ Live interactive telemetry connected to the world’s leading open marine APIs:
 * **Scrollbar-Free Navigation:** Responsive pill clusters with dedicated Lucide iconography that adapt naturally to all screen sizes without awkward horizontal drag or overflow.
 * **Deterministic Offline Test Suite:** Fully mocked unit test architecture executing in **7ms** with 26/26 passing tests and 100% green CI automation.
 
+### 9. ⚖️ Moroccan Maritime Law & Spearfishing Compliance Guide (Arrêté 1154-88)
+* **Minimum Catch Size Engine:** Interactive catalog of commercial minimum sizes mandated by Dahir 1-73-255 and Arrêté ministériel n° 1154-88 (e.g. Bar ≥ 17 cm, Mérou ≥ 45 cm, Daurade ≥ 19 cm, Poulpe ≥ 500 g).
+* **Interactive Dual-Color Fish Ruler:** Visual gauge depicting prohibited sub-size zone vs legal landing threshold.
+* **Biological Resting Periods (Repos Biologique):** Scheduled bans for Dusky Grouper (July 1 – August 31) and Common Octopus (bi-annual seasonal recovery).
+* **Apnea Spearfishing (Chasse sous-marine) Code:** 6 golden rules under DPM mandate (apnea-only, daylight-only, mandatory Alpha dive buoy, non-commercial catch limit, and license requirements).
+
+### 10. 🎬 Multi-Language Filleting & Preparation Video Guide
+* **Language Selector:** Seamless switching between **🇲🇦 الدارجة**, **🇫🇷 Français**, and **🇬🇧 English** across species filleting tutorials.
+* **Deep YouTube Search Fallbacks:** Targeted direct queries per species and dialect to prevent hardcoded video repetitions.
+* **Click-to-Play Performance:** Zero external tracking scripts or cookies loaded until user interaction.
+
 ---
 
 ## 🗺️ Moroccan Regional Dialect Reference Matrix
@@ -77,11 +89,15 @@ Live interactive telemetry connected to the world’s leading open marine APIs:
 | Species | Central Darija | Oriental (Nador/Saïdia) | Chamal (Tangier) | Souss & South (Agadir) |
 |---|---|---|---|---|
 | **Sardine** | السردين (Serdine) | **تيتشوكْتْ (Titchoukt)** / الخشبة | سردينة (Sardina) | تازنكارت (Tazenkart) |
+| **Mérou brun** | الميرو (Mérou) | **الميرو د ريف** / ميرو قارش | ميرو الحجرة | أمود أزوكاغ (Amoud) |
 | **Pageot Royal** | الباجو الملكي (Pageot) | **باخيل (Pagel / Bajel)** | باجيل الحجرة | الباجو السوسي |
+| **Turbot** | التربو (Turbot) | **التربو د كبدانة** / روضوب | طوربو د البوغاز | التربو الصحراوي |
 | **Crevette Rose** | الكروفيت (Crevette) | **كامبار (Kamber)** / الغامبا | الغامبا الشمالية | كروفيت طانطان |
 | **Poulpe** | الأخطبوط / الروكبا | **بوكْرون (Boukroun)** / أخروي | أخطبوط المضيق | أخطبوط واد الذهب |
 | **Loup / Bar** | بوشوك / الدرعي | **لوبينا (Lubina)** / دراك | لوبينا د كاب سبارطيل | الدرعي السوسي |
+| **Rascasse rouge** | البوكشاش (Bouchkache) | **شكريت د مارشيكا** | شبوك (Chbouk) | أبوعكرام (Abouakram) |
 | **Calamar** | الكالامار (Calamar) | **شوكو (Choco)** / حبار مارشيكا | كالمار القصر الصغير | كالامار الداخلة |
+| **Liche amie** | الليشة (Liche) | **الليشة الريفية** / بالوميطا | ليتشا د البوغاز | تصلافت (Taslaft) |
 | **Rouget Barbet** | الروجي (Rouget) | **سالمونيتي (Salmonete)** | روجي الحجرة | الحمرية د سوس |
 | **Seiche** | السيبيا (Sepia) | **خيبيا (Jibia)** / نوافة | سيبيا طنجة | زايوط د الداخلة |
 
@@ -119,8 +135,8 @@ npm run build
 ```
 l7ot/
 ├── src/
-│   ├── components/         # UI Components (FishCard, FishModal, Header, MarineWeatherAndApis, PriceBadge...)
-│   ├── data/               # 32 Species Catalog, 16 Recipes, International Treaties
+│   ├── components/         # UI Components (FishCard, FishModal, MaritimeLawGuide, Header, MarineWeatherAndApis...)
+│   ├── data/               # 44 Species Catalog (fish.ts, extraFish.ts), 16 Recipes, International Treaties
 │   ├── hooks/              # useUserPortLocation (GPS Haversine engine)
 │   ├── i18n/               # Tri-lingual localization strings (AR, FR, EN)
 │   ├── lib/                # Speech synthesis, Charmoula calculator, Moroccan Port Regions
@@ -134,6 +150,19 @@ l7ot/
 ├── CONTRIBUTORS.md         # Author and open data acknowledgements
 └── LICENSE                 # MIT License
 ```
+
+---
+
+## 🗺️ Project Milestones & Roadmap
+
+L7OT is actively engineered to become the world's most exhaustive Moroccan marine intelligence hub. Track active and upcoming milestones on [GitHub Milestones](https://github.com/Bosaj/l7ot/milestones):
+
+- [x] **[Milestone 7: v1.3.0](https://github.com/Bosaj/l7ot/milestone/7)** — Moroccan Maritime Law, Spearfishing Compliance & Legal Catch Size Engine (Arrêté 1154-88, biological resting periods, dual-color ruler).
+- [x] **[Milestone 8: v1.4.0](https://github.com/Bosaj/l7ot/milestone/8)** — Expanded Marine Taxonomy (44 Commercial Species), Multi-Language Video Guide & Zero-Scrollbar UX.
+- [ ] **[Milestone 9: v1.5.0](https://github.com/Bosaj/l7ot/milestone/9)** — L7OT Smart Lens: Client-Side Edge AI Fish Species Recognition (ONNX Runtime Web) & AR Measuring Ruler.
+- [ ] **[Milestone 10: v1.6.0](https://github.com/Bosaj/l7ot/milestone/10)** — Spearfishing & Free-Diving Maritime Forecast (Swell, Water Visibility, Turbidity Index & Tides).
+- [ ] **[Milestone 11: v1.7.0](https://github.com/Bosaj/l7ot/milestone/11)** — B2B Wholesale Market Radar & ONP Daily Criée WhatsApp / SMS Notification Engine.
+- [ ] **[Milestone 12: v1.8.0](https://github.com/Bosaj/l7ot/milestone/12)** — Chef L7ot AI Sommelier & Interactive 3D Biomolecular Fish Anatomy Explorer.
 
 ---
 
