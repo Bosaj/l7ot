@@ -5,6 +5,8 @@ import {
   fetchOBISOccurrences,
   fetchFishBaseSpecies,
   searchOpenFoodFactsSeafood,
+  fetchGBIFOccurrencesInMorocco,
+  getSeaStateImpact,
 } from './marineApis'
 
 describe('Marine APIs Service', () => {
@@ -15,7 +17,7 @@ describe('Marine APIs Service', () => {
     expect(weather.current.waveHeight).toBeGreaterThan(0)
     expect(weather.current.wavePeriod).toBeGreaterThan(0)
     expect(weather.current.waveDirection).toBeGreaterThanOrEqual(0)
-  })
+  }, 12000)
 
   it('searchWoRMSByScientificName handles valid and invalid queries safely', async () => {
     const results = await searchWoRMSByScientificName('Sardina pilchardus')
@@ -36,4 +38,20 @@ describe('Marine APIs Service', () => {
     const products = await searchOpenFoodFactsSeafood('sardines maroc')
     expect(Array.isArray(products)).toBe(true)
   })
+
+  it('fetchGBIFOccurrencesInMorocco returns an array of observations', async () => {
+    const sightings = await fetchGBIFOccurrencesInMorocco('Sardina pilchardus', 2)
+    expect(Array.isArray(sightings)).toBe(true)
+  })
+
+  it('getSeaStateImpact returns correct qualitative impact for wave heights', () => {
+    const calm = getSeaStateImpact(1.2)
+    expect(calm.status).toBe('calm')
+    expect(calm.labelAr).toContain('هادئ')
+
+    const rough = getSeaStateImpact(3.1)
+    expect(rough.status).toBe('rough')
+    expect(rough.labelAr).toContain('هائج')
+  })
 })
+

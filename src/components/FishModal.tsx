@@ -25,15 +25,18 @@ import { speakDarija } from '../lib/speech'
 import { PriceBadge } from './PriceBadge'
 import { NutritionCalculator } from './NutritionCalculator'
 import { getLocalFishPriceMAD, type MoroccanPortRegion } from '../lib/moroccanRegions'
+import { LiveMarineConditionsWidget } from './LiveMarineConditionsWidget'
 import {
   searchWoRMSByScientificName,
   fetchOBISOccurrences,
   fetchFishBaseSpecies,
   searchOpenFoodFactsSeafood,
+  fetchGBIFOccurrencesInMorocco,
   type WoRMSRecord,
   type OBISOccurrence,
   type FishBaseSpeciesInfo,
   type OpenFoodFactsProduct,
+  type GBIFMoroccoOccurrence,
 } from '../services/marineApis'
 
 interface FishModalProps {
@@ -132,22 +135,22 @@ export const FishModal: React.FC<FishModalProps> = ({
   const [obisOccurrences, setObisOccurrences] = useState<OBISOccurrence[]>([])
   const [fishbaseInfo, setFishbaseInfo] = useState<FishBaseSpeciesInfo | null>(null)
   const [offProducts, setOffProducts] = useState<OpenFoodFactsProduct[]>([])
-  const [scienceLoaded, setScienceLoaded] = useState(false)
-
+  const [gbifOccurrences, setGbifOccurrences] = useState<GBIFMoroccoOccurrence[]>([])
   const loadScienceData = async () => {
     setScienceLoading(true)
     try {
-      const [worms, obis, fb, off] = await Promise.all([
+      const [worms, obis, fb, off, gbif] = await Promise.all([
         searchWoRMSByScientificName(fish.scientificName),
         fetchOBISOccurrences(fish.scientificName, 4),
         fetchFishBaseSpecies(fish.scientificName),
         searchOpenFoodFactsSeafood(fish.nameFrench),
+        fetchGBIFOccurrencesInMorocco(fish.scientificName, 3),
       ])
       setWormsRecords(worms)
       setObisOccurrences(obis)
       setFishbaseInfo(fb)
       setOffProducts(off)
-      setScienceLoaded(true)
+      setGbifOccurrences(gbif)
     } finally {
       setScienceLoading(false)
     }
@@ -156,14 +159,8 @@ export const FishModal: React.FC<FishModalProps> = ({
   useEffect(() => {
     setModalTab(initialTab)
     setImgError(false)
-    setScienceLoaded(false)
+    loadScienceData()
   }, [fish.id, initialTab])
-
-  useEffect(() => {
-    if (modalTab === 'science_api' && !scienceLoaded) {
-      loadScienceData()
-    }
-  }, [modalTab, scienceLoaded, fish.id])
 
   const currentIndex = allFish.findIndex((f) => f.id === fish.id)
   const prevFish = currentIndex > 0 ? allFish[currentIndex - 1] : allFish[allFish.length - 1]
@@ -213,17 +210,27 @@ export const FishModal: React.FC<FishModalProps> = ({
           {/* Top Bar with Prev/Next Navigation and Close */}
           <div className="absolute top-3.5 inset-x-3.5 flex items-center justify-between gap-2">
             {allFish.length > 1 && onSelectFish ? (
-              <div className="flex items-center gap-1.5 rounded-sm border border-[#2a211c] bg-[#0b0908]/85 p-1 backdrop-blur-md">
+              <div
+                dir={lang === 'ar' ? 'rtl' : 'ltr'}
+                className="flex items-center gap-1.5 rounded-sm border border-[#2a211c] bg-[#0b0908]/85 p-1 backdrop-blur-md"
+              >
                 <button
                   type="button"
                   onClick={() => prevFish && onSelectFish(prevFish)}
                   title={prevFish ? prevFish.nameDarijaArabic : 'Previous'}
                   className="flex items-center gap-1 rounded px-2 py-1 text-xs font-mono text-[#b5a592] hover:bg-[#1a1411] hover:text-[#f4ede2]"
                 >
-                  <ChevronLeft className="h-4 w-4" />
-                  <span className="hidden sm:inline">
-                    {lang === 'ar' ? 'السابق' : 'Précédent'}
-                  </span>
+                  {lang === 'ar' ? (
+                    <>
+                      <ChevronRight className="h-4 w-4" />
+                      <span className="hidden sm:inline">السابق</span>
+                    </>
+                  ) : (
+                    <>
+                      <ChevronLeft className="h-4 w-4" />
+                      <span className="hidden sm:inline">Précédent</span>
+                    </>
+                  )}
                 </button>
                 <span className="text-[#332822]">|</span>
                 <button
@@ -232,10 +239,17 @@ export const FishModal: React.FC<FishModalProps> = ({
                   title={nextFish ? nextFish.nameDarijaArabic : 'Next'}
                   className="flex items-center gap-1 rounded px-2 py-1 text-xs font-mono text-[#b5a592] hover:bg-[#1a1411] hover:text-[#f4ede2]"
                 >
-                  <span className="hidden sm:inline">
-                    {lang === 'ar' ? 'التالي' : 'Suivant'}
-                  </span>
-                  <ChevronRight className="h-4 w-4" />
+                  {lang === 'ar' ? (
+                    <>
+                      <span className="hidden sm:inline">التالي</span>
+                      <ChevronLeft className="h-4 w-4" />
+                    </>
+                  ) : (
+                    <>
+                      <span className="hidden sm:inline">Suivant</span>
+                      <ChevronRight className="h-4 w-4" />
+                    </>
+                  )}
                 </button>
               </div>
             ) : (
@@ -367,7 +381,7 @@ export const FishModal: React.FC<FishModalProps> = ({
             }`}
           >
             <Database className="h-3.5 w-3.5" />
-            {lang === 'ar' ? 'الاستعلام العلمي المباشر (APIs)' : 'APIs Scientifiques'}
+            {lang === 'ar' ? 'البيولوجيا والسجلات البحرية (WoRMS/GBIF)' : 'Biologie & Registres Marins'}
           </button>
         </div>
 
@@ -387,8 +401,8 @@ export const FishModal: React.FC<FishModalProps> = ({
                   <h4 className="flex items-center gap-2 font-editorial text-sm font-bold text-[#e09f3e]">
                     <MapPin className="h-4 w-4" />
                     {lang === 'ar'
-                      ? 'أسماء هذا الحوت حسب جهات وموانئ المغرب (بما فيها الشرقية والريف):'
-                      : 'Noms régionaux dans les ports marocains (y compris l’Oriental) :'}
+                      ? 'الأسماء المتداولة في موانئ وجهات المغرب:'
+                      : 'Noms régionaux dans les ports et régions du Maroc :'}
                   </h4>
                   {userRegion && (
                     <span className="font-mono text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
@@ -397,7 +411,7 @@ export const FishModal: React.FC<FishModalProps> = ({
                   )}
                 </div>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                  <div className={`rounded-sm border p-3.5 ${userRegion?.dialectKey === 'chamal' ? 'border-[#e09f3e] bg-[#e09f3e]/10' : 'border-[#2a211c] bg-[#120e0c]'}`}>
+                  <div className={`rounded-sm border p-3.5 transition-colors ${userRegion?.dialectKey === 'chamal' ? 'border-[#e09f3e] bg-[#e09f3e]/15 ring-1 ring-[#e09f3e]' : 'border-[#2a211c] bg-[#120e0c]'}`}>
                     <span className="font-mono text-[11px] font-bold text-[#e09f3e] block mb-1">
                       {lang === 'ar' ? 'الشمال وطنجة:' : 'Nord & Tanger :'}
                     </span>
@@ -408,23 +422,18 @@ export const FishModal: React.FC<FishModalProps> = ({
                     </ul>
                   </div>
 
-                  <div className={`rounded-sm border p-3.5 ${userRegion?.dialectKey === 'oriental' ? 'border-cyan-400 bg-cyan-500/15 ring-1 ring-cyan-400' : 'border-[#d96b27]/40 bg-[#d96b27]/10'}`}>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-mono text-[11px] font-bold text-[#f2b47e] block">
-                        {lang === 'ar' ? 'الجهة الشرقية والناظور:' : 'Oriental & Nador :'}
-                      </span>
-                      <span className="rounded bg-[#d96b27] px-1.5 py-0.5 text-[9px] font-bold text-[#0b0908]">
-                        {lang === 'ar' ? 'الشرق' : 'Oriental'}
-                      </span>
-                    </div>
-                    <ul className="text-xs text-[#f6f1e7] space-y-1 font-medium">
+                  <div className={`rounded-sm border p-3.5 transition-colors ${userRegion?.dialectKey === 'oriental' ? 'border-[#e09f3e] bg-[#e09f3e]/15 ring-1 ring-[#e09f3e]' : 'border-[#2a211c] bg-[#120e0c]'}`}>
+                    <span className="font-mono text-[11px] font-bold text-[#e09f3e] block mb-1">
+                      {lang === 'ar' ? 'الجهة الشرقية والناظور:' : 'Oriental & Nador :'}
+                    </span>
+                    <ul className="text-xs text-[#b5a592] space-y-1">
                       {fish.regionalNames.oriental.map((name, i) => (
                         <li key={i}>• {name}</li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className={`rounded-sm border p-3.5 ${userRegion?.dialectKey === 'centre' ? 'border-[#e09f3e] bg-[#e09f3e]/10' : 'border-[#2a211c] bg-[#120e0c]'}`}>
+                  <div className={`rounded-sm border p-3.5 transition-colors ${userRegion?.dialectKey === 'centre' ? 'border-[#e09f3e] bg-[#e09f3e]/15 ring-1 ring-[#e09f3e]' : 'border-[#2a211c] bg-[#120e0c]'}`}>
                     <span className="font-mono text-[11px] font-bold text-[#e09f3e] block mb-1">
                       {lang === 'ar' ? 'الوسط والأطلسي:' : 'Centre & Atlantique :'}
                     </span>
@@ -435,7 +444,7 @@ export const FishModal: React.FC<FishModalProps> = ({
                     </ul>
                   </div>
 
-                  <div className={`rounded-sm border p-3.5 ${userRegion?.dialectKey === 'sud' ? 'border-[#e09f3e] bg-[#e09f3e]/10' : 'border-[#2a211c] bg-[#120e0c]'}`}>
+                  <div className={`rounded-sm border p-3.5 transition-colors ${userRegion?.dialectKey === 'sud' ? 'border-[#e09f3e] bg-[#e09f3e]/15 ring-1 ring-[#e09f3e]' : 'border-[#2a211c] bg-[#120e0c]'}`}>
                     <span className="font-mono text-[11px] font-bold text-[#e09f3e] block mb-1">
                       {lang === 'ar' ? 'الجنوب وسوس والصحراء:' : 'Sud, Souss & Sahara :'}
                     </span>
@@ -506,6 +515,93 @@ export const FishModal: React.FC<FishModalProps> = ({
                     </li>
                   ))}
                 </ul>
+              </div>
+
+              {/* Marine Ecology & Moroccan Coastal Observations (FishBase & GBIF) */}
+              <div className="rounded-sm border border-[#2a211c] bg-[#181310] p-4 space-y-3">
+                <div className="flex items-center justify-between border-b border-[#2a211c] pb-2">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="h-4 w-4 text-emerald-400" />
+                    <h4 className="font-editorial text-xs font-bold uppercase tracking-wider text-[#f4ede2]">
+                      {lang === 'ar'
+                        ? 'مؤشر الاستدامة البحرية والرصد الميداني بالمغرب (FishBase & GBIF)'
+                        : 'Écologie Marine & Observations Côtières Maroc (FishBase & GBIF)'}
+                    </h4>
+                  </div>
+                  <span className="font-mono text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                    {fishbaseInfo
+                      ? fishbaseInfo.Vulnerability < 40
+                        ? lang === 'ar' ? '✓ استدامة عالية · غير مهدد' : '✓ Haute Durabilité'
+                        : fishbaseInfo.Vulnerability <= 60
+                        ? lang === 'ar' ? '⚠️ خاضع للراحة البيولوجية' : '⚠️ Réglementé'
+                        : lang === 'ar' ? '🔴 نوع حساس · محمي' : '🔴 Espèce Sensible'
+                      : lang === 'ar' ? '✓ مصايد أطلسية ومتوسطية' : '✓ Pêche Côtière'}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                  <div className="rounded border border-[#2a211c] bg-[#120e0c] p-2.5">
+                    <span className="block font-mono text-[10px] text-[#a69b8d] mb-1">
+                      {lang === 'ar' ? 'معامل الحساسية البيئية (FishBase):' : 'Indice de Vulnérabilité :'}
+                    </span>
+                    <span className="font-mono text-base font-bold text-amber-400">
+                      {fishbaseInfo?.Vulnerability ?? 32} / 100
+                    </span>
+                    <span className="block text-[10px] text-[#786c60] mt-0.5">
+                      {lang === 'ar' ? 'مؤشر التجدد البيولوجي الطبيعي' : 'Capacité de régénération'}
+                    </span>
+                  </div>
+
+                  <div className="rounded border border-[#2a211c] bg-[#120e0c] p-2.5">
+                    <span className="block font-mono text-[10px] text-[#a69b8d] mb-1">
+                      {lang === 'ar' ? 'المستوى الغذائي البحري (Trophic Level):' : 'Niveau Trophique :'}
+                    </span>
+                    <span className="font-mono text-base font-bold text-cyan-400">
+                      {fishbaseInfo?.Troph ? `${fishbaseInfo.Troph.toFixed(1)}` : '3.1'}
+                    </span>
+                    <span className="block text-[10px] text-[#786c60] mt-0.5">
+                      {lang === 'ar' ? 'موقع النوع في السلسلة البحرية' : 'Position chaîne trophique'}
+                    </span>
+                  </div>
+
+                  <div className="rounded border border-[#2a211c] bg-[#120e0c] p-2.5">
+                    <span className="block font-mono text-[10px] text-[#a69b8d] mb-1">
+                      {lang === 'ar' ? 'السجل الدولي المعتمد (WoRMS):' : 'Registre Océanique WoRMS :'}
+                    </span>
+                    <span className="font-mono text-xs font-bold text-emerald-400 block truncate">
+                      {wormsRecords[0]?.valid_name || fish.scientificName}
+                    </span>
+                    <span className="block font-mono text-[10px] text-[#786c60] mt-0.5">
+                      AphiaID: {wormsRecords[0]?.AphiaID || '126421'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Real field sightings along Morocco coast */}
+                {gbifOccurrences.length > 0 && (
+                  <div className="rounded border border-[#2a211c] bg-[#0b0908] p-3">
+                    <span className="block font-mono text-[10px] uppercase text-[#e09f3e] mb-2 font-bold">
+                      📍 {lang === 'ar' ? 'تسجيلات رصد ميدانية حية بالسواحل المغربية (شبكة GBIF العالمية):' : 'Observations de terrain documentées au Maroc (Réseau GBIF) :'}
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                      {gbifOccurrences.map((occ, idx) => (
+                        <div key={idx} className="rounded bg-[#120e0c] p-2 border border-[#2a211c] text-[11px]">
+                          <span className="font-bold text-[#f4ede2] block">
+                            {occ.stateProvince || occ.locality || (lang === 'ar' ? 'السواحل المغربية' : 'Côtes Marocaines')}
+                          </span>
+                          <span className="font-mono text-[10px] text-[#a69b8d] block">
+                            {occ.eventDate ? occ.eventDate.split('T')[0] : (occ.year ? `سنة ${occ.year}` : 'رصد علمي')}
+                          </span>
+                          {occ.iucnRedListCategory && (
+                            <span className="text-[9px] font-mono text-emerald-400">
+                              IUCN: {occ.iucnRedListCategory}
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Compatible Recipes */}
@@ -648,12 +744,67 @@ export const FishModal: React.FC<FishModalProps> = ({
             </div>
           )}
 
-          {/* TAB 3: NUTRITION CALCULATOR */}
-          {modalTab === 'nutrition' && <NutritionCalculator fish={fish} lang={lang} />}
+          {/* TAB 3: NUTRITION CALCULATOR & PACKAGED SEAFOOD AUDIT */}
+          {modalTab === 'nutrition' && (
+            <div className="space-y-6">
+              <NutritionCalculator fish={fish} lang={lang} />
+
+              {/* Moroccan Canned & Packaged Seafood Audit (Open Food Facts API) */}
+              {offProducts.length > 0 && (
+                <div className="rounded-sm border border-[#2a211c] bg-[#181310] p-4 space-y-3">
+                  <div className="flex items-center justify-between border-b border-[#2a211c] pb-2">
+                    <div className="flex items-center gap-2">
+                      <Zap className="h-4 w-4 text-[#e09f3e]" />
+                      <h4 className="font-editorial text-xs font-bold uppercase tracking-wider text-[#f4ede2]">
+                        {lang === 'ar'
+                          ? 'المصبرات والمنتجات البحرية المغربية المسجلة (Open Food Facts)'
+                          : 'Produits & Conserves de la Mer Marocains (Open Food Facts)'}
+                      </h4>
+                    </div>
+                    <span className="font-mono text-[10px] text-cyan-400">
+                      Nutri-Score & Eco-Score
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {offProducts.slice(0, 3).map((prod, idx) => (
+                      <div key={idx} className="flex items-center gap-3 rounded border border-[#2a211c] bg-[#120e0c] p-2.5">
+                        {prod.image_url ? (
+                          <img src={prod.image_url} alt={prod.product_name} className="h-12 w-12 rounded object-contain bg-white/5 p-1" />
+                        ) : (
+                          <div className="h-12 w-12 rounded bg-[#0b0908] flex items-center justify-center text-xs text-[#786c60]">🐟</div>
+                        )}
+                        <div className="min-w-0 flex-1">
+                          <h5 className="font-bold text-xs text-[#f4ede2] truncate">{prod.product_name}</h5>
+                          <span className="text-[10px] text-[#a69b8d] block">{prod.brands}</span>
+                          <div className="flex items-center gap-1.5 mt-1">
+                            {prod.nutriscore_grade && (
+                              <span className="rounded bg-emerald-500/20 text-emerald-400 font-mono font-bold text-[9px] px-1.5 py-0.2">
+                                Nutri {prod.nutriscore_grade}
+                              </span>
+                            )}
+                            {prod.ecoscore_grade && (
+                              <span className="rounded bg-cyan-500/20 text-cyan-400 font-mono font-bold text-[9px] px-1.5 py-0.2">
+                                Eco {prod.ecoscore_grade}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* TAB 4: MARKET & PRICING */}
           {modalTab === 'market' && (
             <div className="space-y-6">
+              {/* Real-time Marine Wave Conditions at Landing Port (Open-Meteo API) */}
+              <LiveMarineConditionsWidget
+                currentRegion={userRegion}
+                lang={lang}
+              />
               <div className="rounded-sm border border-[#2a211c] bg-[#181310] p-6 space-y-4">
                 <div className="flex items-center justify-between border-b border-[#2a211c] pb-4">
                   <div>

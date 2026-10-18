@@ -263,3 +263,122 @@ export async function searchOpenFoodFactsSeafood(
     return []
   }
 }
+
+/**
+ * 6. GBIF (Global Biodiversity Information Facility) API (Free, Morocco Occurrences)
+ */
+export interface GBIFMoroccoOccurrence {
+  key: number
+  scientificName: string
+  locality?: string
+  stateProvince?: string
+  year?: number
+  eventDate?: string
+  decimalLatitude?: number
+  decimalLongitude?: number
+  imageUrl?: string
+  iucnRedListCategory?: string
+}
+
+export async function fetchGBIFOccurrencesInMorocco(
+  scientificName: string,
+  limit = 4
+): Promise<GBIFMoroccoOccurrence[]> {
+  const url = `https://api.gbif.org/v1/occurrence/search?scientificName=${encodeURIComponent(
+    scientificName
+  )}&country=MA&limit=${limit}`
+
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), 8000)
+
+  try {
+    const res = await fetch(url, { signal: controller.signal })
+    clearTimeout(timeoutId)
+    if (!res.ok) return []
+    const data = await res.json()
+    const results = data.results || []
+    return results.map((item: Record<string, unknown>) => {
+      let imageUrl: string | undefined
+      if (Array.isArray(item.media) && item.media.length > 0) {
+        const m = item.media[0] as Record<string, unknown>
+        imageUrl = typeof m.identifier === 'string' ? m.identifier : undefined
+      }
+      return {
+        key: Number(item.key || Math.random()),
+        scientificName: String(item.scientificName || scientificName),
+        locality: typeof item.verbatimLocality === 'string' ? item.verbatimLocality : undefined,
+        stateProvince: typeof item.stateProvince === 'string' ? item.stateProvince : undefined,
+        year: typeof item.year === 'number' ? item.year : undefined,
+        eventDate: typeof item.eventDate === 'string' ? item.eventDate : undefined,
+        decimalLatitude: typeof item.decimalLatitude === 'number' ? item.decimalLatitude : undefined,
+        decimalLongitude: typeof item.decimalLongitude === 'number' ? item.decimalLongitude : undefined,
+        imageUrl,
+        iucnRedListCategory: typeof item.iucnRedListCategory === 'string' ? item.iucnRedListCategory : undefined,
+      }
+    })
+  } catch {
+    clearTimeout(timeoutId)
+    return []
+  }
+}
+
+/**
+ * Evaluates wave height impact on Moroccan artisanal/coastal fishing activity and consumer price expectation
+ */
+export function getSeaStateImpact(waveHeightMeters: number): {
+  status: 'calm' | 'moderate' | 'rough'
+  labelAr: string
+  labelFr: string
+  labelEn: string
+  consumerAdviceAr: string
+  consumerAdviceFr: string
+  consumerAdviceEn: string
+  color: string
+} {
+  if (waveHeightMeters < 1.6) {
+    return {
+      status: 'calm',
+      labelAr: 'بحر هادئ · رحلات الصيد نشطة',
+      labelFr: 'Mer Calme · Pêche Active',
+      labelEn: 'Calm Sea · Active Landings',
+      consumerAdviceAr:
+        'حالة البحر ممتازة لخروج قوارب الصيد التقليدي والساحلي. وفرة جيدة من الأسماك الطرية اليوم بالمرسى واستقرار في الأسعار.',
+      consumerAdviceFr:
+        'Conditions optimales pour les sorties artisanales. Débarquements réguliers et prix stables sur les criées.',
+      consumerAdviceEn:
+        'Favorable sea conditions for coastal boats. Abundant fresh catches and balanced market prices.',
+      color: 'text-emerald-400 border-emerald-500/30 bg-emerald-950/20',
+    }
+  }
+
+  if (waveHeightMeters <= 2.5) {
+    return {
+      status: 'moderate',
+      labelAr: 'بحر متوسط · ملاحة اعتيادية',
+      labelFr: 'Mer Modérée · Navigation Normale',
+      labelEn: 'Moderate Sea · Standard Activity',
+      consumerAdviceAr:
+        'أمواج معتدلة، بعض قوارب السردين والجر تعمل بانتظام. الإمداد متوازن ومناسب للشراء العائلي.',
+      consumerAdviceFr:
+        'Houle modérée, approvisionnement régulier du marché central.',
+      consumerAdviceEn:
+        'Moderate waves, regular supply arriving at municipal central markets.',
+      color: 'text-amber-400 border-amber-500/30 bg-amber-950/20',
+    }
+  }
+
+  return {
+    status: 'rough',
+    labelAr: 'بحر هائج · قلة الصيد وارتفاع مرتقب في السعر',
+    labelFr: 'Mer Agitée · Débarquements Réduits',
+    labelEn: 'Rough Sea · Reduced Catches',
+    consumerAdviceAr:
+      'أمواج عالية ورياح تؤدي لرسو قوارب الصيد التقليدي. قد تلاحظ قلة في المعروض من السردين والحوت الأبيض مع ارتفاع طفيف في أسعار التقسيط اليوم.',
+    consumerAdviceFr:
+      'Forte houle et avis de vent : sorties artisanales restreintes. Offre réduite et tension temporaire sur les prix.',
+    consumerAdviceEn:
+      'High swell restricts small artisanal vessels. Lower volume on spot markets with upward pressure on fresh fish prices.',
+    color: 'text-rose-400 border-rose-500/30 bg-rose-950/20',
+  }
+}
+

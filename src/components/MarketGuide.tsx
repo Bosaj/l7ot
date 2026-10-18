@@ -16,12 +16,20 @@ import { MOROCCAN_FISH } from '../data/fish'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
 import { PriceBadge } from './PriceBadge'
+import { LiveMarineConditionsWidget } from './LiveMarineConditionsWidget'
+import type { MoroccanPortRegion } from '../lib/moroccanRegions'
 
 interface MarketGuideProps {
   lang: SupportedLanguage
+  userRegion?: MoroccanPortRegion
+  onSelectRegion?: (regionId: string) => void
 }
 
-export const MarketGuide: React.FC<MarketGuideProps> = ({ lang }) => {
+export const MarketGuide: React.FC<MarketGuideProps> = ({
+  lang,
+  userRegion,
+  onSelectRegion,
+}) => {
   const t = STRINGS[lang]
   const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth() + 1)
 
@@ -57,13 +65,24 @@ export const MarketGuide: React.FC<MarketGuideProps> = ({ lang }) => {
             <span>{t.marketTitle}</span>
           </div>
           <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">
-            دليل الشراء واختبار الطراوة في المارشي
+            {lang === 'ar'
+              ? 'دليل الشراء وحالة البحر واختبار الطراوة بالمرسى'
+              : 'Guide Criée, Météo Marine & Fraîcheur'}
           </h2>
           <p className="max-w-2xl text-xs sm:text-sm text-slate-300 leading-relaxed">
             {t.marketSubtitle}
           </p>
         </div>
       </div>
+
+      {/* Live Port Marine Telemetry & Market Impact (Open-Meteo API) */}
+      <section className="space-y-3">
+        <LiveMarineConditionsWidget
+          currentRegion={userRegion}
+          lang={lang}
+          onSelectRegion={onSelectRegion}
+        />
+      </section>
 
       {/* 1. The 5-Point Sensory Test */}
       <section className="space-y-4">

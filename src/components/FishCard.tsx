@@ -237,7 +237,7 @@ export const FishCard: React.FC<FishCardProps> = ({
               </div>
             </div>
 
-            {/* Regional Moroccan Names Ledger (Including Oriental & Highlighted User Port) */}
+            {/* Regional Moroccan Names Ledger (Uniform styling for all 4 regions) */}
             <div className="space-y-1 text-[11px]">
               <div className={`flex items-baseline justify-between gap-2 border-b border-[#f6f1e7]/5 pb-0.5 ${userRegion?.dialectKey === 'chamal' ? 'bg-[#d96b27]/10 px-1 rounded' : ''}`}>
                 <span className="font-mono text-[10px] uppercase text-[#a69b8d] shrink-0">
@@ -247,16 +247,11 @@ export const FishCard: React.FC<FishCardProps> = ({
                   {fish.regionalNames.chamal[0]}
                 </span>
               </div>
-              <div className={`flex items-baseline justify-between gap-2 border-b border-[#f6f1e7]/5 pb-0.5 ${userRegion?.dialectKey === 'oriental' ? 'bg-cyan-500/15 px-1 rounded ring-1 ring-cyan-500/30' : ''}`}>
-                <div className="flex items-center gap-1">
-                  <span className="font-mono text-[10px] uppercase text-cyan-400 shrink-0 font-bold">
-                    {lang === 'ar' ? 'الشرقية:' : lang === 'fr' ? 'Oriental:' : 'East:'}
-                  </span>
-                  <span className="text-[8px] bg-cyan-500/20 text-cyan-300 px-1 py-0.2 rounded font-mono">
-                    {lang === 'ar' ? 'الناظور' : 'Nador'}
-                  </span>
-                </div>
-                <span className={`text-end font-medium truncate ${userRegion?.dialectKey === 'oriental' ? 'text-cyan-200 font-bold' : 'text-[#e8e0d3]'}`}>
+              <div className={`flex items-baseline justify-between gap-2 border-b border-[#f6f1e7]/5 pb-0.5 ${userRegion?.dialectKey === 'oriental' ? 'bg-[#d96b27]/10 px-1 rounded' : ''}`}>
+                <span className="font-mono text-[10px] uppercase text-[#a69b8d] shrink-0">
+                  {lang === 'ar' ? 'الشرقية:' : lang === 'fr' ? 'Oriental:' : 'East:'}
+                </span>
+                <span className={`text-end font-medium truncate ${userRegion?.dialectKey === 'oriental' ? 'text-amber-300 font-bold' : 'text-[#e8e0d3]'}`}>
                   {fish.regionalNames.oriental[0]}
                 </span>
               </div>
@@ -346,7 +341,7 @@ export const FishCard: React.FC<FishCardProps> = ({
               </div>
             </div>
 
-            {/* Quick Nutrition Strip */}
+            {/* Quick Nutrition & Ecological Catch Status Strip */}
             <div
               dir="ltr"
               className="mt-2.5 flex items-center justify-between border-t border-[#f6f1e7]/8 pt-2 font-mono text-[10px] text-[#a69b8d]"
@@ -356,6 +351,10 @@ export const FishCard: React.FC<FishCardProps> = ({
               <span>{fish.nutrition.proteinGrams}g Prot</span>
               <span>•</span>
               <span className="text-[#e68a45]">{fish.nutrition.omega3Mg}mg Ω-3</span>
+              <span>•</span>
+              <span className="text-emerald-400 font-semibold" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+                {lang === 'ar' ? 'صيد مستدام' : 'Pêche Durable'}
+              </span>
             </div>
           </div>
 

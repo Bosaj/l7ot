@@ -455,7 +455,13 @@ export const App: React.FC = () => {
         )}
 
         {/* Tab 4: Market Guide & Freshness Audit */}
-        {activeTab === 'market' && <MarketGuide lang={lang} />}
+        {activeTab === 'market' && (
+          <MarketGuide
+            lang={lang}
+            userRegion={userPortLocation.selectedRegion}
+            onSelectRegion={userPortLocation.setManualRegion}
+          />
+        )}
 
         {/* Tab 5: International Fisheries Agreements & Market Trends */}
         {activeTab === 'agreements' && <AgreementsAndMarket lang={lang} />}
