@@ -174,17 +174,17 @@
 /* Continuous Auto-Scrolling Ticker (Marquee) with Pause on Hover */
 @keyframes ticker-marquee {
   0% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-33.333333%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 .animate-marquee {
-  display: inline-flex;
+  display: flex;
   width: max-content;
-  animation: ticker-marquee 30s linear infinite;
+  animation: ticker-marquee 45s linear infinite;
   will-change: transform;
 }
 

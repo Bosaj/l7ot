@@ -104,25 +104,46 @@ export const Header: React.FC<HeaderProps> = ({
     lang === 'ar'
       ? [
           { port: 'بني نصار / الناظور · باخيل والغامبا', price: '85 درهم/كلغ', trend: '▲', down: false },
-          { port: 'آسفي · السردين', price: '14 درهم/كلغ', trend: '▼', down: true },
-          { port: 'الداخلة · الأخطبوط', price: '95 درهم/كلغ', trend: '▲', down: false },
-          { port: 'طنجة المتوسط · الباجو الملكي', price: '110 درهم/كلغ', trend: '▲', down: false },
-          { port: 'الواليدية · المحار وبوجنبة', price: '70 درهم/كلغ', trend: '●', down: true },
+          { port: 'طنجة المتوسط · الباجو الملكي والزريقة', price: '110 درهم/كلغ', trend: '▲', down: false },
+          { port: 'الحسيمة · الميرو والباسي', price: '130 درهم/كلغ', trend: '▲', down: false },
+          { port: 'العرائش · بيسبادا وروبيو', price: '65 درهم/كلغ', trend: '▼', down: true },
+          { port: 'الدار البيضاء · الكوربين والكلمار', price: '80 درهم/كلغ', trend: '●', down: true },
+          { port: 'الواليدية · المحار الملكي وبوجنبة', price: '70 درهم/كلغ', trend: '●', down: true },
+          { port: 'آسفي · السردين الطري', price: '14 درهم/كلغ', trend: '▼', down: true },
+          { port: 'الصويرة · الميرلا والصابر', price: '55 درهم/كلغ', trend: '▼', down: true },
+          { port: 'أكادير · الصول والكوكياج', price: '120 درهم/كلغ', trend: '▲', down: false },
+          { port: 'سيدي إفني وطانطان · الأخطبوط والكوربين', price: '90 درهم/كلغ', trend: '▲', down: false },
+          { port: 'العيون المرسى · كروفيت رويال وتونة', price: '140 درهم/كلغ', trend: '▼', down: true },
+          { port: 'الداخلة · الأخطبوط والسيبيا', price: '95 درهم/كلغ', trend: '▲', down: false },
         ]
       : lang === 'fr'
         ? [
-            { port: 'NADOR · PAGEL & GAMBA', price: '85 MAD/KG', trend: '▲', down: false },
-            { port: 'SAFI · SARDINE', price: '14 MAD/KG', trend: '▼', down: true },
-            { port: 'DAKHLA · POULPE', price: '95 MAD/KG', trend: '▲', down: false },
-            { port: 'TANGER MED · PAGEOT ROYAL', price: '110 MAD/KG', trend: '▲', down: false },
+            { port: 'NADOR / BENI ANSAR · PAGEOT & GAMBAS', price: '85 MAD/KG', trend: '▲', down: false },
+            { port: 'TANGER MED · DAURADE ROYALE', price: '110 MAD/KG', trend: '▲', down: false },
+            { port: 'AL HOCEIMA · MÉROU & PAGEOT', price: '130 MAD/KG', trend: '▲', down: false },
+            { port: 'LARACHE · ESPADON & ROUGET', price: '65 MAD/KG', trend: '▼', down: true },
+            { port: 'CASABLANCA · COURBINE & CALMAR', price: '80 MAD/KG', trend: '●', down: true },
             { port: 'OUALIDIA · HUÎTRES & CRABE', price: '70 MAD/KG', trend: '●', down: true },
+            { port: 'SAFI · SARDINE ATLANTIQUE', price: '14 MAD/KG', trend: '▼', down: true },
+            { port: 'ESSAOUIRA · MERLU BLANC', price: '55 MAD/KG', trend: '▼', down: true },
+            { port: 'AGADIR · SOLE ROYALE & SEICHE', price: '120 MAD/KG', trend: '▲', down: false },
+            { port: 'TAN-TAN / SIDI IFNI · POULPE & COURBINE', price: '90 MAD/KG', trend: '▲', down: false },
+            { port: 'LAÂYOUNE · CREVETTE ROYALE', price: '140 MAD/KG', trend: '▼', down: true },
+            { port: 'DAKHLA · POULPE & THON', price: '95 MAD/KG', trend: '▲', down: false },
           ]
         : [
-            { port: 'NADOR · ROYAL PAGEL & SHRIMPS', price: '85 MAD/KG', trend: '▲', down: false },
-            { port: 'SAFI · SARDINE', price: '14 MAD/KG', trend: '▼', down: true },
-            { port: 'DAKHLA · OCTOPUS', price: '95 MAD/KG', trend: '▲', down: false },
-            { port: 'TANGIER MED · ROYAL BREAM', price: '110 MAD/KG', trend: '▲', down: false },
-            { port: 'OUALIDIA · OYSTERS & CRAB', price: '70 MAD/KG', trend: '●', down: true },
+            { port: 'NADOR / BENI ANSAR · ROYAL PAGEL & SHRIMPS', price: '85 MAD/KG', trend: '▲', down: false },
+            { port: 'TANGIER MED · ROYAL SEABREAM', price: '110 MAD/KG', trend: '▲', down: false },
+            { port: 'AL HOCEIMA · DUSKY GROUPER', price: '130 MAD/KG', trend: '▲', down: false },
+            { port: 'LARACHE · SWORDFISH & RED MULLET', price: '65 MAD/KG', trend: '▼', down: true },
+            { port: 'CASABLANCA · CROAKER & SQUID', price: '80 MAD/KG', trend: '●', down: true },
+            { port: 'OUALIDIA · ROYAL OYSTERS & CRAB', price: '70 MAD/KG', trend: '●', down: true },
+            { port: 'SAFI · ATLANTIC SARDINE', price: '14 MAD/KG', trend: '▼', down: true },
+            { port: 'ESSAOUIRA · SILVER HAKE', price: '55 MAD/KG', trend: '▼', down: true },
+            { port: 'AGADIR · DOVER SOLE & SEAFOOD', price: '120 MAD/KG', trend: '▲', down: false },
+            { port: 'TAN-TAN / SIDI IFNI · OCTOPUS & CROAKER', price: '90 MAD/KG', trend: '▲', down: false },
+            { port: 'LAAYOUNE · KING PRAWN & TUNA', price: '140 MAD/KG', trend: '▼', down: true },
+            { port: 'DAKHLA · SAHARA OCTOPUS', price: '95 MAD/KG', trend: '▲', down: false },
           ]
 
   return (
@@ -142,33 +163,58 @@ export const Header: React.FC<HeaderProps> = ({
             </span>
           </div>
 
-          {/* Continuous Auto-Scrolling Ticker (Pauses immediately on hover!) */}
-          <div className="relative flex-1 overflow-hidden min-w-0 mx-2 group">
+          {/* Continuous Auto-Scrolling Ticker (Dual-track seamless loop, pauses immediately on hover, zero emptiness) */}
+          <div
+            dir="ltr"
+            className="relative flex-1 overflow-hidden min-w-0 mx-2 group select-none"
+            title={lang === 'ar' ? 'مرر المؤشر لإيقاف الشريط وقراءة الأسعار' : 'Hover to pause prices'}
+          >
             {/* Soft gradient edge masks */}
-            <div className="pointer-events-none absolute inset-y-0 start-0 w-8 bg-gradient-to-e from-[#120f0d] to-transparent z-10" />
-            <div className="pointer-events-none absolute inset-y-0 end-0 w-8 bg-gradient-to-s from-[#120f0d] to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#120f0d] to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#120f0d] to-transparent z-10" />
 
-            <div
-              dir="ltr"
-              className="animate-marquee flex items-center gap-6 whitespace-nowrap font-mono text-[#a69b8d] cursor-pointer py-0.5"
-              title={lang === 'ar' ? 'مرر المؤشر لإيقاف الشريط وقراءة الأسعار' : 'Survolez pour mettre en pause'}
-            >
-              {[...tickerItems, ...tickerItems, ...tickerItems].map((item, idx) => (
-                <div key={idx} className="inline-flex items-center gap-2">
-                  <span className="text-[#f6f1e7]/20">•</span>
-                  <span className="text-[#d4cbbd] font-medium text-[11px]">{item.port}</span>
-                  <span
-                    className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold ${
-                      item.down
-                        ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20'
-                        : 'bg-amber-500/15 text-amber-300 border border-amber-500/20'
-                    }`}
-                  >
-                    <span>{item.price}</span>
-                    <span className="text-[9px] opacity-85">{item.trend}</span>
-                  </span>
-                </div>
-              ))}
+            <div className="flex w-max animate-marquee">
+              {/* Track A */}
+              <div className="flex shrink-0 items-center gap-6 pr-6 font-mono text-[#a69b8d] cursor-pointer py-0.5">
+                {tickerItems.map((item, idx) => (
+                  <div key={`ta-${idx}`} className="inline-flex items-center gap-2">
+                    <span className="text-[#f6f1e7]/20">•</span>
+                    <span className="text-[#d4cbbd] font-medium text-[11px] whitespace-nowrap">{item.port}</span>
+                    <span
+                      dir="ltr"
+                      className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold ${
+                        item.down
+                          ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20'
+                          : 'bg-amber-500/15 text-amber-300 border border-amber-500/20'
+                      }`}
+                    >
+                      <span>{item.price}</span>
+                      <span className="text-[9px] opacity-85">{item.trend}</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Track B (Identical clone for seamless zero-gap infinite loop) */}
+              <div className="flex shrink-0 items-center gap-6 pr-6 font-mono text-[#a69b8d] cursor-pointer py-0.5" aria-hidden="true">
+                {tickerItems.map((item, idx) => (
+                  <div key={`tb-${idx}`} className="inline-flex items-center gap-2">
+                    <span className="text-[#f6f1e7]/20">•</span>
+                    <span className="text-[#d4cbbd] font-medium text-[11px] whitespace-nowrap">{item.port}</span>
+                    <span
+                      dir="ltr"
+                      className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-mono text-[10px] font-bold ${
+                        item.down
+                          ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20'
+                          : 'bg-amber-500/15 text-amber-300 border border-amber-500/20'
+                      }`}
+                    >
+                      <span>{item.price}</span>
+                      <span className="text-[9px] opacity-85">{item.trend}</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
