@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added full test coverage for both successful telemetry parsing and resilient offline fallback mechanisms (26/26 passing tests).
 
 ### Fixed
+- **CodeQL CWE-116 Sanitization Alert:** Fixed incomplete multi-character sanitization in `scripts/download-images.mjs` by implementing an iterative tag stripper and bracket neutralizer (`sanitizeHtml`), fully resolving alert #1 on GitHub Security.
 - **Empty Void in RTL Marquee:** Fixed layout flaw where Arabic `dir="rtl"` caused the single ticker track to detach from the right boundary upon translation, leaving an empty black void.
 - **RTL / LTR Modal Arrows:** Fixed next/previous directional chevron orientation in `FishModal` to naturally follow Arabic right-to-left layout.
 - **Casablanca GPS Geolocation Default:** Fixed location detector so inland or central users seamlessly auto-detect Casablanca / Mohammedia port instead of failing silently.
@@ -68,6 +69,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Commit | Type | Description |
 |---|---|---|
+| `6e2d3c1` | `fix` | resolve CodeQL CWE-116 incomplete multi-character sanitization in download-images.mjs |
+| `74e074a` | `docs` | update README and CHANGELOG with v1.2.0 release, dual-track ticker, and complete commit history |
 | `4c9669f` | `test` | mock network calls to prevent CI timeouts and ensure deterministic tests |
 | `aea4b82` | `fix` | eliminate ticker gap with dual-track infinite marquee and 12 Moroccan ports |
 | `218d863` | `fix` | add smooth auto-scrolling ticker with pause on hover and eliminate horizontal scrollbars in navigation |
