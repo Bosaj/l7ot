@@ -1,168 +1,139 @@
-# 🐟 L7OT (الحوت) · Moroccan Fish & Seafood Companion
+# L7OT (الحوت) — The Moroccan Fish & Marine Encyclopedia
 
-> **The definitive Moroccan Fish & Seafood encyclopedia, Darija marine terminology, live photography, market freshness inspector, and authentic coastal recipe companion with an intelligent Charmoula Calculator.**
+<div align="center">
 
-[![Vite](https://img.shields.io/badge/Vite-8.3-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![React](https://img.shields.io/badge/React-19.3-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-7.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vitest](https://img.shields.io/badge/Vitest-Passing-00C7B7?logo=vitest&logoColor=white)](https://vitest.dev/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI Pipeline](https://github.com/Bosaj/l7ot/actions/workflows/ci.yml/badge.svg)](https://github.com/Bosaj/l7ot/actions/workflows/ci.yml)
+[![CodeQL Security](https://github.com/Bosaj/l7ot/actions/workflows/codeql.yml/badge.svg)](https://github.com/Bosaj/l7ot/actions/workflows/codeql.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-19-cyan.svg)](https://react.dev/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v4-38bdf8.svg)](https://tailwindcss.com/)
+[![Author: Oussama EL HADJI](https://img.shields.io/badge/Author-Oussama_EL_HADJI-d96b27.svg)](https://www.linkedin.com/in/oussama-el-hadji-388a101b7/)
 
----
+**The definitive Moroccan seafood encyclopedia, Darija & Oriental dialect taxonomy, port auctions, live marine weather, and coastal culinary heritage.**
 
-## 🌊 Context & Cultural Heritage
+[🌐 Explore Live App](https://github.com/Bosaj/l7ot) • [📖 Read the Complete Wiki](https://github.com/Bosaj/l7ot/wiki) • [🐛 Report Issue](https://github.com/Bosaj/l7ot/issues/new/choose)
 
-With over **3,500 kilometers of pristine coastline** spanning both the Atlantic Ocean and the Mediterranean Sea, Morocco is one of the world's richest marine ecosystems and the **#1 exporter of canned and fresh sardines globally**.
-
-In Moroccan markets (*souks* and *marchés aux poissons*), fish have vibrant, historic **Darija (Moroccan Arabic)** names that differ markedly from Classical Arabic, French, and English:
-- Sardines are **سردين (Serdine)**
-- European hake/whiting is **ميرلا (Mirla)**
-- Gilthead seabream is **الدوراد / الزريقة (Dorade / Zriqa)**
-- Meagre / Atlantic croaker is **القرب (Qorb)**
-- White seabream is **الشرغو (Chargho)**
-- Swordfish is **الإسبادون / بوسف (Spadon / Bousif)**
-- Shrimp is **كروفيت (Krovit)**
-- Squid is **كالامار (Kalamar)**
-- Octopus is **الأخطبوط / الروكاس (Pwilp / Rokas)**
-- Mussels are **بوزروك (Bouzroug)**
-- Oysters are **المحار (L-M7ar)**
-
-**L7OT** bridges the gap between coastal fishermen, local shoppers, culinary enthusiasts, and diaspora food lovers by providing instant identification, accurate market pricing in Moroccan Dirhams (MAD), real-time Darija pronunciation, and grandmother-tested authentic Moroccan recipes.
+</div>
 
 ---
 
-## ✨ Features & Architecture
+## 🌊 Overview
 
-### 1. 🐟 Comprehensive Moroccan Fish Directory (24+ Species)
-- **Multi-Name Taxonomy**: Moroccan Darija (Arabic script + phonetic Arabizi), French common name, English commercial name, and Latin scientific binomial.
-- **Ecological Data**: Habitat classification (Poisson Bleu, Poisson Blanc, Céphalopodes, Crustacés, Mollusques, Cartilagineux) and coastlines (Atlantic, Mediterranean, or both).
-- **Landing Ports**: Exact ports of origin (Dakhla, Safi, Essaouira, Al Hoceima, Tanger, Larache, Agadir, Mehdia, Tan-Tan).
-- **Verified Biological Photography**: Real scientific high-definition photos curated from Wikimedia Commons and marine biology archives.
-- **Regional Marine Taxonomy**: Distinct names across Morocco's maritime cultural zones:
-  - *Chamal / North* (Spanish & Mediterranean heritage: *Boquerón*, *Chipiron*, *Dorada*, *Lenguado*, *Pez Espada*)
-  - *Centre / Atlantic* (Standard Darija: *Mirla*, *Sol*, *Qorb*, *Serdine*, *Kalamar*)
-  - *Sud / Souss / Sahara* (Amazigh & Hassaniya roots: *Azayz*, *Rokas*, *Tazenkart*, *Bouzroug*)
-- **Darija Audio Pronunciation**: Web Speech API integration that speaks the authentic Moroccan name on demand.
+**L7OT (الحوت)** is an open-source, cultural, culinary, and oceanographic platform documenting the rich marine heritage of Morocco across **3,500 km of coastline** spanning both the Atlantic Ocean and the Mediterranean Sea.
 
-### 2. 📈 Moroccan Spot Prices vs Global Export Benchmarks
-- **Local Moroccan Spot Price**: Current market price in Moroccan Dirhams (MAD / kg) at central auction halls (*Hallal aux Poissons*).
-- **Global Export Valuation**: Wholesale benchmark price in USD/EUR compared with leading international wholesale exchanges (Mercabarna, Mercamadrid, Rungis Paris, Tokyo Toyosu).
-- **6-Month Price Dynamics**: Historical progression, immediate spot quotation, and next-quarter forecasts.
-- **Market Drivers & Biological Rest**: In-depth economic rationale explaining seasonal variations (*المنية* winter storms, Ramadan demand, and *INRH* biological rest windows).
-
-### 3. 🧪 Live Nutritional Scaler & Health Benefits Calculator
-- **Dynamic Weight Slider**: Seamless scaling for standard portions (100g, 250g single meal, 500g family fillet, 1000g / 1kg) and custom grams slider.
-- **Macronutrients & Lipids**: Calories, high-absorption proteins, clean fats, and EPA/DHA Omega-3 content.
-- **Micronutrient Density**: Complete profile of Vitamin D, B12, Calcium, Iron, Phosphorus, Selenium, Marine Iodine, and Zinc.
-- **Daily Reference Intake (DRI)**: Visual percentage progress bars against recommended dietary allowances.
-- **Direct Health Impact**: Clinical and wellness benefits detailing cardiovascular defense, thyroid optimization, cognitive sharpness, and bone density support.
-
-### 4. 🔪 Traditional Moroccan Fishmonger Cleaning Tutorials (*طريقة الكسال*)
-- **Step-by-Step Field Guides**: Authentic techniques practiced in coastal Moroccan fish markets (*معلم الحوت*).
-- **Thumb Butterflying (*التنياد بالصبع*)**: Knife-free thumb-filleting preserving delicate skin and flesh.
-- **Artisan "Kessal" Secrets**: Professional tips on avoiding bile ruptures, rapid salt-water sanitization, and crustacean stock extraction for pastillas.
-- **Time & Difficulty Badges**: Clear preparation time estimates and difficulty ratings.
-
-### 5. 🌍 International Fisheries Treaties & Maritime Diplomacy
-- **Strategic Partnership Analysis**:
-  - *Maroc – Union Européenne (APPD)*: Historical background, 128 licensed vessels, exclusion of cephalopods/poulpe, and sovereign renegotiation doctrine.
-  - *Maroc – Fédération de Russie*: Bilateral cooperation in the southern Atlantic, small pelagic quotas, scientific research, and sailor training.
-  - *Maroc – Japon (JICA)*: Village modernization, technology transfer, and tuna farming in Larache/Tanger.
-  - *ICCAT Atlantic Bluefin Tuna Framework*: Biometric e-BCD tagging, historic fixed Almadraba trap systems (*المضربة*), and sustainable quotas.
-  - *Plan Halieutis I & II*: Sovereign long-term strategy for resource sustainability, onshore valorization, and aquaculture expansion.
-
-### 6. 🍲 Authentic Coastal Moroccan Recipes
-1. **Sardines Mchermline Mlasqine**: Double-stuffed sardines with spicy charmoula fried to crispy perfection.
-2. **Tagine Kouari dial Sardine bel Maticha**: Sardine kefta meatballs in rich cumin-tomato reduction with cured red olives.
-3. **Tagine dial L7ot bel Khodra w Citron Confit**: Royal fish steak tagine over sliced potatoes, carrots, and sweet bell peppers.
-4. **Crevettes Pil-Pil à la Marocaine**: Sizzling sweet shrimp in bubbling olive oil infused with copious garlic, sweet paprika, and harissa.
-5. **Pastilla dial L7ot Royale**: Moroccan banquet pastilla layered with warqa pastry, shrimp, squid, white fish, vermicelli, and black mushrooms.
-6. **Pageot / Dorade Royale au Four**: Whole baked sea bream scored and packed with charmoula over seasoned roasted vegetables.
-7. **Friture Mixte de Poissons**: Classic crispy seaside fried platter of whiting, sole, squid rings, and red mullet.
-8. **Calamars Farcis au Riz et Crevettes**: Stuffed squid tubes with seasoned rice and shrimp in saffron-tomato coulis.
-9. **Chorba dial L7ot**: Traditional coastal seafood chowder brewed from concentrated shrimp shell fumet.
-10. **Tagine Bouzroug d’Essaouira**: Wild rock mussels simmered in spicy garlic-tomato sauce.
-11. **Brochettes d’Espadon Grillé**: Charcoal-grilled swordfish skewers marinated in grated sweet onion and cumin rub.
-
-### 7. 🧂 "Chef L7ot" · Intelligent Charmoula Calculator
-- Custom algorithm (`src/lib/charmoula.ts`) calculating exact herb and spice ratios based on fish species, category oil content, cooking style, and guest count (1 to 12 persons).
-- Generates exact measurements for:
-  - Grated garlic cloves (*Thoum*)
-  - Chopped fresh coriander (*Qasbour*) & parsley (*Maadnous*) in grams and tablespoons
-  - Cumin beldi (*Kamoun*)
-  - Sweet paprika (*Tahmira*)
-  - Moroccan red harissa (*Soudaniya*)
-  - Cold-pressed virgin olive oil (*Zit Zitoun*)
-  - Fresh lemon juice & preserved lemon (*Citron Confit / Beldi*)
-  - Special touches (Taliouine saffron, celery bed, bay leaves, extra-fine semolina).
-- Provides recommended marinating times and optimal cooking temperatures.
-
-### 8. ⚓ "Dalil Souk" · Market Freshness & Port Guide
-- **5-Sense Sensory Test**: Interactive checklist comparing extra-fresh indicators vs decomposing warnings across:
-  1. *Eyes (Clarity & Convexity)*
-  2. *Gills (Crimson Red & Moisture)*
-  3. *Skin & Scales (Metallic Luster & Firm Adhesion)*
-  4. *Flesh (Spring-Back Elasticity)*
-  5. *Aroma (Invigorating Ocean Spray vs Ammonia)*
-- **Moroccan Ports Explorer**: Map and details on Dakhla, Safi, Essaouira, Al Hoceima, Tanger, Larache, and Agadir.
-- **Seasonal Fishery Calendar**: Interactive month-by-month selector highlighting species at their peak fat and flavor.
-
-### 9. 🎨 Premium Variable Typography & Design
-- **Arabic Typography**: `@fontsource-variable/cairo` and `@fontsource-variable/readex-pro` for balanced, readable, high-contrast RTL typography.
-- **Latin Typography**: `@fontsource-variable/plus-jakarta-sans` for geometric headings and technical figures.
-- **Visual Architecture**: High-end double-bezel cards with deep ocean OLED surfaces, glowing ambient gradients, and crisp glassmorphic panels.
+From the artisanal ports of **Nador and Saïdia** in the Oriental, to **Tangier Med** on the Strait, **Safi and Casablanca** along the central shelf, and the deep southern waters of **Agadir and Dakhla**, L7OT provides an exhaustive, bilingual reference for seafood lovers, chefs, researchers, and everyday market shoppers.
 
 ---
 
-## 🚀 Quick Start
+## ✨ Key Features
+
+### 1. 🐟 32 Documented Marine Species
+* **Real Photography & Latin Taxonomy:** Every species features high-definition imagery, official binomial nomenclature, and biological classification.
+* **Regional Moroccan Dialects (Including Oriental):** Comprehensive nomenclature cataloged across **4 Moroccan coastal regions**:
+  * **Oriental & Rif (الجهة الشرقية):** Nador, Saidia, Ras Kebdana, Marchica lagoon (*Titchoukt*, *Pagel*, *Kamber*, *Lubina*, *Choco*, *Akharouy*).
+  * **Chamal (الشمال):** Tangier, Tetouan, Larache, Al Hoceima (*Sardina*, *Pez Espada*, *Lubina*).
+  * **Centre (الوسط):** Casablanca, Rabat, Safi, El Jadida (*Serdine*, *Merla*, *Crevette*).
+  * **Sud & Souss (الجنوب وسوس):** Agadir, Tan-Tan, Dakhla, Laâyoune (*Tazenkart*, *Azougar*, *Courbine*).
+* **Native Audio Pronunciation:** Built-in speech synthesis pronouncing each fish's name in authentic Moroccan Darija.
+
+### 2. 📍 GPS Coastal Port Geolocation & Local Pricing Engine
+* Automatically detects the user's nearest Moroccan coastal port hub using **Haversine great-circle distance**.
+* Dynamically adapts the fish catalog to highlight the **local dialect name** and calculates **location-adjusted port auction prices** (reflecting supply dynamics from Nador to Dakhla).
+
+### 3. 🌐 Worldwide Free Marine & Oceanographic APIs Hub
+Live interactive telemetry connected to the world’s leading open marine APIs:
+1. **Open-Meteo Marine API:** Real-time wave heights, swell directions, wave periods, and artisanal fishing safety indices for 8 Moroccan ports.
+2. **WoRMS (World Register of Marine Species):** Authoritative global taxonomy and AphiaID verification.
+3. **OBIS (Ocean Biodiversity Information System):** UNESCO-IOC marine occurrence records in Moroccan EEZ waters.
+4. **FishBase & SeaLifeBase (rOpenSci):** Trophic levels, ecological vulnerability indices, and biological maturity data.
+5. **Open Food Facts:** Open database of packaged and canned Moroccan seafood with Nutri-Score and Eco-Score ratings.
+6. **FAO Fisheries Data (ASFIS):** Moroccan catch statistics across international statistical areas FAO 34 & 37.
+
+### 4. 🍽️ 16 Authentic Coastal Recipes & Video Filleting Guides
+* Traditional tagines (*Tagine Kouari de Sardine*, *Tagine de Congre aux Raisins Secs*, *Pastilla aux Fruits de Mer*).
+* YouTube video demonstrations showcasing traditional Moroccan fish cleaning and filleting techniques (**Le Kessal / الكسال**).
+
+### 5. ⚖️ Chef L7ot Charmoula Calculator
+* Interactive spice balance engine calculating exact gram-level proportions of garlic, cumin, paprika, fresh coriander, lemon juice, and olive oil tailored to each fish species and cooking method.
+
+### 6. 📱 AI Camera Fish Scanner
+* Mobile-optimized camera scanner enabling users to snap or upload a fish photo at the port or market to instantly detect species, market value, and freshness indicators.
+
+### 7. 🛒 Souk Basket & Species Comparator
+* Head-to-head nutritional and economic comparator (Protein, Omega-3, spot price, export value).
+* Souk basket budget simulator including *Kessal* cleaning fees and one-click clipboard shopping list export.
+
+---
+
+## 🗺️ Moroccan Regional Dialect Reference Matrix
+
+| Species | Central Darija | Oriental (Nador/Saïdia) | Chamal (Tangier) | Souss & South (Agadir) |
+|---|---|---|---|---|
+| **Sardine** | السردين (Serdine) | **تيتشوكْتْ (Titchoukt)** / الخشبة | سردينة (Sardina) | تازنكارت (Tazenkart) |
+| **Pageot Royal** | الباجو الملكي (Pageot) | **باخيل (Pagel / Bajel)** | باجيل الحجرة | الباجو السوسي |
+| **Crevette Rose** | الكروفيت (Crevette) | **كامبار (Kamber)** / الغامبا | الغامبا الشمالية | كروفيت طانطان |
+| **Poulpe** | الأخطبوط / الروكبا | **بوكْرون (Boukroun)** / أخروي | أخطبوط المضيق | أخطبوط واد الذهب |
+| **Loup / Bar** | بوشوك / الدرعي | **لوبينا (Lubina)** / دراك | لوبينا د كاب سبارطيل | الدرعي السوسي |
+| **Calamar** | الكالامار (Calamar) | **شوكو (Choco)** / حبار مارشيكا | كالمار القصر الصغير | كالامار الداخلة |
+| **Rouget Barbet** | الروجي (Rouget) | **سالمونيتي (Salmonete)** | روجي الحجرة | الحمرية د سوس |
+| **Seiche** | السيبيا (Sepia) | **خيبيا (Jibia)** / نوافة | سيبيا طنجة | زايوط د الداخلة |
+
+---
+
+## 🚀 Quick Start & Local Development
 
 ### Prerequisites
-- Node.js 18+ (tested on Node v24.19.0)
-- npm or pnpm
+* **Node.js:** `v20.x` or `v22.x`
+* **npm:** `v10.x+`
 
 ### Installation
-
 ```bash
-# Clone the repository
+# 1. Clone repository
 git clone https://github.com/Bosaj/l7ot.git
 cd l7ot
 
-# Install dependencies
+# 2. Install dependencies
 npm install
 
-# Start local development server
+# 3. Start development server
 npm run dev
-```
 
-Visit `http://localhost:5173` to explore the app.
+# 4. Run tests
+npm run test
 
-### Testing & Quality Assurance
-
-```bash
-# Run Vitest test suite
-npm test
-
-# Typecheck with TypeScript
-npm run typecheck
-
-# Build optimized production bundle with PWA service worker
+# 5. Production build
 npm run build
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## 🏗️ Architecture & Tech Stack
 
-- **Framework**: React 19 + TypeScript
-- **Build Tool**: Vite 8 with `@tailwindcss/vite` (Tailwind CSS v4)
-- **Icons**: Lucide React
-- **PWA**: `vite-plugin-pwa` for offline capability
-- **Test Runner**: Vitest + Testing Library + jsdom
-- **Localization**: Trilingual engine (Darija / Arabic, French, English)
+```
+l7ot/
+├── src/
+│   ├── components/         # UI Components (FishCard, FishModal, Header, MarineWeatherAndApis, PriceBadge...)
+│   ├── data/               # 32 Species Catalog, 16 Recipes, International Treaties
+│   ├── hooks/              # useUserPortLocation (GPS Haversine engine)
+│   ├── i18n/               # Tri-lingual localization strings (AR, FR, EN)
+│   ├── lib/                # Speech synthesis, Charmoula calculator, Moroccan Port Regions
+│   ├── services/           # Real clients for Open-Meteo, WoRMS, OBIS, FishBase, Open Food Facts
+│   └── App.tsx             # Main Application Shell
+├── .github/
+│   ├── workflows/          # CI Pipeline, CodeQL Security, Release Automation
+│   └── ISSUE_TEMPLATE/     # Bug Report, Feature Request, Species Proposal
+├── CHANGELOG.md            # Semantic version history
+├── CONTRIBUTING.md         # Contribution standards
+├── CONTRIBUTORS.md         # Author and open data acknowledgements
+└── LICENSE                 # MIT License
+```
 
 ---
 
-## 📜 License
+## 📜 License & Author
 
-MIT License © 2026 [Oussama EL HADJI](https://github.com/Bosaj)
+Distributed under the **MIT License**. See [`LICENSE`](./LICENSE) for more information.
+
+Designed, architected and built with passion by:
+**[Oussama EL HADJI](https://www.linkedin.com/in/oussama-el-hadji-388a101b7/)** ([@Bosaj](https://github.com/Bosaj))

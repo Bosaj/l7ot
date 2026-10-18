@@ -1,0 +1,42 @@
+name: 🐟 Moroccan Species or Dialect Proposal
+description: Propose adding a new Moroccan fish species, recipe, or regional dialect correction
+title: "[SPECIES/DIALECT]: "
+labels: ["area:dialect", "type:documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Help enrich Morocco's marine heritage documentation across Darija, Amazigh, Spanish, and French coastal vernaculars!
+  - type: input
+    id: fish_name
+    attributes:
+      label: Fish / Seafood Common Name
+      placeholder: E.g., Pagel, Merluza, Titchoukt...
+    validations:
+      required: true
+  - type: input
+    id: scientific_name
+    attributes:
+      label: Scientific Name (Latin)
+      placeholder: E.g., Pagellus bogaraveo
+  - type: dropdown
+    id: region
+    attributes:
+      label: Moroccan Coastal Region
+      options:
+        - "Oriental / الشرقية (Nador, Saidia, Ras Kebdana, Marchica)"
+        - "Chamal / الشمال (Tanger, Tetouan, Larache, Al Hoceima)"
+        - "Centre / الوسط (Casablanca, Rabat, Mohammedia, Kenitra)"
+        - "Doukkala-Abda / دكالة وعبدة (Safi, El Jadida, Oualidia)"
+        - "Souss-Massa / سوس (Agadir, Taghazout, Tiznit)"
+        - "Sahara / الصحراء (Dakhla, Laâyoune, Boujdour)"
+    validations:
+      required: true
+  - type: textarea
+    id: dialect_terms
+    attributes:
+      label: Regional Names & Pronunciation
+      description: Provide the authentic local names used at the fish auction (La Criée / المرسى).
+      placeholder: E.g., In Nador it is called 'باخيل', in Agadir it is called 'الباجو'...
+    validations:
+      required: true

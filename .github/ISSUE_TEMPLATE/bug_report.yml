@@ -1,0 +1,56 @@
+name: 🐛 Bug Report
+description: Report a bug, broken feature, layout defect, or translation issue in L7OT
+title: "[BUG]: "
+labels: ["type:bug", "status:triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report an issue and keep L7OT (الحوت) reliable!
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: E.g., Button overflow in Souk Basket on mobile, or RTL price inversion...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected Area
+      options:
+        - "Species Encyclopedia (01)"
+        - "AI Camera Scanner (02)"
+        - "Coastal Recipes (03)"
+        - "Chef L7ot Charmoula (04)"
+        - "Market Freshness Guide (05)"
+        - "Treaties & Global Trade (06)"
+        - "Live Weather & Marine APIs (07)"
+        - "RTL / Arabic Localization"
+        - "Mobile UI / Responsiveness"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this issue?
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. See error
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should happen instead?
+    validations:
+      required: true
+  - type: input
+    id: device_browser
+    attributes:
+      label: Device & Browser
+      placeholder: E.g., iPhone 15 / Safari, or Windows 11 / Chrome 130
