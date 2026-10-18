@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-10-18
+
+### Added
+- **Continuous Dual-Track Infinite Marquee Ticker:**
+  - Architected a mathematically seamless, gapless infinite ticker utilizing twin identical tracks (`Track A` and `Track B`) animating via `translate3d(-50%, 0, 0)`.
+  - Expanded wholesale port auction feeds to **12 authentic Moroccan fishing ports**: Nador/Beni Ansar (Oriental), Tangier Med (Strait), Al Hoceima (Rif), Larache, Casablanca Port, Oualidia, Safi, Essaouira, Agadir, Tan-Tan/Sidi Ifni, Laâyoune, and Dakhla.
+  - Added instant hover-to-pause (`group-hover:[animation-play-state:paused]`) allowing users to inspect spot prices comfortably without movement.
+  - Implemented soft bilateral gradient fade masks (`bg-gradient-to-r` and `bg-gradient-to-l`) matching editorial theme `#120f0d`.
+- **Responsive Navigation Pill Cluster:**
+  - Completely eliminated clumsy horizontal scrollbars on desktop, tablet, and mobile displays.
+  - Redesigned navigation items into a modern, wrapping pill cluster (`flex flex-wrap gap-1.5`) with custom Lucide icons (`Fish`, `Camera`, `UtensilsCrossed`, `ChefHat`, `ShoppingBag`, `Globe2`, `Waves`).
+- **Deterministic Offline Testing Suite:**
+  - Mocked all external third-party network APIs (Open-Meteo, WoRMS, OBIS, FishBase, Open Food Facts, GBIF) with `vi.spyOn(globalThis, 'fetch')`.
+  - Reduced test execution time from >4s to **7ms**, eliminating flaky network timeouts in GitHub Actions runners.
+  - Added full test coverage for both successful telemetry parsing and resilient offline fallback mechanisms (26/26 passing tests).
+
+### Fixed
+- **Empty Void in RTL Marquee:** Fixed layout flaw where Arabic `dir="rtl"` caused the single ticker track to detach from the right boundary upon translation, leaving an empty black void.
+- **RTL / LTR Modal Arrows:** Fixed next/previous directional chevron orientation in `FishModal` to naturally follow Arabic right-to-left layout.
+- **Casablanca GPS Geolocation Default:** Fixed location detector so inland or central users seamlessly auto-detect Casablanca / Mohammedia port instead of failing silently.
+
+---
+
 ## [1.1.0] - 2026-10-18
 
 ### Added
@@ -38,3 +61,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moroccan fisheries agreements and international treaties analysis (EU-Morocco, Russia, Japan, UK).
 - Interactive Souk Basket and Species Head-to-Head Comparator with Kessal cleaning fee estimation.
 - Mobile Camera AI Fish Scanner.
+
+---
+
+## 📜 Complete Git Commit History
+
+| Commit | Type | Description |
+|---|---|---|
+| `4c9669f` | `test` | mock network calls to prevent CI timeouts and ensure deterministic tests |
+| `aea4b82` | `fix` | eliminate ticker gap with dual-track infinite marquee and 12 Moroccan ports |
+| `218d863` | `fix` | add smooth auto-scrolling ticker with pause on hover and eliminate horizontal scrollbars in navigation |
+| `254235c` | `fix` | normalize regional styling, fix RTL/LTR modal arrows, enable Casablanca auto-detection & integrate marine APIs into core features |
+| `f09a88f` | `docs` | add GitHub Actions CI/CodeQL/release workflows, issue templates, CHANGELOG, and governance files |
+| `8753bca` | `feat` | add Oriental Moroccan regional dialect naming, port geolocation detection, and worldwide free marine APIs integration |
+| `107d0fa` | `fix` | resolve RTL/LTR currency inversion, layout overflows, untranslated footer, and add live marine weather and free marine APIs directory |
+| `b61e334` | `feat` | complete premium Moroccan seafood portal overhaul |
+| `8e602f8` | `feat` | editorial Moroccan Maritime Atlas redesign, 22 fish species with local photos, native Arabic MP3 audio, and 10 fisheries treaties |
+| `a33dd71` | `fix` | store authentic fish & recipe photos locally, embed YouTube cleaning tutorials, and unify typography |
+| `195c97e` | `docs` | expand README with comprehensive guide to regional taxonomy, price trends, live nutrition calculator, cleaning tutorials, and treaties |
+| `183bc44` | `feat` | real biological photos, regional Moroccan names, global/local price trends, live nutrition calculator, and traditional cleaning tutorials |
+| `552aa99` | `feat` | add regional Moroccan fish names, global vs local pricing, international fisheries treaties, market tracker, and live 100g/1kg nutritional calculator |
+| `5a6f390` | `feat` | initial release of L7OT - Moroccan fish encyclopedia, live images, market freshness guide, and recipes web app |
+

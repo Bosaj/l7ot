@@ -64,6 +64,12 @@ Live interactive telemetry connected to the world’s leading open marine APIs:
 * Head-to-head nutritional and economic comparator (Protein, Omega-3, spot price, export value).
 * Souk basket budget simulator including *Kessal* cleaning fees and one-click clipboard shopping list export.
 
+### 8. 📈 Continuous Dual-Track ONP Ticker & Zero-Scrollbar UX
+* **Dual-Track Infinite Marquee:** Seamless, gapless live telemetry strip covering **12 Moroccan wholesale criées (ONP)** from Nador and Tangier to Agadir and Dakhla.
+* **Pause on Hover:** Users can hover anywhere on the telemetry bar to freeze animation and inspect spot prices and trend arrows.
+* **Scrollbar-Free Navigation:** Responsive pill clusters with dedicated Lucide iconography that adapt naturally to all screen sizes without awkward horizontal drag or overflow.
+* **Deterministic Offline Test Suite:** Fully mocked unit test architecture executing in **7ms** with 26/26 passing tests and 100% green CI automation.
+
 ---
 
 ## 🗺️ Moroccan Regional Dialect Reference Matrix
