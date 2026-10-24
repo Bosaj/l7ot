@@ -35,12 +35,15 @@ export const RecipeModal: React.FC<RecipeModalProps> = ({
   const t = STRINGS[lang]
   const [playingVideo, setPlayingVideo] = useState(false)
 
-  // Lock background body scroll while modal is active
+  // Lock background body scroll while modal is active (with touch-bounce prevention)
   useEffect(() => {
     const originalOverflow = document.body.style.overflow
+    const originalTouchAction = document.body.style.touchAction
     document.body.style.overflow = 'hidden'
+    document.body.style.touchAction = 'none'
     return () => {
       document.body.style.overflow = originalOverflow
+      document.body.style.touchAction = originalTouchAction
     }
   }, [])
 

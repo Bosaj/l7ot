@@ -204,12 +204,15 @@ export const FishModal: React.FC<FishModalProps> = ({
   )
   const [videoLang, setVideoLang] = useState<SupportedLanguage>(lang)
 
-  // Lock background body scroll while modal is open
+  // Lock background body scroll while modal is open (with touch-bounce prevention)
   useEffect(() => {
     const originalOverflow = document.body.style.overflow
+    const originalTouchAction = document.body.style.touchAction
     document.body.style.overflow = 'hidden'
+    document.body.style.touchAction = 'none'
     return () => {
       document.body.style.overflow = originalOverflow
+      document.body.style.touchAction = originalTouchAction
     }
   }, [])
 
@@ -367,8 +370,13 @@ export const FishModal: React.FC<FishModalProps> = ({
             <div>
               <div className="flex items-center gap-3">
                 <h2 className="font-editorial text-3xl font-bold tracking-tight text-[#f4ede2] sm:text-4xl">
-                  {fish.nameDarijaArabic}
+                  {lang === 'ar' ? fish.nameDarijaArabic : lang === 'fr' ? fish.nameFrench : fish.nameEnglish}
                 </h2>
+                {lang !== 'ar' && (
+                  <span dir="rtl" className="font-bold text-lg sm:text-xl text-[#e09f3e] bg-[#0b0908]/80 px-2.5 py-0.5 rounded border border-[#2a211c]">
+                    {fish.nameDarijaArabic}
+                  </span>
+                )}
                 <button
                   type="button"
                   onClick={handleAudio}

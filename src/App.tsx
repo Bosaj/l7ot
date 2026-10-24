@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import {
   Search,
   Waves,
@@ -56,6 +56,12 @@ export const App: React.FC = () => {
 
   const t = STRINGS[lang]
   const isRtl = lang === 'ar'
+
+  // Dynamically update documentElement lang and dir for optimal typography, kerning, and screen-reader a11y
+  useEffect(() => {
+    document.documentElement.lang = lang
+    document.documentElement.dir = isRtl ? 'rtl' : 'ltr'
+  }, [lang, isRtl])
 
   // Filtered Fish (including deep search across all regional Moroccan names & Amazigh terms)
   const filteredFish = useMemo(() => {

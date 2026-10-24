@@ -10,9 +10,9 @@
  *   3. Telemetry Mono: JetBrains Mono Variable (Prices, weights, port codes, quotas)
  */
 @theme {
-  --font-sans: 'Space Grotesk Variable', 'IBM Plex Sans Arabic', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Fraunces Variable', 'Amiri', Georgia, serif;
-  --font-serif: 'Fraunces Variable', 'Amiri', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', 'Readex Pro Variable', 'IBM Plex Sans Arabic', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Cinzel', 'Playfair Display', 'Fraunces Variable', 'Amiri', Georgia, serif;
+  --font-serif: 'Playfair Display', 'Fraunces Variable', 'Amiri', Georgia, serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, monospace;
 
   /* Remap cold slate to Warm Obsidian & Basalt Stone */
@@ -83,13 +83,39 @@
     font-weight: 700;
   }
 
-  /* Arabic cursive letters must stay joined: never apply positive/negative tracking in RTL */
-  [dir='rtl'] * {
-    letter-spacing: 0 !important;
+  /* English & French High-End Luxury Typography (Regal, Crisp, Editorial) */
+  [dir='ltr'] {
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.012em;
+    line-height: 1.55;
   }
 
+  [dir='ltr'] h1,
+  [dir='ltr'] h2,
+  [dir='ltr'] h3,
+  [dir='ltr'] .font-editorial {
+    font-family: 'Cinzel', 'Playfair Display', 'Fraunces Variable', Georgia, serif;
+    letter-spacing: -0.022em;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  /* Distinctive Inscriptional Maritime Title Typography */
+  .font-royal {
+    font-family: 'Cinzel', 'Playfair Display', serif;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* Arabic classical Naskh & Readex Pro Typography */
   [dir='rtl'] {
+    font-family: 'Readex Pro Variable', 'IBM Plex Sans Arabic', ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: 0 !important;
     line-height: 1.75;
+  }
+
+  [dir='rtl'] * {
+    letter-spacing: 0 !important;
   }
 
   [dir='rtl'] h1,
@@ -98,6 +124,7 @@
   [dir='rtl'] .font-editorial {
     font-family: 'Amiri', 'Fraunces Variable', Georgia, serif;
     line-height: 1.35;
+    letter-spacing: 0 !important;
   }
 
   /* Tabular figures & technical mono for prices, weights, and port indices */

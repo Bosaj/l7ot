@@ -9,10 +9,11 @@
 [![React](https://img.shields.io/badge/React-19-cyan.svg)](https://react.dev/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v4-38bdf8.svg)](https://tailwindcss.com/)
 [![Author: Oussama EL HADJI](https://img.shields.io/badge/Author-Oussama_EL_HADJI-d96b27.svg)](https://www.linkedin.com/in/oussama-el-hadji-388a101b7/)
+[![Version: 1.6.0](https://img.shields.io/badge/version-1.6.0-amber.svg)](https://github.com/Bosaj/l7ot/releases/tag/v1.6.0)
 
 **The definitive Moroccan seafood encyclopedia, Darija & Oriental dialect taxonomy, port auctions, live marine weather, and coastal culinary heritage.**
 
-[🚀 Live on Netlify](https://l7ot-morocco.netlify.app) • [🐙 GitHub Pages](https://bosaj.github.io/l7ot/) • [📖 Read the Complete Wiki](https://github.com/Bosaj/l7ot/wiki) • [🐛 Report Issue](https://github.com/Bosaj/l7ot/issues/new/choose)
+[🚀 Live on Netlify](https://l7ot-morocco.netlify.app) • [▲ Vercel Production](https://l7ot.vercel.app) • [🐙 GitHub Pages](https://bosaj.github.io/l7ot/) • [📖 Read the Complete Wiki](https://github.com/Bosaj/l7ot/wiki) • [🐛 Report Issue](https://github.com/Bosaj/l7ot/issues/new/choose)
 
 </div>
 

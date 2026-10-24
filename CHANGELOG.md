@@ -4,6 +4,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-10-24
+
+### Added
+- **Royal & Premium Latin Typography Architecture (Cinzel, Playfair Display & Plus Jakarta Sans):**
+  - Integrated `Cinzel` inscriptional serif for royal maritime mastheads, giving English and French the grandeur of an imperial halieutic codex.
+  - Paired `Playfair Display` and `Fraunces Variable` for editorial taxonomy headings.
+  - Replaced techy Space Grotesk with `@fontsource-variable/plus-jakarta-sans` for body copy, badges, and telemetry with razor-sharp geometric precision and optical kerning (`tracking-[-0.012em]`).
+  - Integrated `@fontsource-variable/readex-pro` for modern, clean Arabic typography alongside classical `Amiri` Naskh.
+- **Interactive 5-Sense Freshness Diagnostic Lab (`MarketGuide.tsx`):**
+  - Interactive evaluation tool testing Cornea clarity, Gill redness, Flesh elasticity, Scale sheen, and Sea-spray aroma.
+  - Real-time freshness scoring (0–100%) and instant certification (*Grade A+ Criée Directe*, *Frais Standard*, *Douteux / Passé*) with bubble sound effects.
+- **Moroccan Fleet Landing Clock & Golden Hours Guide (`Horloge des Débarquements`):**
+  - Detailed dock landing schedules for **Pêche Artisanale** (06:00–09:00, hook-caught Pageot, Bar, Merou), **Chalutiers Côtiers** (11:00–14:30, Soles, Merlu, Calmar), and **Sardiniers** (20:30–02:00, pelagic sardines & anchovies).
+- **Localized Primary Species Names in Specimen Cards (`FishCard.tsx` & `FishModal.tsx`):**
+  - Displays French or English names as the prominent editorial title when browsing in `fr` or `en`, alongside the authentic Darija name.
+
+### Fixed
+- **Root Document Locale & Direction Synchronization (`App.tsx`):**
+  - Added dynamic synchronization of `document.documentElement.lang` and `document.documentElement.dir` on language switch, ensuring native browser typography and font-fallback compliance.
+- **Bulletproof Touch-Action Scroll Locking across all Modals:**
+  - Added `touchAction = 'none'` alongside `overflow = 'hidden'` in `FishModal`, `RecipeModal`, and `CleaningTutorialModal` to eliminate iOS Safari background bounce.
+- **Full 3-Language Localization in Market Guide:**
+  - Eliminated hardcoded Arabic strings in coastal indicators, peak seasonality headings, and landing port maps.
+
+---
+
 ## [1.5.0] - 2026-10-24
 
 ### Added

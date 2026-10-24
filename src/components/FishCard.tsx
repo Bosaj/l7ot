@@ -218,13 +218,13 @@ export const FishCard: React.FC<FishCardProps> = ({
             <div className="border-b border-[#f6f1e7]/10 pb-3">
               <div className="flex items-baseline justify-between gap-2">
                 <h3 className="font-editorial text-2xl font-bold text-[#f6f1e7] group-hover:text-[#e68a45] transition-colors">
-                  {fish.nameDarijaArabic}
+                  {localizedPrimaryName}
                 </h3>
                 <span
-                  dir="ltr"
-                  className="font-mono text-xs font-semibold text-[#e68a45]"
+                  dir="rtl"
+                  className="font-bold text-sm text-[#e68a45] shrink-0"
                 >
-                  {fish.nameDarijaLatin}
+                  {lang === 'ar' ? fish.nameDarijaLatin : fish.nameDarijaArabic}
                 </span>
               </div>
               <div className="mt-1 flex items-center justify-between text-xs text-[#a69b8d]">
