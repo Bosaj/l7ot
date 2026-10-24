@@ -38,10 +38,10 @@ describe('MoroccanCoastalRadar', () => {
     expect(realMapBtn).toHaveClass('bg-cyan-500')
   })
 
-  it('renders satellite and dark nautical tile controls on real map', () => {
+  it('renders satellite and marine ocean tile controls on real map', () => {
     render(<MoroccanCoastalRadar lang="fr" />)
     expect(screen.getByRole('button', { name: /Satellite/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /Nautique/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Océans/i })).toBeInTheDocument()
   })
 
   it('triggers onFilterSpeciesByPort when filter button is clicked', () => {
