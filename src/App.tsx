@@ -157,14 +157,14 @@ export const App: React.FC = () => {
         onToggleSimulatedOffline={offlineStatus.toggleSimulatedOffline}
       />
 
-      <main className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 space-y-10">
+      <main className="relative z-10 mx-auto max-w-7xl px-2.5 sm:px-6 py-3 sm:py-8 space-y-5 sm:space-y-10">
         {/* Editorial Asymmetric Masthead Hero (Fish & Recipes Tabs) */}
         {(activeTab === 'fish' || activeTab === 'recipes') && (
-          <section className="rounded-xl border border-[#f6f1e7]/12 bg-[#14110f] p-6 sm:p-8 shadow-2xl">
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+          <section className="rounded-2xl border border-[#f6f1e7]/12 bg-[#14110f] p-3.5 sm:p-6 md:p-8 shadow-2xl">
+            <div className="grid grid-cols-1 gap-5 sm:gap-8 lg:grid-cols-12 lg:items-end">
               {/* Left Editorial Column */}
-              <div className="lg:col-span-7 space-y-4">
-                <div className="inline-flex items-center gap-2 border border-[#d96b27]/40 bg-[#d96b27]/10 px-3 py-1 font-mono text-[11px] font-semibold uppercase text-[#f2b47e]">
+              <div className="lg:col-span-7 space-y-3 sm:space-y-4">
+                <div className="inline-flex items-center gap-2 border border-[#d96b27]/40 bg-[#d96b27]/10 px-3 py-1 font-mono text-[10px] sm:text-[11px] font-semibold uppercase text-[#f2b47e]">
                   <Compass className="h-3.5 w-3.5 text-[#e68a45]" />
                   <span>
                     {lang === 'ar'
@@ -175,7 +175,7 @@ export const App: React.FC = () => {
                   </span>
                 </div>
 
-                <h2 className="font-editorial text-3xl font-bold leading-tight text-[#f6f1e7] sm:text-5xl">
+                <h2 className="font-editorial text-2xl sm:text-4xl md:text-5xl font-bold leading-snug sm:leading-tight text-[#f6f1e7]">
                   {activeTab === 'fish'
                     ? lang === 'ar'
                       ? 'موسوعة الحوت المغربي، الأسماء الجهوية وأسعار المراسي'
@@ -189,7 +189,7 @@ export const App: React.FC = () => {
                     : 'Authentic Moroccan Coastal Culinary Repertoire'}
                 </h2>
 
-                <p className="max-w-2xl text-sm leading-relaxed text-[#a69b8d]">
+                <p className="max-w-2xl text-xs sm:text-sm md:text-base leading-relaxed text-[#c9beb0]">
                   {lang === 'ar'
                     ? `دليل مرجعي شامل يوثق ${MOROCCAN_FISH.length} نوعاً من ثروات السواحل المغربية (الأطلسية والمتوسطية) بأسمائها في الشمال والوسط والجنوب والأمازيغية، مع نطق صوتي ناطق بالدارجة، ماسح ذكي بالكاميرا، فيديوهات تنقية لكل سمكة، وحاسبة قفة الساحل.`
                     : lang === 'fr'
@@ -199,39 +199,39 @@ export const App: React.FC = () => {
               </div>
 
               {/* Right Telemetry Metrics Grid */}
-              <div className="lg:col-span-5 grid grid-cols-2 gap-3">
-                <div className="rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-3.5">
-                  <span className="font-mono text-[10px] uppercase text-[#a69b8d] block">
+              <div className="lg:col-span-5 grid grid-cols-2 gap-2 sm:gap-3">
+                <div className="rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-2.5 sm:p-3.5">
+                  <span className="font-mono text-[9px] sm:text-[10px] uppercase text-[#a69b8d] block">
                     {lang === 'ar' ? 'الأنواع الموثقة' : 'ESPÈCES DOCUMENTÉES'}
                   </span>
-                  <span className="font-editorial text-2xl font-bold text-[#e68a45]">
+                  <span className="font-editorial text-xl sm:text-2xl font-bold text-[#e68a45]">
                     {MOROCCAN_FISH.length}
                   </span>
-                  <span className="mt-0.5 block font-mono text-[10px] text-[#786c60]">
+                  <span className="mt-0.5 block font-mono text-[9px] sm:text-[10px] text-[#786c60]">
                     {lang === 'ar' ? 'بالصور الحقيقية والنطق' : 'Photos & Audio Darija'}
                   </span>
                 </div>
 
                 <div
                   onClick={() => setActiveTab('agreements')}
-                  className="cursor-pointer rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-3.5 transition-colors hover:border-[#d96b27]/50"
+                  className="cursor-pointer rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-2.5 sm:p-3.5 transition-colors hover:border-[#d96b27]/50"
                 >
-                  <span className="font-mono text-[10px] uppercase text-[#a69b8d] block">
+                  <span className="font-mono text-[9px] sm:text-[10px] uppercase text-[#a69b8d] block">
                     {lang === 'ar' ? 'المعاهدات الدولية' : 'TRAITÉS & ACCORDS'}
                   </span>
                   <div className="flex items-baseline gap-1.5">
-                    <span className="font-editorial text-2xl font-bold text-[#f6f1e7]">
+                    <span className="font-editorial text-xl sm:text-2xl font-bold text-[#f6f1e7]">
                       {FISHERIES_AGREEMENTS.length}
                     </span>
                     <Globe className="h-3.5 w-3.5 text-[#e68a45]" />
                   </div>
-                  <span className="mt-0.5 block font-mono text-[10px] text-[#e68a45]">
-                    {lang === 'ar' ? 'UE · UK · USA · اليابان · روسيا ←' : 'UE · UK · USA · Japon · Russie →'}
+                  <span className="mt-0.5 block font-mono text-[9px] sm:text-[10px] text-[#e68a45] truncate">
+                    {lang === 'ar' ? 'UE · UK · USA · اليابان ←' : 'UE · UK · USA · Japon →'}
                   </span>
                 </div>
 
-                <div className="rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-3.5">
-                  <span className="font-mono text-[10px] uppercase text-[#a69b8d] block">
+                <div className="rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-2.5 sm:p-3.5">
+                  <span className="font-mono text-[9px] sm:text-[10px] uppercase text-[#a69b8d] block">
                     {lang === 'ar'
                       ? 'صادرات المملكة'
                       : lang === 'fr'
@@ -239,11 +239,11 @@ export const App: React.FC = () => {
                       : 'SEAFOOD EXPORTS'}
                   </span>
                   <div className="flex items-baseline gap-1" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
-                    <span className="font-mono text-xl font-bold text-emerald-400">
+                    <span className="font-mono text-base sm:text-xl font-bold text-emerald-400">
                       {lang === 'ar' ? '+31 مليار درهم' : lang === 'fr' ? '+31 Mds MAD' : '+31B MAD'}
                     </span>
                   </div>
-                  <span className="mt-0.5 block font-mono text-[10px] text-[#786c60]">
+                  <span className="mt-0.5 block font-mono text-[9px] sm:text-[10px] text-[#786c60]">
                     {lang === 'ar'
                       ? 'الرتبة الأولى إفريقياً في الصيد'
                       : lang === 'fr'
@@ -252,17 +252,17 @@ export const App: React.FC = () => {
                   </span>
                 </div>
 
-                <div className="rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-3.5">
-                  <span className="font-mono text-[10px] uppercase text-[#a69b8d] block">
+                <div className="rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-2.5 sm:p-3.5">
+                  <span className="font-mono text-[9px] sm:text-[10px] uppercase text-[#a69b8d] block">
                     {lang === 'ar' ? 'النطق الصوتي' : 'AUDIO DARIJA NATIF'}
                   </span>
                   <div className="flex items-center gap-1.5">
                     <Volume2 className="h-4 w-4 text-[#e68a45]" />
-                    <span className="font-mono text-sm font-bold text-[#f6f1e7]">
+                    <span className="font-mono text-xs sm:text-sm font-bold text-[#f6f1e7]">
                       100% MP3 Arabe
                     </span>
                   </div>
-                  <span className="mt-0.5 block font-mono text-[10px] text-[#786c60]">
+                  <span className="mt-0.5 block font-mono text-[9px] sm:text-[10px] text-[#786c60]">
                     {lang === 'ar' ? 'لهجات الشمال والوسط والجنوب' : 'Chamal · Centre · Souss'}
                   </span>
                 </div>
@@ -270,7 +270,7 @@ export const App: React.FC = () => {
             </div>
 
             {/* Search & Filter Console */}
-            <div className="mt-6 space-y-4 border-t border-[#f6f1e7]/10 pt-6">
+            <div className="mt-4 sm:mt-6 space-y-3 sm:space-y-4 border-t border-[#f6f1e7]/10 pt-4 sm:pt-6">
               <div className="relative">
                 <Search className="absolute top-3.5 right-4 h-5 w-5 text-[#a69b8d] rtl:right-4 ltr:left-4 ltr:right-auto" />
                 <input
@@ -278,7 +278,7 @@ export const App: React.FC = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={t.searchPlaceholder}
-                  className="w-full rounded-lg border border-[#f6f1e7]/15 bg-[#0b0908] px-12 py-3.5 text-sm text-[#f6f1e7] placeholder-[#786c60] focus:border-[#d96b27] focus:outline-none focus:ring-1 focus:ring-[#d96b27]"
+                  className="w-full rounded-xl border border-[#f6f1e7]/15 bg-[#0b0908] px-12 py-3 sm:py-3.5 text-sm text-[#f6f1e7] placeholder-[#786c60] focus:border-[#d96b27] focus:outline-none focus:ring-1 focus:ring-[#d96b27]"
                 />
                 {searchQuery && (
                   <button
@@ -293,9 +293,9 @@ export const App: React.FC = () => {
 
               {/* Fish Tab Category & Coast Filters */}
               {activeTab === 'fish' && (
-                <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
-                  {/* Categories */}
-                  <div className="flex flex-wrap items-center gap-1.5">
+                <div className="flex flex-col gap-2.5 sm:gap-3 text-xs sm:flex-row sm:items-center sm:justify-between">
+                  {/* Categories - Swipeable Horizontal Rail on mobile, wrapping on desktop */}
+                  <div className="flex overflow-x-auto no-scrollbar gap-1.5 py-1 -mx-1 px-1 snap-x w-full sm:w-auto">
                     {[
                       { id: 'all', label: t.allCategories },
                       { id: 'poisson_bleu', label: t.catPoissonBleu },
@@ -309,9 +309,9 @@ export const App: React.FC = () => {
                         key={cat.id}
                         type="button"
                         onClick={() => setSelectedCategory(cat.id)}
-                        className={`rounded px-3 py-1.5 font-medium transition-all ${
+                        className={`shrink-0 snap-start rounded-lg px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-medium transition-all active:scale-95 ${
                           selectedCategory === cat.id
-                            ? 'bg-[#d96b27] text-[#0b0908] font-bold'
+                            ? 'bg-[#d96b27] text-[#0b0908] font-bold shadow-md shadow-[#d96b27]/20'
                             : 'border border-[#f6f1e7]/10 bg-[#0b0908] text-[#a69b8d] hover:border-[#f6f1e7]/25 hover:text-[#f6f1e7]'
                         }`}
                       >
@@ -320,12 +320,12 @@ export const App: React.FC = () => {
                     ))}
                   </div>
 
-                  {/* Coasts */}
-                  <div className="flex items-center gap-1 rounded border border-[#f6f1e7]/10 bg-[#0b0908] p-1 font-mono">
+                  {/* Coasts - Touch-friendly segmented bar */}
+                  <div className="flex items-center gap-1 rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] p-1 font-mono w-full sm:w-auto justify-between sm:justify-start shrink-0">
                     <button
                       type="button"
                       onClick={() => setSelectedCoast('all')}
-                      className={`rounded px-2.5 py-1 text-[11px] font-semibold transition-colors ${
+                      className={`flex-1 sm:flex-initial text-center rounded px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold transition-colors active:scale-95 ${
                         selectedCoast === 'all'
                           ? 'bg-[#d96b27] text-[#0b0908]'
                           : 'text-[#a69b8d] hover:text-[#f6f1e7]'
@@ -336,7 +336,7 @@ export const App: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setSelectedCoast('atlantic')}
-                      className={`rounded px-2.5 py-1 text-[11px] font-semibold transition-colors ${
+                      className={`flex-1 sm:flex-initial text-center rounded px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold transition-colors active:scale-95 ${
                         selectedCoast === 'atlantic'
                           ? 'bg-[#d96b27] text-[#0b0908]'
                           : 'text-[#a69b8d] hover:text-[#f6f1e7]'
@@ -347,7 +347,7 @@ export const App: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setSelectedCoast('mediterranean')}
-                      className={`rounded px-2.5 py-1 text-[11px] font-semibold transition-colors ${
+                      className={`flex-1 sm:flex-initial text-center rounded px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold transition-colors active:scale-95 ${
                         selectedCoast === 'mediterranean'
                           ? 'bg-[#d96b27] text-[#0b0908]'
                           : 'text-[#a69b8d] hover:text-[#f6f1e7]'

@@ -283,8 +283,8 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          {/* Location Port & Language Controls (Pinned at End) */}
-          <div className="flex items-center gap-2.5 font-mono text-[11px] shrink-0 z-10 bg-[#120f0d] ps-2">
+          {/* Location Port & Desktop Status Strip */}
+          <div className="hidden lg:flex items-center gap-2.5 font-mono text-[11px] shrink-0 z-10 bg-[#120f0d] ps-2">
             {userPortLocation && (
               <div className="flex items-center gap-1 border-e border-[#f6f1e7]/15 pe-2">
                 <button
@@ -324,103 +324,129 @@ export const Header: React.FC<HeaderProps> = ({
                 }`}
               >
                 <Anchor className={`h-2.5 w-2.5 ${isHighSeasActive ? 'text-emerald-400' : 'text-[#a69b8d]'}`} />
-                <span className="hidden sm:inline">
+                <span>
                   {isHighSeasActive
                     ? (lang === 'ar' ? 'عرض البحر' : 'Haute Mer')
                     : (lang === 'ar' ? 'وضع البحر' : 'Mode Mer')}
                 </span>
               </button>
             )}
-
-            {/* Language Selector */}
-            <div className="flex items-center gap-1">
-              <button
-                type="button"
-                onClick={() => setLang('ar')}
-                className={`rounded px-1.5 py-0.5 text-[10px] font-semibold transition-colors ${
-                  lang === 'ar'
-                    ? 'bg-[#d96b27] text-[#0b0908]'
-                    : 'text-[#a69b8d] hover:text-[#f6f1e7]'
-                }`}
-              >
-                العربية
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang('fr')}
-                className={`rounded px-1.5 py-0.5 text-[10px] font-semibold transition-colors ${
-                  lang === 'fr'
-                    ? 'bg-[#d96b27] text-[#0b0908]'
-                    : 'text-[#a69b8d] hover:text-[#f6f1e7]'
-                }`}
-              >
-                FR
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang('en')}
-                className={`rounded px-1.5 py-0.5 text-[10px] font-semibold transition-colors ${
-                  lang === 'en'
-                    ? 'bg-[#d96b27] text-[#0b0908]'
-                    : 'text-[#a69b8d] hover:text-[#f6f1e7]'
-                }`}
-              >
-                EN
-              </button>
-              <button
-                type="button"
-                onClick={() => setSoundActive(sounds.toggle())}
-                title={soundActive ? (lang === 'ar' ? 'كتم المؤثرات الصوتية' : 'Couper les sons') : (lang === 'ar' ? 'تشغيل المؤثرات الصوتية' : 'Activer les sons')}
-                className={`flex items-center justify-center rounded px-1.5 py-0.5 text-[10px] transition-colors border ${
-                  soundActive
-                    ? 'border-cyan-500/30 bg-cyan-500/10 text-cyan-300'
-                    : 'border-white/10 text-[#786c60] hover:text-[#f6f1e7]'
-                }`}
-              >
-                {soundActive ? <Volume2 className="h-3 w-3" /> : <VolumeX className="h-3 w-3" />}
-              </button>
-            </div>
           </div>
         </div>
       </div>
 
-      {/* Main Editorial Masthead & Architectural Index Navigation */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="flex flex-col justify-between gap-4 py-3.5 xl:flex-row xl:items-center">
-          {/* Custom Moroccan Zellige & Brass Fish Brand Crest */}
-          <div
-            onClick={() => {
-              sounds.playBubble()
-              setActiveTab('fish')
-            }}
-            className="flex cursor-pointer items-center gap-3.5 group"
-          >
-            <img
-              src={getAssetUrl("favicon.svg")}
-              alt="L7OT Moroccan Maritime Crest"
-              className="h-12 w-12 shrink-0 rounded-lg border border-[#d96b27]/40 bg-[#14100d] p-0.5 shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:border-[#e68a45]"
-            />
-            <div>
-              <div className="flex flex-wrap items-baseline gap-2.5">
-                <h1 className="font-editorial text-2xl font-bold tracking-tight text-[#f6f1e7] sm:text-3xl">
-                  {t.siteTitle}
-                </h1>
-                <span className="border border-[#d96b27]/35 bg-[#d96b27]/10 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase text-[#f2b47e]">
-                  {lang === 'ar'
-                    ? 'الأطلس البحري المغربي · 44 نوعاً'
-                    : lang === 'fr'
-                      ? 'ATLAS MARITIME DU MAROC · 44 ESPÈCES'
-                      : 'MOROCCAN MARITIME ATLAS · 44 SPECIES'}
-                </span>
+      {/* Main Editorial Masthead & Navigation (Fully responsive across all phones, tablets, and desktop) */}
+      <div className="mx-auto max-w-7xl px-3 sm:px-6">
+        <div className="flex flex-col justify-between gap-3 py-3 xl:flex-row xl:items-center">
+          {/* Top Row: Brand Crest & Prominent Language Controller */}
+          <div className="flex items-center justify-between gap-3 w-full xl:w-auto">
+            {/* Custom Moroccan Zellige & Brass Fish Brand Crest */}
+            <div
+              onClick={() => {
+                sounds.playBubble()
+                setActiveTab('fish')
+              }}
+              className="flex cursor-pointer items-center gap-2.5 sm:gap-3.5 group min-w-0"
+            >
+              <img
+                src={getAssetUrl("favicon.svg")}
+                alt="L7OT Moroccan Maritime Crest"
+                className="h-10 w-10 sm:h-12 sm:w-12 shrink-0 rounded-lg border border-[#d96b27]/40 bg-[#14100d] p-0.5 shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:border-[#e68a45]"
+              />
+              <div className="min-w-0">
+                <div className="flex items-baseline gap-2">
+                  <h1 className="font-editorial text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-[#f6f1e7] truncate">
+                    {t.siteTitle}
+                  </h1>
+                  <span className="hidden sm:inline border border-[#d96b27]/35 bg-[#d96b27]/10 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase text-[#f2b47e]">
+                    {lang === 'ar'
+                      ? '44 نوعاً'
+                      : lang === 'fr'
+                        ? '44 ESPÈCES'
+                        : '44 SPECIES'}
+                  </span>
+                </div>
+                <p className="mt-0.5 text-[11px] sm:text-xs text-[#a69b8d] truncate">{t.tagline}</p>
               </div>
-              <p className="mt-0.5 text-xs text-[#a69b8d] line-clamp-1">{t.tagline}</p>
+            </div>
+
+            {/* Prominent High-End Language Switcher & Audio Controls (Accessible on EVERY screen, never stuck!) */}
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+              {/* GPS Port Chip (Visible on mobile/tablet) */}
+              {userPortLocation && (
+                <button
+                  type="button"
+                  onClick={userPortLocation.detectLocation}
+                  disabled={userPortLocation.isLocating}
+                  title={lang === 'ar' ? 'رصد الموقع الجغرافي وتحديد أقرب ميناء مغربي' : 'Localisation GPS du port le plus proche'}
+                  className="hidden md:inline-flex lg:hidden items-center gap-1 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1 text-xs font-medium text-cyan-300"
+                >
+                  <MapPin className={`h-3.5 w-3.5 text-cyan-400 ${userPortLocation.isLocating ? 'animate-spin' : ''}`} />
+                  <span className="max-w-[110px] truncate">
+                    {userPortLocation.isLocating
+                      ? 'GPS...'
+                      : (lang === 'ar' ? userPortLocation.selectedRegion.primaryPortAr.split('/')[0] : userPortLocation.selectedRegion.primaryPortFr.split('/')[0])}
+                  </span>
+                </button>
+              )}
+
+              {/* Language Switcher Pills */}
+              <div className="flex items-center rounded-xl border border-[#f6f1e7]/20 bg-[#14110f] p-1 shadow-lg ring-1 ring-white/5">
+                <button
+                  type="button"
+                  onClick={() => setLang('ar')}
+                  className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-all active:scale-95 ${
+                    lang === 'ar'
+                      ? 'bg-[#d96b27] text-[#0b0908] shadow-md'
+                      : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+                  }`}
+                >
+                  العربية
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLang('fr')}
+                  className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-all active:scale-95 ${
+                    lang === 'fr'
+                      ? 'bg-[#d96b27] text-[#0b0908] shadow-md'
+                      : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+                  }`}
+                >
+                  FR
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLang('en')}
+                  className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-all active:scale-95 ${
+                    lang === 'en'
+                      ? 'bg-[#d96b27] text-[#0b0908] shadow-md'
+                      : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+                  }`}
+                >
+                  EN
+                </button>
+              </div>
+
+              {/* Sound Toggle */}
+              <button
+                type="button"
+                onClick={() => setSoundActive(sounds.toggle())}
+                title={soundActive ? (lang === 'ar' ? 'كتم المؤثرات الصوتية' : 'Couper les sons') : (lang === 'ar' ? 'تشغيل المؤثرات الصوتية' : 'Activer les sons')}
+                className={`flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl transition-all border shadow-lg active:scale-95 ${
+                  soundActive
+                    ? 'border-cyan-500/30 bg-cyan-500/15 text-cyan-300'
+                    : 'border-white/10 text-[#786c60] hover:text-[#f6f1e7] bg-[#14110f]'
+                }`}
+              >
+                {soundActive ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+              </button>
             </div>
           </div>
 
-          {/* Numbered Editorial Index Navigation (Zero scrollbar, touch-scrollable on mobile, wrapping on desktop) */}
+          {/* Numbered Editorial Index Navigation (Touch-scrollable with short labels on mobile, full labels on desktop) */}
           <nav
             aria-label="Main Navigation"
-            className="flex overflow-x-auto sm:flex-wrap items-center gap-1.5 rounded-xl border border-[#f6f1e7]/10 bg-[#14110f] p-1.5 shadow-inner no-scrollbar scroll-smooth snap-x pb-2 sm:pb-1.5 max-w-full"
+            className="flex overflow-x-auto no-scrollbar scroll-smooth snap-x items-center gap-1.5 rounded-xl border border-[#f6f1e7]/10 bg-[#14110f] p-1.5 shadow-inner max-w-full -mx-1 px-1 sm:mx-0 sm:px-1.5"
           >
             {navItems.map((item) => {
               const isActive = activeTab === item.id
@@ -429,11 +455,12 @@ export const Header: React.FC<HeaderProps> = ({
                 <button
                   key={item.id}
                   type="button"
+                  aria-label={item.label}
                   onClick={() => {
                     sounds.playTabClick()
                     setActiveTab(item.id)
                   }}
-                  className={`group relative flex shrink-0 snap-start items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs transition-transform duration-150 active:scale-95 ${
+                  className={`group relative flex shrink-0 snap-start items-center gap-1.5 rounded-lg px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs transition-transform duration-150 active:scale-95 ${
                     isActive
                       ? 'bg-[#d96b27] text-[#0b0908] font-bold shadow-md shadow-[#d96b27]/20 ring-1 ring-[#e68a45]'
                       : item.highlight
@@ -458,7 +485,10 @@ export const Header: React.FC<HeaderProps> = ({
                   >
                     {item.index}
                   </span>
-                  <span className="font-medium text-xs whitespace-nowrap">
+                  <span className="font-medium text-xs whitespace-nowrap sm:hidden">
+                    {item.shortLabel}
+                  </span>
+                  <span className="font-medium text-xs whitespace-nowrap hidden sm:inline">
                     {item.label}
                   </span>
                 </button>
