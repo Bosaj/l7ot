@@ -13,11 +13,13 @@ import {
   TrendingUp,
   TrendingDown,
   Minus,
+  Scale,
 } from 'lucide-react'
 import type { Fish } from '../data/types'
 import type { SupportedLanguage } from '../i18n/strings'
 import { speakDarija } from '../lib/speech'
 import { PriceBadge } from './PriceBadge'
+import { sounds } from '../lib/soundEffects'
 
 interface FishScannerProps {
   allFish: Fish[]
@@ -318,6 +320,7 @@ export const FishScanner: React.FC<FishScannerProps> = ({
 
     setMatches(top3)
     setIsScanning(false)
+    sounds.playScanMatch()
   }
 
   const primaryMatch = matches[0]
@@ -722,6 +725,28 @@ export const FishScanner: React.FC<FishScannerProps> = ({
                         </span>
                       </div>
                     </div>
+
+                    {/* Moroccan Maritime Law & Minimum Catch Size Check */}
+                    {primaryMatch.fish.regulations && (
+                      <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-emerald-500/25 bg-emerald-950/20 px-3.5 py-2.5 text-xs">
+                        <div className="flex items-center gap-2">
+                          <Scale className="h-4 w-4 text-emerald-400" />
+                          <span className="font-mono text-[#a69b8d]">
+                            {lang === 'ar' ? 'المقاس الأدنى القانوني (القرار 1154-88):' : 'Taille Minimale Légale (Arrêté 1154-88) :'}
+                          </span>
+                          <span className="rounded bg-emerald-500/20 px-2 py-0.5 font-mono font-bold text-emerald-300">
+                            {primaryMatch.fish.regulations.minimumCatchSizeCm
+                              ? `≥ ${primaryMatch.fish.regulations.minimumCatchSizeCm} cm`
+                              : primaryMatch.fish.regulations.minimumCatchWeightGrams
+                              ? `≥ ${primaryMatch.fish.regulations.minimumCatchWeightGrams} g`
+                              : 'Conforme'}
+                          </span>
+                        </div>
+                        <span className="font-mono text-[11px] text-emerald-400/90 font-medium">
+                          {lang === 'ar' ? '✓ مرخص للصيد والبيع بالمارشي' : '✓ Conforme à la législation DPM'}
+                        </span>
+                      </div>
+                    )}
 
                     {/* Secondary Alternative Candidates */}
                     {matches.length > 1 && (

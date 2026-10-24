@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Camera,
   MapPin,
@@ -9,10 +9,13 @@ import {
   Globe2,
   Waves,
   Scale,
+  Volume2,
+  VolumeX,
 } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
 import type { MoroccanPortRegion } from '../lib/moroccanRegions'
+import { sounds } from '../lib/soundEffects'
 
 export type NavTab = 'fish' | 'scanner' | 'recipes' | 'chef' | 'market' | 'agreements' | 'maritime-law' | 'marine-apis'
 
@@ -40,6 +43,7 @@ export const Header: React.FC<HeaderProps> = ({
   userPortLocation,
 }) => {
   const t = STRINGS[lang]
+  const [soundActive, setSoundActive] = useState(() => sounds.isEnabled())
 
   const navItems: Array<{
     id: NavTab
@@ -288,6 +292,18 @@ export const Header: React.FC<HeaderProps> = ({
               >
                 EN
               </button>
+              <button
+                type="button"
+                onClick={() => setSoundActive(sounds.toggle())}
+                title={soundActive ? (lang === 'ar' ? 'كتم المؤثرات الصوتية' : 'Couper les sons') : (lang === 'ar' ? 'تشغيل المؤثرات الصوتية' : 'Activer les sons')}
+                className={`flex items-center justify-center rounded px-1.5 py-0.5 text-[10px] transition-colors border ${
+                  soundActive
+                    ? 'border-cyan-500/30 bg-cyan-500/10 text-cyan-300'
+                    : 'border-white/10 text-[#786c60] hover:text-[#f6f1e7]'
+                }`}
+              >
+                {soundActive ? <Volume2 className="h-3 w-3" /> : <VolumeX className="h-3 w-3" />}
+              </button>
             </div>
           </div>
         </div>
@@ -298,7 +314,10 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex flex-col justify-between gap-4 py-3.5 xl:flex-row xl:items-center">
           {/* Custom Moroccan Zellige & Brass Fish Brand Crest */}
           <div
-            onClick={() => setActiveTab('fish')}
+            onClick={() => {
+              sounds.playBubble()
+              setActiveTab('fish')
+            }}
             className="flex cursor-pointer items-center gap-3.5 group"
           >
             <img
@@ -313,10 +332,10 @@ export const Header: React.FC<HeaderProps> = ({
                 </h1>
                 <span className="border border-[#d96b27]/35 bg-[#d96b27]/10 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase text-[#f2b47e]">
                   {lang === 'ar'
-                    ? 'الأطلس البحري المغربي · 32 نوعاً'
+                    ? 'الأطلس البحري المغربي · 44 نوعاً'
                     : lang === 'fr'
-                      ? 'ATLAS MARITIME DU MAROC · 32 ESPÈCES'
-                      : 'MOROCCAN MARITIME ATLAS · 32 SPECIES'}
+                      ? 'ATLAS MARITIME DU MAROC · 44 ESPÈCES'
+                      : 'MOROCCAN MARITIME ATLAS · 44 SPECIES'}
                 </span>
               </div>
               <p className="mt-0.5 text-xs text-[#a69b8d] line-clamp-1">{t.tagline}</p>
@@ -335,7 +354,10 @@ export const Header: React.FC<HeaderProps> = ({
                 <button
                   key={item.id}
                   type="button"
-                  onClick={() => setActiveTab(item.id)}
+                  onClick={() => {
+                    sounds.playTabClick()
+                    setActiveTab(item.id)
+                  }}
                   className={`group relative flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs transition-all duration-200 ${
                     isActive
                       ? 'bg-[#d96b27] text-[#0b0908] font-bold shadow-md shadow-[#d96b27]/20 ring-1 ring-[#e68a45]'

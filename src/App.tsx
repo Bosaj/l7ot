@@ -11,6 +11,7 @@ import {
   Code2,
   BookOpen,
   ShieldCheck,
+  Map,
 } from 'lucide-react'
 import { Header } from './components/Header'
 import { FishCard } from './components/FishCard'
@@ -25,7 +26,9 @@ import { FishScanner } from './components/FishScanner'
 import { SoukBasketAndComparator } from './components/SoukBasketAndComparator'
 import { MarineWeatherAndApis } from './components/MarineWeatherAndApis'
 import { MaritimeLawGuide } from './components/MaritimeLawGuide'
+import { MoroccanCoastalRadar } from './components/MoroccanCoastalRadar'
 import type { NavTab } from './components/Header'
+import { sounds } from './lib/soundEffects'
 
 import { MOROCCAN_FISH } from './data/fish'
 import { MOROCCAN_RECIPES } from './data/recipes'
@@ -39,6 +42,7 @@ export const App: React.FC = () => {
   const [lang, setLang] = useState<SupportedLanguage>('ar')
   const userPortLocation = useUserPortLocation()
   const [activeTab, setActiveTab] = useState<NavTab>('fish')
+  const [showCoastalRadar, setShowCoastalRadar] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [selectedCoast, setSelectedCoast] = useState<string>('all')
@@ -156,10 +160,10 @@ export const App: React.FC = () => {
 
                 <p className="max-w-2xl text-sm leading-relaxed text-[#a69b8d]">
                   {lang === 'ar'
-                    ? 'دليل مرجعي شامل يوثق 32 نوعاً من ثروات السواحل المغربية (الأطلسية والمتوسطية) بأسمائها في الشمال والوسط والجنوب والأمازيغية، مع نطق صوتي ناطق بالدارجة، ماسح ذكي بالكاميرا، فيديوهات تنقية لكل سمكة، وحاسبة قفة الساحل.'
+                    ? `دليل مرجعي شامل يوثق ${MOROCCAN_FISH.length} نوعاً من ثروات السواحل المغربية (الأطلسية والمتوسطية) بأسمائها في الشمال والوسط والجنوب والأمازيغية، مع نطق صوتي ناطق بالدارجة، ماسح ذكي بالكاميرا، فيديوهات تنقية لكل سمكة، وحاسبة قفة الساحل.`
                     : lang === 'fr'
-                    ? 'Référentiel documentant 32 espèces emblématiques des côtes marocaines avec leurs noms régionaux (Nord, Centre, Sud & Amazigh), prononciation audio native, scanner caméra IA, vidéos de découpe et panier du souk.'
-                    : 'Definitive reference covering 32 iconic Moroccan marine species with regional dialects, native Arabic audio, AI camera scanner, video filleting guides, and Souk market basket.'}
+                    ? `Référentiel documentant ${MOROCCAN_FISH.length} espèces emblématiques des côtes marocaines avec leurs noms régionaux (Nord, Centre, Sud & Amazigh), prononciation audio native, scanner caméra IA, vidéos de découpe et panier du souk.`
+                    : `Definitive reference covering ${MOROCCAN_FISH.length} iconic Moroccan marine species with regional dialects, native Arabic audio, AI camera scanner, video filleting guides, and Souk market basket.`}
                 </p>
               </div>
 
@@ -371,20 +375,55 @@ export const App: React.FC = () => {
                 )}
               </div>
 
-              <button
-                type="button"
-                onClick={userPortLocation.detectLocation}
-                disabled={userPortLocation.isLocating}
-                className="inline-flex items-center gap-1.5 rounded bg-[#d96b27] px-3 py-1 font-mono text-xs font-bold text-[#0b0908] transition hover:bg-[#b85318] shrink-0"
-              >
-                <Compass className={`h-3.5 w-3.5 ${userPortLocation.isLocating ? 'animate-spin' : ''}`} />
-                <span>
-                  {userPortLocation.isLocating
-                    ? (lang === 'ar' ? 'جاري الرصد...' : 'Localisation...')
-                    : (lang === 'ar' ? 'حدد موقعي تلقائياً (GPS)' : 'Détecter ma position')}
-                </span>
-              </button>
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => {
+                    sounds.playBubble()
+                    setShowCoastalRadar(!showCoastalRadar)
+                  }}
+                  className={`inline-flex items-center gap-1.5 rounded border px-3 py-1 font-mono text-xs font-bold transition shrink-0 ${
+                    showCoastalRadar
+                      ? 'border-[#d96b27] bg-[#d96b27] text-[#0b0908]'
+                      : 'border-cyan-500/30 bg-cyan-500/10 text-cyan-300 hover:border-cyan-400'
+                  }`}
+                >
+                  <Map className="h-3.5 w-3.5 text-current" />
+                  <span>
+                    {showCoastalRadar
+                      ? (lang === 'ar' ? 'إخفاء الخريطة' : 'Masquer Radar')
+                      : (lang === 'ar' ? 'خريطة السواحل والموانئ' : 'Radar & Carte')}
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={userPortLocation.detectLocation}
+                  disabled={userPortLocation.isLocating}
+                  className="inline-flex items-center gap-1.5 rounded bg-[#d96b27] px-3 py-1 font-mono text-xs font-bold text-[#0b0908] transition hover:bg-[#b85318] shrink-0"
+                >
+                  <Compass className={`h-3.5 w-3.5 ${userPortLocation.isLocating ? 'animate-spin' : ''}`} />
+                  <span>
+                    {userPortLocation.isLocating
+                      ? (lang === 'ar' ? 'جاري الرصد...' : 'Localisation...')
+                      : (lang === 'ar' ? 'موقعي (GPS)' : 'Ma position (GPS)')}
+                  </span>
+                </button>
+              </div>
             </div>
+
+            {/* Interactive Moroccan Coastline & Port Radar */}
+            {showCoastalRadar && (
+              <div className="animate-fade-in">
+                <MoroccanCoastalRadar
+                  lang={lang}
+                  selectedRegion={userPortLocation.selectedRegion}
+                  onSelectRegion={(regId) => {
+                    userPortLocation.setManualRegion(regId)
+                  }}
+                />
+              </div>
+            )}
 
             {filteredFish.length > 0 ? (
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -396,6 +435,7 @@ export const App: React.FC = () => {
                     lang={lang}
                     userRegion={userPortLocation.selectedRegion}
                     onSelectFish={(f) => {
+                      sounds.playBubble()
                       setActiveFish(f)
                       setFishModalTab('overview')
                     }}
@@ -455,7 +495,10 @@ export const App: React.FC = () => {
                   recipe={recipe}
                   index={idx}
                   lang={lang}
-                  onSelectRecipe={(r) => setActiveRecipe(r)}
+                  onSelectRecipe={(r) => {
+                    sounds.playBubble()
+                    setActiveRecipe(r)
+                  }}
                 />
               ))}
             </div>
