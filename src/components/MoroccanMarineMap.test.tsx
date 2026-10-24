@@ -23,6 +23,27 @@ describe('MoroccanCoastalRadar', () => {
     expect(reservesBtn).toHaveClass('bg-emerald-500')
   })
 
+  it('allows toggling between Real Interactive Map and Vector Radar View', () => {
+    render(<MoroccanCoastalRadar lang="fr" />)
+    const radarBtn = screen.getByRole('button', { name: /Radar Vectoriel/i })
+    expect(radarBtn).toBeInTheDocument()
+
+    // Toggle to Vector Radar
+    fireEvent.click(radarBtn)
+    expect(radarBtn).toHaveClass('bg-amber-500')
+
+    // Toggle back to Real Map
+    const realMapBtn = screen.getByRole('button', { name: /Carte Réelle/i })
+    fireEvent.click(realMapBtn)
+    expect(realMapBtn).toHaveClass('bg-cyan-500')
+  })
+
+  it('renders satellite and dark nautical tile controls on real map', () => {
+    render(<MoroccanCoastalRadar lang="fr" />)
+    expect(screen.getByRole('button', { name: /Satellite/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Nautique/i })).toBeInTheDocument()
+  })
+
   it('triggers onFilterSpeciesByPort when filter button is clicked', () => {
     const filterSpy = vi.fn()
     render(<MoroccanCoastalRadar lang="fr" onFilterSpeciesByPort={filterSpy} />)

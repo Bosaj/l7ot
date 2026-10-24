@@ -13,6 +13,7 @@ import {
 import type { SupportedLanguage } from '../i18n/strings'
 import type { MoroccanPortRegion } from '../lib/moroccanRegions'
 import { sounds } from '../lib/soundEffects'
+import { MoroccanLeafletMap } from './MoroccanLeafletMap'
 
 export interface PortPoint {
   id: string
@@ -23,6 +24,8 @@ export interface PortPoint {
   coast: 'mediterranean' | 'atlantic'
   cx: number // 0-1000 SVG coordinates
   cy: number
+  lat: number // Real GPS latitude
+  lng: number // Real GPS longitude
   waveHeightM: number
   windKnots: number
   tempC: number
@@ -48,6 +51,8 @@ export interface MarineProtectedArea {
   typeFr: string
   cx: number
   cy: number
+  lat: number // Real GPS latitude
+  lng: number // Real GPS longitude
   areaKm2: number
   keySpeciesAr: string[]
   keySpeciesFr: string[]
@@ -81,6 +86,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'mediterranean',
     cx: 890,
     cy: 70,
+    lat: 35.0833,
+    lng: -2.2333,
     waveHeightM: 0.6,
     windKnots: 8,
     tempC: 19.5,
@@ -101,6 +108,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'mediterranean',
     cx: 840,
     cy: 85,
+    lat: 35.2833,
+    lng: -2.9333,
     waveHeightM: 0.8,
     windKnots: 11,
     tempC: 19.2,
@@ -121,6 +130,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'mediterranean',
     cx: 740,
     cy: 95,
+    lat: 35.2444,
+    lng: -3.9317,
     waveHeightM: 1.1,
     windKnots: 14,
     tempC: 18.8,
@@ -141,6 +152,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'mediterranean',
     cx: 600,
     cy: 65,
+    lat: 35.8867,
+    lng: -5.5033,
     waveHeightM: 1.4,
     windKnots: 18,
     tempC: 18.1,
@@ -161,6 +174,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'atlantic',
     cx: 560,
     cy: 130,
+    lat: 35.195,
+    lng: -6.155,
     waveHeightM: 1.6,
     windKnots: 15,
     tempC: 18.5,
@@ -181,6 +196,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'atlantic',
     cx: 520,
     cy: 175,
+    lat: 34.2583,
+    lng: -6.6667,
     waveHeightM: 1.7,
     windKnots: 13,
     tempC: 18.7,
@@ -201,6 +218,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'atlantic',
     cx: 480,
     cy: 220,
+    lat: 33.6067,
+    lng: -7.6167,
     waveHeightM: 1.8,
     windKnots: 16,
     tempC: 18.9,
@@ -221,6 +240,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'atlantic',
     cx: 410,
     cy: 290,
+    lat: 32.7333,
+    lng: -9.0333,
     waveHeightM: 1.5,
     windKnots: 12,
     tempC: 19.1,
@@ -241,6 +262,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'atlantic',
     cx: 380,
     cy: 335,
+    lat: 32.3,
+    lng: -9.245,
     waveHeightM: 2.1,
     windKnots: 17,
     tempC: 18.4,
@@ -261,6 +284,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'atlantic',
     cx: 330,
     cy: 400,
+    lat: 31.5125,
+    lng: -9.7719,
     waveHeightM: 2.3,
     windKnots: 22,
     tempC: 17.9,
@@ -281,6 +306,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'atlantic',
     cx: 290,
     cy: 480,
+    lat: 30.42,
+    lng: -9.62,
     waveHeightM: 1.9,
     windKnots: 14,
     tempC: 19.3,
@@ -301,6 +328,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'atlantic',
     cx: 250,
     cy: 550,
+    lat: 29.38,
+    lng: -10.17,
     waveHeightM: 2.2,
     windKnots: 19,
     tempC: 18.6,
@@ -321,6 +350,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'atlantic',
     cx: 220,
     cy: 610,
+    lat: 28.5,
+    lng: -11.33,
     waveHeightM: 2.1,
     windKnots: 18,
     tempC: 19.2,
@@ -341,6 +372,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'atlantic',
     cx: 190,
     cy: 670,
+    lat: 27.095,
+    lng: -13.418,
     waveHeightM: 2.0,
     windKnots: 16,
     tempC: 19.8,
@@ -361,6 +394,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'atlantic',
     cx: 155,
     cy: 760,
+    lat: 26.1264,
+    lng: -14.4842,
     waveHeightM: 1.9,
     windKnots: 17,
     tempC: 19.9,
@@ -381,6 +416,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'atlantic',
     cx: 120,
     cy: 850,
+    lat: 23.71,
+    lng: -15.93,
     waveHeightM: 1.7,
     windKnots: 15,
     tempC: 20.2,
@@ -401,6 +438,8 @@ export const MOROCCAN_COASTAL_PORTS: PortPoint[] = [
     coast: 'atlantic',
     cx: 95,
     cy: 930,
+    lat: 20.8333,
+    lng: -17.0833,
     waveHeightM: 1.8,
     windKnots: 18,
     tempC: 20.6,
@@ -424,6 +463,8 @@ export const MOROCCAN_MARINE_RESERVES: MarineProtectedArea[] = [
     typeFr: 'Aire Marine Protégée (AMP) · 19 600 ha',
     cx: 740,
     cy: 105,
+    lat: 35.2,
+    lng: -4.1,
     areaKm2: 196,
     keySpeciesAr: ['الميرو البني', 'المرجان الأحمر', 'عقاب البحر (البلبوزارد)'],
     keySpeciesFr: ['Mérou brun', 'Corail rouge', 'Balbuzard pêcheur'],
@@ -440,6 +481,8 @@ export const MOROCCAN_MARINE_RESERVES: MarineProtectedArea[] = [
     typeFr: 'Lagune Côtière & Site Ramsar · 115 km²',
     cx: 840,
     cy: 95,
+    lat: 35.1667,
+    lng: -2.85,
     areaKm2: 115,
     keySpeciesAr: ['بوزروك مارشيكا', 'الوراطة الملكية (Dorade)', 'السيبيا'],
     keySpeciesFr: ['Palourdes', 'Dorade Royale', 'Seiche'],
@@ -456,6 +499,8 @@ export const MOROCCAN_MARINE_RESERVES: MarineProtectedArea[] = [
     typeFr: 'Parc Estuarien & Réserve Marine',
     cx: 275,
     cy: 510,
+    lat: 30.05,
+    lng: -9.68,
     areaKm2: 338,
     keySpeciesAr: ['الدرعي (Bar Loup)', 'البوري الرمادي', 'سلطان إبراهيم'],
     keySpeciesFr: ['Bar Loup', 'Mulet', 'Rouget'],
@@ -472,6 +517,8 @@ export const MOROCCAN_MARINE_RESERVES: MarineProtectedArea[] = [
     typeFr: 'Sanctuaire Marin Ramsar & Nurserie',
     cx: 125,
     cy: 865,
+    lat: 23.85,
+    lng: -15.8,
     areaKm2: 400,
     keySpeciesAr: ['أخطبوط السواحل', 'الكوربين الصحراوي', 'دلفين المحيط'],
     keySpeciesFr: ['Poulpe commun', 'Courbine', 'Grand Dauphin'],
@@ -547,8 +594,7 @@ export const MoroccanCoastalRadar: React.FC<MoroccanCoastalRadarProps> = ({
   const [selectedPortId, setSelectedPortId] = useState<string>('casablanca')
   const [selectedReserveId, setSelectedReserveId] = useState<string | null>(null)
   const [selectedCorridorId, setSelectedCorridorId] = useState<string | null>(null)
-
-  const isRtl = lang === 'ar'
+  const [mapMode, setMapMode] = useState<'real' | 'vector'>('real')
 
   const activePort: PortPoint = useMemo(() => {
     if (selectedPortId) {
@@ -785,21 +831,73 @@ export const MoroccanCoastalRadar: React.FC<MoroccanCoastalRadarProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center justify-between text-[11px] font-mono text-[#786c60] mb-3">
+          <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-[#786c60] mb-3">
             <span className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
-              {lang === 'ar' ? 'إسقاط كارتوغرافي حي للسواحل المغربية' : 'Projection Cartographique Active du Littoral'}
+              <span className="text-slate-300 font-bold">
+                {mapMode === 'real'
+                  ? (lang === 'ar' ? 'خريطة تفاعلية حقيقية (أقمار صناعية وتضاريس)' : lang === 'fr' ? 'Carte Interactive Réelle (Satellite & Nautique)' : 'Real Interactive Map (Satellite & Nautical)')
+                  : (lang === 'ar' ? 'إسقاط رادار رقمي للسواحل' : lang === 'fr' ? 'Projection Radar Vectorielle' : 'Vector Radar Projection')}
+              </span>
             </span>
-            <span>{isRtl ? 'المتوسط ↗ · الأطلسي ↙' : 'Méditerranée ↗ · Atlantique ↙'}</span>
+
+            {/* Mode Switcher */}
+            <div className="flex items-center gap-1 bg-[#12171e] p-1 rounded-lg border border-white/10 shadow-inner">
+              <button
+                type="button"
+                onClick={() => {
+                  sounds.playBubble()
+                  setMapMode('real')
+                }}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-bold transition ${
+                  mapMode === 'real'
+                    ? 'bg-cyan-500 text-black shadow-md'
+                    : 'text-[#a69b8d] hover:text-white'
+                }`}
+              >
+                <span>🗺️</span>
+                <span>{lang === 'ar' ? 'خريطة حقيقية' : lang === 'fr' ? 'Carte Réelle' : 'Real Map'}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  sounds.playBubble()
+                  setMapMode('vector')
+                }}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-bold transition ${
+                  mapMode === 'vector'
+                    ? 'bg-amber-500 text-black shadow-md'
+                    : 'text-[#a69b8d] hover:text-white'
+                }`}
+              >
+                <span>📡</span>
+                <span>{lang === 'ar' ? 'رادار متجهي' : lang === 'fr' ? 'Radar Vectoriel' : 'Radar View'}</span>
+              </button>
+            </div>
           </div>
 
-          {/* SVG Coastline Projection Canvas */}
-          <div className="relative w-full aspect-[16/10] max-h-[540px] select-none bg-[#050910] rounded-lg overflow-hidden border border-white/5">
-            <svg
-              viewBox="0 0 1000 960"
-              className="w-full h-full drop-shadow-lg"
-              preserveAspectRatio="xMidYMid meet"
-            >
+          {/* Map Display: Real Leaflet Map by default or Vector Radar Projection */}
+          {mapMode === 'real' ? (
+            <MoroccanLeafletMap
+              ports={filteredPorts}
+              reserves={MOROCCAN_MARINE_RESERVES}
+              corridors={MOROCCAN_FISHERY_CORRIDORS}
+              activePort={displayPort}
+              activeReserve={activeReserve}
+              activeCorridor={activeCorridor}
+              activeLayer={activeLayer}
+              lang={lang}
+              onSelectPort={handleSelectPort}
+              onSelectReserve={handleSelectReserve}
+              onSelectCorridor={handleSelectCorridor}
+            />
+          ) : (
+            <div className="relative w-full aspect-[16/10] max-h-[540px] select-none bg-[#050910] rounded-lg overflow-hidden border border-white/5">
+              <svg
+                viewBox="0 0 1000 960"
+                className="w-full h-full drop-shadow-lg"
+                preserveAspectRatio="xMidYMid meet"
+              >
               <defs>
                 <linearGradient id="coastGradient" x1="0%" y1="100%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#0891b2" stopOpacity="0.9" />
@@ -1064,8 +1162,9 @@ export const MoroccanCoastalRadar: React.FC<MoroccanCoastalRadarProps> = ({
                     </g>
                   )
                 })}
-            </svg>
-          </div>
+              </svg>
+            </div>
+          )}
 
           {/* Map Footer Legend */}
           <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-[10px] font-mono text-[#786c60] pt-2 border-t border-white/5">

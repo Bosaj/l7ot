@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-10-24
+
+### Added
+- **Real Interactive Geographic Map (`MoroccanLeafletMap.tsx`):**
+  - Integrated full **Leaflet** engine with true geographic bounds covering all 3,500 km of Moroccan coastline (Saïdia to Lagouira).
+  - Multi-layer tile engine with one-click toggles:
+    - 🛰️ **Esri World Imagery**: Real-world high-resolution satellite photography showing ports, coastlines, and ocean waters.
+    - 🗺️ **CartoDB Dark Matter**: Dark nautical maritime tiles matching the application's navy-slate aesthetic.
+    - 🌍 **OpenStreetMap (OSM)**: Standard geographic terrain and street mapping.
+  - Interactive nautical port pins with real WGS84 coordinates for all 17 Moroccan commercial fishing ports and 4 Marine Protected Areas (AMPs).
+  - Live marine telemetry popups showing swell height (m), wind speed (knots), surface sea temperature (°C), and top freshly landed species.
+  - Zoom & pan fly-to animations, protective marine sanctuary radii, and instant "Whole Morocco (3,500 km)" reset viewport control.
+  - Seamless toggle between **Real Map (Satellite & Nautical)** and **Vector Radar Projection**.
+
+---
+
 ## [2.0.0] - 2026-10-24
 
 ### Added
