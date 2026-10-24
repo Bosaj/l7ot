@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.2] - 2026-10-24
+
+### Fixed & Enhanced
+- **Two-Tier Desktop & Mobile Navigation Architecture:**
+  - Redesigned the header into two distinct, spacious tiers:
+    - **Top Tier**: Moroccan Zellige & Brass Brand Crest, site title, live GPS Port location indicator, audio sound effects toggle, and high-visibility language switcher pills (`العربية` · `FR` · `EN`).
+    - **Bottom Tier**: Dedicated full-width navigation bar spanning the entire container.
+- **100% Discoverable Desktop Navigation (Zero Hidden Scroll):**
+  - Completely resolved the issue where desktop users had to scroll horizontally or missed sections 8–12 entirely.
+  - Implemented an immaculate 6-column balanced grid on desktop (`lg:grid-cols-6`) and 4-column grid on tablets (`md:grid-cols-4`).
+  - All 12 modules (`01 الأسماك` through `12 طقس الموانئ`) are now 100% visible simultaneously on first visit with zero hidden items.
+- **Enhanced Mobile Touch Navigation Rail:**
+  - Added Prev/Next directional navigation buttons (`<` and `>`) with bidirectional RTL rotation for effortless tab scrolling on phones.
+  - Implemented automatic smooth `scrollIntoView` centering whenever the active tab changes.
+- **Test Integrity:**
+  - Modernized `tests/integrity.test.mjs` to native Vitest format.
+  - 100% test pass rate maintained (71 tests across 17 test suites).
+
+---
+
 ## [2.1.1] - 2026-10-24
 
 ### Fixed & Enhanced

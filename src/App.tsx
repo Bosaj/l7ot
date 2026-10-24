@@ -830,7 +830,7 @@ export const App: React.FC = () => {
               </span>
             </div>
             <div className="shrink-0 text-start sm:text-end">
-              <span>{lang === 'ar' ? 'النسخة v2.1.1 · رخصة MIT الحرة' : 'Release v2.1.1 · MIT Open Source License'}</span>
+              <span>{lang === 'ar' ? 'النسخة v2.1.2 · رخصة MIT الحرة' : 'Release v2.1.2 · MIT Open Source License'}</span>
             </div>
           </div>
         </div>
