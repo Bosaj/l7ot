@@ -23,25 +23,30 @@ describe('MoroccanCoastalRadar', () => {
     expect(reservesBtn).toHaveClass('bg-emerald-500')
   })
 
-  it('allows toggling between Real Interactive Map and Vector Radar View', () => {
+  it('renders unified interactive marine map with working Nautical Marks and Lighthouses toggle', () => {
     render(<MoroccanCoastalRadar lang="fr" />)
-    const radarBtn = screen.getByRole('button', { name: /Radar Vectoriel/i })
+    const marksBtn = screen.getByRole('button', { name: /Phares & Balises/i })
+    expect(marksBtn).toBeInTheDocument()
+    expect(marksBtn).toHaveClass('bg-amber-400')
+
+    // Toggle Nautical Marks off and on
+    fireEvent.click(marksBtn)
+    expect(marksBtn).not.toHaveClass('bg-amber-400')
+    fireEvent.click(marksBtn)
+    expect(marksBtn).toHaveClass('bg-amber-400')
+
+    // Toggle Tactical Radar EEZ
+    const radarBtn = screen.getByRole('button', { name: /Radar ZEE/i })
     expect(radarBtn).toBeInTheDocument()
-
-    // Toggle to Vector Radar
     fireEvent.click(radarBtn)
-    expect(radarBtn).toHaveClass('bg-amber-500')
-
-    // Toggle back to Real Map
-    const realMapBtn = screen.getByRole('button', { name: /Carte Réelle/i })
-    fireEvent.click(realMapBtn)
-    expect(realMapBtn).toHaveClass('bg-cyan-500')
+    expect(radarBtn).toHaveClass('bg-cyan-400')
   })
 
-  it('renders satellite and marine ocean tile controls on real map', () => {
+  it('renders satellite and marine ocean tile controls on unified map', () => {
     render(<MoroccanCoastalRadar lang="fr" />)
     expect(screen.getByRole('button', { name: /Satellite/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Océans/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Relief/i })).toBeInTheDocument()
   })
 
   it('triggers onFilterSpeciesByPort when filter button is clicked', () => {

@@ -1,8 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { Maximize2, Compass } from 'lucide-react'
-import type { PortPoint, MarineProtectedArea, FisheryCorridor } from './MoroccanCoastalRadar'
+import { Maximize2, Radio } from 'lucide-react'
+import type {
+  PortPoint,
+  MarineProtectedArea,
+  FisheryCorridor,
+  MoroccanLighthouse,
+} from './MoroccanCoastalRadar'
+import { MOROCCAN_LIGHTHOUSES } from './MoroccanCoastalRadar'
 import type { SupportedLanguage } from '../i18n/strings'
 import { sounds } from '../lib/soundEffects'
 
@@ -10,6 +16,7 @@ interface MoroccanLeafletMapProps {
   ports: PortPoint[]
   reserves: MarineProtectedArea[]
   corridors: FisheryCorridor[]
+  lighthouses?: MoroccanLighthouse[]
   activePort: PortPoint
   activeReserve: MarineProtectedArea | null
   activeCorridor: FisheryCorridor | null
@@ -39,9 +46,9 @@ const TILE_LAYERS: Record<MapTileProvider, TileLayerDef> = {
     overlayUrl: 'https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Reference/MapServer/tile/{z}/{y}/{x}',
     attribution: 'Tiles &copy; Esri, GEBCO, NOAA, National Geographic, DeLorme',
     maxZoom: 13,
-    nameAr: 'خريطة المحيطات والأعماق (Esri Oceans)',
+    nameAr: 'المحيطات والأعماق (Esri Oceans)',
     nameFr: 'Océans & Bathymétrie (Esri)',
-    nameEn: 'Oceans & Marine (Esri)',
+    nameEn: 'Oceans & Depths (Esri)',
     icon: '🌊',
   },
   satellite: {
@@ -65,28 +72,35 @@ const TILE_LAYERS: Record<MapTileProvider, TileLayerDef> = {
   },
 }
 
-const OPENSEAMAP_SEAMARK_URL = 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'
-
 export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
   ports,
   reserves,
+  corridors,
+  lighthouses = MOROCCAN_LIGHTHOUSES,
   activePort,
   activeReserve,
+  activeCorridor,
   activeLayer,
   lang,
   onSelectPort,
   onSelectReserve,
+  onSelectCorridor,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null)
   const mapInstanceRef = useRef<L.Map | null>(null)
   const markersLayerRef = useRef<L.LayerGroup | null>(null)
+  const corridorsLayerRef = useRef<L.LayerGroup | null>(null)
+  const lighthousesLayerRef = useRef<L.LayerGroup | null>(null)
+  const radarGridLayerRef = useRef<L.LayerGroup | null>(null)
   const baseTileLayerRef = useRef<L.TileLayer | null>(null)
   const overlayTileLayerRef = useRef<L.TileLayer | null>(null)
-  const seamarksLayerRef = useRef<L.TileLayer | null>(null)
 
   // Default to Real Marine Ocean map with blue water & bathymetry
   const [tileMode, setTileMode] = useState<MapTileProvider>('marine')
-  const [showSeamarks, setShowSeamarks] = useState<boolean>(true)
+  // Nautical marks active by default
+  const [showNauticalMarks, setShowNauticalMarks] = useState<boolean>(true)
+  // Tactical radar grid
+  const [showRadarGrid, setShowRadarGrid] = useState<boolean>(false)
 
   // Full Moroccan Sovereign Maritime Coordinates: Lagouira (SW) to Saïdia (NE)
   const MOROCCO_BOUNDS: L.LatLngBoundsExpression = [
@@ -132,18 +146,11 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
         overlayTileLayerRef.current = overlayLayer
       }
 
-      // 3. OpenSeaMap Seamarks Nautical Navigation Layer
-      if (showSeamarks) {
-        const seamarks = L.tileLayer(OPENSEAMAP_SEAMARK_URL, {
-          maxZoom: 18,
-          opacity: 0.85,
-        }).addTo(map)
-        seamarksLayerRef.current = seamarks
-      }
-
-      // 4. Markers Layer
-      const markersGroup = L.layerGroup().addTo(map)
-      markersLayerRef.current = markersGroup
+      // Feature Layer Groups
+      corridorsLayerRef.current = L.layerGroup().addTo(map)
+      radarGridLayerRef.current = L.layerGroup().addTo(map)
+      lighthousesLayerRef.current = L.layerGroup().addTo(map)
+      markersLayerRef.current = L.layerGroup().addTo(map)
 
       // Fit full Morocco bounds on initial load
       map.fitBounds(MOROCCO_BOUNDS, { padding: [24, 24] })
@@ -171,13 +178,11 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
     const map = mapInstanceRef.current
     if (!map) return
 
-    // Remove old base layer
     if (baseTileLayerRef.current) {
       map.removeLayer(baseTileLayerRef.current)
       baseTileLayerRef.current = null
     }
 
-    // Remove old overlay layer
     if (overlayTileLayerRef.current) {
       map.removeLayer(overlayTileLayerRef.current)
       overlayTileLayerRef.current = null
@@ -185,14 +190,12 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
 
     const config = TILE_LAYERS[tileMode]
 
-    // Mount new base layer
     const newBaseLayer = L.tileLayer(config.baseUrl, {
       attribution: config.attribution,
       maxZoom: config.maxZoom,
     }).addTo(map)
     baseTileLayerRef.current = newBaseLayer
 
-    // Mount reference label layer if present
     if (config.overlayUrl) {
       const newOverlayLayer = L.tileLayer(config.overlayUrl, {
         maxZoom: config.maxZoom,
@@ -200,34 +203,143 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
       }).addTo(map)
       overlayTileLayerRef.current = newOverlayLayer
     }
-
-    // Re-stack seamarks on top
-    if (seamarksLayerRef.current && showSeamarks) {
-      seamarksLayerRef.current.bringToFront()
-    }
   }, [tileMode])
 
-  // Toggle OpenSeaMap Seamarks Navigation Layer
+  // Render Fishery Corridors on the Water
   useEffect(() => {
-    const map = mapInstanceRef.current
-    if (!map) return
+    const layerGroup = corridorsLayerRef.current
+    if (!layerGroup) return
 
-    if (showSeamarks) {
-      if (!seamarksLayerRef.current) {
-        const seamarks = L.tileLayer(OPENSEAMAP_SEAMARK_URL, {
-          maxZoom: 18,
-          opacity: 0.85,
-        }).addTo(map)
-        seamarksLayerRef.current = seamarks
-      }
-      seamarksLayerRef.current.bringToFront()
-    } else {
-      if (seamarksLayerRef.current) {
-        map.removeLayer(seamarksLayerRef.current)
-        seamarksLayerRef.current = null
-      }
+    layerGroup.clearLayers()
+
+    if (activeLayer === 'all' || activeLayer === 'corridors') {
+      corridors.forEach((corridor) => {
+        if (!corridor.waypointsLatLon || corridor.waypointsLatLon.length < 2) return
+
+        const isSelected = activeCorridor?.id === corridor.id
+        const color = corridor.id === 'corridor-poulpe' ? '#06b6d4' : '#f59e0b'
+
+        const polyline = L.polyline(corridor.waypointsLatLon, {
+          color,
+          weight: isSelected ? 6 : 4,
+          opacity: isSelected ? 0.95 : 0.7,
+          dashArray: '8, 8',
+        }).addTo(layerGroup)
+
+        polyline.on('click', () => {
+          sounds.playBubble()
+          onSelectCorridor(corridor)
+        })
+
+        const title = lang === 'ar' ? corridor.nameAr : lang === 'en' ? corridor.nameEn : corridor.nameFr
+        const biomass = lang === 'ar' ? corridor.biomassTypeAr : corridor.biomassTypeFr
+
+        polyline.bindPopup(`
+          <div style="font-family: system-ui, sans-serif; min-width: 190px; color: #0b0908; padding: 4px;">
+            <div style="font-weight: 800; font-size: 12px; color: ${color}; border-bottom: 1px solid #e5e7eb; padding-bottom: 4px; margin-bottom: 5px;">
+              🐟 ${title}
+            </div>
+            <div style="font-size: 11px; color: #4b5563;">
+              <strong>${lang === 'ar' ? 'الكتلة الحيوية' : 'Biomasse'}:</strong> ${biomass}
+            </div>
+          </div>
+        `)
+      })
     }
-  }, [showSeamarks])
+  }, [corridors, activeCorridor, activeLayer, lang, onSelectCorridor])
+
+  // Render Nautical Marks & Active Lighthouses (Working toggle!)
+  useEffect(() => {
+    const layerGroup = lighthousesLayerRef.current
+    if (!layerGroup) return
+
+    layerGroup.clearLayers()
+
+    if (showNauticalMarks) {
+      lighthouses.forEach((lh) => {
+        const lhTitle = lang === 'ar' ? lh.nameAr : lang === 'en' ? lh.nameEn : lh.nameFr
+        const lhChar = lang === 'ar' ? lh.characteristicAr : lang === 'en' ? lh.characteristicEn : lh.characteristicFr
+
+        // Custom Glowing Lighthouse DivIcon
+        const iconHtml = `
+          <div class="relative flex items-center justify-center cursor-pointer group">
+            <div class="absolute -inset-2 rounded-full bg-amber-400/40 animate-ping"></div>
+            <div class="relative flex items-center justify-center h-7 w-7 rounded-full border-2 border-amber-300 bg-amber-500 text-black shadow-lg shadow-amber-500/80 scale-110 z-20 transition-transform">
+              <span class="text-[12px] font-bold leading-none select-none">🏮</span>
+            </div>
+            <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-slate-950/90 text-amber-300 border border-amber-400/50 px-1.5 py-0.2 font-mono text-[9px] font-bold shadow">
+              ${lhTitle.split(' ')[0]}
+            </div>
+          </div>
+        `
+
+        const customIcon = L.divIcon({
+          html: iconHtml,
+          className: 'custom-lighthouse-pin',
+          iconSize: [28, 28],
+          iconAnchor: [14, 14],
+        })
+
+        // Draw Lighthouse Marker
+        L.marker([lh.lat, lh.lng], { icon: customIcon })
+          .addTo(layerGroup)
+          .bindPopup(`
+            <div style="font-family: system-ui, sans-serif; min-width: 220px; padding: 4px; color: #0b0908;">
+              <div style="font-weight: 800; font-size: 13px; color: #d97706; border-bottom: 2px solid #fef3c7; padding-bottom: 4px; margin-bottom: 6px;">
+                🏮 ${lhTitle}
+              </div>
+              <div style="font-size: 11px; margin-bottom: 4px;">
+                📡 <strong>${lang === 'ar' ? 'المدى البصري' : lang === 'en' ? 'Optical Range' : 'Portée Optique'}:</strong> ${lh.rangeNauticalMiles} NM (~${Math.round(lh.rangeNauticalMiles * 1.852)} km)
+              </div>
+              <div style="font-size: 11px; margin-bottom: 4px;">
+                📐 <strong>${lang === 'ar' ? 'علو المنارة' : lang === 'en' ? 'Tower Height' : 'Hauteur du Foyer'}:</strong> ${lh.heightMeters} m
+              </div>
+              <div style="font-size: 10.5px; color: #4b5563; background: #fffbeb; padding: 4px; rounded: 4px; border: 1px solid #fde68a;">
+                ⚡ <strong>${lang === 'ar' ? 'إيقاع الوميض' : lang === 'en' ? 'Light Cadence' : 'Caractéristique'}:</strong> ${lhChar}
+              </div>
+            </div>
+          `)
+
+        // Draw Optical Nautical Range Ring (~1.852 km per nautical mile)
+        L.circle([lh.lat, lh.lng], {
+          radius: lh.rangeNauticalMiles * 1852,
+          color: '#f59e0b',
+          fillColor: '#fbbf24',
+          fillOpacity: 0.05,
+          weight: 1.2,
+          dashArray: '3, 6',
+        }).addTo(layerGroup)
+      })
+    }
+  }, [lighthouses, showNauticalMarks, lang])
+
+  // Tactical Radar EEZ Range Rings Overlay
+  useEffect(() => {
+    const layerGroup = radarGridLayerRef.current
+    if (!layerGroup) return
+
+    layerGroup.clearLayers()
+
+    if (showRadarGrid) {
+      // 50, 100, and 200 NM Moroccan Exclusive Economic Zone (ZEE) Surveillance Rings
+      const centerCoords: [number, number] = [31.5, -9.8] // Central Atlantic pivot
+      const rings = [
+        { nm: 50, label: '50 NM · Eaux Territoriales', color: '#06b6d4' },
+        { nm: 100, label: '100 NM · Zone Contiguë', color: '#38bdf8' },
+        { nm: 200, label: '200 NM · ZEE Souveraine du Maroc', color: '#f59e0b' },
+      ]
+
+      rings.forEach((ring) => {
+        L.circle(centerCoords, {
+          radius: ring.nm * 1852,
+          color: ring.color,
+          fill: false,
+          weight: 1.5,
+          dashArray: '4, 8',
+        }).addTo(layerGroup)
+      })
+    }
+  }, [showRadarGrid])
 
   // Render Port and Marine Reserve Markers
   useEffect(() => {
@@ -361,7 +473,7 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
         }).addTo(markersGroup)
       })
     }
-  }, [ports, reserves, activePort, activeReserve, activeLayer, lang])
+  }, [ports, reserves, activePort, activeReserve, activeLayer, lang, onSelectPort, onSelectReserve])
 
   const handleResetMoroccoView = () => {
     sounds.playBubble()
@@ -371,12 +483,12 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
   }
 
   return (
-    <div className="relative w-full h-[540px] rounded-xl overflow-hidden border border-white/10 bg-[#06101e] shadow-2xl">
+    <div className="relative w-full h-[560px] rounded-xl overflow-hidden border border-white/10 bg-[#06101e] shadow-2xl">
       {/* Map DOM Element */}
       <div ref={mapContainerRef} className="w-full h-full z-10" />
 
       {/* Floating Tactical Layer Switcher Controls (Top-Left) */}
-      <div className="absolute top-3 start-3 z-20 flex flex-wrap items-center gap-1.5 bg-[#090d16]/95 backdrop-blur-md p-1.5 rounded-lg border border-cyan-500/20 shadow-xl">
+      <div className="absolute top-3 start-3 z-20 flex flex-wrap items-center gap-1.5 bg-[#090d16]/95 backdrop-blur-md p-1.5 rounded-lg border border-cyan-500/20 shadow-xl max-w-[95%]">
         {/* 1. Marine Oceans & Bathymetry */}
         <button
           type="button"
@@ -431,22 +543,47 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
           <span>{lang === 'ar' ? 'تضاريس' : lang === 'en' ? 'Physical' : 'Relief'}</span>
         </button>
 
-        {/* 4. OpenSeaMap Seamarks Toggle */}
+        {/* 4. Nautical Marks & Moroccan Lighthouses Toggle (Working!) */}
         <button
           type="button"
           onClick={() => {
-            sounds.playBubble()
-            setShowSeamarks((prev) => !prev)
+            sounds.playSonar()
+            setShowNauticalMarks((prev) => !prev)
           }}
-          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-mono font-bold border transition ${
-            showSeamarks
-              ? 'bg-indigo-600 text-white border-indigo-400 shadow-md'
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-bold transition border ${
+            showNauticalMarks
+              ? 'bg-amber-400 text-black border-amber-300 shadow-lg shadow-amber-400/40'
               : 'border-white/10 text-[#a69b8d] hover:text-white hover:bg-white/5'
           }`}
-          title="OpenSeaMap Maritime Beacons, Buoys, and Channels"
+          title="Afficher les 8 grands phares et balises maritimes du Maroc"
         >
-          <Compass className="h-3.5 w-3.5" />
-          <span>{lang === 'ar' ? 'إشارات الملاحة' : lang === 'en' ? 'Nautical Marks' : 'Balises'}</span>
+          <span className="text-sm">💡</span>
+          <span>
+            {lang === 'ar'
+              ? 'المنارات والعلامات البحرية'
+              : lang === 'en'
+              ? 'Nautical Marks & Lighthouses'
+              : 'Phares & Balises'}
+          </span>
+          {showNauticalMarks && <span className="h-2 w-2 rounded-full bg-black animate-pulse" />}
+        </button>
+
+        {/* 5. Radar Sonar Grid & ZEE Arcs Toggle */}
+        <button
+          type="button"
+          onClick={() => {
+            sounds.playSonar()
+            setShowRadarGrid((prev) => !prev)
+          }}
+          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-mono font-bold transition border ${
+            showRadarGrid
+              ? 'bg-cyan-400 text-black border-cyan-300 shadow-lg shadow-cyan-400/30'
+              : 'border-white/10 text-[#a69b8d] hover:text-white hover:bg-white/5'
+          }`}
+          title="Activer la grille de surveillance radar sonar ZEE"
+        >
+          <Radio className="h-3.5 w-3.5" />
+          <span>{lang === 'ar' ? 'رادار ZEE' : lang === 'en' ? 'Radar EEZ' : 'Radar ZEE'}</span>
         </button>
       </div>
 

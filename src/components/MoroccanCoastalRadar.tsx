@@ -61,7 +61,22 @@ export interface MarineProtectedArea {
   descriptionFr: string
 }
 
+export interface MoroccanLighthouse {
+  id: string
+  nameAr: string
+  nameFr: string
+  nameEn: string
+  lat: number
+  lng: number
+  rangeNauticalMiles: number
+  heightMeters: number
+  characteristicAr: string
+  characteristicFr: string
+  characteristicEn: string
+}
+
 export interface FisheryCorridor {
+  waypointsLatLon?: [number, number][]
   id: string
   nameAr: string
   nameFr: string
@@ -528,6 +543,113 @@ export const MOROCCAN_MARINE_RESERVES: MarineProtectedArea[] = [
   },
 ]
 
+export const MOROCCAN_LIGHTHOUSES: MoroccanLighthouse[] = [
+  {
+    id: 'cap-spartel',
+    nameAr: 'منارة رأس سبارطيل (طنجة)',
+    nameFr: 'Phare du Cap Spartel (Tanger)',
+    nameEn: 'Cap Spartel Lighthouse (Tangier)',
+    lat: 35.7925,
+    lng: -5.9228,
+    rangeNauticalMiles: 30,
+    heightMeters: 24,
+    characteristicAr: 'وميض أبيض كل 20 ثانية · ملتقى المتوسط والأطلسي (1864)',
+    characteristicFr: 'Éclats blancs toutes les 20s · Jonction Atlantique/Méditerranée (1864)',
+    characteristicEn: 'White flash every 20s · Atlantic/Mediterranean Meeting Point (1864)',
+  },
+  {
+    id: 'el-hank',
+    nameAr: 'منارة العنق (الدار البيضاء)',
+    nameFr: 'Phare d’El Hank (Casablanca)',
+    nameEn: 'El Hank Lighthouse (Casablanca)',
+    lat: 33.6108,
+    lng: -7.6539,
+    rangeNauticalMiles: 30,
+    heightMeters: 51,
+    characteristicAr: '3 ومضات بيضاء كل 15 ثانية · برج بارتفاع 51 متراً (1916)',
+    characteristicFr: '3 éclats blancs groupés toutes les 15s · Tour de 51 mètres (1916)',
+    characteristicEn: '3 white flashes every 15s · 51m Tower (1916)',
+  },
+  {
+    id: 'sidi-bouafi',
+    nameAr: 'منارة سيدي بوافي (الجديدة)',
+    nameFr: 'Phare de Sidi Bouafi (El Jadida)',
+    nameEn: 'Sidi Bouafi Lighthouse (El Jadida)',
+    lat: 33.2486,
+    lng: -8.5133,
+    rangeNauticalMiles: 28,
+    heightMeters: 45,
+    characteristicAr: 'ضوء دوار أبيض وأحمر كل 5 ثوانٍ · توجيه ميناء الجرف الأصفر',
+    characteristicFr: 'Éclat tournant blanc/rouge toutes les 5s · Balisage Jorf Lasfar',
+    characteristicEn: 'Rotating white/red flash every 5s · Jorf Lasfar Fairway',
+  },
+  {
+    id: 'cap-cantin',
+    nameAr: 'منارة كاب بدوزة / كاب كنتين (آسفي)',
+    nameFr: 'Phare du Cap Cantin (Safi / Beddouza)',
+    nameEn: 'Cap Cantin Lighthouse (Safi / Beddouza)',
+    lat: 32.5406,
+    lng: -9.2817,
+    rangeNauticalMiles: 26,
+    heightMeters: 20,
+    characteristicAr: 'وميضان أبيضان كل 10 ثوانٍ · حراسة منحدرات عبدة الصخرية',
+    characteristicFr: '2 éclats blancs toutes les 10s · Gardien des falaises d’Abda',
+    characteristicEn: '2 white flashes every 10s · Guardian of Abda Cliffs',
+  },
+  {
+    id: 'cap-sim',
+    nameAr: 'منارة رأس سيم (الصويرة)',
+    nameFr: 'Phare de Cap Sim (Essaouira)',
+    nameEn: 'Cap Sim Lighthouse (Essaouira)',
+    lat: 31.3917,
+    lng: -9.8417,
+    rangeNauticalMiles: 24,
+    heightMeters: 18,
+    characteristicAr: '3 ومضات كل 15 ثانية · مدخل خليج موغادور وجزر الصويرة',
+    characteristicFr: '3 éclats toutes les 15s · Entrée baie de Mogador et îles Purpuraires',
+    characteristicEn: '3 flashes every 15s · Entrance to Mogador Bay',
+  },
+  {
+    id: 'cap-ghir',
+    nameAr: 'منارة كاب غير (أكادير)',
+    nameFr: 'Phare de Cap Ghir (Agadir)',
+    nameEn: 'Cap Ghir Lighthouse (Agadir)',
+    lat: 30.63,
+    lng: -9.8867,
+    rangeNauticalMiles: 25,
+    heightMeters: 28,
+    characteristicAr: 'وميض أبيض كل 5 ثوانٍ · حامي خليج تغازوت وأكادير الكبير',
+    characteristicFr: 'Éclat blanc toutes les 5s · Protection de la baie d’Agadir et Taghazout',
+    characteristicEn: 'White flash every 5s · Agadir Bay Guardian',
+  },
+  {
+    id: 'cap-bojador',
+    nameAr: 'منارة كاب بوجدور التاريخية',
+    nameFr: 'Phare du Cap Bojador (Boujdour)',
+    nameEn: 'Cap Bojador Lighthouse (Boujdour)',
+    lat: 26.125,
+    lng: -14.4983,
+    rangeNauticalMiles: 24,
+    heightMeters: 45,
+    characteristicAr: '3 ومضات كل 12 ثانية · علامة الملاحة الأطلسية الكبرى بالصحراء',
+    characteristicFr: '3 éclats toutes les 12s · Balisage majeur de l’Atlantique saharien',
+    characteristicEn: '3 flashes every 12s · Major Atlantic Landmark',
+  },
+  {
+    id: 'cap-blanc',
+    nameAr: 'منارة رأس نواذيبو / الرأس الأبيض (الكويرة)',
+    nameFr: 'Phare de Cap Blanc (Lagouira)',
+    nameEn: 'Cap Blanc Lighthouse (Lagouira)',
+    lat: 20.7719,
+    lng: -17.0483,
+    rangeNauticalMiles: 22,
+    heightMeters: 19,
+    characteristicAr: 'وميض أبيض كل 10 ثوانٍ · أقصى نقطة ملاحة جنوب المملكة المغربية',
+    characteristicFr: 'Éclat blanc toutes les 10s · Borne australe maritime du Maroc',
+    characteristicEn: 'White flash every 10s · Southernmost Maritime Landmark',
+  },
+]
+
 export const MOROCCAN_FISHERY_CORRIDORS: FisheryCorridor[] = [
   {
     id: 'corridor-sardine',
@@ -590,11 +712,9 @@ export const MoroccanCoastalRadar: React.FC<MoroccanCoastalRadarProps> = ({
 }) => {
   const [activeLayer, setActiveLayer] = useState<'all' | 'ports' | 'reserves' | 'corridors'>('all')
   const [selectedCoast, setSelectedCoast] = useState<'all' | 'atlantic' | 'mediterranean'>('all')
-  const [hoveredPort, setHoveredPort] = useState<PortPoint | null>(null)
   const [selectedPortId, setSelectedPortId] = useState<string>('casablanca')
   const [selectedReserveId, setSelectedReserveId] = useState<string | null>(null)
   const [selectedCorridorId, setSelectedCorridorId] = useState<string | null>(null)
-  const [mapMode, setMapMode] = useState<'real' | 'vector'>('real')
 
   const activePort: PortPoint = useMemo(() => {
     if (selectedPortId) {
@@ -608,7 +728,7 @@ export const MoroccanCoastalRadar: React.FC<MoroccanCoastalRadarProps> = ({
     return MOROCCAN_COASTAL_PORTS[6] ?? MOROCCAN_COASTAL_PORTS[0]!
   }, [selectedPortId, selectedRegion])
 
-  const displayPort: PortPoint = hoveredPort ?? activePort
+  const displayPort: PortPoint = activePort
 
   const filteredPorts = useMemo(() => {
     return MOROCCAN_COASTAL_PORTS.filter((p) => {
@@ -834,337 +954,34 @@ export const MoroccanCoastalRadar: React.FC<MoroccanCoastalRadarProps> = ({
           <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-[#786c60] mb-3">
             <span className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
-              <span className="text-slate-300 font-bold">
-                {mapMode === 'real'
-                  ? (lang === 'ar' ? 'خريطة تفاعلية حقيقية (أقمار صناعية وتضاريس)' : lang === 'fr' ? 'Carte Interactive Réelle (Satellite & Nautique)' : 'Real Interactive Map (Satellite & Nautical)')
-                  : (lang === 'ar' ? 'إسقاط رادار رقمي للسواحل' : lang === 'fr' ? 'Projection Radar Vectorielle' : 'Vector Radar Projection')}
+              <span className="text-cyan-300 font-bold">
+                {lang === 'ar'
+                  ? 'خريطة المحيطات والملاحة التفاعلية الموحدة (أقمار صناعية وبحرية تفاعلية)'
+                  : lang === 'en'
+                  ? 'Unified Interactive Marine GIS (Satellite, Depths & Active Lighthouses)'
+                  : 'Carte Maritime & Côtière Unifiée (Satellite, Océans & Phares Actifs)'}
               </span>
             </span>
-
-            {/* Mode Switcher */}
-            <div className="flex items-center gap-1 bg-[#12171e] p-1 rounded-lg border border-white/10 shadow-inner">
-              <button
-                type="button"
-                onClick={() => {
-                  sounds.playBubble()
-                  setMapMode('real')
-                }}
-                className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-bold transition ${
-                  mapMode === 'real'
-                    ? 'bg-cyan-500 text-black shadow-md'
-                    : 'text-[#a69b8d] hover:text-white'
-                }`}
-              >
-                <span>🗺️</span>
-                <span>{lang === 'ar' ? 'خريطة حقيقية' : lang === 'fr' ? 'Carte Réelle' : 'Real Map'}</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  sounds.playBubble()
-                  setMapMode('vector')
-                }}
-                className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-bold transition ${
-                  mapMode === 'vector'
-                    ? 'bg-amber-500 text-black shadow-md'
-                    : 'text-[#a69b8d] hover:text-white'
-                }`}
-              >
-                <span>📡</span>
-                <span>{lang === 'ar' ? 'رادار متجهي' : lang === 'fr' ? 'Radar Vectoriel' : 'Radar View'}</span>
-              </button>
-            </div>
+            <span className="text-slate-400 text-[10px]">
+              {lang === 'ar' ? 'البحر المتوسط ↗ · المحيط الأطلسي ↙' : 'Méditerranée ↗ · Atlantique ↙'}
+            </span>
           </div>
 
-          {/* Map Display: Real Leaflet Map by default or Vector Radar Projection */}
-          {mapMode === 'real' ? (
-            <MoroccanLeafletMap
-              ports={filteredPorts}
-              reserves={MOROCCAN_MARINE_RESERVES}
-              corridors={MOROCCAN_FISHERY_CORRIDORS}
-              activePort={displayPort}
-              activeReserve={activeReserve}
-              activeCorridor={activeCorridor}
-              activeLayer={activeLayer}
-              lang={lang}
-              onSelectPort={handleSelectPort}
-              onSelectReserve={handleSelectReserve}
-              onSelectCorridor={handleSelectCorridor}
-            />
-          ) : (
-            <div className="relative w-full aspect-[16/10] max-h-[540px] select-none bg-[#050910] rounded-lg overflow-hidden border border-white/5">
-              <svg
-                viewBox="0 0 1000 960"
-                className="w-full h-full drop-shadow-lg"
-                preserveAspectRatio="xMidYMid meet"
-              >
-              <defs>
-                <linearGradient id="coastGradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#0891b2" stopOpacity="0.9" />
-                  <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.95" />
-                  <stop offset="100%" stopColor="#d96b27" stopOpacity="0.85" />
-                </linearGradient>
-
-                <linearGradient id="landGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#1e293b" stopOpacity="0.6" />
-                  <stop offset="50%" stopColor="#0f172a" stopOpacity="0.75" />
-                  <stop offset="100%" stopColor="#090d16" stopOpacity="0.9" />
-                </linearGradient>
-
-                <linearGradient id="corridorGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#eab308" stopOpacity="0.6" />
-                  <stop offset="100%" stopColor="#d96b27" stopOpacity="0.8" />
-                </linearGradient>
-
-                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="6" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-              </defs>
-
-              {/* Ocean Grid Lines */}
-              <line x1="50" y1="200" x2="950" y2="200" stroke="rgba(255,255,255,0.025)" strokeDasharray="4 6" />
-              <line x1="50" y1="400" x2="950" y2="400" stroke="rgba(255,255,255,0.025)" strokeDasharray="4 6" />
-              <line x1="50" y1="600" x2="950" y2="600" stroke="rgba(255,255,255,0.025)" strokeDasharray="4 6" />
-              <line x1="50" y1="800" x2="950" y2="800" stroke="rgba(255,255,255,0.025)" strokeDasharray="4 6" />
-
-              {/* Geographic Context: Spain & Strait of Gibraltar (Top) */}
-              <path
-                d="M 500,0 L 800,0 L 780,45 Q 670,55 600,50 Q 540,45 500,0 Z"
-                fill="rgba(30, 41, 59, 0.55)"
-                stroke="rgba(255, 255, 255, 0.1)"
-                strokeWidth="1"
-              />
-              <text
-                x="650"
-                y="32"
-                textAnchor="middle"
-                className="fill-slate-400 font-mono text-[11px] font-bold select-none"
-              >
-                🇪🇸 مضيق جبل طارق · GIBRALTAR
-              </text>
-
-              {/* Geographic Context: Canary Islands (West of Tarfaya/Laayoune) */}
-              <g className="select-none opacity-80">
-                <ellipse cx="65" cy="625" rx="14" ry="7" fill="rgba(30, 41, 59, 0.75)" stroke="#38bdf8" strokeWidth="1" />
-                <ellipse cx="85" cy="640" rx="12" ry="6" fill="rgba(30, 41, 59, 0.75)" stroke="#38bdf8" strokeWidth="1" />
-                <ellipse cx="50" cy="648" rx="10" ry="5" fill="rgba(30, 41, 59, 0.75)" stroke="#38bdf8" strokeWidth="1" />
-                <text x="75" y="670" textAnchor="middle" className="fill-sky-400/70 font-mono text-[10px] font-bold">
-                  🏝️ جزر الكناري (Canaries)
-                </text>
-              </g>
-
-              {/* Bathymetric Depth Contour Lines (Canary Current & Upwelling) */}
-              <path
-                d="M 50,200 Q 300,300 600,100"
-                stroke="rgba(6, 182, 212, 0.12)"
-                strokeWidth="1.5"
-                strokeDasharray="4 6"
-                fill="none"
-              />
-              <path
-                d="M 20,500 Q 250,600 500,400"
-                stroke="rgba(6, 182, 212, 0.12)"
-                strokeWidth="1.5"
-                strokeDasharray="4 6"
-                fill="none"
-              />
-              <path
-                d="M 10,800 Q 150,850 400,700"
-                stroke="rgba(6, 182, 212, 0.12)"
-                strokeWidth="1.5"
-                strokeDasharray="4 6"
-                fill="none"
-              />
-
-              {/* Moroccan Sovereign Landmass Shading Fill */}
-              <path
-                d="M 910,65 L 890,70 Q 820,95 740,95 Q 670,80 600,65 Q 560,95 560,130 Q 530,170 480,220 Q 440,260 410,290 Q 395,310 380,335 Q 350,370 330,400 Q 305,445 290,480 Q 270,520 250,550 Q 220,610 190,670 Q 155,760 120,850 Q 105,890 95,930 L 750,930 L 980,500 Z"
-                fill="url(#landGradient)"
-                stroke="rgba(255, 255, 255, 0.08)"
-                strokeWidth="1.5"
-              />
-
-              {/* Sovereign Territory Watermark Inside Landmass */}
-              <g className="select-none pointer-events-none">
-                <text x="620" y="380" className="fill-amber-400/25 font-editorial text-[22px] font-bold tracking-widest text-center">
-                  🇲🇦 المملكة المغربية
-                </text>
-                <text x="620" y="405" className="fill-slate-400/20 font-mono text-[11px] tracking-widest text-center">
-                  ROYAUME DU MAROC · DOMAINE MARITIME
-                </text>
-              </g>
-
-              {/* Ocean Water Geographic Typography */}
-              <text
-                x="140"
-                y="430"
-                transform="rotate(-70 140 430)"
-                className="fill-cyan-500/20 font-mono text-[20px] tracking-[0.25em] font-bold select-none pointer-events-none"
-              >
-                🌊 المحيط الأطلسي · OCÉAN ATLANTIQUE
-              </text>
-              <text
-                x="760"
-                y="45"
-                className="fill-cyan-500/25 font-mono text-[13px] tracking-wider font-bold select-none pointer-events-none"
-              >
-                🌊 البحر الأبيض المتوسط · MÉDITERRANÉE
-              </text>
-
-              {/* Stylized Moroccan Coastline Arc */}
-              <path
-                d="M 910,65 L 890,70 Q 820,95 740,95 Q 670,80 600,65 Q 560,95 560,130 Q 530,170 480,220 Q 440,260 410,290 Q 395,310 380,335 Q 350,370 330,400 Q 305,445 290,480 Q 270,520 250,550 Q 220,610 190,670 Q 155,760 120,850 Q 105,890 95,930"
-                stroke="url(#coastGradient)"
-                strokeWidth="5"
-                strokeLinecap="round"
-                fill="none"
-                filter="url(#glow)"
-              />
-
-              {/* Fishery Corridors Layer */}
-              {(activeLayer === 'all' || activeLayer === 'corridors') &&
-                MOROCCAN_FISHERY_CORRIDORS.map((corridor) => {
-                  const isCorridorActive = selectedCorridorId === corridor.id
-                  return (
-                    <g
-                      key={corridor.id}
-                      className="cursor-pointer"
-                      onClick={() => handleSelectCorridor(corridor)}
-                    >
-                      <line
-                        x1={corridor.startCoord[0]}
-                        y1={corridor.startCoord[1]}
-                        x2={corridor.endCoord[0]}
-                        y2={corridor.endCoord[1]}
-                        stroke={isCorridorActive ? '#eab308' : 'rgba(234, 179, 8, 0.35)'}
-                        strokeWidth={isCorridorActive ? '8' : '5'}
-                        strokeLinecap="round"
-                        strokeDasharray="8 6"
-                      />
-                    </g>
-                  )
-                })}
-
-              {/* Marine Protected Areas (AMPs) Layer */}
-              {(activeLayer === 'all' || activeLayer === 'reserves') &&
-                MOROCCAN_MARINE_RESERVES.map((reserve) => {
-                  const isReserveActive = selectedReserveId === reserve.id
-                  return (
-                    <g
-                      key={reserve.id}
-                      className="cursor-pointer"
-                      onClick={() => handleSelectReserve(reserve)}
-                    >
-                      <circle
-                        cx={reserve.cx}
-                        cy={reserve.cy}
-                        r={isReserveActive ? '16' : '11'}
-                        fill="rgba(16, 185, 129, 0.25)"
-                        stroke="#10b981"
-                        strokeWidth="2"
-                        strokeDasharray="3 3"
-                        className={isReserveActive ? 'animate-pulse' : ''}
-                      />
-                      <circle cx={reserve.cx} cy={reserve.cy} r="4.5" fill="#10b981" />
-                      <text
-                        x={reserve.cx + 12}
-                        y={reserve.cy + 3}
-                        className="text-[9px] font-mono fill-emerald-300 select-none font-bold"
-                      >
-                        🛡️ {lang === 'ar' ? reserve.nameAr.split(' ')[0] : reserve.nameFr.split(' ')[0]}
-                      </text>
-                    </g>
-                  )
-                })}
-
-              {/* Port Markers Layer */}
-              {(activeLayer === 'all' || activeLayer === 'ports') &&
-                filteredPorts.map((port) => {
-                  const isSelected = activePort.id === port.id
-                  const isHovered = hoveredPort?.id === port.id
-
-                  return (
-                    <g
-                      key={port.id}
-                      className="cursor-pointer transition-transform duration-300"
-                      onMouseEnter={() => setHoveredPort(port)}
-                      onMouseLeave={() => setHoveredPort(null)}
-                      onClick={() => handleSelectPort(port)}
-                    >
-                      {/* Animated Ping on active/hover */}
-                      {(isSelected || isHovered) && (
-                        <circle
-                          cx={port.cx}
-                          cy={port.cy}
-                          r="18"
-                          className="animate-ping opacity-35"
-                          fill={isSelected ? '#d96b27' : '#06b6d4'}
-                        />
-                      )}
-
-                      {/* Outer Glow Halo */}
-                      <circle
-                        cx={port.cx}
-                        cy={port.cy}
-                        r={isSelected ? '10' : '7'}
-                        fill={isSelected ? '#d96b27' : isHovered ? '#22d3ee' : '#0891b2'}
-                        stroke="#090d12"
-                        strokeWidth="2.5"
-                      />
-
-                      {/* Inner Core Pin */}
-                      <circle cx={port.cx} cy={port.cy} r="3.5" fill="#ffffff" />
-
-                      {/* Port Label with high-contrast background pill for key hubs or active */}
-                      {(() => {
-                        const isKeyHub = ['tanger-med', 'casablanca', 'safi', 'agadir', 'laayoune', 'dakhla', 'saidia'].includes(port.id)
-                        const labelText = (lang === 'ar' ? port.nameAr.split(' ')[0] : port.nameFr.split(' ')[0]) || ''
-                        const isRightSide = port.cx > 500
-                        const tx = port.cx + (isRightSide ? -16 : 16)
-                        const ty = port.cy + 4
-
-                        return (
-                          <g>
-                            {/* Prominent badge chip for selected or key hub ports */}
-                            {(isSelected || isHovered || isKeyHub) && (
-                              <rect
-                                x={isRightSide ? tx - (labelText.length * 8 + 12) : tx - 4}
-                                y={ty - 13}
-                                width={labelText.length * 8 + 14}
-                                height={18}
-                                rx="4"
-                                fill={isSelected ? 'rgba(217, 107, 39, 0.95)' : isHovered ? 'rgba(8, 145, 178, 0.9)' : 'rgba(15, 23, 42, 0.85)'}
-                                stroke={isSelected ? '#fbd38d' : isHovered ? '#67e8f9' : 'rgba(255, 255, 255, 0.18)'}
-                                strokeWidth="1"
-                              />
-                            )}
-
-                            <text
-                              x={isRightSide ? tx - 6 : tx + 3}
-                              y={ty}
-                              textAnchor={isRightSide ? 'end' : 'start'}
-                              className={`text-[11px] font-mono select-none transition-all ${
-                                isSelected
-                                  ? 'fill-[#0b0908] font-bold text-[11px]'
-                                  : isHovered
-                                  ? 'fill-white font-bold text-[11px]'
-                                  : isKeyHub
-                                  ? 'fill-amber-200 font-semibold text-[10px]'
-                                  : 'fill-[#a69b8d] text-[10px]'
-                              }`}
-                            >
-                              {labelText}
-                            </text>
-                          </g>
-                        )
-                      })()}
-                    </g>
-                  )
-                })}
-              </svg>
-            </div>
-          )}
+          {/* Unified Real Interactive Marine GIS Map */}
+          <MoroccanLeafletMap
+            ports={filteredPorts}
+            reserves={MOROCCAN_MARINE_RESERVES}
+            corridors={MOROCCAN_FISHERY_CORRIDORS}
+            lighthouses={MOROCCAN_LIGHTHOUSES}
+            activePort={displayPort}
+            activeReserve={activeReserve}
+            activeCorridor={activeCorridor}
+            activeLayer={activeLayer}
+            lang={lang}
+            onSelectPort={handleSelectPort}
+            onSelectReserve={handleSelectReserve}
+            onSelectCorridor={handleSelectCorridor}
+          />
 
           {/* Map Footer Legend */}
           <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-[10px] font-mono text-[#786c60] pt-2 border-t border-white/5">
