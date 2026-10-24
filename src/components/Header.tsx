@@ -417,10 +417,10 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          {/* Numbered Editorial Index Navigation (Zero scrollbar, responsive wrapping pills) */}
+          {/* Numbered Editorial Index Navigation (Zero scrollbar, touch-scrollable on mobile, wrapping on desktop) */}
           <nav
             aria-label="Main Navigation"
-            className="flex flex-wrap items-center gap-1.5 rounded-xl border border-[#f6f1e7]/10 bg-[#14110f] p-1.5 shadow-inner no-scrollbar"
+            className="flex overflow-x-auto sm:flex-wrap items-center gap-1.5 rounded-xl border border-[#f6f1e7]/10 bg-[#14110f] p-1.5 shadow-inner no-scrollbar scroll-smooth snap-x pb-2 sm:pb-1.5 max-w-full"
           >
             {navItems.map((item) => {
               const isActive = activeTab === item.id
@@ -433,7 +433,7 @@ export const Header: React.FC<HeaderProps> = ({
                     sounds.playTabClick()
                     setActiveTab(item.id)
                   }}
-                  className={`group relative flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs transition-all duration-200 ${
+                  className={`group relative flex shrink-0 snap-start items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs transition-transform duration-150 active:scale-95 ${
                     isActive
                       ? 'bg-[#d96b27] text-[#0b0908] font-bold shadow-md shadow-[#d96b27]/20 ring-1 ring-[#e68a45]'
                       : item.highlight

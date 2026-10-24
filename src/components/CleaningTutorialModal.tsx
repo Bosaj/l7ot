@@ -97,6 +97,7 @@ const VideoPlayer: React.FC<{
             className="absolute inset-0 h-full w-full"
             src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
             title={title}
+            loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />

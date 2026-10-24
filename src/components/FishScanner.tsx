@@ -14,6 +14,9 @@ import {
   TrendingDown,
   Minus,
   Scale,
+  RotateCcw,
+  Zap,
+  ZapOff,
 } from 'lucide-react'
 import type { Fish } from '../data/types'
 import type { SupportedLanguage } from '../i18n/strings'
@@ -140,6 +143,10 @@ export const FishScanner: React.FC<FishScannerProps> = ({
   const [matches, setMatches] = useState<ScanMatch[]>([])
   const [isPlayingAudio, setIsPlayingAudio] = useState(false)
   const [showContours, setShowContours] = useState(true)
+  const [facingMode, setFacingMode] = useState<'environment' | 'user'>('environment')
+  const [hasTorch, setHasTorch] = useState<boolean>(false)
+  const [torchActive, setTorchActive] = useState<boolean>(false)
+  const [audioLang, setAudioLang] = useState<'ar' | 'fr' | 'en'>('ar')
 
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const overlayCanvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -371,17 +378,30 @@ export const FishScanner: React.FC<FishScannerProps> = ({
       streamRef.current = null
     }
     setCameraActive(false)
+    setTorchActive(false)
   }
 
-  const startCamera = async () => {
+  const startCamera = async (mode: 'environment' | 'user' = facingMode) => {
     setCameraError(null)
     try {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((t) => t.stop())
+      }
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 } },
+        video: { facingMode: { ideal: mode }, width: { ideal: 1280 } },
         audio: false,
       })
       streamRef.current = stream
       setCameraActive(true)
+      setFacingMode(mode)
+
+      // Detect torch capabilities
+      const track = stream.getVideoTracks()[0]
+      if (track && typeof track.getCapabilities === 'function') {
+        const caps = track.getCapabilities() as { torch?: boolean }
+        setHasTorch(Boolean(caps.torch))
+      }
+
       setTimeout(() => {
         if (videoRef.current) {
           videoRef.current.srcObject = stream
@@ -399,8 +419,28 @@ export const FishScanner: React.FC<FishScannerProps> = ({
     }
   }
 
+  const toggleCameraTorch = async () => {
+    if (!streamRef.current) return
+    const track = streamRef.current.getVideoTracks()[0]
+    if (track && typeof track.applyConstraints === 'function') {
+      try {
+        const next = !torchActive
+        await track.applyConstraints({ advanced: [{ torch: next } as MediaTrackConstraintSet] })
+        setTorchActive(next)
+      } catch {
+        // ignore
+      }
+    }
+  }
+
+  const flipCamera = () => {
+    const next = facingMode === 'environment' ? 'user' : 'environment'
+    startCamera(next)
+  }
+
   const captureFromVideo = () => {
     if (!videoRef.current) return
+    sounds.playSnap()
     const video = videoRef.current
     const canvas = document.createElement('canvas')
     canvas.width = video.videoWidth || 640
@@ -585,7 +625,7 @@ export const FishScanner: React.FC<FishScannerProps> = ({
           {!cameraActive ? (
             <button
               type="button"
-              onClick={startCamera}
+              onClick={() => startCamera()}
               className="flex items-center gap-2 rounded-lg bg-[#d96b27] px-5 py-3 text-sm font-bold text-[#0b0908] shadow-lg transition-all hover:bg-[#e68a45]"
             >
               <Camera className="h-4 w-4" />
@@ -704,19 +744,45 @@ export const FishScanner: React.FC<FishScannerProps> = ({
                 </span>
               </div>
 
-              <button
-                type="button"
-                onClick={() => setShowContours(!showContours)}
-                className={`rounded-full border px-3 py-1 font-mono text-[11px] transition backdrop-blur-md ${
-                  showContours
-                    ? 'border-emerald-500/40 bg-emerald-500/20 text-emerald-300'
-                    : 'border-[#f6f1e7]/20 bg-[#0b0908]/80 text-[#a69b8d]'
-                }`}
-              >
-                {showContours
-                  ? (lang === 'ar' ? 'معالم التحليل: مفعّلة ✓' : 'Contours IA : ON ✓')
-                  : (lang === 'ar' ? 'معالم التحليل: معطّلة' : 'Contours IA : OFF')}
-              </button>
+              <div className="flex items-center gap-1.5">
+                {hasTorch && (
+                  <button
+                    type="button"
+                    onClick={toggleCameraTorch}
+                    className={`rounded-full border p-1.5 transition backdrop-blur-md ${
+                      torchActive
+                        ? 'border-amber-400 bg-amber-400 text-black'
+                        : 'border-white/20 bg-black/60 text-white hover:bg-black/80'
+                    }`}
+                    title={torchActive ? 'Éteindre la torche' : 'Allumer la torche'}
+                  >
+                    {torchActive ? <Zap className="h-3.5 w-3.5" /> : <ZapOff className="h-3.5 w-3.5" />}
+                  </button>
+                )}
+
+                <button
+                  type="button"
+                  onClick={flipCamera}
+                  className="rounded-full border border-white/20 bg-black/60 p-1.5 text-white transition hover:bg-black/80 backdrop-blur-md"
+                  title={lang === 'ar' ? 'تبديل الكاميرا (أمامية/خلفية)' : 'Changer de caméra'}
+                >
+                  <RotateCcw className="h-3.5 w-3.5" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setShowContours(!showContours)}
+                  className={`rounded-full border px-3 py-1 font-mono text-[11px] transition backdrop-blur-md ${
+                    showContours
+                      ? 'border-emerald-500/40 bg-emerald-500/20 text-emerald-300'
+                      : 'border-[#f6f1e7]/20 bg-[#0b0908]/80 text-[#a69b8d]'
+                  }`}
+                >
+                  {showContours
+                    ? (lang === 'ar' ? 'معالم: مفعّلة ✓' : 'Contours : ON ✓')
+                    : (lang === 'ar' ? 'معالم: معطّلة' : 'Contours : OFF')}
+                </button>
+              </div>
             </div>
 
             {/* Capture Button */}
@@ -837,28 +903,82 @@ export const FishScanner: React.FC<FishScannerProps> = ({
                         </p>
                       </div>
 
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setIsPlayingAudio(true)
-                          speakDarija(
-                            primaryMatch.fish.nameDarijaArabic,
-                            primaryMatch.fish.audioPhonetic,
-                            primaryMatch.fish.id
-                          )
-                          setTimeout(() => setIsPlayingAudio(false), 3200)
-                        }}
-                        className={`flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold transition-all ${
-                          isPlayingAudio
-                            ? 'border-[#e68a45] bg-[#d96b27] text-[#0b0908]'
-                            : 'border-[#d96b27]/50 bg-[#d96b27]/15 text-[#f2b47e] hover:bg-[#d96b27] hover:text-[#0b0908]'
-                        }`}
-                      >
-                        <Volume2 className="h-4 w-4" />
-                        <span>
-                          {lang === 'ar' ? 'استمع للنطق بالدارجة' : 'Écouter en Darija'}
-                        </span>
-                      </button>
+                    </div>
+
+                    {/* High-End Voice Engine & Pronunciation Studio */}
+                    <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#d96b27]/30 bg-[#d96b27]/10 p-3.5 backdrop-blur-md">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsPlayingAudio(true)
+                            sounds.playBubble()
+                            const textToSpeak =
+                              audioLang === 'ar'
+                                ? primaryMatch.fish.nameDarijaArabic
+                                : audioLang === 'fr'
+                                ? primaryMatch.fish.nameFrench
+                                : primaryMatch.fish.nameEnglish
+                            speakDarija(
+                              textToSpeak,
+                              primaryMatch.fish.audioPhonetic,
+                              primaryMatch.fish.id,
+                              audioLang
+                            )
+                            setTimeout(() => setIsPlayingAudio(false), 3000)
+                          }}
+                          className={`flex items-center gap-2 rounded-lg px-4 py-2 font-mono text-xs font-bold transition-all active:scale-95 ${
+                            isPlayingAudio
+                              ? 'bg-amber-400 text-black shadow-lg shadow-amber-400/40'
+                              : 'bg-[#d96b27] text-black hover:bg-[#e68a45]'
+                          }`}
+                        >
+                          <Volume2 className="h-4 w-4" />
+                          {isPlayingAudio ? (
+                            <div className="flex items-center gap-1 h-3">
+                              <span className="w-1 h-full bg-black animate-bounce" style={{ animationDelay: '0ms' }} />
+                              <span className="w-1 h-2/3 bg-black animate-bounce" style={{ animationDelay: '150ms' }} />
+                              <span className="w-1 h-full bg-black animate-bounce" style={{ animationDelay: '300ms' }} />
+                              <span className="w-1 h-1/2 bg-black animate-bounce" style={{ animationDelay: '75ms' }} />
+                              <span className="ms-1.5">{lang === 'ar' ? 'جاري النطق...' : 'En lecture...'}</span>
+                            </div>
+                          ) : (
+                            <span>
+                              {lang === 'ar'
+                                ? 'استمع للنطق الصوتي'
+                                : lang === 'fr'
+                                ? 'Écouter la Prononciation'
+                                : 'Listen to Pronunciation'}
+                            </span>
+                          )}
+                        </button>
+
+                        <div className="flex items-center rounded-lg border border-white/10 bg-black/40 p-0.5 text-[10px] font-mono">
+                          {(['ar', 'fr', 'en'] as const).map((l) => (
+                            <button
+                              key={l}
+                              type="button"
+                              onClick={() => setAudioLang(l)}
+                              className={`px-2 py-1 rounded transition ${
+                                audioLang === l
+                                  ? 'bg-amber-500 text-black font-bold'
+                                  : 'text-[#a69b8d] hover:text-white'
+                              }`}
+                            >
+                              {l === 'ar' ? 'الدارجة' : l === 'fr' ? 'FR' : 'EN'}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {primaryMatch.fish.audioPhonetic && (
+                        <div className="font-mono text-xs text-amber-200">
+                          <span className="text-[#a69b8d] text-[10px] uppercase block">
+                            {lang === 'ar' ? 'النطق الصوتي باللاتينية:' : 'Phonétique Darija :'}
+                          </span>
+                          <span>"{primaryMatch.fish.audioPhonetic}"</span>
+                        </div>
+                      )}
                     </div>
 
                     <p className="text-sm leading-relaxed text-[#d4cbbd]">

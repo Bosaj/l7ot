@@ -141,6 +141,34 @@ class SoundEngine {
     }
   }
 
+  /** Crisp camera shutter snap sound */
+  public playSnap() {
+    if (!this.enabled) return
+    try {
+      this.initCtx()
+      if (!this.ctx) return
+
+      const now = this.ctx.currentTime
+      const osc = this.ctx.createOscillator()
+      const gain = this.ctx.createGain()
+
+      osc.type = 'square'
+      osc.frequency.setValueAtTime(1200, now)
+      osc.frequency.exponentialRampToValueAtTime(180, now + 0.05)
+
+      gain.gain.setValueAtTime(0.09, now)
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06)
+
+      osc.connect(gain)
+      gain.connect(this.ctx.destination)
+
+      osc.start(now)
+      osc.stop(now + 0.07)
+    } catch {
+      // Audio error ignored
+    }
+  }
+
   /** Soft tactile click for tabs */
   public playTabClick() {
     if (!this.enabled) return

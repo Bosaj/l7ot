@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useRef } from 'react'
 import {
   ShoppingBag,
   PlusCircle,
@@ -8,10 +8,18 @@ import {
   Filter,
   Search,
   Store,
+  Camera,
+  Image as ImageIcon,
+  Share2,
+  TrendingUp,
+  X,
+  ShieldCheck,
+  Award,
 } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import type { Fish } from '../data/types'
 import { sounds } from '../lib/soundEffects'
+import { getAssetUrl } from '../lib/assetHelper'
 
 export interface CommunityPriceReport {
   id: string
@@ -27,6 +35,8 @@ export interface CommunityPriceReport {
   onpWholesaleMAD: number
   freshnessGrade: 'extra' | 'grade_a' | 'standard'
   hasReceiptOrPhoto: boolean
+  photoUrl?: string
+  marketType?: 'port_direct' | 'souk_municipal' | 'supermarche'
   notesAr: string
   notesFr: string
   reporterName: string
@@ -51,6 +61,8 @@ const PRE_SEEDED_REPORTS: CommunityPriceReport[] = [
     onpWholesaleMAD: 10,
     freshnessGrade: 'extra',
     hasReceiptOrPhoto: true,
+    photoUrl: getAssetUrl('fish/sardine.webp'),
+    marketType: 'port_direct',
     notesAr: 'حوت طري عاد خارج من البحر مع 7 صباحاً، عيون كتبري وغلاصم حمرين دم.',
     notesFr: 'Directement débarqué de la barque artisanale à 7h, fraîcheur absolue.',
     reporterName: 'سعيد الصياد',
@@ -71,6 +83,8 @@ const PRE_SEEDED_REPORTS: CommunityPriceReport[] = [
     onpWholesaleMAD: 50,
     freshnessGrade: 'grade_a',
     hasReceiptOrPhoto: true,
+    photoUrl: getAssetUrl('fish/merlan.webp'),
+    marketType: 'souk_municipal',
     notesAr: 'ميرلا نبتة نقية، ثمن معقول مقارنة بالأسبوع الفايت.',
     notesFr: 'Merlan très frais, chair ferme et brillante.',
     reporterName: 'أمينة بنجلون',
@@ -91,6 +105,8 @@ const PRE_SEEDED_REPORTS: CommunityPriceReport[] = [
     onpWholesaleMAD: 85,
     freshnessGrade: 'extra',
     hasReceiptOrPhoto: true,
+    photoUrl: getAssetUrl('fish/calamar.webp'),
+    marketType: 'souk_municipal',
     notesAr: 'حجم كبير نقي ديال الشواية والفران، لحم رطب وشفاف.',
     notesFr: 'Calmar blanc épais, parfait pour grillade.',
     reporterName: 'كريم الشمالي',
@@ -110,7 +126,9 @@ const PRE_SEEDED_REPORTS: CommunityPriceReport[] = [
     reportedPriceMAD: 95,
     onpWholesaleMAD: 75,
     freshnessGrade: 'grade_a',
-    hasReceiptOrPhoto: false,
+    hasReceiptOrPhoto: true,
+    photoUrl: getAssetUrl('fish/sole.webp'),
+    marketType: 'souk_municipal',
     notesAr: 'صول حبة كبيرة، جودة عالية.',
     notesFr: 'Belles pièces d’environ 400g, branchies rouge vif.',
     reporterName: 'حسن السوسي',
@@ -131,6 +149,8 @@ const PRE_SEEDED_REPORTS: CommunityPriceReport[] = [
     onpWholesaleMAD: 70,
     freshnessGrade: 'extra',
     hasReceiptOrPhoto: true,
+    photoUrl: getAssetUrl('fish/poulpe.webp'),
+    marketType: 'port_direct',
     notesAr: 'أخطبوط صيد القوارب التقليدية، نقاوة منقطعة النظير.',
     notesFr: 'Poulpe royal direct de la lagune, chair ferme.',
     reporterName: 'سيدي أحمد',
@@ -151,6 +171,8 @@ const PRE_SEEDED_REPORTS: CommunityPriceReport[] = [
     onpWholesaleMAD: 95,
     freshnessGrade: 'extra',
     hasReceiptOrPhoto: true,
+    photoUrl: getAssetUrl('fish/crevette.webp'),
+    marketType: 'souk_municipal',
     notesAr: 'غامبا حمراء طرية ديال مياه رأس كبدانة ومارشيكا.',
     notesFr: 'Gambas fraîches de Méditerranée.',
     reporterName: 'طارق الريفي',
@@ -160,23 +182,23 @@ const PRE_SEEDED_REPORTS: CommunityPriceReport[] = [
 ]
 
 export const MOROCCAN_MARKETS = [
-  { cityAr: 'الدار البيضاء', cityFr: 'Casablanca', nameAr: 'المارشي سونطرال (السوق المركزي)', nameFr: 'Marché Central' },
-  { cityAr: 'الدار البيضاء', cityFr: 'Casablanca', nameAr: 'سوق السمك بنجدية', nameFr: 'Marché Benjdia' },
-  { cityAr: 'الدار البيضاء', cityFr: 'Casablanca', nameAr: 'مرسى الدار البيضاء (الميناء)', nameFr: 'Port de Casablanca' },
-  { cityAr: 'الرباط', cityFr: 'Rabat', nameAr: 'السوق المركزي بالرباط', nameFr: 'Marché Central Rabat' },
-  { cityAr: 'الرباط', cityFr: 'Rabat', nameAr: 'ميناء الصيد بسلا', nameFr: 'Port de Pêche de Salé' },
-  { cityAr: 'طنجة', cityFr: 'Tanger', nameAr: 'سوق السمك باب المارسى', nameFr: 'Marché Bab El Marsa' },
-  { cityAr: 'طنجة', cityFr: 'Tanger', nameAr: 'ميناء طنجة المدينة', nameFr: 'Port de Tanger Ville' },
-  { cityAr: 'آسفي', cityFr: 'Safi', nameAr: 'مرسى الصيد بآسفي', nameFr: 'Port de Pêche de Safi' },
-  { cityAr: 'آسفي', cityFr: 'Safi', nameAr: 'سوق البياضة للأسماك', nameFr: 'Marché Biada' },
-  { cityAr: 'الصويرة', cityFr: 'Essaouira', nameAr: 'سوق السمك التاريخي بالمدينة القديمة', nameFr: 'Marché Médina Mogador' },
-  { cityAr: 'الصويرة', cityFr: 'Essaouira', nameAr: 'مرسى الصويرة', nameFr: 'Port d’Essaouira' },
-  { cityAr: 'أكادير', cityFr: 'Agadir', nameAr: 'سوق الأحد (جناح السمك)', nameFr: 'Souk El Had' },
-  { cityAr: 'أكادير', cityFr: 'Agadir', nameAr: 'ميناء الصيد بأكادير (أنزا)', nameFr: 'Port d’Agadir Anza' },
-  { cityAr: 'الناظور', cityFr: 'Nador', nameAr: 'سوق المركب التجاري', nameFr: 'Marché المركب Nador' },
-  { cityAr: 'الناظور', cityFr: 'Nador', nameAr: 'ميناء بني نصار', nameFr: 'Port de Beni Ensar' },
-  { cityAr: 'الداخلة', cityFr: 'Dakhla', nameAr: 'سوق المسيرة البلدي', nameFr: 'Marché Municipal Dakhla' },
-  { cityAr: 'الداخلة', cityFr: 'Dakhla', nameAr: 'مرسى الداخلة', nameFr: 'Port de Dakhla' },
+  { cityAr: 'الدار البيضاء', cityFr: 'Casablanca', nameAr: 'المارشي سونطرال (السوق المركزي)', nameFr: 'Marché Central', type: 'souk_municipal' as const },
+  { cityAr: 'الدار البيضاء', cityFr: 'Casablanca', nameAr: 'سوق السمك بنجدية', nameFr: 'Marché Benjdia', type: 'souk_municipal' as const },
+  { cityAr: 'الدار البيضاء', cityFr: 'Casablanca', nameAr: 'مرسى الدار البيضاء (الميناء)', nameFr: 'Port de Casablanca', type: 'port_direct' as const },
+  { cityAr: 'الرباط', cityFr: 'Rabat', nameAr: 'السوق المركزي بالرباط', nameFr: 'Marché Central Rabat', type: 'souk_municipal' as const },
+  { cityAr: 'الرباط', cityFr: 'Rabat', nameAr: 'ميناء الصيد بسلا', nameFr: 'Port de Pêche de Salé', type: 'port_direct' as const },
+  { cityAr: 'طنجة', cityFr: 'Tanger', nameAr: 'سوق السمك باب المارسى', nameFr: 'Marché Bab El Marsa', type: 'souk_municipal' as const },
+  { cityAr: 'طنجة', cityFr: 'Tanger', nameAr: 'ميناء طنجة المدينة', nameFr: 'Port de Tanger Ville', type: 'port_direct' as const },
+  { cityAr: 'آسفي', cityFr: 'Safi', nameAr: 'مرسى الصيد بآسفي', nameFr: 'Port de Pêche de Safi', type: 'port_direct' as const },
+  { cityAr: 'آسفي', cityFr: 'Safi', nameAr: 'سوق البياضة للأسماك', nameFr: 'Marché Biada', type: 'souk_municipal' as const },
+  { cityAr: 'الصويرة', cityFr: 'Essaouira', nameAr: 'سوق السمك التاريخي بالمدينة القديمة', nameFr: 'Marché Médina Mogador', type: 'souk_municipal' as const },
+  { cityAr: 'الصويرة', cityFr: 'Essaouira', nameAr: 'مرسى الصويرة', nameFr: 'Port d’Essaouira', type: 'port_direct' as const },
+  { cityAr: 'أكادير', cityFr: 'Agadir', nameAr: 'سوق الأحد (جناح السمك)', nameFr: 'Souk El Had', type: 'souk_municipal' as const },
+  { cityAr: 'أكادير', cityFr: 'Agadir', nameAr: 'ميناء الصيد بأكادير (أنزا)', nameFr: 'Port d’Agadir Anza', type: 'port_direct' as const },
+  { cityAr: 'الناظور', cityFr: 'Nador', nameAr: 'سوق المركب التجاري', nameFr: 'Marché المركب Nador', type: 'souk_municipal' as const },
+  { cityAr: 'الناظور', cityFr: 'Nador', nameAr: 'ميناء بني نصار', nameFr: 'Port de Beni Ensar', type: 'port_direct' as const },
+  { cityAr: 'الداخلة', cityFr: 'Dakhla', nameAr: 'سوق المسيرة البلدي', nameFr: 'Marché Municipal Dakhla', type: 'souk_municipal' as const },
+  { cityAr: 'الداخلة', cityFr: 'Dakhla', nameAr: 'مرسى الداخلة', nameFr: 'Port de Dakhla', type: 'port_direct' as const },
 ]
 
 interface CommunityPriceReporterProps {
@@ -203,9 +225,11 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
   })
 
   const [selectedCityFilter, setSelectedCityFilter] = useState<string>('all')
+  const [selectedChannelFilter, setSelectedChannelFilter] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false)
   const [confirmedReports, setConfirmedReports] = useState<Record<string, boolean>>({})
+  const [activePhotoModal, setActivePhotoModal] = useState<string | null>(null)
 
   // Form states
   const [formFishId, setFormFishId] = useState<string>(allFish[0]?.id || 'sardine')
@@ -213,9 +237,11 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
   const [formPrice, setFormPrice] = useState<string>('15')
   const [formFreshness, setFormFreshness] = useState<'extra' | 'grade_a' | 'standard'>('extra')
   const [formHasReceipt, setFormHasReceipt] = useState<boolean>(true)
+  const [formPhotoData, setFormPhotoData] = useState<string | null>(null)
   const [formNotes, setFormNotes] = useState<string>('')
   const [formReporter, setFormReporter] = useState<string>('')
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
 
   // Save to local storage
   const saveReports = (newReports: CommunityPriceReport[]) => {
@@ -234,6 +260,34 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
   const selectedMarketObj = useMemo(() => {
     return MOROCCAN_MARKETS[formMarketIndex] || MOROCCAN_MARKETS[0]!
   }, [formMarketIndex])
+
+  // Macro Statistics Barometer
+  const marketMetrics = useMemo(() => {
+    if (reports.length === 0) {
+      return { avgSpread: 0, topBargain: null, topConfirmed: null }
+    }
+    const totalSpread = reports.reduce((acc, r) => {
+      const diff = ((r.reportedPriceMAD - r.onpWholesaleMAD) / r.onpWholesaleMAD) * 100
+      return acc + diff
+    }, 0)
+    const avgSpread = Math.round(totalSpread / reports.length)
+
+    // Best bargain (lowest spread)
+    const sortedByBargain = [...reports].sort((a, b) => {
+      const diffA = (a.reportedPriceMAD - a.onpWholesaleMAD) / a.onpWholesaleMAD
+      const diffB = (b.reportedPriceMAD - b.onpWholesaleMAD) / b.onpWholesaleMAD
+      return diffA - diffB
+    })
+
+    // Most confirmed report
+    const sortedByConfirm = [...reports].sort((a, b) => b.confirmationsCount - a.confirmationsCount)
+
+    return {
+      avgSpread,
+      topBargain: sortedByBargain[0] || null,
+      topConfirmed: sortedByConfirm[0] || null,
+    }
+  }, [reports])
 
   // Form price markup calculation preview
   const formMarkupInfo = useMemo(() => {
@@ -265,6 +319,11 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
         r.cityFr.toLowerCase() === selectedCityFilter.toLowerCase() ||
         r.cityAr === selectedCityFilter
 
+      const matchesChannel =
+        selectedChannelFilter === 'all' ||
+        (selectedChannelFilter === 'port' && r.marketType === 'port_direct') ||
+        (selectedChannelFilter === 'souk' && r.marketType === 'souk_municipal')
+
       const q = searchQuery.toLowerCase().trim()
       const matchesSearch =
         !q ||
@@ -275,9 +334,9 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
         r.marketNameFr.toLowerCase().includes(q) ||
         r.notesAr.toLowerCase().includes(q)
 
-      return matchesCity && matchesSearch
+      return matchesCity && matchesChannel && matchesSearch
     })
-  }, [reports, selectedCityFilter, searchQuery])
+  }, [reports, selectedCityFilter, selectedChannelFilter, searchQuery])
 
   const handleConfirmPrice = (reportId: string) => {
     if (confirmedReports[reportId]) return
@@ -290,6 +349,19 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
       return r
     })
     saveReports(updated)
+  }
+
+  const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      if (typeof reader.result === 'string') {
+        setFormPhotoData(reader.result)
+        setFormHasReceipt(true)
+      }
+    }
+    reader.readAsDataURL(file)
   }
 
   const handleSubmitReport = (e: React.FormEvent) => {
@@ -312,6 +384,8 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
       onpWholesaleMAD: selectedFishObj.pricing.currentSpotMAD,
       freshnessGrade: formFreshness,
       hasReceiptOrPhoto: formHasReceipt,
+      photoUrl: formPhotoData || selectedFishObj.imageUrl,
+      marketType: selectedMarketObj.type,
       notesAr: formNotes || 'ملاحظة مباشرة من السوق.',
       notesFr: formNotes || 'Observation directe sur le marché.',
       reporterName: formReporter || (lang === 'ar' ? 'مواطن مستهلك' : 'Citoyen Observateur'),
@@ -325,11 +399,68 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
       setSubmitSuccess(false)
       setIsFormOpen(false)
       setFormNotes('')
+      setFormPhotoData(null)
     }, 1800)
+  }
+
+  const handleShareWhatsApp = () => {
+    sounds.playBubble()
+    const headline =
+      lang === 'ar'
+        ? `🐟 *نشرة أسعار الحوت اليوم بالأسواق المغربية — بورصة L7OT*`
+        : `🐟 *Bulletin des Prix du Poisson au Maroc Aujourd'hui — L7OT*`
+    const itemsText = filteredReports
+      .slice(0, 5)
+      .map((r) => {
+        const name = lang === 'ar' ? r.fishNameAr : r.fishNameFr
+        const city = lang === 'ar' ? r.cityAr : r.cityFr
+        const market = lang === 'ar' ? r.marketNameAr : r.marketNameFr
+        return `• *${name}* à ${city} (${market}) : *${r.reportedPriceMAD} MAD/kg* (Gros ONP: ${r.onpWholesaleMAD} MAD)`
+      })
+      .join('\n')
+
+    const footer =
+      lang === 'ar'
+        ? `\n\n📊 تتبع أسعار 44 نوعاً من الأسماك المغربية مباشرة عبر: https://l7ot.vercel.app`
+        : `\n\n📊 Consultez l’atlas des 44 poissons marocains sur : https://l7ot.vercel.app`
+
+    const message = `${headline}\n\n${itemsText}${footer}`
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank')
   }
 
   return (
     <div className="space-y-8 animate-fade-in text-[#f6f1e7]">
+      {/* Lightbox Photo Preview Modal */}
+      {activePhotoModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setActivePhotoModal(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-md animate-fade-in cursor-pointer"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-h-[85vh] max-w-2xl overflow-hidden rounded-2xl border border-amber-500/30 bg-[#14110f] p-3 shadow-2xl"
+          >
+            <button
+              type="button"
+              onClick={() => setActivePhotoModal(null)}
+              className="absolute end-4 top-4 z-10 rounded-full bg-black/70 p-2 text-white hover:bg-black transition"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <img
+              src={activePhotoModal}
+              alt="Photo d'observation"
+              className="max-h-[75vh] w-full rounded-xl object-contain"
+            />
+            <div className="p-3 text-center font-mono text-xs text-amber-300">
+              {lang === 'ar' ? 'إثبات الفاتورة أو صورة الصيد الحية من السوق ✓' : 'Justificatif / Photo du produit au marché ✓'}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header Editorial Masthead */}
       <div className="rounded-xl border border-amber-500/30 bg-gradient-to-br from-[#1c120a] via-[#140d07] to-[#0c0804] p-6 sm:p-8 shadow-2xl">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -362,8 +493,17 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
             </p>
           </div>
 
-          {/* Action Button */}
-          <div className="shrink-0">
+          {/* Action Buttons Strip */}
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <button
+              type="button"
+              onClick={handleShareWhatsApp}
+              className="inline-flex items-center gap-2 rounded-lg border border-emerald-500/40 bg-emerald-500/15 px-4 py-2.5 font-mono text-xs font-bold text-emerald-300 shadow-lg hover:bg-emerald-500 hover:text-black transition"
+            >
+              <Share2 className="h-4 w-4" />
+              <span>{lang === 'ar' ? 'مشاركة النشرة (WhatsApp)' : 'Partager (WhatsApp)'}</span>
+            </button>
+
             <button
               type="button"
               onClick={() => {
@@ -382,11 +522,71 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
           </div>
         </div>
 
+        {/* Top Macro Barometer Bento Cards */}
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3.5 border-t border-amber-500/20 pt-6">
+          <div className="rounded-xl border border-white/10 bg-[#0b0908]/70 p-4 backdrop-blur-md">
+            <div className="flex items-center justify-between text-xs text-[#a69b8d] font-mono">
+              <span>{lang === 'ar' ? 'متوسط هامش الربح الوطني' : 'Marge Moyenne Nationale'}</span>
+              <TrendingUp className="h-4 w-4 text-amber-400" />
+            </div>
+            <div className="mt-2 flex items-baseline gap-2">
+              <span className="font-editorial text-3xl font-bold text-amber-300">
+                +{marketMetrics.avgSpread}%
+              </span>
+              <span className="text-[11px] text-[#a69b8d]">
+                {lang === 'ar' ? 'فوق سعر الجملة بالمرسى' : 'au-dessus de la criée'}
+              </span>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4 backdrop-blur-md">
+            <div className="flex items-center justify-between text-xs text-emerald-300 font-mono">
+              <span>{lang === 'ar' ? 'أفضل صفقة اليوم (أقل هامش)' : 'Bonne Affaire du Jour'}</span>
+              <Award className="h-4 w-4 text-emerald-400" />
+            </div>
+            <div className="mt-2">
+              {marketMetrics.topBargain ? (
+                <div>
+                  <span className="font-editorial text-lg font-bold text-emerald-200">
+                    {lang === 'ar' ? marketMetrics.topBargain.fishNameAr : marketMetrics.topBargain.fishNameFr}
+                  </span>
+                  <p className="font-mono text-xs text-emerald-400">
+                    {marketMetrics.topBargain.reportedPriceMAD} MAD/kg · {marketMetrics.topBargain.cityFr}
+                  </p>
+                </div>
+              ) : (
+                <span className="text-xs text-[#a69b8d]">—</span>
+              )}
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-cyan-500/20 bg-cyan-500/5 p-4 backdrop-blur-md">
+            <div className="flex items-center justify-between text-xs text-cyan-300 font-mono">
+              <span>{lang === 'ar' ? 'التقرير الأكثر تأكيداً من المواطنين' : 'Rapport le Plus Confirmé'}</span>
+              <ShieldCheck className="h-4 w-4 text-cyan-400" />
+            </div>
+            <div className="mt-2">
+              {marketMetrics.topConfirmed ? (
+                <div>
+                  <span className="font-editorial text-lg font-bold text-cyan-200">
+                    {lang === 'ar' ? marketMetrics.topConfirmed.fishNameAr : marketMetrics.topConfirmed.fishNameFr}
+                  </span>
+                  <p className="font-mono text-xs text-cyan-400">
+                    {marketMetrics.topConfirmed.confirmationsCount} {lang === 'ar' ? 'تأكيد موثق ✓' : 'validations citoyennes ✓'}
+                  </p>
+                </div>
+              ) : (
+                <span className="text-xs text-[#a69b8d]">—</span>
+              )}
+            </div>
+          </div>
+        </div>
+
         {/* Observation Form Drawer */}
         {isFormOpen && (
           <form
             onSubmit={handleSubmitReport}
-            className="mt-6 rounded-xl border border-amber-500/30 bg-[#0b0908] p-5 sm:p-6 space-y-5 animate-fade-in"
+            className="mt-6 rounded-xl border border-amber-500/30 bg-[#0b0908] p-5 sm:p-6 space-y-5 animate-fade-in shadow-2xl"
           >
             <div className="flex items-center justify-between border-b border-[#f6f1e7]/10 pb-3">
               <h3 className="font-editorial text-lg font-bold text-amber-200">
@@ -461,7 +661,7 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
               </div>
             </div>
 
-            {/* Freshness & Proof Controls */}
+            {/* Freshness & Photo Controls */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-1.5">
                 <label className="font-mono text-[11px] text-[#a69b8d] block">
@@ -491,17 +691,43 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
                 />
               </div>
 
-              <div className="flex items-center gap-2 pt-6">
-                <input
-                  type="checkbox"
-                  id="receipt-check"
-                  checked={formHasReceipt}
-                  onChange={(e) => setFormHasReceipt(e.target.checked)}
-                  className="h-4 w-4 rounded border-[#f6f1e7]/20 bg-[#14110f] text-amber-500 focus:ring-0"
-                />
-                <label htmlFor="receipt-check" className="text-xs text-[#a69b8d] cursor-pointer">
-                  {lang === 'ar' ? 'شراء شخصي مباشر أو توفر إثبات' : 'Achat direct ou preuve constatée'}
+              {/* Photo & Receipt Upload */}
+              <div className="space-y-1.5">
+                <label className="font-mono text-[11px] text-[#a69b8d] block">
+                  {lang === 'ar' ? 'صورة الفاتورة أو السمكة' : 'Photo de la facture ou du poisson'}
                 </label>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="flex-1 flex items-center justify-center gap-1.5 rounded-lg border border-amber-500/30 bg-[#14110f] p-2 text-xs text-amber-200 hover:border-amber-400 transition"
+                  >
+                    <Camera className="h-3.5 w-3.5 text-amber-400" />
+                    <span>
+                      {formPhotoData
+                        ? (lang === 'ar' ? 'تم اختيار الصورة ✓' : 'Photo chargée ✓')
+                        : (lang === 'ar' ? 'التقاط أو رفع صورة' : 'Photo / Reçu')}
+                    </span>
+                  </button>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    capture="environment"
+                    onChange={handleImageFileChange}
+                    className="hidden"
+                  />
+                  {formPhotoData && (
+                    <button
+                      type="button"
+                      onClick={() => setFormPhotoData(null)}
+                      className="rounded-lg border border-red-500/30 bg-red-500/10 p-2 text-red-400 hover:bg-red-500/20"
+                      title="Supprimer la photo"
+                    >
+                      <X className="h-3.5 w-3.5" />
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -545,7 +771,7 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-lg border border-[#f6f1e7]/10 bg-[#14110f] p-3 text-xs">
+      <div className="flex flex-col gap-3 rounded-lg border border-[#f6f1e7]/10 bg-[#14110f] p-3 text-xs md:flex-row md:items-center md:justify-between">
         <div className="flex flex-wrap items-center gap-2">
           <Filter className="h-3.5 w-3.5 text-amber-400" />
           <span className="font-mono text-[#a69b8d]">
@@ -566,6 +792,30 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
                 {c === 'all' ? (lang === 'ar' ? 'كل المدن' : 'Toutes') : c}
               </button>
             ))}
+          </div>
+
+          <div className="hidden sm:flex items-center gap-1 border-s border-white/10 ps-2 ms-2">
+            <button
+              type="button"
+              onClick={() => setSelectedChannelFilter('all')}
+              className={`rounded px-2 py-0.5 font-mono text-[10px] ${selectedChannelFilter === 'all' ? 'bg-white/20 text-white font-bold' : 'text-[#a69b8d]'}`}
+            >
+              {lang === 'ar' ? 'الكل' : 'Tous'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedChannelFilter('port')}
+              className={`rounded px-2 py-0.5 font-mono text-[10px] ${selectedChannelFilter === 'port' ? 'bg-cyan-500 text-black font-bold' : 'text-[#a69b8d]'}`}
+            >
+              {lang === 'ar' ? 'الميناء مباشرة' : 'Port Direct'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedChannelFilter('souk')}
+              className={`rounded px-2 py-0.5 font-mono text-[10px] ${selectedChannelFilter === 'souk' ? 'bg-amber-500 text-black font-bold' : 'text-[#a69b8d]'}`}
+            >
+              {lang === 'ar' ? 'الأسواق البلدية' : 'Souks'}
+            </button>
           </div>
         </div>
 
@@ -591,7 +841,7 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
           return (
             <div
               key={report.id}
-              className="rounded-xl border border-[#f6f1e7]/10 bg-[#14110f] p-5 shadow-lg flex flex-col justify-between space-y-4 hover:border-amber-500/30 transition-colors"
+              className="rounded-xl border border-[#f6f1e7]/10 bg-[#14110f] p-5 shadow-lg flex flex-col justify-between space-y-4 hover:border-amber-500/30 transition-all hover:scale-[1.01]"
             >
               {/* Card Top Strip */}
               <div className="flex items-start justify-between gap-3 border-b border-[#f6f1e7]/10 pb-3">
@@ -630,6 +880,29 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
                   </span>
                 </div>
               </div>
+
+              {/* Photo Thumbnail if available */}
+              {report.photoUrl && (
+                <div
+                  onClick={() => setActivePhotoModal(report.photoUrl!)}
+                  className="group relative h-28 w-full overflow-hidden rounded-lg border border-white/10 bg-black cursor-pointer"
+                >
+                  <img
+                    src={report.photoUrl}
+                    alt={report.fishNameFr}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2 justify-between">
+                    <span className="inline-flex items-center gap-1 font-mono text-[10px] text-amber-300">
+                      <ImageIcon className="h-3 w-3" />
+                      {lang === 'ar' ? 'انقر لتكبير صورة الإثبات' : 'Agrandir photo'}
+                    </span>
+                    <span className="rounded bg-black/60 px-1.5 py-0.5 font-mono text-[9px] text-white">
+                      {report.marketType === 'port_direct' ? '⚓ Port' : '🏪 Souk'}
+                    </span>
+                  </div>
+                </div>
+              )}
 
               {/* Markup Barometer Badge & Freshness */}
               <div className="space-y-2 text-xs">
@@ -678,7 +951,7 @@ export const CommunityPriceReporter: React.FC<CommunityPriceReporterProps> = ({
                   type="button"
                   onClick={() => handleConfirmPrice(report.id)}
                   disabled={isConfirmed}
-                  className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1 font-mono text-xs transition ${
+                  className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1 font-mono text-xs transition active:scale-95 ${
                     isConfirmed
                       ? 'border-emerald-500/50 bg-emerald-500/20 text-emerald-300 cursor-default'
                       : 'border-[#f6f1e7]/15 bg-[#0b0908] text-[#f6f1e7] hover:border-amber-400'
