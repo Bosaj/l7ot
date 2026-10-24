@@ -433,6 +433,11 @@ export const App: React.FC = () => {
                   onSelectRegion={(regId) => {
                     userPortLocation.setManualRegion(regId)
                   }}
+                  onFilterSpeciesByPort={(portName) => {
+                    setSearchQuery(portName)
+                    setShowCoastalRadar(false)
+                    window.scrollTo({ top: 350, behavior: 'smooth' })
+                  }}
                 />
               </div>
             )}
@@ -484,6 +489,23 @@ export const App: React.FC = () => {
               />
             </div>
           </section>
+        )}
+
+        {/* Tab 2: Moroccan Coastal GIS Map & Port Species Hotspots */}
+        {activeTab === 'map' && (
+          <div className="space-y-6">
+            <MoroccanCoastalRadar
+              isStandaloneTab={true}
+              lang={lang}
+              selectedRegion={userPortLocation.selectedRegion}
+              onSelectRegion={(regId) => userPortLocation.setManualRegion(regId)}
+              onFilterSpeciesByPort={(portName) => {
+                setSearchQuery(portName)
+                setActiveTab('fish')
+                window.scrollTo({ top: 300, behavior: 'smooth' })
+              }}
+            />
+          </div>
         )}
 
         {/* Tab: Moroccan Seasonal Catch & Biological Rest Calendar */}

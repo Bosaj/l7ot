@@ -12,6 +12,7 @@ import {
   Volume2,
   VolumeX,
   Calendar,
+  Map,
 } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
@@ -19,7 +20,7 @@ import type { MoroccanPortRegion } from '../lib/moroccanRegions'
 import { sounds } from '../lib/soundEffects'
 import { getAssetUrl } from '../lib/assetHelper'
 
-export type NavTab = 'fish' | 'scanner' | 'seasons' | 'recipes' | 'chef' | 'market' | 'agreements' | 'maritime-law' | 'marine-apis'
+export type NavTab = 'fish' | 'map' | 'scanner' | 'seasons' | 'recipes' | 'chef' | 'market' | 'agreements' | 'maritime-law' | 'marine-apis'
 
 interface HeaderProps {
   activeTab: NavTab
@@ -63,8 +64,15 @@ export const Header: React.FC<HeaderProps> = ({
       icon: Fish,
     },
     {
-      id: 'scanner',
+      id: 'map',
       index: '02',
+      label: t.navMap || (lang === 'ar' ? 'خريطة السواحل والموانئ' : 'Carte Côtière GIS'),
+      shortLabel: lang === 'ar' ? 'الخريطة' : lang === 'fr' ? 'Carte GIS' : 'Coast Map',
+      icon: Map,
+    },
+    {
+      id: 'scanner',
+      index: '03',
       label: t.navScanner,
       shortLabel: lang === 'ar' ? 'ماسح الكاميرا' : lang === 'fr' ? 'Vision IA' : 'Scanner',
       icon: Camera,

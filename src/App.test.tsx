@@ -20,6 +20,15 @@ describe('L7OT App', () => {
     expect(screen.queryByRole('heading', { name: 'سردين' })).not.toBeInTheDocument()
   })
 
+  it('switches to Moroccan coastal GIS map tab', () => {
+    render(<App />)
+    const mapTabBtn = screen.getByRole('button', { name: /خريطة السواحل والموانئ \(3,500 كلم\)/i })
+    fireEvent.click(mapTabBtn)
+
+    expect(screen.getByText(/نظام المعلومات الجغرافي البحري المغربي/i)).toBeInTheDocument()
+    expect(screen.getByText(/3,500 km/i)).toBeInTheDocument()
+  })
+
   it('switches to coastal recipes tab', () => {
     render(<App />)
     const recipesTab = screen.getByRole('button', { name: /وصفات بحرية/i })
