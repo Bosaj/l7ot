@@ -4,6 +4,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-10-24
+
+### Added
+- **Moroccan Seasonal Catch & Biological Rest Calendar (`SeasonalCatchCalendar.tsx`):**
+  - Interactive 12-month calendar mapping seafood availability peaks and ministerial biological rest periods (*repos biologique*) to prevent overfishing.
+  - Category filters, real-time spot pricing indicators, and direct modal inspection links.
+- **Interactive Moroccan Coastal Radar (`MoroccanCoastalRadar.tsx`):**
+  - Interactive littoral SVG covering 3,500 km across 13 ports (Saïdia, Nador, Al Hoceima, Tanger Med, Larache, Casablanca, Oualidia, Safi, Essaouira, Agadir, Sidi Ifni, Laâyoune, Dakhla).
+  - Real-time swell height, wind speed, water temperature, and click-to-sync regional dialect and pricing adaptation.
+- **Pure Web Audio API Sound Synthesizer (`soundEffects.ts`):**
+  - Native browser synthesizer implementing `playSonar()`, `playBubble()`, `playScanMatch()`, and `playTabClick()` with persistent local storage mute state.
+- **100% Species Cleaning Videos in 3 Languages (Darija, French, English):**
+  - Injected dedicated `cleaningVideos: { ar, fr, en }` across all 44 marine species with authentic Moroccan fishmonger and culinary YouTube demonstrations.
+- **Multi-Cloud Deployment Suite (Netlify, GitHub Pages, Vercel, Docker):**
+  - Production Netlify Edge CDN deployment with atomic redirects (`netlify.toml`, `public/_redirects`).
+  - Automated GitHub Pages deployment pipeline (`.github/workflows/deploy-pages.yml`).
+  - Multi-stage `Dockerfile` and `docker-compose.yml` with Nginx alpine server.
+  - Vercel configuration (`vercel.json`) for multi-cloud parity.
+
+### Fixed
+- **Subpath Asset Resolution on GitHub Pages:**
+  - Created `assetHelper.ts` with `getAssetUrl()` and converted all absolute `/images/...` and `/favicon.svg` paths to relative paths, fixing broken image icons on `https://bosaj.github.io/l7ot/`.
+- **GitHub Pages Workflow Automation:**
+  - Automated GitHub Pages enablement with `enablement: true` in `actions/configure-pages@v5`.
+- **Cleared Failed Workflow History:**
+  - Deleted all failed workflow runs from the `Bosaj/l7ot` repository history.
+
+---
+
 ## [1.4.0] - 2026-10-18
 
 ### Added

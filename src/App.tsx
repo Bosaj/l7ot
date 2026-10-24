@@ -27,6 +27,7 @@ import { SoukBasketAndComparator } from './components/SoukBasketAndComparator'
 import { MarineWeatherAndApis } from './components/MarineWeatherAndApis'
 import { MaritimeLawGuide } from './components/MaritimeLawGuide'
 import { MoroccanCoastalRadar } from './components/MoroccanCoastalRadar'
+import { SeasonalCatchCalendar } from './components/SeasonalCatchCalendar'
 import type { NavTab } from './components/Header'
 import { sounds } from './lib/soundEffects'
 
@@ -472,6 +473,18 @@ export const App: React.FC = () => {
               />
             </div>
           </section>
+        )}
+
+        {/* Tab: Moroccan Seasonal Catch & Biological Rest Calendar */}
+        {activeTab === 'seasons' && (
+          <SeasonalCatchCalendar
+            fishList={MOROCCAN_FISH}
+            lang={lang}
+            onSelectFish={(f) => {
+              setActiveFish(f)
+              setFishModalTab('overview')
+            }}
+          />
         )}
 
         {/* Tab 2: Coastal Recipes */}

@@ -12,7 +12,7 @@
 
 **The definitive Moroccan seafood encyclopedia, Darija & Oriental dialect taxonomy, port auctions, live marine weather, and coastal culinary heritage.**
 
-[🌐 Explore Live App](https://github.com/Bosaj/l7ot) • [📖 Read the Complete Wiki](https://github.com/Bosaj/l7ot/wiki) • [🐛 Report Issue](https://github.com/Bosaj/l7ot/issues/new/choose)
+[🚀 Live on Netlify](https://l7ot-morocco.netlify.app) • [🐙 GitHub Pages](https://bosaj.github.io/l7ot/) • [📖 Read the Complete Wiki](https://github.com/Bosaj/l7ot/wiki) • [🐛 Report Issue](https://github.com/Bosaj/l7ot/issues/new/choose)
 
 </div>
 
@@ -77,10 +77,23 @@ Live interactive telemetry connected to the world’s leading open marine APIs:
 * **Biological Resting Periods (Repos Biologique):** Scheduled bans for Dusky Grouper (July 1 – August 31) and Common Octopus (bi-annual seasonal recovery).
 * **Apnea Spearfishing (Chasse sous-marine) Code:** 6 golden rules under DPM mandate (apnea-only, daylight-only, mandatory Alpha dive buoy, non-commercial catch limit, and license requirements).
 
-### 10. 🎬 Multi-Language Filleting & Preparation Video Guide
-* **Language Selector:** Seamless switching between **🇲🇦 الدارجة**, **🇫🇷 Français**, and **🇬🇧 English** across species filleting tutorials.
-* **Deep YouTube Search Fallbacks:** Targeted direct queries per species and dialect to prevent hardcoded video repetitions.
+### 10. 🎬 Multi-Language Filleting & Preparation Video Guide (100% Species)
+* **Dedicated Videos for all 44 Species:** Tailored demonstrations in **Moroccan Darija** (local *kessal* techniques), **French** (haute cuisine filleting), and **English** (master fish butcher preparation).
+* **Deep YouTube Search Fallbacks:** Targeted direct queries per species and dialect to prevent generic video repetitions.
 * **Click-to-Play Performance:** Zero external tracking scripts or cookies loaded until user interaction.
+
+### 11. 🧭 Interactive Moroccan Coastal Radar (3,500 km Littoral)
+* Interactive SVG map spanning **13 major Moroccan ports** across the Mediterranean and Atlantic coasts.
+* Real-time oceanographic telemetry (swell height, wind speed, water temp, and top landed species).
+* One-click port selection synchronizing active market region, local dialect names, and port auction prices.
+
+### 12. 📅 Moroccan Seasonal Catch & Biological Rest Calendar
+* 12-month interactive seafood wheel highlighting peak harvest months vs official ministerial biological rest bans (*repos biologique*).
+* Category filters, real-time spot prices, and instant technical card inspection.
+
+### 13. 🐳 Production Containerization & Multi-Cloud Deployment
+* **Docker:** Multi-stage `Dockerfile` (`node:22-alpine` + `nginx:alpine`) with gzip, SPA fallback, security headers, and health checks. Launch with `docker compose up -d`.
+* **Multi-Cloud Parity:** Pre-configured for **Netlify Edge CDN** (`netlify.toml`, `public/_redirects`), **GitHub Pages** (`.github/workflows/deploy-pages.yml`), and **Vercel** (`vercel.json`).
 
 ---
 

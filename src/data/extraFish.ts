@@ -135,7 +135,7 @@ export const EXTRA_MOROCCAN_FISH: Fish[] = [
       fr: "Le seigneur incontesté des fonds rocheux. Sa chair blanche d'une fermeté royale est l'une des plus nobles du Maroc.",
       en: "The undisputed king of Moroccan rocky reefs. Prized for its succulent, firm white meat perfect for imperial tagines.",
     },
-    imageUrl: '/images/fish/merou-brun.jpg',
+    imageUrl: './images/fish/merou-brun.jpg',
     fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Epinephelus_marginatus_1.jpg/800px-Epinephelus_marginatus_1.jpg',
     cleaningVideoId: 'Gyf5tLHERl0',
     cleaningVideos: {
@@ -297,7 +297,7 @@ export const EXTRA_MOROCCAN_FISH: Fish[] = [
       fr: "Prisée pour sa queue sans aucune arête et sa chair ferme comparable à la langouste. Idéale pour les enfants et les tajines mijotés.",
       en: "Celebrated for its 100% bone-free meaty tail and lobster-like firmness. A family favorite across Moroccan households.",
     },
-    imageUrl: '/images/fish/lotte-baudroie.jpg',
+    imageUrl: './images/fish/lotte-baudroie.jpg',
     fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Lophius_piscatorius.jpg/800px-Lophius_piscatorius.jpg',
     cleaningVideoId: '0N7B7l4h4yU',
     cleaningVideos: {
@@ -453,7 +453,7 @@ export const EXTRA_MOROCCAN_FISH: Fish[] = [
       fr: "Le prince des poissons plats. Sa chair dense et d'une blancheur éclatante en fait l'un des mets les plus recherchés des gourmets.",
       en: "The crown jewel of flatfish along the Moroccan coast. Renowned for its firm texture and incomparably refined flavor.",
     },
-    imageUrl: '/images/fish/turbot.jpg',
+    imageUrl: './images/fish/turbot.jpg',
     fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Scophthalmus_maximus_1.jpg/800px-Scophthalmus_maximus_1.jpg',
     cleaningVideoId: '7NtZNm_cFk4',
     cleaningVideos: {
@@ -597,7 +597,7 @@ export const EXTRA_MOROCCAN_FISH: Fish[] = [
       fr: "Le favori des pêcheurs à la ligne sur les plages marocaines. Chair blanche délicate merveilleuse grillée au feu de bois.",
       en: "The cherished prize of Moroccan surfcasters. Delicate, naturally sweet white meat ideal for charcoal grilling with cumin and olive oil.",
     },
-    imageUrl: '/images/fish/marbre.jpg',
+    imageUrl: './images/fish/marbre.jpg',
     fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Herrera_%28Lithognathus_mormyrus%29%2C_Parque_natural_de_la_Arr%C3%A1bida%2C_Portugal%2C_2020-07-21%2C_DD_53.jpg/800px-Herrera_%28Lithognathus_mormyrus%29%2C_Parque_natural_de_la_Arr%C3%A1bida%2C_Portugal%2C_2020-07-21%2C_DD_53.jpg',
     cleaningVideoId: 'Gyf5tLHERl0',
     cleaningVideos: {
@@ -741,7 +741,7 @@ export const EXTRA_MOROCCAN_FISH: Fish[] = [
       fr: "Le colosse de la famille des sars. Chair ferme et musclée, roi incontesté des grands tajines de poisson au four avec olives et citrons confits.",
       en: "The heavyweight champion of the seabream family. Exceptionally firm, savory meat renowned for heritage tagines with mchatat olives.",
     },
-    imageUrl: '/images/fish/sar-tambour.jpg',
+    imageUrl: './images/fish/sar-tambour.jpg',
     fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Diplodus_cervinus_cervinus_2.jpg/800px-Diplodus_cervinus_cervinus_2.jpg',
     cleaningVideoId: 'Gyf5tLHERl0',
     cleaningVideos: {
@@ -885,7 +885,7 @@ export const EXTRA_MOROCCAN_FISH: Fish[] = [
       fr: "La redoutable prédatrice des estuaires marocains. Chair ferme et généreuse se prêtant admirablement aux grillades au feu de bois et marinades.",
       en: "The lightning-fast predator of Moroccan estuaries. Pure meaty loin steaks that excel on charcoal grills and spicy charmoula tagines.",
     },
-    imageUrl: '/images/fish/liche-amie.jpg',
+    imageUrl: './images/fish/liche-amie.jpg',
     fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Lichia_amia_1.jpg/800px-Lichia_amia_1.jpg',
     cleaningVideoId: 'v584mwvgQuk',
     cleaningVideos: {
@@ -1029,7 +1029,7 @@ export const EXTRA_MOROCCAN_FISH: Fish[] = [
       fr: "L'incontournable roi des soupes de poisson et bouillabaisses méditerranéennes. Apporte un fumet d'une intensité inégalée.",
       en: "The unrivaled emperor of fish soups and seafood bisques. Imparts a luxurious natural richness and unforgettable oceanic depth.",
     },
-    imageUrl: '/images/fish/rascasse-rouge.jpg',
+    imageUrl: './images/fish/rascasse-rouge.jpg',
     fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Scorpaena_scrofa_1.jpg/800px-Scorpaena_scrofa_1.jpg',
     cleaningVideoId: '7NtZNm_cFk4',
     cleaningVideos: {
@@ -1173,7 +1173,7 @@ export const EXTRA_MOROCCAN_FISH: Fish[] = [
       fr: "La sœur cadette du maigre, joyau des côtes atlantiques. Chair soyeuse et fondante sublime dans un tajine aux oignons caramélisés et raisins secs.",
       en: "The graceful sister of the croaker and pride of southern Moroccan fishing ports. Silky white meat that melts on the tongue in savory tagines.",
     },
-    imageUrl: '/images/fish/ombrine.jpg',
+    imageUrl: './images/fish/ombrine.jpg',
     fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Umbrina_cirrosa.jpg/800px-Umbrina_cirrosa.jpg',
     cleaningVideoId: 'Gyf5tLHERl0',
     cleaningVideos: {
@@ -1317,7 +1317,7 @@ export const EXTRA_MOROCCAN_FISH: Fish[] = [
       fr: "Le joyau suprême des crustacés marocains. Sa robe bleu nuit abrite une chair d'une fermeté et d'une sucrosité exceptionnelles.",
       en: "The crowning sovereign of Moroccan crustaceans. Midnight-blue Atlantic lobster offering unmatched sweetness and firm, decadent meat.",
     },
-    imageUrl: '/images/fish/homard-europeen.jpg',
+    imageUrl: './images/fish/homard-europeen.jpg',
     fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Homarus_gammarus_01.jpg/800px-Homarus_gammarus_01.jpg',
     cleaningVideoId: 'kG88HXwQlSw',
     cleaningVideos: {
@@ -1467,7 +1467,7 @@ export const EXTRA_MOROCCAN_FISH: Fish[] = [
       fr: "Poisson populaire et savoureux par excellence. Chair blanche tendre à un tarif accessible, délicieuse en friture croustillante ou tajine familial.",
       en: "A democratic coastal favorite across Moroccan souks. Tender white meat at an unbeatable price point, delicious crispy-fried in semolina.",
     },
-    imageUrl: '/images/fish/dorade-grise.jpg',
+    imageUrl: './images/fish/dorade-grise.jpg',
     fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Spondyliosoma_cantharus_1.jpg/800px-Spondyliosoma_cantharus_1.jpg',
     cleaningVideoId: 'Gyf5tLHERl0',
     cleaningVideos: {
@@ -1611,7 +1611,7 @@ export const EXTRA_MOROCCAN_FISH: Fish[] = [
       fr: "Le colosse des grands fonds atlantiques. Qualité royale équivalente au mérou avec une chair d'une tenue exceptionnelle en tagine.",
       en: "The deep-sea giant of Moroccan Atlantic canyons. Reaching majestic sizes, its pristine white meat rivals grouper in luxury and taste.",
     },
-    imageUrl: '/images/fish/cernier.jpg',
+    imageUrl: './images/fish/cernier.jpg',
     fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Polyprion_americanus.jpg/800px-Polyprion_americanus.jpg',
     cleaningVideoId: 'Gyf5tLHERl0',
     cleaningVideos: {
@@ -1755,7 +1755,7 @@ export const EXTRA_MOROCCAN_FISH: Fish[] = [
       fr: "Le secret des connaisseurs des criées marocaines. Malgré ses épines venimeuses à neutraliser, sa chair blanche est un trésor de finesse en friture.",
       en: "The best-kept secret of Moroccan fishmongers. Despite its fearsome stinging spines, safely shearing them reveals astonishingly sweet, delicate meat.",
     },
-    imageUrl: '/images/fish/grande-vive.jpg',
+    imageUrl: './images/fish/grande-vive.jpg',
     fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Trachinus_draco_2.jpg/800px-Trachinus_draco_2.jpg',
     cleaningVideoId: 'tyV2vsrFxQg',
     cleaningVideos: {

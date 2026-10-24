@@ -79,7 +79,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Zaalouk d’aubergines fumées', 'Taktouka de poivrons rôtis', 'Pain marocain maison au sésame', 'Thé à la menthe traditionnel'],
       en: ['Smoked eggplant Zaalouk', 'Charred pepper & tomato Taktouka', 'Crusty Moroccan semolina bread', 'Fresh Moroccan mint tea'],
     },
-    imageUrl: '/images/recipes/sardines-mchermline.jpg',
+    imageUrl: './images/recipes/sardines-mchermline.jpg',
     videoId: 'EQwD8KhlTEo',
   },
   {
@@ -161,7 +161,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Pain batbout marocain à la poêle', 'Salade marocaine tomate-oignon', 'Piments marinés'],
       en: ['Skillet Batbout bread', 'Fresh diced tomato and onion salad', 'Pickled wild chilies'],
     },
-    imageUrl: '/images/recipes/tagine-kouari-sardine.jpg',
+    imageUrl: './images/recipes/tagine-kouari-sardine.jpg',
     videoId: 'S0K7PQ_f2x8',
   },
   {
@@ -243,7 +243,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Pain de campagne aux graines de nigelle', 'Bakoula (salade d’épinards/mauve sauvage)', 'Salade rafraîchissante de concombre à l’origan'],
       en: ['Nigella & sesame seeded country bread', 'Warm wild mallow / spinach Bakoula salad', 'Chilled cucumber and wild oregano salad'],
     },
-    imageUrl: '/images/recipes/tagine-l7ot-khodra.jpg',
+    imageUrl: './images/recipes/tagine-l7ot-khodra.jpg',
     videoId: 'PXw1uI635sc',
   },
   {
@@ -323,7 +323,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Baguette croustillante bien chaude', 'Salade fraîche marocaine', 'Jus de citron pressé'],
       en: ['Crispy warm baguette or Batbout', 'Chilled Moroccan salad', 'Freshly pressed lime juice'],
     },
-    imageUrl: '/images/recipes/crevettes-pil-pil.jpg',
+    imageUrl: './images/recipes/crevettes-pil-pil.jpg',
     videoId: 'YuyDDh9XVcI',
   },
   {
@@ -406,7 +406,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Crevettes géantes rôties pour décor', 'Rondelles de citron ciselées', 'Salade fraîche de crudités'],
       en: ['Giant pan-seared royal prawns', 'Sculpted lemon wheels', 'Festive Moroccan salads'],
     },
-    imageUrl: '/images/recipes/pastilla-l7ot-royale.jpg',
+    imageUrl: './images/recipes/pastilla-l7ot-royale.jpg',
     videoId: 'ZbOlYaMlp9U',
   },
   {
@@ -486,7 +486,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Riz jaune au safran', 'Salade de betteraves au cumin et citron', 'Pain de semoule au levain naturel'],
       en: ['Saffron yellow rice pilaf', 'Moroccan beetroot & cumin salad', 'Traditional sourdough semolina bread'],
     },
-    imageUrl: '/images/recipes/pageot-royal-au-four.jpg',
+    imageUrl: './images/recipes/pageot-royal-au-four.jpg',
     videoId: 'JZ5_mEJrl2Q',
   },
   {
@@ -563,7 +563,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Zaalouk d’aubergines', 'Taktouka de tomates et poivrons', 'Frites croustillantes', 'Mayonnaise à la harissa'],
       en: ['Smoky Zaalouk dip', 'Sweet pepper Taktouka', 'Crisp homemade fries', 'Spicy harissa emulsion'],
     },
-    imageUrl: '/images/recipes/friture-mixte-marocaine.jpg',
+    imageUrl: './images/recipes/friture-mixte-marocaine.jpg',
     videoId: 'kG88HXwQlSw',
   },
   {
@@ -641,7 +641,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Pain croustillant', 'Salade de poivrons grillés', 'Olives pimentées'],
       en: ['Fresh hearth bread', 'Roasted sweet pepper salad', 'Spiced olives'],
     },
-    imageUrl: '/images/recipes/calamar-farci-marocain.jpg',
+    imageUrl: './images/recipes/calamar-farci-marocain.jpg',
     videoId: 'pl8cgecVicQ',
   },
   {
@@ -720,7 +720,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Dattes Majhoul et harcha', 'Quartiers de citron vert', 'Croûtons aillés'],
       en: ['Medjool dates and semolina Harcha', 'Fresh lemon quarters', 'Garlic toasted croutons'],
     },
-    imageUrl: '/images/recipes/chorba-l7ot-marocaine.jpg',
+    imageUrl: './images/recipes/chorba-l7ot-marocaine.jpg',
     videoId: 'nO_YLMzS5Pw',
   },
   {
@@ -800,7 +800,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Pain complet à l’orge', 'Piments grillés', 'Salade de concombre à la menthe'],
       en: ['Whole wheat & barley bread', 'Charred hot peppers', 'Crisp mint-cucumber salad'],
     },
-    imageUrl: '/images/recipes/tagine-bouzroug-essaouira.jpg',
+    imageUrl: './images/recipes/tagine-bouzroug-essaouira.jpg',
     videoId: 'zP1cW3CzAKM',
   },
   {
@@ -878,7 +878,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Pain marocain traditionnel', 'Salade méchouia tuniso-marocaine', 'Oignons émincés au persil et cumin'],
       en: ['Traditional aniseed wheat bread', 'Charred Mechouia pepper salad', 'Sliced onion and parsley salad with cumin'],
     },
-    imageUrl: '/images/recipes/brochettes-espadon-grille.jpg',
+    imageUrl: './images/recipes/brochettes-espadon-grille.jpg',
     videoId: 'PXw1uI635sc',
   },
   {
@@ -956,7 +956,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Pain maison à la semoule', 'Amandes dorées (en version fête)', 'Thé vert à la menthe'],
       en: ['Warm semolina hearth bread', 'Toasted blanched almonds', 'Moroccan mint tea'],
     },
-    imageUrl: '/images/recipes/tagine-farkh-zbib.jpg',
+    imageUrl: './images/recipes/tagine-farkh-zbib.jpg',
     videoId: 'p-M6S9C-CAQ',
   },
   {
@@ -1034,7 +1034,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Pain maison croustillant', 'Salade de bakoula au citron', 'Pommes de terre vapeur à la chermoula'],
       en: ['Warm crusty flatbread', 'Lemon-dressed Bakoula greens', 'Charmoula-tossed steamed potatoes'],
     },
-    imageUrl: '/images/recipes/raie-mchermla-citron.jpg',
+    imageUrl: './images/recipes/raie-mchermla-citron.jpg',
     videoId: 'p-M6S9C-CAQ',
   },
   {
@@ -1113,7 +1113,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Salade marocaine jardinière au riz', 'Batbouts garnis à la harissa et olives', 'Salade de pommes de terre au cumin'],
       en: ['Moroccan "Jarda" rice and vegetable salad', 'Stuffed Batbout pockets with harissa and olives', 'Cumin potato salad'],
     },
-    imageUrl: '/images/recipes/thon-confit-maison.jpg',
+    imageUrl: './images/recipes/thon-confit-maison.jpg',
     videoId: 'PXw1uI635sc',
   },
   {
@@ -1191,7 +1191,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Légumes glacés au beurre persillé', 'Assortiment de salades marocaines', 'Pain maison'],
       en: ['Parsley-butter glazed vegetables', 'Assorted Moroccan cooked salads', 'Artisanal flatbread'],
     },
-    imageUrl: '/images/recipes/chergou-farci-vermicelle.jpg',
+    imageUrl: './images/recipes/chergou-farci-vermicelle.jpg',
     videoId: 'JZ5_mEJrl2Q',
   },
   {
@@ -1267,7 +1267,7 @@ export const MOROCCAN_RECIPES: Recipe[] = [
       fr: ['Sauce aïoli au citron confit', 'Pain croustillant du Nord', 'Salade de poivrons grillés'],
       en: ['Preserved-lemon garlic aioli', 'Crusty Tangier bread', 'Roasted bell pepper salad'],
     },
-    imageUrl: '/images/recipes/choco-seiche-tangeroise.jpg',
+    imageUrl: './images/recipes/choco-seiche-tangeroise.jpg',
     videoId: 'kG88HXwQlSw',
   },
 ]

@@ -11,13 +11,15 @@ import {
   Scale,
   Volume2,
   VolumeX,
+  Calendar,
 } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
 import type { MoroccanPortRegion } from '../lib/moroccanRegions'
 import { sounds } from '../lib/soundEffects'
+import { getAssetUrl } from '../lib/assetHelper'
 
-export type NavTab = 'fish' | 'scanner' | 'recipes' | 'chef' | 'market' | 'agreements' | 'maritime-law' | 'marine-apis'
+export type NavTab = 'fish' | 'scanner' | 'seasons' | 'recipes' | 'chef' | 'market' | 'agreements' | 'maritime-law' | 'marine-apis'
 
 interface HeaderProps {
   activeTab: NavTab
@@ -68,44 +70,51 @@ export const Header: React.FC<HeaderProps> = ({
       icon: Camera,
       highlight: true,
     },
+        {
+      id: 'seasons',
+      index: '03',
+      label: lang === 'ar' ? 'المواسم والراحة البيولوجية' : lang === 'fr' ? 'Saisons & Repos Bio' : 'Seasons & Bio-Rest',
+      shortLabel: lang === 'ar' ? 'المواسم' : lang === 'fr' ? 'Saisons' : 'Seasons',
+      icon: Calendar,
+    },
     {
       id: 'recipes',
-      index: '03',
+      index: '04',
       label: t.navRecipes,
       shortLabel: lang === 'ar' ? 'الوصفات' : lang === 'fr' ? 'Recettes' : 'Recipes',
       icon: UtensilsCrossed,
     },
     {
       id: 'chef',
-      index: '04',
+      index: '05',
       label: t.navChef,
       shortLabel: lang === 'ar' ? 'شيف التوابل' : lang === 'fr' ? 'Chef Épices' : 'Spice Lab',
       icon: ChefHat,
     },
     {
       id: 'market',
-      index: '05',
+      index: '06',
       label: t.navMarket,
       shortLabel: lang === 'ar' ? 'دليل المارشي' : lang === 'fr' ? 'Guide Criée' : 'Market',
       icon: ShoppingBag,
     },
     {
       id: 'agreements',
-      index: '06',
+      index: '07',
       label: t.navAgreements,
       shortLabel: lang === 'ar' ? 'المعاهدات' : lang === 'fr' ? 'Traités' : 'Treaties',
       icon: Globe2,
     },
     {
       id: 'maritime-law',
-      index: '07',
+      index: '08',
       label: t.navMaritimeLaw,
       shortLabel: lang === 'ar' ? 'قانون الصيد' : lang === 'fr' ? 'Lois & Tailles' : 'Fishing Law',
       icon: Scale,
     },
     {
       id: 'marine-apis',
-      index: '08',
+      index: '09',
       label: t.navMarineApis,
       shortLabel: lang === 'ar' ? 'طقس الموانئ' : lang === 'fr' ? 'Météo Mer' : 'Port Radar',
       icon: Waves,
@@ -321,7 +330,7 @@ export const Header: React.FC<HeaderProps> = ({
             className="flex cursor-pointer items-center gap-3.5 group"
           >
             <img
-              src="/favicon.svg"
+              src={getAssetUrl("favicon.svg")}
               alt="L7OT Moroccan Maritime Crest"
               className="h-12 w-12 shrink-0 rounded-lg border border-[#d96b27]/40 bg-[#14100d] p-0.5 shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:border-[#e68a45]"
             />
