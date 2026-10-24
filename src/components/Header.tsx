@@ -13,6 +13,8 @@ import {
   VolumeX,
   Calendar,
   Map,
+  Compass,
+  Anchor,
 } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
@@ -20,13 +22,15 @@ import type { MoroccanPortRegion } from '../lib/moroccanRegions'
 import { sounds } from '../lib/soundEffects'
 import { getAssetUrl } from '../lib/assetHelper'
 
-export type NavTab = 'fish' | 'map' | 'scanner' | 'seasons' | 'recipes' | 'chef' | 'market' | 'agreements' | 'maritime-law' | 'marine-apis'
+export type NavTab = 'fish' | 'map' | 'gps' | 'scanner' | 'seasons' | 'recipes' | 'chef' | 'market' | 'agreements' | 'maritime-law' | 'marine-apis'
 
 interface HeaderProps {
   activeTab: NavTab
   setActiveTab: (tab: NavTab) => void
   lang: SupportedLanguage
   setLang: (lang: SupportedLanguage) => void
+  isHighSeasActive?: boolean
+  onToggleSimulatedOffline?: () => void
   userPortLocation?: {
     selectedRegion: MoroccanPortRegion
     isLocating: boolean
@@ -43,6 +47,8 @@ export const Header: React.FC<HeaderProps> = ({
   setActiveTab,
   lang,
   setLang,
+  isHighSeasActive,
+  onToggleSimulatedOffline,
   userPortLocation,
 }) => {
   const t = STRINGS[lang]
@@ -71,58 +77,65 @@ export const Header: React.FC<HeaderProps> = ({
       icon: Map,
     },
     {
-      id: 'scanner',
+      id: 'gps',
       index: '03',
+      label: t.navGps || (lang === 'ar' ? 'الملاحة في عرض البحر (GPS)' : 'Navigateur Haute Mer (GPS)'),
+      shortLabel: lang === 'ar' ? 'الملاحة (GPS)' : lang === 'fr' ? 'Compas GPS' : 'Marine GPS',
+      icon: Compass,
+      highlight: true,
+    },
+    {
+      id: 'scanner',
+      index: '04',
       label: t.navScanner,
       shortLabel: lang === 'ar' ? 'ماسح الكاميرا' : lang === 'fr' ? 'Vision IA' : 'Scanner',
       icon: Camera,
-      highlight: true,
     },
-        {
+    {
       id: 'seasons',
-      index: '03',
+      index: '05',
       label: lang === 'ar' ? 'المواسم والراحة البيولوجية' : lang === 'fr' ? 'Saisons & Repos Bio' : 'Seasons & Bio-Rest',
       shortLabel: lang === 'ar' ? 'المواسم' : lang === 'fr' ? 'Saisons' : 'Seasons',
       icon: Calendar,
     },
     {
       id: 'recipes',
-      index: '04',
+      index: '06',
       label: t.navRecipes,
       shortLabel: lang === 'ar' ? 'الوصفات' : lang === 'fr' ? 'Recettes' : 'Recipes',
       icon: UtensilsCrossed,
     },
     {
       id: 'chef',
-      index: '05',
+      index: '07',
       label: t.navChef,
       shortLabel: lang === 'ar' ? 'شيف التوابل' : lang === 'fr' ? 'Chef Épices' : 'Spice Lab',
       icon: ChefHat,
     },
     {
       id: 'market',
-      index: '06',
+      index: '08',
       label: t.navMarket,
       shortLabel: lang === 'ar' ? 'دليل المارشي' : lang === 'fr' ? 'Guide Criée' : 'Market',
       icon: ShoppingBag,
     },
     {
       id: 'agreements',
-      index: '07',
+      index: '09',
       label: t.navAgreements,
       shortLabel: lang === 'ar' ? 'المعاهدات' : lang === 'fr' ? 'Traités' : 'Treaties',
       icon: Globe2,
     },
     {
       id: 'maritime-law',
-      index: '08',
+      index: '10',
       label: t.navMaritimeLaw,
       shortLabel: lang === 'ar' ? 'قانون الصيد' : lang === 'fr' ? 'Lois & Tailles' : 'Fishing Law',
       icon: Scale,
     },
     {
       id: 'marine-apis',
-      index: '09',
+      index: '11',
       label: t.navMarineApis,
       shortLabel: lang === 'ar' ? 'طقس الموانئ' : lang === 'fr' ? 'Météo Mer' : 'Port Radar',
       icon: Waves,
@@ -272,6 +285,30 @@ export const Header: React.FC<HeaderProps> = ({
                   </span>
                 </button>
               </div>
+            )}
+
+            {onToggleSimulatedOffline && (
+              <button
+                type="button"
+                onClick={onToggleSimulatedOffline}
+                title={
+                  isHighSeasActive
+                    ? (lang === 'ar' ? 'وضع الصيد في عرض البحر نشط (100% دون إنترنت)' : 'Mode Haute Mer Actif (100% Hors-ligne)')
+                    : (lang === 'ar' ? 'محاكاة وضع الصيد في عرض البحر بدون إنترنت' : 'Simuler Mode Mer Hors-Ligne')
+                }
+                className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] font-mono transition shrink-0 ${
+                  isHighSeasActive
+                    ? 'border-emerald-500/50 bg-emerald-500/15 text-emerald-300 font-bold'
+                    : 'border-white/10 text-[#a69b8d] hover:text-[#f6f1e7] hover:border-white/20'
+                }`}
+              >
+                <Anchor className={`h-2.5 w-2.5 ${isHighSeasActive ? 'text-emerald-400' : 'text-[#a69b8d]'}`} />
+                <span className="hidden sm:inline">
+                  {isHighSeasActive
+                    ? (lang === 'ar' ? 'عرض البحر' : 'Haute Mer')
+                    : (lang === 'ar' ? 'وضع البحر' : 'Mode Mer')}
+                </span>
+              </button>
             )}
 
             {/* Language Selector */}

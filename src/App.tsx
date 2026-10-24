@@ -28,6 +28,8 @@ import { MarineWeatherAndApis } from './components/MarineWeatherAndApis'
 import { MaritimeLawGuide } from './components/MaritimeLawGuide'
 import { MoroccanCoastalRadar } from './components/MoroccanCoastalRadar'
 import { SeasonalCatchCalendar } from './components/SeasonalCatchCalendar'
+import { MarineGpsNavigator } from './components/MarineGpsNavigator'
+import { OffshoreFishermanBanner } from './components/OffshoreFishermanBanner'
 import type { NavTab } from './components/Header'
 import { sounds } from './lib/soundEffects'
 
@@ -38,10 +40,12 @@ import type { Fish, Recipe } from './data/types'
 import type { SupportedLanguage } from './i18n/strings'
 import { STRINGS } from './i18n/strings'
 import { useUserPortLocation } from './hooks/useUserPortLocation'
+import { useOfflineStatus } from './hooks/useOfflineStatus'
 
 export const App: React.FC = () => {
   const [lang, setLang] = useState<SupportedLanguage>('ar')
   const userPortLocation = useUserPortLocation()
+  const offlineStatus = useOfflineStatus()
   const [activeTab, setActiveTab] = useState<NavTab>('fish')
   const [showCoastalRadar, setShowCoastalRadar] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -135,7 +139,21 @@ export const App: React.FC = () => {
         setActiveTab={setActiveTab}
         lang={lang}
         setLang={setLang}
+        isHighSeasActive={offlineStatus.isHighSeasActive}
+        onToggleSimulatedOffline={offlineStatus.toggleSimulatedOffline}
         userPortLocation={userPortLocation}
+      />
+
+      <OffshoreFishermanBanner
+        isHighSeasActive={offlineStatus.isHighSeasActive}
+        isSimulatedOffline={offlineStatus.isSimulatedOffline}
+        isOnline={offlineStatus.isOnline}
+        lang={lang}
+        onOpenGpsNavigator={() => {
+          setActiveTab('gps')
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }}
+        onToggleSimulatedOffline={offlineStatus.toggleSimulatedOffline}
       />
 
       <main className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 space-y-10">
@@ -500,6 +518,20 @@ export const App: React.FC = () => {
               selectedRegion={userPortLocation.selectedRegion}
               onSelectRegion={(regId) => userPortLocation.setManualRegion(regId)}
               onFilterSpeciesByPort={(portName) => {
+                setSearchQuery(portName)
+                setActiveTab('fish')
+                window.scrollTo({ top: 300, behavior: 'smooth' })
+              }}
+            />
+          </div>
+        )}
+
+        {/* Tab 3: High-Seas Marine Navigator & Port Shelter Compass (GPS) */}
+        {activeTab === 'gps' && (
+          <div className="space-y-6">
+            <MarineGpsNavigator
+              lang={lang}
+              onSelectPortFilter={(portName) => {
                 setSearchQuery(portName)
                 setActiveTab('fish')
                 window.scrollTo({ top: 300, behavior: 'smooth' })

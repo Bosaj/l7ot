@@ -64,5 +64,14 @@ describe('L7OT App', () => {
     fireEvent.change(searchInput, { target: { value: 'بوجوخ' } })
     expect(screen.getByText('بوجوخ')).toBeInTheDocument()
   })
+
+  it('switches to High-Seas Marine Navigator (GPS) tab and renders port compass', () => {
+    render(<App />)
+    const gpsNavBtn = screen.getByRole('button', { name: /الملاحة في عرض البحر \(GPS\)/i })
+    fireEvent.click(gpsNavBtn)
+
+    expect(screen.getByText(/نظام الملاحة في عرض البحر · بوصلة الموانئ المغربية/i)).toBeInTheDocument()
+    expect(screen.getByText(/قناة النجدة الدولية VHF Canal 16/i)).toBeInTheDocument()
+  })
 })
 

@@ -4,6 +4,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] - 2026-10-24
+
+### Added
+- **Full Offline PWA Service Worker Caching ("Mode Pêcheur en Mer"):**
+  - Enhanced `vite-plugin-pwa` Workbox engine to precache 112 assets totaling 18.09 MB (`maximumFileSizeToCacheInBytes: 15MB`), including all 44 high-res Moroccan fish specimens in `public/images/fish/`, webfonts, and biological regulatory tables.
+  - Guarantees 100% offline functionality when sailing offshore with zero cellular signal (0G / No 4G/5G).
+- **High-Seas Marine Navigator & Gyro Compass (`MarineGpsNavigator.tsx`):**
+  - Built an offshore nautical bridge dashboard featuring a rotating SVG gyro compass dial with magnetic needle pointing toward refuge ports.
+  - Real-time GPS telemetry: Latitude / Longitude in Nautical DMS (`DD°MM'SS" N/W`) and Decimal Degrees, Speed Over Ground (SOG) in Knots, and GPS precision accuracy ($\pm x$ meters).
+  - Haversine Proximity Engine computing nautical distance (`NM`), azimuth bearing ($0-359^\circ$), and sailing travel duration at 8 knots across all 17 Moroccan ONP ports.
+- **Moroccan Sovereign Maritime Zone Classifier:**
+  - Categorizes vessel distance according to Dahir 1-73-211 and UNCLOS: Territorial Waters (0–12 NM), Contiguous Zone (12–24 NM), Moroccan Exclusive Economic Zone (ZEE 200 NM), and International High Seas (> 200 NM).
+- **Marine Protected Areas (AMPs) Sanctuary Proximity Alarm:**
+  - Real-time safety status monitoring near 5 marine sanctuaries (Al Hoceima National Park, Marchica Lagoon, Sidi Boughaba, Souss-Massa, and Dakhla Bay) with cautionary biological rest warnings per Dahir 1973.
+- **VHF Channel 16 & MRCC Emergency Mayday Generator:**
+  - Pre-formatted international distress broadcast message (Canal 16 VHF - 156.800 MHz) with 1-click clipboard copy and direct contact numbers for MRCC Rabat (+212 537 62 58 77), Gendarmerie Maritime (177), and Protection Civile (150).
+- **Persistent Offshore Status Banner (`OffshoreFishermanBanner.tsx`):**
+  - Live online/offline listener with manual high-seas simulation toggle, sonar ping animation, and quick launcher button.
+
+---
+
+## [1.8.0] - 2026-10-24
+
+### Added
+- **Interactive 3,500 km Moroccan Coastal GIS Map & Port Species Hotspots (`MoroccanCoastalRadar.tsx`):**
+  - Full-scale cartography covering 17 Moroccan ports (Saïdia to Lagouira), 5 Marine Protected Areas, and 3 Pelagic Corridors.
+  - Dedicated navigation tab with filter species action.
+
+---
+
+## [1.7.0] - 2026-10-24
+
+### Added
+- **Dynamic Language Typography Font Switching (Arabic, French, English):**
+  - Classical `Amiri` serif for Arabic headings, `Playfair Display` for French Riviera luxury, and `Cinzel` for Roman imperial English headings.
+- **Moroccan Coastal Tide & Lunar Clock Widget:**
+  - Astronomical lunar phase calculation (illumination %, synodic day, spring/neap coefficient index 20–120) and semi-diurnal tides for 6 ports.
+- **Printable Specimen Passport (Fiche Technique) Export:**
+  - Moroccan commercial passport conforming to Dahir 1973 minimum catch sizes, nutrition, and 1-click Markdown copy.
+
+---
+
 ## [1.6.0] - 2026-10-24
 
 ### Added
