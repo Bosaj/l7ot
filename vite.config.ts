@@ -16,6 +16,9 @@ export default defineConfig({
         'images/fish/*.png',
       ],
       workbox: {
+        skipWaiting: true,
+        clientsClaim: true,
+        cleanupOutdatedCaches: true,
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,jpg,jpeg,json}'],
         maximumFileSizeToCacheInBytes: 15 * 1024 * 1024, // 15 MB to precache all 44 high-res Moroccan fish specimens
         runtimeCaching: [

@@ -229,6 +229,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Continuous Auto-Scrolling Ticker (Dual-track seamless loop, pauses immediately on hover, zero emptiness) */}
           <div
             dir="ltr"
+            style={{ contain: 'paint', overflow: 'hidden' }}
             className="relative flex-1 overflow-hidden min-w-0 mx-2 group select-none"
             title={lang === 'ar' ? 'مرر المؤشر لإيقاف الشريط وقراءة الأسعار' : 'Hover to pause prices'}
           >

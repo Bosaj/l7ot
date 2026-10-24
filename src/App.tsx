@@ -129,11 +129,11 @@ export const App: React.FC = () => {
         lang === 'ar' ? 'font-arabic' : lang === 'fr' ? 'font-french' : 'font-english'
       }`}
     >
-      {/* Subtle Warm Terracotta & Brass Ambient Illumination */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute -top-48 left-1/4 h-[28rem] w-[28rem] rounded-full bg-[#d96b27]/[0.05] blur-[140px]" />
-        <div className="absolute bottom-0 right-1/4 h-[26rem] w-[26rem] rounded-full bg-[#b85318]/[0.04] blur-[140px]" />
-      </div>
+      {/* Subtle Warm Terracotta & Brass Ambient Illumination (Hardware-Accelerated CSS Radial Gradient, Zero Layout Overflow) */}
+      <div
+        aria-hidden="true"
+        className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(217,107,39,0.06),transparent_60%),radial-gradient(circle_at_50%_110%,rgba(184,83,24,0.04),transparent_60%)]"
+      />
 
       <Header
         activeTab={activeTab}
