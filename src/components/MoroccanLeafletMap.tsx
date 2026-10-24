@@ -483,12 +483,12 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
   }
 
   return (
-    <div className="relative w-full h-[560px] rounded-xl overflow-hidden border border-white/10 bg-[#06101e] shadow-2xl">
+    <div className="relative w-full h-[400px] sm:h-[520px] md:h-[560px] rounded-xl overflow-hidden border border-white/10 bg-[#06101e] shadow-2xl">
       {/* Map DOM Element */}
       <div ref={mapContainerRef} className="w-full h-full z-10" />
 
       {/* Floating Tactical Layer Switcher Controls (Top-Left) */}
-      <div className="absolute top-3 start-3 z-20 flex flex-wrap items-center gap-1.5 bg-[#090d16]/95 backdrop-blur-md p-1.5 rounded-lg border border-cyan-500/20 shadow-xl max-w-[95%]">
+      <div className="absolute top-2 sm:top-3 start-2 sm:start-3 z-20 flex flex-wrap items-center gap-1 bg-[#090d16]/95 backdrop-blur-md p-1 rounded-lg border border-cyan-500/20 shadow-xl max-w-[96%]">
         {/* 1. Marine Oceans & Bathymetry */}
         <button
           type="button"
@@ -496,7 +496,7 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
             sounds.playBubble()
             setTileMode('marine')
           }}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-bold transition ${
+          className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-mono font-bold transition ${
             tileMode === 'marine'
               ? 'bg-cyan-500 text-black shadow-lg shadow-cyan-500/30'
               : 'text-[#a69b8d] hover:text-white hover:bg-white/5'
@@ -504,7 +504,8 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
           title="Esri World Ocean Base & Bathymetric Depths"
         >
           <span>🌊</span>
-          <span>{lang === 'ar' ? 'المحيطات والأعماق' : lang === 'en' ? 'Oceans & Depths' : 'Océans & Fonds'}</span>
+          <span>{lang === 'ar' ? 'المحيطات' : lang === 'en' ? 'Oceans' : 'Océans'}</span>
+          <span className="hidden sm:inline">{lang === 'ar' ? ' والأعماق' : lang === 'en' ? ' & Depths' : ' & Fonds'}</span>
         </button>
 
         {/* 2. High-Res Satellite Photography */}
@@ -514,7 +515,7 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
             sounds.playBubble()
             setTileMode('satellite')
           }}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-bold transition ${
+          className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-mono font-bold transition ${
             tileMode === 'satellite'
               ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/30'
               : 'text-[#a69b8d] hover:text-white hover:bg-white/5'
@@ -522,7 +523,7 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
           title="Esri World High-Resolution Satellite Imagery"
         >
           <span>🛰️</span>
-          <span>{lang === 'ar' ? 'قمر صناعي حقيقي' : lang === 'en' ? 'Real Satellite' : 'Satellite Réel'}</span>
+          <span>{lang === 'ar' ? 'قمر صناعي' : lang === 'en' ? 'Satellite' : 'Satellite'}</span>
         </button>
 
         {/* 3. Physical Topography */}
@@ -532,7 +533,7 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
             sounds.playBubble()
             setTileMode('natgeo')
           }}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-bold transition ${
+          className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-mono font-bold transition ${
             tileMode === 'natgeo'
               ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/30'
               : 'text-[#a69b8d] hover:text-white hover:bg-white/5'

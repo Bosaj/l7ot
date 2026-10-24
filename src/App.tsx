@@ -381,46 +381,50 @@ export const App: React.FC = () => {
               </span>
             </div>
 
-            {/* Moroccan Port Geolocation & Dialect Selector Bar */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-lg border border-[#f6f1e7]/10 bg-[#14110f] p-3 text-xs">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="font-mono text-[#a69b8d]">
-                  {lang === 'ar' ? 'الميناء المعتمد للأسعار واللهجة:' : 'Port Référent & Dialecte :'}
-                </span>
-                <select
-                  value={userPortLocation.selectedRegion.id}
-                  onChange={(e) => userPortLocation.setManualRegion(e.target.value)}
-                  className="rounded border border-[#f6f1e7]/15 bg-[#0b0908] px-2.5 py-1 font-semibold text-[#f2b47e] focus:border-[#d96b27] focus:outline-none"
-                >
-                  {userPortLocation.regions.map((reg) => (
-                    <option key={reg.id} value={reg.id}>
-                      {lang === 'ar' ? reg.nameAr : reg.nameFr}
-                    </option>
-                  ))}
-                </select>
-                {userPortLocation.isAutoDetected && userPortLocation.detectedDistanceKm !== null && (
-                  <span className="rounded bg-emerald-500/15 px-2 py-0.5 font-mono text-[10px] text-emerald-300 border border-emerald-500/20">
-                    {lang === 'ar' ? `✓ تم الرصد عبر GPS (${userPortLocation.detectedDistanceKm} كلم)` : `✓ Détecté GPS (${userPortLocation.detectedDistanceKm} km)`}
+            {/* Moroccan Port Geolocation & Dialect Selector Bar (Fully Responsive on All Phones & Tablets) */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 rounded-xl border border-[#f6f1e7]/10 bg-[#14110f] p-3 text-xs w-full max-w-full overflow-hidden">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 min-w-0 w-full md:w-auto">
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="font-mono text-[#a69b8d] shrink-0">
+                    {lang === 'ar' ? 'الميناء المعتمد للأسعار واللهجة:' : 'Port Référent & Dialecte :'}
                   </span>
-                )}
+                </div>
+                <div className="flex items-center gap-2 min-w-0 flex-1">
+                  <select
+                    value={userPortLocation.selectedRegion.id}
+                    onChange={(e) => userPortLocation.setManualRegion(e.target.value)}
+                    className="w-full sm:w-auto max-w-full rounded border border-[#f6f1e7]/15 bg-[#0b0908] px-2.5 py-1.5 font-semibold text-[#f2b47e] focus:border-[#d96b27] focus:outline-none truncate text-ellipsis min-w-0"
+                  >
+                    {userPortLocation.regions.map((reg) => (
+                      <option key={reg.id} value={reg.id} className="bg-[#0b0908] text-[#f2b47e]">
+                        {lang === 'ar' ? reg.nameAr : reg.nameFr}
+                      </option>
+                    ))}
+                  </select>
+                  {userPortLocation.isAutoDetected && userPortLocation.detectedDistanceKm !== null && (
+                    <span className="shrink-0 rounded bg-emerald-500/15 px-2 py-0.5 font-mono text-[10px] text-emerald-300 border border-emerald-500/20">
+                      {lang === 'ar' ? `✓ (${userPortLocation.detectedDistanceKm} كلم)` : `✓ (${userPortLocation.detectedDistanceKm} km)`}
+                    </span>
+                  )}
+                </div>
               </div>
 
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="grid grid-cols-2 gap-2 w-full sm:flex sm:w-auto sm:items-center shrink-0">
                 <button
                   type="button"
                   onClick={() => {
                     sounds.playBubble()
                     setShowCoastalRadar(!showCoastalRadar)
                   }}
-                  className={`inline-flex items-center gap-1.5 rounded border px-3 py-1 font-mono text-xs font-bold transition shrink-0 ${
+                  className={`inline-flex items-center justify-center gap-1.5 rounded-lg border px-3 py-1.5 font-mono text-xs font-bold transition w-full sm:w-auto ${
                     showCoastalRadar
                       ? 'border-[#d96b27] bg-[#d96b27] text-[#0b0908]'
                       : 'border-cyan-500/30 bg-cyan-500/10 text-cyan-300 hover:border-cyan-400'
                   }`}
                 >
-                  <Map className="h-3.5 w-3.5 text-current" />
-                  <span>
+                  <Map className="h-3.5 w-3.5 text-current shrink-0" />
+                  <span className="truncate">
                     {showCoastalRadar
                       ? (lang === 'ar' ? 'إخفاء الخريطة' : 'Masquer Radar')
                       : (lang === 'ar' ? 'خريطة السواحل والموانئ' : 'Radar & Carte')}
@@ -431,10 +435,10 @@ export const App: React.FC = () => {
                   type="button"
                   onClick={userPortLocation.detectLocation}
                   disabled={userPortLocation.isLocating}
-                  className="inline-flex items-center gap-1.5 rounded bg-[#d96b27] px-3 py-1 font-mono text-xs font-bold text-[#0b0908] transition hover:bg-[#b85318] shrink-0"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#d96b27] px-3 py-1.5 font-mono text-xs font-bold text-[#0b0908] transition hover:bg-[#b85318] w-full sm:w-auto"
                 >
-                  <Compass className={`h-3.5 w-3.5 ${userPortLocation.isLocating ? 'animate-spin' : ''}`} />
-                  <span>
+                  <Compass className={`h-3.5 w-3.5 shrink-0 ${userPortLocation.isLocating ? 'animate-spin' : ''}`} />
+                  <span className="truncate">
                     {userPortLocation.isLocating
                       ? (lang === 'ar' ? 'جاري الرصد...' : 'Localisation...')
                       : (lang === 'ar' ? 'موقعي (GPS)' : 'Ma position (GPS)')}
@@ -754,16 +758,16 @@ export const App: React.FC = () => {
                 </p>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+              {/* Action Buttons (Responsive Symmetrical Grid on Mobile, Flex on Desktop) */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:flex lg:flex-wrap items-center gap-2 w-full lg:w-auto shrink-0">
                 <a
                   href="https://github.com/Bosaj/l7ot/issues/new/choose"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-[#e68a45]/40 bg-[#d96b27] px-3.5 py-2 font-mono text-xs font-bold text-[#0b0908] transition hover:bg-[#e68a45] shadow-md shadow-[#d96b27]/20"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#e68a45]/40 bg-[#d96b27] px-3 py-2 font-mono text-xs font-bold text-[#0b0908] transition hover:bg-[#e68a45] shadow-md shadow-[#d96b27]/20 text-center col-span-2 sm:col-span-1"
                 >
-                  <Bug className="h-3.5 w-3.5" />
-                  <span>
+                  <Bug className="h-3.5 w-3.5 shrink-0" />
+                  <span className="truncate">
                     {lang === 'ar'
                       ? 'التبليغ عبر GitHub (Issues)'
                       : lang === 'fr'
@@ -774,10 +778,10 @@ export const App: React.FC = () => {
 
                 <a
                   href="mailto:elhadjioussama11@gmail.com?subject=%5BL7OT%20Report%5D%20Signalement%20ou%20Suggestion%20de%20Poisson"
-                  className="inline-flex items-center gap-2 rounded-lg border border-[#f6f1e7]/15 bg-[#0b0908] px-3.5 py-2 font-mono text-xs font-medium text-[#f6f1e7] transition hover:border-[#d96b27]/50 hover:bg-[#1a1512]"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#f6f1e7]/15 bg-[#0b0908] px-3 py-2 font-mono text-xs font-medium text-[#f6f1e7] transition hover:border-[#d96b27]/50 hover:bg-[#1a1512] text-center col-span-2 sm:col-span-1"
                 >
-                  <Mail className="h-3.5 w-3.5 text-[#e68a45]" />
-                  <span>
+                  <Mail className="h-3.5 w-3.5 text-[#e68a45] shrink-0" />
+                  <span className="truncate">
                     {lang === 'ar'
                       ? 'مراسلة عبر الإيميل'
                       : lang === 'fr'
@@ -790,10 +794,10 @@ export const App: React.FC = () => {
                   href="https://github.com/Bosaj/l7ot/wiki"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] px-3 py-2 font-mono text-xs font-medium text-[#a69b8d] transition hover:text-[#f6f1e7]"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] px-3 py-2 font-mono text-xs font-medium text-[#a69b8d] transition hover:text-[#f6f1e7] text-center"
                 >
-                  <BookOpen className="h-3.5 w-3.5 text-cyan-400" />
-                  <span>
+                  <BookOpen className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
+                  <span className="truncate">
                     {lang === 'ar' ? 'ويكي المنصة' : 'Wiki L7ot'}
                   </span>
                 </a>
@@ -802,10 +806,10 @@ export const App: React.FC = () => {
                   href="https://github.com/Bosaj/l7ot"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] px-3 py-2 font-mono text-xs font-medium text-[#a69b8d] transition hover:text-[#f6f1e7]"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#f6f1e7]/10 bg-[#0b0908] px-3 py-2 font-mono text-xs font-medium text-[#a69b8d] transition hover:text-[#f6f1e7] text-center"
                 >
-                  <Code2 className="h-3.5 w-3.5 text-[#e68a45]" />
-                  <span>
+                  <Code2 className="h-3.5 w-3.5 text-[#e68a45] shrink-0" />
+                  <span className="truncate">
                     {lang === 'ar' ? 'الكود المصدري' : 'Source Code'}
                   </span>
                 </a>
@@ -826,7 +830,7 @@ export const App: React.FC = () => {
               </span>
             </div>
             <div className="shrink-0 text-start sm:text-end">
-              <span>{lang === 'ar' ? 'النسخة v1.2.0 · رخصة MIT الحرة' : 'Release v1.2.0 · MIT Open Source License'}</span>
+              <span>{lang === 'ar' ? 'النسخة v2.1.1 · رخصة MIT الحرة' : 'Release v2.1.1 · MIT Open Source License'}</span>
             </div>
           </div>
         </div>

@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.1] - 2026-10-24
+
+### Fixed & Enhanced
+- **Mobile Responsive Layout & Viewport Deep-Dive:**
+  - Resolved intrinsic width overflow on Moroccan Port & Dialect select dropdowns on narrow mobile screens (320px–412px) by adding strict `w-full sm:w-auto max-w-full truncate text-ellipsis`.
+  - Converted port action buttons into a symmetrical 2-column mobile grid preventing awkward wrapping.
+  - Eliminated blank side margins and horizontal viewport scroll by adding strict `overflow-x: hidden; max-width: 100vw; width: 100%` on `html`, `body`, and `#root`.
+  - Modernized Open Source Community card and footer actions with responsive touch-friendly button layouts.
+  - Synchronized footer release string to `v2.1.0`.
+- **Prominent Header Language Switcher:**
+  - Relocated language pills (`العربية` · `FR` · `EN`) from the cramped top ticker into the prominent main header beside the Moroccan brand crest, ensuring thumb accessibility on every mobile device.
+- **Production Headers & GitHub Integration:**
+  - Enforced clean `Permissions-Policy: camera=(self), microphone=(), geolocation=(self)` eliminating browser ad-policy console warnings.
+  - Registered official Vercel Production deployment in GitHub Deployments (`https://l7ot.vercel.app`).
+  - Configured repository homepage in GitHub About section.
+  - Enriched `README.md` with visual UI screenshot gallery from live production.
+
+---
+
 ## [2.1.0] - 2026-10-24
 
 ### Added

@@ -9,11 +9,35 @@
 [![React](https://img.shields.io/badge/React-19-cyan.svg)](https://react.dev/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v4-38bdf8.svg)](https://tailwindcss.com/)
 [![Author: Oussama EL HADJI](https://img.shields.io/badge/Author-Oussama_EL_HADJI-d96b27.svg)](https://www.linkedin.com/in/oussama-el-hadji-388a101b7/)
-[![Version: 1.6.0](https://img.shields.io/badge/version-1.6.0-amber.svg)](https://github.com/Bosaj/l7ot/releases/tag/v1.6.0)
+[![Version: 2.1.1](https://img.shields.io/badge/version-2.1.1-amber.svg)](https://github.com/Bosaj/l7ot/releases/tag/v2.1.1)
 
 **The definitive Moroccan seafood encyclopedia, Darija & Oriental dialect taxonomy, port auctions, live marine weather, and coastal culinary heritage.**
 
-[🚀 Live on Netlify](https://l7ot-morocco.netlify.app) • [▲ Vercel Production](https://l7ot.vercel.app) • [🐙 GitHub Pages](https://bosaj.github.io/l7ot/) • [📖 Read the Complete Wiki](https://github.com/Bosaj/l7ot/wiki) • [🐛 Report Issue](https://github.com/Bosaj/l7ot/issues/new/choose)
+[▲ Vercel Production](https://l7ot.vercel.app) • [🚀 Live on Netlify](https://l7ot-morocco.netlify.app) • [🐙 GitHub Pages](https://bosaj.github.io/l7ot/) • [📖 Read the Complete Wiki](https://github.com/Bosaj/l7ot/wiki) • [🐛 Report Issue](https://github.com/Bosaj/l7ot/issues/new/choose)
+
+</div>
+
+---
+
+## 📸 Visual Showcase & Previews
+
+<div align="center">
+
+### 🗺️ Moroccan Coastal GIS Map & Tactical Nautical Layer (3,500 km)
+<img src="./docs/screenshots/desktop-map.png" alt="Moroccan Coastal GIS Map & Nautical Marks" width="900" />
+
+<br/><br/>
+
+### 📱 Responsive Desktop & Universal Mobile Viewport (Pixel, iPhone, Tablets & PC)
+<p align="center">
+  <img src="./docs/screenshots/desktop-home.png" alt="L7OT Desktop Atlas & Encyclopedia" width="620" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="./docs/screenshots/mobile-home.png" alt="L7OT Mobile Responsive Layout" width="230" />
+</p>
+
+<p align="center">
+  <img src="./docs/screenshots/mobile-map.png" alt="L7OT Mobile Marine Map" width="280" />
+</p>
 
 </div>
 
@@ -94,7 +118,30 @@ Live interactive telemetry connected to the world’s leading open marine APIs:
 
 ### 13. 🐳 Production Containerization & Multi-Cloud Deployment
 * **Docker:** Multi-stage `Dockerfile` (`node:22-alpine` + `nginx:alpine`) with gzip, SPA fallback, security headers, and health checks. Launch with `docker compose up -d`.
-* **Multi-Cloud Parity:** Pre-configured for **Netlify Edge CDN** (`netlify.toml`, `public/_redirects`), **GitHub Pages** (`.github/workflows/deploy-pages.yml`), and **Vercel** (`vercel.json`).
+* **Multi-Cloud Parity:** Pre-configured for **Vercel** (`vercel.json`), **Netlify Edge CDN** (`netlify.toml`, `public/_redirects`), and **GitHub Pages** (`.github/workflows/deploy-pages.yml`).
+
+### 14. 🗺️ Real Interactive Geographic Coastal GIS Map (Leaflet)
+* **True 3,500 km Moroccan Coastal Bounds:** Interactive Leaflet GIS covering Saïdia to Lagouira with 17 commercial ports and 4 Marine Protected Areas.
+* **Multi-Layer Tile Engine:** Instant toggles for **Esri Oceans** (bathymetric depths & contours), **Esri World Imagery** (high-res satellite), and **National Geographic Physical Terrain**.
+* **Moroccan Nautical Lighthouses:** Live tactical overlay with historical flash periods and WGS84 coordinates (Cap Spartel, El Hank, Cap Bojador, Cap de l'Eau).
+
+### 15. ⚓ High-Seas Marine Navigator (Mode Pêcheur en Mer)
+* **Nautical Bridge Dashboard:** SVG Gyro Compass dial with magnetic needle pointing to refuge ports, Speed Over Ground (SOG) in Knots, and coordinates in Nautical DMS (`DD°MM'SS" N/W`).
+* **Sovereign Maritime Zone Classifier:** Categorizes vessel position according to Dahir 1-73-211 and UNCLOS (Territorial Waters, Contiguous Zone, Moroccan EEZ, International High Seas).
+* **VHF Canal 16 & MRCC Emergency Mayday Generator:** Instant 1-click distress message for MRCC Rabat (+212 537 62 58 77) and Gendarmerie Maritime (177).
+
+### 16. 🪙 Bourse Citoyenne (Crowdsourced Souk & Port Price Reporter)
+* **Receipt Proof & Community Verification:** Allows citizens and artisanal fishermen across 17 Moroccan markets to report live consumer prices with photo receipts and verification upvotes.
+* **National Wholesale Markup Barometer:** Automatically compares crowdsourced spot prices against official ONP criée wholesale baselines to highlight fair pricing vs speculative margins.
+* **WhatsApp Share Bulletin:** 1-click export of market price summaries formatted for community WhatsApp groups.
+
+### 17. 🪪 Dynamic Social Specimen Share Cards & Rich SEO
+* **HTML5 Canvas Export:** Generates high-resolution 1200x630 social passport cards featuring Moroccan maritime crest, local dialect names, Dahir minimum catch sizes, and spot prices.
+* **Google Rich Cards:** Real-time Schema.org `Product` (`SeafoodProduct`) and `Recipe` JSON-LD microdata injection for rich search indexing.
+
+### 18. 🎙️ Neural Studio Voice Pack (132 Recordings in Darija, FR & EN)
+* **Native Dialect Speech Synthesis:** 132 high-fidelity neural audio pronunciations for all 44 fish species in authentic Moroccan Darija (`ar-MA`), Parisian French (`fr-FR`), and American English (`en-US`).
+* **Soundwave Equalizer:** Dynamic 4-bar audio visualizer with instant fallback to Web Speech Synthesis.
 
 ---
 
