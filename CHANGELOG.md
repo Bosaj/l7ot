@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-10-24
+
+### Added
+- **Full 44-Species Moroccan Halieutic Catalog Alignment:**
+  - Integrated all 44 commercial species with biological taxonomy, 4 regional Moroccan dialect names (Chamal, Oriental, Centre, Sud), culinary profiles, and Dahir 1973 statutory sizes.
+- **High-Fidelity Studio Neural Voice Pack (132 Recordings in Darija, French & English):**
+  - Native Moroccan Arabic (`ar-MA-JamalNeural`), Parisian French (`fr-FR-VivienneMultilingualNeural`), and American English (`en-US-ChristopherNeural`) neural recordings stored in `public/audio/fish/ar/`, `public/audio/fish/fr/`, and `public/audio/fish/en/` with backward-compatible root aliases.
+  - Multilingual voice playback in `FishCard.tsx` and `FishModal.tsx` matching active UI language.
+- **Bourse Citoyenne (Crowdsourced Souk & Port Price Reporter) (`CommunityPriceReporter.tsx`):**
+  - Live crowdsourced price reporting across 17 Moroccan coastal markets (Marché Central Casablanca, Souk El Had Agadir, Bab El Marsa Tanger, Marché de Safi, etc.).
+  - Automated ONP wholesale markup barometer detecting fair margins vs. speculative overpricing.
+  - Citizen confirmation and upvote system with `localStorage` persistence.
+- **Dynamic Social Specimen Share Cards & Schema.org Rich SEO (`SpecimenShareCardModal.tsx`):**
+  - High-resolution 1200x630 HTML5 Canvas generator rendering Moroccan maritime crest, fish artwork, Dahir minimum legal size, and spot price.
+  - 1-click WhatsApp share link with pre-formatted bilingual Moroccan text and direct link.
+  - Schema.org `Product` (`SeafoodProduct`) and `Recipe` JSON-LD structured data dynamically injected for Google Search rich cards.
+- **Edge Vision AI Scanner Enhancement (`FishScanner.tsx`):**
+  - Real-time animated bounding box, laser sweep, corneal clarity eye reticle, gill coloration contour arc, and Dahir 1973 length calibrator over live camera video feed.
+  - Biometric sensory HUD telemetry readouts.
+
+---
+
 ## [1.9.0] - 2026-10-24
 
 ### Added

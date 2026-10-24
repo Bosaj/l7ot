@@ -1,3 +1,6 @@
+import { getAssetUrl } from './assetHelper'
+import type { SupportedLanguage } from '../i18n/strings'
+
 let activeAudio: HTMLAudioElement | null = null
 
 const ARABIC_NAME_TO_ID: Record<string, string> = {
@@ -35,12 +38,25 @@ const ARABIC_NAME_TO_ID: Record<string, string> = {
   'محار الواليدية': 'huitre-oualidia',
   المتيل: 'palourde-coquillage',
   البوقة: 'bogue-bouga',
+  الميرو: 'merou-brun',
+  بوجوخ: 'lotte-baudroie',
+  التوربو: 'turbot',
+  المرمير: 'marbre',
+  'الشارغو طمبور': 'sar-tambour',
+  الليشا: 'liche-amie',
+  البوكشاش: 'rascasse-rouge',
+  الأومبرينا: 'ombrine',
+  'الهومار الملكي': 'homard-europeen',
+  الخنزيرة: 'dorade-grise',
+  البصري: 'cernier',
+  'الحوتة السامة': 'grande-vive',
 }
 
 export function speakDarija(
   text: string,
   phoneticFallback?: string,
-  fishId?: string
+  fishId?: string,
+  lang: SupportedLanguage = 'ar'
 ): boolean {
   if (typeof window === 'undefined') {
     return false
@@ -59,15 +75,27 @@ export function speakDarija(
 
   const resolvedId = fishId || ARABIC_NAME_TO_ID[text.trim()]
 
-  // 1. Primary: Play local native Arabic MP3 recording if available
+  // 1. Primary: Play studio natural neural recording matching active language
   if (resolvedId && typeof Audio !== 'undefined') {
     try {
-      const audio = new Audio(`/audio/fish/${resolvedId}.mp3`)
+      const langFolder = lang === 'fr' ? 'fr' : lang === 'en' ? 'en' : 'ar'
+      const audioUrl = getAssetUrl(`audio/fish/${langFolder}/${resolvedId}.mp3`)
+      const audio = new Audio(audioUrl)
       activeAudio = audio
+
       const playPromise = audio.play()
       if (playPromise && typeof playPromise.catch === 'function') {
         playPromise.catch(() => {
-          fallbackWebSpeech(text, phoneticFallback)
+          // Try root fallback or Web Speech
+          try {
+            const fallbackAudio = new Audio(getAssetUrl(`audio/fish/${resolvedId}.mp3`))
+            activeAudio = fallbackAudio
+            fallbackAudio.play().catch(() => {
+              fallbackWebSpeech(text, phoneticFallback, lang)
+            })
+          } catch {
+            fallbackWebSpeech(text, phoneticFallback, lang)
+          }
         })
       }
       return true
@@ -76,10 +104,14 @@ export function speakDarija(
     }
   }
 
-  return fallbackWebSpeech(text, phoneticFallback)
+  return fallbackWebSpeech(text, phoneticFallback, lang)
 }
 
-function fallbackWebSpeech(text: string, phoneticFallback?: string): boolean {
+function fallbackWebSpeech(
+  text: string,
+  phoneticFallback?: string,
+  lang: SupportedLanguage = 'ar'
+): boolean {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
     return false
   }
@@ -88,9 +120,17 @@ function fallbackWebSpeech(text: string, phoneticFallback?: string): boolean {
     window.speechSynthesis.cancel()
 
     const voices = window.speechSynthesis.getVoices()
-    const arabicVoice = voices.find(
-      (v) => v.lang.toLowerCase().startsWith('ar')
+    let selectedVoice = voices.find((v) =>
+      v.lang.toLowerCase().startsWith(lang)
     )
+
+    if (!selectedVoice) {
+      if (lang === 'ar') {
+        selectedVoice = voices.find((v) => v.lang.toLowerCase().startsWith('fr'))
+      } else {
+        selectedVoice = voices.find((v) => v.lang.toLowerCase().startsWith('en'))
+      }
+    }
 
     // Strip hyphens so a fallback TTS never spells letters out
     const cleanPhonetic = phoneticFallback
@@ -98,22 +138,16 @@ function fallbackWebSpeech(text: string, phoneticFallback?: string): boolean {
       : text
 
     const utterance = new SpeechSynthesisUtterance(
-      arabicVoice ? text : cleanPhonetic
+      lang === 'ar' && selectedVoice?.lang.startsWith('ar') ? text : cleanPhonetic
     )
     utterance.rate = 0.88
     utterance.pitch = 1.0
 
-    if (arabicVoice) {
-      utterance.voice = arabicVoice
-      utterance.lang = arabicVoice.lang
+    if (selectedVoice) {
+      utterance.voice = selectedVoice
+      utterance.lang = selectedVoice.lang
     } else {
-      const frenchVoice = voices.find((v) =>
-        v.lang.toLowerCase().startsWith('fr')
-      )
-      if (frenchVoice) {
-        utterance.voice = frenchVoice
-      }
-      utterance.lang = 'fr-FR'
+      utterance.lang = lang === 'fr' ? 'fr-FR' : lang === 'en' ? 'en-US' : 'ar-MA'
     }
 
     window.speechSynthesis.speak(utterance)

@@ -15,6 +15,7 @@ import {
   Map,
   Compass,
   Anchor,
+  TrendingUp,
 } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
@@ -22,7 +23,19 @@ import type { MoroccanPortRegion } from '../lib/moroccanRegions'
 import { sounds } from '../lib/soundEffects'
 import { getAssetUrl } from '../lib/assetHelper'
 
-export type NavTab = 'fish' | 'map' | 'gps' | 'scanner' | 'seasons' | 'recipes' | 'chef' | 'market' | 'agreements' | 'maritime-law' | 'marine-apis'
+export type NavTab =
+  | 'fish'
+  | 'map'
+  | 'gps'
+  | 'scanner'
+  | 'seasons'
+  | 'recipes'
+  | 'chef'
+  | 'market'
+  | 'bourse'
+  | 'agreements'
+  | 'maritime-law'
+  | 'marine-apis'
 
 interface HeaderProps {
   activeTab: NavTab
@@ -120,22 +133,30 @@ export const Header: React.FC<HeaderProps> = ({
       icon: ShoppingBag,
     },
     {
-      id: 'agreements',
+      id: 'bourse',
       index: '09',
+      label: lang === 'ar' ? 'بورصة المواطن للأسعار' : lang === 'fr' ? 'Bourse Citoyenne' : 'Citizen Price Hub',
+      shortLabel: lang === 'ar' ? 'بورصة الأسعار' : lang === 'fr' ? 'Bourse Souk' : 'Prices Hub',
+      icon: TrendingUp,
+      highlight: true,
+    },
+    {
+      id: 'agreements',
+      index: '10',
       label: t.navAgreements,
       shortLabel: lang === 'ar' ? 'المعاهدات' : lang === 'fr' ? 'Traités' : 'Treaties',
       icon: Globe2,
     },
     {
       id: 'maritime-law',
-      index: '10',
+      index: '11',
       label: t.navMaritimeLaw,
       shortLabel: lang === 'ar' ? 'قانون الصيد' : lang === 'fr' ? 'Lois & Tailles' : 'Fishing Law',
       icon: Scale,
     },
     {
       id: 'marine-apis',
-      index: '11',
+      index: '12',
       label: t.navMarineApis,
       shortLabel: lang === 'ar' ? 'طقس الموانئ' : lang === 'fr' ? 'Météo Mer' : 'Port Radar',
       icon: Waves,

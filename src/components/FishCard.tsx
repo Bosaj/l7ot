@@ -45,7 +45,7 @@ export const FishCard: React.FC<FishCardProps> = ({
   const handleAudio = (e: React.MouseEvent) => {
     e.stopPropagation()
     setIsPlayingAudio(true)
-    speakDarija(fish.nameDarijaArabic, fish.audioPhonetic, fish.id)
+    speakDarija(fish.nameDarijaArabic, fish.audioPhonetic, fish.id, lang)
     setTimeout(() => setIsPlayingAudio(false), 3200)
   }
 

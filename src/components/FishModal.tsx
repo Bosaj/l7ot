@@ -24,6 +24,7 @@ import {
   Compass,
   Search,
   Printer,
+  Share2,
 } from 'lucide-react'
 import type { Fish, Recipe } from '../data/types'
 import type { SupportedLanguage } from '../i18n/strings'
@@ -46,6 +47,8 @@ import {
   type GBIFMoroccoOccurrence,
 } from '../services/marineApis'
 import { FishSpecimenPassportModal } from './FishSpecimenPassportModal'
+import { SpecimenShareCardModal } from './SpecimenShareCardModal'
+import { generateSeafoodProductSchema, injectJsonLd } from '../lib/seoStructuredData'
 
 interface FishModalProps {
   fish: Fish
@@ -206,6 +209,14 @@ export const FishModal: React.FC<FishModalProps> = ({
   )
   const [videoLang, setVideoLang] = useState<SupportedLanguage>(lang)
   const [showSpecimenPassport, setShowSpecimenPassport] = useState(false)
+  const [showSocialCard, setShowSocialCard] = useState(false)
+
+  // Inject Schema.org JSON-LD structured data for Google Search rich snippets
+  useEffect(() => {
+    if (fish) {
+      injectJsonLd(`schema-fish-${fish.id}`, generateSeafoodProductSchema(fish, lang))
+    }
+  }, [fish, lang])
 
   // Lock background body scroll while modal is open (with touch-bounce prevention)
   useEffect(() => {
@@ -270,7 +281,7 @@ export const FishModal: React.FC<FishModalProps> = ({
 
   const handleAudio = () => {
     setIsPlayingAudio(true)
-    speakDarija(fish.nameDarijaArabic, fish.audioPhonetic, fish.id)
+    speakDarija(fish.nameDarijaArabic, fish.audioPhonetic, fish.id, lang)
     setTimeout(() => setIsPlayingAudio(false), 3200)
   }
 
@@ -359,6 +370,18 @@ export const FishModal: React.FC<FishModalProps> = ({
             )}
 
             <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setShowSocialCard(true)}
+                title={lang === 'ar' ? 'بطاقة للمشاركة (واتساب وشبكات التواصل)' : 'Carte Partageable (WhatsApp & Réseaux)'}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-amber-500/40 bg-amber-500/10 text-amber-300 backdrop-blur-md transition-colors hover:bg-amber-500 hover:text-[#0b0908] text-xs font-mono font-bold"
+              >
+                <Share2 className="h-3.5 w-3.5 text-amber-400" />
+                <span className="hidden sm:inline">
+                  {lang === 'ar' ? 'بطاقة للمشاركة' : 'Carte Sociale'}
+                </span>
+              </button>
+
               <button
                 type="button"
                 onClick={() => setShowSpecimenPassport(true)}
@@ -1461,6 +1484,14 @@ export const FishModal: React.FC<FishModalProps> = ({
           fish={fish}
           lang={lang}
           onClose={() => setShowSpecimenPassport(false)}
+        />
+      )}
+
+      {showSocialCard && (
+        <SpecimenShareCardModal
+          fish={fish}
+          lang={lang}
+          onClose={() => setShowSocialCard(false)}
         />
       )}
     </div>

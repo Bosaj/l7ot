@@ -20,6 +20,7 @@ import { RecipeCard } from './components/RecipeCard'
 import { RecipeModal } from './components/RecipeModal'
 import { ChefL7ot } from './components/ChefL7ot'
 import { MarketGuide } from './components/MarketGuide'
+import { CommunityPriceReporter } from './components/CommunityPriceReporter'
 import { AgreementsAndMarket } from './components/AgreementsAndMarket'
 import { CleaningTutorialModal } from './components/CleaningTutorialModal'
 import { FishScanner } from './components/FishScanner'
@@ -598,6 +599,19 @@ export const App: React.FC = () => {
             lang={lang}
             userRegion={userPortLocation.selectedRegion}
             onSelectRegion={userPortLocation.setManualRegion}
+            onNavigateToBourse={() => setActiveTab('bourse')}
+          />
+        )}
+
+        {/* Tab: Bourse Citoyenne (Crowdsourced Souk & Port Price Reporter) */}
+        {activeTab === 'bourse' && (
+          <CommunityPriceReporter
+            allFish={MOROCCAN_FISH}
+            lang={lang}
+            onSelectFishModal={(f) => {
+              setActiveFish(f)
+              setFishModalTab('overview')
+            }}
           />
         )}
 

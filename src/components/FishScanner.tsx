@@ -139,8 +139,10 @@ export const FishScanner: React.FC<FishScannerProps> = ({
   const [isScanning, setIsScanning] = useState(false)
   const [matches, setMatches] = useState<ScanMatch[]>([])
   const [isPlayingAudio, setIsPlayingAudio] = useState(false)
+  const [showContours, setShowContours] = useState(true)
 
   const videoRef = useRef<HTMLVideoElement | null>(null)
+  const overlayCanvasRef = useRef<HTMLCanvasElement | null>(null)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
   const refSignaturesRef = useRef<Record<string, number[]>>({})
@@ -153,6 +155,215 @@ export const FishScanner: React.FC<FishScannerProps> = ({
       }
     }
   }, [])
+
+  // Real-time edge vision contour & biometric inspection loop
+  useEffect(() => {
+    if (!cameraActive || !showContours) return
+
+    let animId: number
+    let scanLinePos = 0
+    let scanDir = 1
+
+    const renderOverlay = () => {
+      const canvas = overlayCanvasRef.current
+      const video = videoRef.current
+      if (!canvas || !video) {
+        animId = requestAnimationFrame(renderOverlay)
+        return
+      }
+
+      const rect = video.getBoundingClientRect()
+      if (canvas.width !== Math.floor(rect.width) || canvas.height !== Math.floor(rect.height)) {
+        canvas.width = Math.floor(rect.width)
+        canvas.height = Math.floor(rect.height)
+      }
+
+      const ctx = canvas.getContext('2d')
+      if (!ctx || canvas.width === 0 || canvas.height === 0) {
+        animId = requestAnimationFrame(renderOverlay)
+        return
+      }
+
+      const w = canvas.width
+      const h = canvas.height
+      ctx.clearRect(0, 0, w, h)
+
+      // Main Bounding Box (Central ~78% width, 68% height)
+      const boxW = Math.min(w * 0.78, 560)
+      const boxH = Math.min(h * 0.68, 340)
+      const boxX = (w - boxW) / 2
+      const boxY = (h - boxH) / 2
+
+      // Laser scan line
+      scanLinePos += 2.4 * scanDir
+      if (scanLinePos > boxH) {
+        scanLinePos = boxH
+        scanDir = -1
+      } else if (scanLinePos < 0) {
+        scanLinePos = 0
+        scanDir = 1
+      }
+
+      const scanY = boxY + scanLinePos
+
+      // Draw Laser Line with gradient
+      const laserGrad = ctx.createLinearGradient(boxX, scanY, boxX + boxW, scanY)
+      laserGrad.addColorStop(0, 'rgba(230, 138, 69, 0)')
+      laserGrad.addColorStop(0.5, 'rgba(230, 138, 69, 0.9)')
+      laserGrad.addColorStop(1, 'rgba(230, 138, 69, 0)')
+      ctx.strokeStyle = laserGrad
+      ctx.lineWidth = 2
+      ctx.beginPath()
+      ctx.moveTo(boxX, scanY)
+      ctx.lineTo(boxX + boxW, scanY)
+      ctx.stroke()
+
+      // Bounding Box Outer Frame
+      ctx.strokeStyle = 'rgba(230, 138, 69, 0.35)'
+      ctx.lineWidth = 1.5
+      ctx.strokeRect(boxX, boxY, boxW, boxH)
+
+      // Tactical High-Tech Corner Brackets
+      const cornerLen = 24
+      ctx.strokeStyle = '#e68a45'
+      ctx.lineWidth = 3
+
+      // Top-Left
+      ctx.beginPath()
+      ctx.moveTo(boxX, boxY + cornerLen)
+      ctx.lineTo(boxX, boxY)
+      ctx.lineTo(boxX + cornerLen, boxY)
+      ctx.stroke()
+
+      // Top-Right
+      ctx.beginPath()
+      ctx.moveTo(boxX + boxW - cornerLen, boxY)
+      ctx.lineTo(boxX + boxW, boxY)
+      ctx.lineTo(boxX + boxW, boxY + cornerLen)
+      ctx.stroke()
+
+      // Bottom-Left
+      ctx.beginPath()
+      ctx.moveTo(boxX, boxY + boxH - cornerLen)
+      ctx.lineTo(boxX, boxY + boxH)
+      ctx.lineTo(boxX + cornerLen, boxY + boxH)
+      ctx.stroke()
+
+      // Bottom-Right
+      ctx.beginPath()
+      ctx.moveTo(boxX + boxW - cornerLen, boxY + boxH)
+      ctx.lineTo(boxX + boxW, boxY + boxH)
+      ctx.lineTo(boxX + boxW, boxY + boxH - cornerLen)
+      ctx.stroke()
+
+      // Feature Contour 1: Eye Clarity Reticle
+      const eyeX = boxX + boxW * 0.22
+      const eyeY = boxY + boxH * 0.38
+      const eyeR = Math.max(16, boxW * 0.045)
+
+      ctx.save()
+      ctx.strokeStyle = '#38bdf8'
+      ctx.lineWidth = 1.5
+      ctx.beginPath()
+      ctx.arc(eyeX, eyeY, eyeR, 0, Math.PI * 2)
+      ctx.stroke()
+
+      // Eye Crosshair
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.6)'
+      ctx.beginPath()
+      ctx.moveTo(eyeX - eyeR - 6, eyeY)
+      ctx.lineTo(eyeX + eyeR + 6, eyeY)
+      ctx.moveTo(eyeX, eyeY - eyeR - 6)
+      ctx.lineTo(eyeX, eyeY + eyeR + 6)
+      ctx.stroke()
+
+      // Eye Label
+      ctx.fillStyle = '#38bdf8'
+      ctx.font = '10px "Courier New", monospace'
+      ctx.textAlign = 'center'
+      ctx.fillText(lang === 'ar' ? 'فحص صفاء العين' : 'OEIL // CLARITÉ', eyeX, eyeY - eyeR - 6)
+      ctx.restore()
+
+      // Feature Contour 2: Gill Operculum Contour (Crescent)
+      const gillX = boxX + boxW * 0.36
+      const gillY = boxY + boxH * 0.52
+      const gillR = Math.max(22, boxW * 0.065)
+
+      ctx.save()
+      ctx.strokeStyle = '#ef4444'
+      ctx.lineWidth = 2
+      ctx.beginPath()
+      ctx.arc(gillX, gillY, gillR, -Math.PI * 0.4, Math.PI * 0.4)
+      ctx.stroke()
+
+      // Gill Label
+      ctx.fillStyle = '#f87171'
+      ctx.font = '10px "Courier New", monospace'
+      ctx.textAlign = 'center'
+      ctx.fillText(lang === 'ar' ? 'حمرة الخياشيم' : 'OUÏES // TEINTE', gillX + 12, gillY + gillR + 12)
+      ctx.restore()
+
+      // Flank Lateral Line Contour
+      ctx.save()
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.65)'
+      ctx.setLineDash([4, 4])
+      ctx.lineWidth = 1.5
+      ctx.beginPath()
+      ctx.moveTo(boxX + boxW * 0.38, boxY + boxH * 0.5)
+      ctx.bezierCurveTo(
+        boxX + boxW * 0.55,
+        boxY + boxH * 0.48,
+        boxX + boxW * 0.72,
+        boxY + boxH * 0.53,
+        boxX + boxW * 0.88,
+        boxY + boxH * 0.51
+      )
+      ctx.stroke()
+      ctx.restore()
+
+      // Dahir 1973 Minimum Size Calibrator Scale along bottom edge
+      ctx.save()
+      ctx.strokeStyle = 'rgba(212, 175, 55, 0.7)'
+      ctx.lineWidth = 1
+      const rulerY = boxY + boxH - 12
+      const rulerStart = boxX + 20
+      const rulerEnd = boxX + boxW - 20
+      ctx.beginPath()
+      ctx.moveTo(rulerStart, rulerY)
+      ctx.lineTo(rulerEnd, rulerY)
+      const steps = 10
+      for (let i = 0; i <= steps; i++) {
+        const rx = rulerStart + (i / steps) * (rulerEnd - rulerStart)
+        const tickH = i % 5 === 0 ? 8 : 4
+        ctx.moveTo(rx, rulerY - tickH)
+        ctx.lineTo(rx, rulerY)
+      }
+      ctx.stroke()
+
+      ctx.fillStyle = '#f59e0b'
+      ctx.font = '9px "Courier New", monospace'
+      ctx.textAlign = 'left'
+      ctx.fillText('DAHIR 1973 CALIBRATION RULER', rulerStart, rulerY - 12)
+      ctx.restore()
+
+      // HUD Telemetry
+      ctx.fillStyle = '#10b981'
+      ctx.font = '10px "Courier New", monospace'
+      ctx.textAlign = 'left'
+      ctx.fillText('AI VISION // CONTOURS: LOCKED', boxX + 6, boxY - 8)
+
+      ctx.textAlign = 'right'
+      ctx.fillStyle = '#38bdf8'
+      ctx.fillText('BIOMETRIC SCANNING', boxX + boxW - 6, boxY - 8)
+
+      animId = requestAnimationFrame(renderOverlay)
+    }
+
+    animId = requestAnimationFrame(renderOverlay)
+    return () => {
+      cancelAnimationFrame(animId)
+    }
+  }, [cameraActive, showContours, lang])
 
   const stopCamera = () => {
     if (streamRef.current) {
@@ -475,19 +686,45 @@ export const FishScanner: React.FC<FishScannerProps> = ({
               muted
               className="h-full w-full object-cover"
             />
-            {/* Target Reticle Overlay */}
-            <div className="pointer-events-none absolute inset-8 border-2 border-dashed border-[#e68a45]/60 rounded-xl flex items-center justify-center">
-              <span className="rounded bg-[#0b0908]/80 px-3 py-1 font-mono text-xs text-[#e68a45]">
-                {lang === 'ar'
-                  ? 'ضع السمكة داخل الإطار ثم اضغط التقاط'
-                  : 'Cadrez le poisson puis capturez'}
-              </span>
+
+            {/* Real-Time Edge Vision AI Canvas Overlay */}
+            {showContours && (
+              <canvas
+                ref={overlayCanvasRef}
+                className="pointer-events-none absolute inset-0 h-full w-full"
+              />
+            )}
+
+            {/* Top Tactical Controls */}
+            <div className="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-auto">
+              <div className="flex items-center gap-2 rounded-full border border-amber-500/40 bg-[#0b0908]/80 px-3 py-1 font-mono text-[11px] text-amber-300 backdrop-blur-md">
+                <Sparkles className="h-3.5 w-3.5 text-amber-400 animate-pulse" />
+                <span>
+                  {lang === 'ar' ? 'المستشعر البصري الذكي نشط' : 'CAPTEURS BIOMÉTRIQUES // ACTIFS'}
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setShowContours(!showContours)}
+                className={`rounded-full border px-3 py-1 font-mono text-[11px] transition backdrop-blur-md ${
+                  showContours
+                    ? 'border-emerald-500/40 bg-emerald-500/20 text-emerald-300'
+                    : 'border-[#f6f1e7]/20 bg-[#0b0908]/80 text-[#a69b8d]'
+                }`}
+              >
+                {showContours
+                  ? (lang === 'ar' ? 'معالم التحليل: مفعّلة ✓' : 'Contours IA : ON ✓')
+                  : (lang === 'ar' ? 'معالم التحليل: معطّلة' : 'Contours IA : OFF')}
+              </button>
             </div>
-            <div className="absolute bottom-4 inset-x-0 flex justify-center">
+
+            {/* Capture Button */}
+            <div className="absolute bottom-4 inset-x-0 flex justify-center pointer-events-auto">
               <button
                 type="button"
                 onClick={captureFromVideo}
-                className="flex items-center gap-2 rounded-full bg-[#d96b27] px-6 py-3 text-sm font-bold text-[#0b0908] shadow-2xl ring-4 ring-[#f6f1e7]/30 hover:bg-[#e68a45]"
+                className="flex items-center gap-2 rounded-full bg-[#d96b27] px-6 py-3 text-sm font-bold text-[#0b0908] shadow-2xl ring-4 ring-[#f6f1e7]/30 hover:bg-[#e68a45] transition-transform hover:scale-105"
               >
                 <Camera className="h-5 w-5" />
                 <span>

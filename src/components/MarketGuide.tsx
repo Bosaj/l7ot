@@ -13,6 +13,7 @@ import {
   Clock,
   Anchor,
   Check,
+  TrendingUp,
 } from 'lucide-react'
 import { FRESHNESS_CRITERIA, MOROCCAN_PORTS } from '../data/freshness'
 import { MOROCCAN_FISH } from '../data/fish'
@@ -27,12 +28,14 @@ interface MarketGuideProps {
   lang: SupportedLanguage
   userRegion?: MoroccanPortRegion
   onSelectRegion?: (regionId: string) => void
+  onNavigateToBourse?: () => void
 }
 
 export const MarketGuide: React.FC<MarketGuideProps> = ({
   lang,
   userRegion,
   onSelectRegion,
+  onNavigateToBourse,
 }) => {
   const t = STRINGS[lang]
   const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth() + 1)
@@ -156,6 +159,34 @@ export const MarketGuide: React.FC<MarketGuideProps> = ({
           </p>
         </div>
       </div>
+
+      {/* Bourse Citoyenne Fast Jump Card */}
+      {onNavigateToBourse && (
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-amber-500/30 bg-gradient-to-r from-amber-950/40 via-[#18120e] to-[#120f0d] p-5 shadow-lg">
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-amber-500/40 bg-amber-500/10 text-amber-400">
+              <TrendingUp className="h-5 w-5" />
+            </div>
+            <div className="space-y-0.5">
+              <h4 className="font-editorial text-lg font-bold text-amber-200">
+                {lang === 'ar' ? 'بورصة المواطن: قارن أسعار السردين والسمك اليوم بالأسواق' : 'Bourse Citoyenne : Vérifiez les cours réels au souk'}
+              </h4>
+              <p className="text-xs text-[#a69b8d]">
+                {lang === 'ar'
+                  ? 'اكتشف أسعار الشراء المعلنة من المواطنين بمارشيات كازا، طنجة، الرباط، وأكادير، وقارنها بهامش مرسى ONP.'
+                  : 'Consultez les prix déclarés en direct par les consommateurs dans les marchés et poissonneries.'}
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={onNavigateToBourse}
+            className="shrink-0 inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-2.5 font-mono text-xs font-bold text-[#0b0908] hover:bg-amber-400 transition"
+          >
+            <span>{lang === 'ar' ? 'فتح بورصة المواطن ←' : 'Accéder à la Bourse →'}</span>
+          </button>
+        </div>
+      )}
 
       {/* Live Port Marine Telemetry & Market Impact (Open-Meteo API) */}
       <section className="space-y-4">
