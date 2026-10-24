@@ -78,26 +78,82 @@
   h2,
   h3,
   .font-editorial {
-    font-family: var(--font-display);
     text-wrap: balance;
     font-weight: 700;
   }
 
-  /* English & French High-End Luxury Typography (Regal, Crisp, Editorial) */
-  [dir='ltr'] {
-    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  /* Arabic Typographic Identity: Classical Calligraphic Dignity & Crisp Modern Readex */
+  html[lang='ar'],
+  html[lang='ar'] body,
+  .font-arabic {
+    font-family: 'Readex Pro Variable', 'Readex Pro', 'IBM Plex Sans Arabic', ui-sans-serif, system-ui, sans-serif !important;
+    letter-spacing: 0 !important;
+    line-height: 1.7;
+  }
+
+  html[lang='ar'] *,
+  .font-arabic * {
+    letter-spacing: 0 !important;
+  }
+
+  html[lang='ar'] h1,
+  html[lang='ar'] h2,
+  html[lang='ar'] h3,
+  html[lang='ar'] .font-editorial,
+  .font-arabic h1,
+  .font-arabic h2,
+  .font-arabic h3,
+  .font-arabic .font-editorial {
+    font-family: 'Amiri', 'Traditional Arabic', Georgia, serif !important;
+    font-weight: 700;
+    letter-spacing: 0 !important;
+    line-height: 1.38;
+  }
+
+  /* French Typographic Identity: Paris-Riviera Maritime Luxury & Haute Editorial Poise */
+  html[lang='fr'],
+  html[lang='fr'] body,
+  .font-french {
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif !important;
     letter-spacing: -0.012em;
     line-height: 1.55;
   }
 
-  [dir='ltr'] h1,
-  [dir='ltr'] h2,
-  [dir='ltr'] h3,
-  [dir='ltr'] .font-editorial {
-    font-family: 'Cinzel', 'Playfair Display', 'Fraunces Variable', Georgia, serif;
-    letter-spacing: -0.022em;
+  html[lang='fr'] h1,
+  html[lang='fr'] h2,
+  html[lang='fr'] h3,
+  html[lang='fr'] .font-editorial,
+  .font-french h1,
+  .font-french h2,
+  .font-french h3,
+  .font-french .font-editorial {
+    font-family: 'Playfair Display', 'Fraunces Variable', Georgia, serif !important;
+    letter-spacing: -0.025em;
     font-weight: 700;
-    line-height: 1.25;
+    line-height: 1.22;
+  }
+
+  /* English Typographic Identity: Imperial Roman Maritime Capitals & Crisp Naval Telemetry */
+  html[lang='en'],
+  html[lang='en'] body,
+  .font-english {
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif !important;
+    letter-spacing: -0.018em;
+    line-height: 1.55;
+  }
+
+  html[lang='en'] h1,
+  html[lang='en'] h2,
+  html[lang='en'] h3,
+  html[lang='en'] .font-editorial,
+  .font-english h1,
+  .font-english h2,
+  .font-english h3,
+  .font-english .font-editorial {
+    font-family: 'Cinzel', 'Playfair Display', Georgia, serif !important;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+    line-height: 1.2;
   }
 
   /* Distinctive Inscriptional Maritime Title Typography */
@@ -105,26 +161,6 @@
     font-family: 'Cinzel', 'Playfair Display', serif;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-  }
-
-  /* Arabic classical Naskh & Readex Pro Typography */
-  [dir='rtl'] {
-    font-family: 'Readex Pro Variable', 'IBM Plex Sans Arabic', ui-sans-serif, system-ui, sans-serif;
-    letter-spacing: 0 !important;
-    line-height: 1.75;
-  }
-
-  [dir='rtl'] * {
-    letter-spacing: 0 !important;
-  }
-
-  [dir='rtl'] h1,
-  [dir='rtl'] h2,
-  [dir='rtl'] h3,
-  [dir='rtl'] .font-editorial {
-    font-family: 'Amiri', 'Fraunces Variable', Georgia, serif;
-    line-height: 1.35;
-    letter-spacing: 0 !important;
   }
 
   /* Tabular figures & technical mono for prices, weights, and port indices */

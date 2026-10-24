@@ -57,10 +57,13 @@ export const App: React.FC = () => {
   const t = STRINGS[lang]
   const isRtl = lang === 'ar'
 
-  // Dynamically update documentElement lang and dir for optimal typography, kerning, and screen-reader a11y
+  // Dynamically update documentElement lang, dir, and typography classes for immediate font switching
   useEffect(() => {
     document.documentElement.lang = lang
     document.documentElement.dir = isRtl ? 'rtl' : 'ltr'
+    const fontClass = lang === 'ar' ? 'font-arabic' : lang === 'fr' ? 'font-french' : 'font-english'
+    document.documentElement.className = fontClass
+    document.body.className = `bg-[#0b0908] text-[#f6f1e7] antialiased selection:bg-[#d96b27] selection:text-[#0b0908] ${fontClass}`
   }, [lang, isRtl])
 
   // Filtered Fish (including deep search across all regional Moroccan names & Amazigh terms)
@@ -117,7 +120,9 @@ export const App: React.FC = () => {
   return (
     <div
       dir={isRtl ? 'rtl' : 'ltr'}
-      className="min-h-dvh bg-[#0b0908] text-[#f6f1e7] font-sans selection:bg-[#d96b27] selection:text-[#0b0908]"
+      className={`min-h-dvh bg-[#0b0908] text-[#f6f1e7] selection:bg-[#d96b27] selection:text-[#0b0908] ${
+        lang === 'ar' ? 'font-arabic' : lang === 'fr' ? 'font-french' : 'font-english'
+      }`}
     >
       {/* Subtle Warm Terracotta & Brass Ambient Illumination */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">

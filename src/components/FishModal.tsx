@@ -23,6 +23,7 @@ import {
   Ruler,
   Compass,
   Search,
+  Printer,
 } from 'lucide-react'
 import type { Fish, Recipe } from '../data/types'
 import type { SupportedLanguage } from '../i18n/strings'
@@ -44,6 +45,7 @@ import {
   type OpenFoodFactsProduct,
   type GBIFMoroccoOccurrence,
 } from '../services/marineApis'
+import { FishSpecimenPassportModal } from './FishSpecimenPassportModal'
 
 interface FishModalProps {
   fish: Fish
@@ -203,6 +205,7 @@ export const FishModal: React.FC<FishModalProps> = ({
     initialTab
   )
   const [videoLang, setVideoLang] = useState<SupportedLanguage>(lang)
+  const [showSpecimenPassport, setShowSpecimenPassport] = useState(false)
 
   // Lock background body scroll while modal is open (with touch-bounce prevention)
   useEffect(() => {
@@ -355,14 +358,28 @@ export const FishModal: React.FC<FishModalProps> = ({
               <div />
             )}
 
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Close"
-              className="flex h-9 w-9 items-center justify-center rounded-sm border border-[#2a211c] bg-[#0b0908]/85 text-[#f4ede2] backdrop-blur-md transition-colors hover:border-[#c85a32] hover:text-[#e09f3e]"
-            >
-              <X className="h-4 w-4" />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setShowSpecimenPassport(true)}
+                title={lang === 'ar' ? 'تصدير وطباعة البطاقة التقنية للمصيد' : 'Passeport & Fiche Technique'}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-[#2a211c] bg-[#0b0908]/90 text-[#f4ede2] backdrop-blur-md transition-colors hover:border-[#d96b27] hover:text-[#e09f3e] text-xs font-mono font-bold"
+              >
+                <Printer className="h-3.5 w-3.5 text-[#e09f3e]" />
+                <span className="hidden sm:inline">
+                  {lang === 'ar' ? 'البطاقة التقنية' : 'Fiche Technique'}
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="Close"
+                className="flex h-9 w-9 items-center justify-center rounded-sm border border-[#2a211c] bg-[#0b0908]/85 text-[#f4ede2] backdrop-blur-md transition-colors hover:border-[#c85a32] hover:text-[#e09f3e]"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
           </div>
 
           {/* Floating Title, Dialect Ledger & Spot Price */}
@@ -518,7 +535,7 @@ export const FishModal: React.FC<FishModalProps> = ({
         </div>
 
         {/* Modal Scrollable Body */}
-        <div className="flex-1 overflow-y-auto p-5 sm:p-7 space-y-6">
+        <div className="flex-1 overflow-y-auto overscroll-contain touch-pan-y p-5 sm:p-7 space-y-6">
           {/* TAB 1: OVERVIEW */}
           {modalTab === 'overview' && (
             <>
@@ -1438,6 +1455,14 @@ export const FishModal: React.FC<FishModalProps> = ({
           )}
         </div>
       </div>
+
+      {showSpecimenPassport && (
+        <FishSpecimenPassportModal
+          fish={fish}
+          lang={lang}
+          onClose={() => setShowSpecimenPassport(false)}
+        />
+      )}
     </div>
   )
 }

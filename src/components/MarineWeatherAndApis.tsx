@@ -14,6 +14,7 @@ import {
   Database,
 } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
+import { MoroccanTideAndLunarClock } from './MoroccanTideAndLunarClock'
 
 interface PortMarineData {
   id: string
@@ -596,6 +597,9 @@ console.log("Vulnerability Score:", bio.data[0].Vulnerability);`,
           </div>
         </div>
       </section>
+
+      {/* SECTION 1.5: MOROCCAN TIDE & LUNAR CYCLE TELEMETRY */}
+      <MoroccanTideAndLunarClock lang={lang} />
 
       {/* SECTION 2: THE WORLD'S BEST FREE MARINE & FISHERIES APIS DIRECTORY */}
       <section className="rounded-xl border border-[#f6f1e7]/12 bg-[#14110f] p-6 sm:p-8 shadow-2xl space-y-8">
