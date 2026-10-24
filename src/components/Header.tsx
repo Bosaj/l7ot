@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import {
   Camera,
   MapPin,
@@ -16,6 +16,8 @@ import {
   Compass,
   Anchor,
   TrendingUp,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
@@ -66,6 +68,24 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const t = STRINGS[lang]
   const [soundActive, setSoundActive] = useState(() => sounds.isEnabled())
+  const navScrollRef = useRef<HTMLElement>(null)
+
+  // Smoothly scroll active tab into view on mobile touch devices
+  useEffect(() => {
+    if (!navScrollRef.current) return
+    const activeEl = navScrollRef.current.querySelector<HTMLElement>(`[data-tab-id="${activeTab}"]`)
+    if (activeEl && typeof activeEl.scrollIntoView === 'function') {
+      activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+    }
+  }, [activeTab])
+
+  const scrollNav = (direction: 'next' | 'prev') => {
+    if (!navScrollRef.current || typeof navScrollRef.current.scrollBy !== 'function') return
+    const isRtl = document.documentElement.dir === 'rtl' || lang === 'ar'
+    const step = 220
+    const delta = direction === 'next' ? (isRtl ? -step : step) : (isRtl ? step : -step)
+    navScrollRef.current.scrollBy({ left: delta, behavior: 'smooth' })
+  }
 
   const navItems: Array<{
     id: NavTab
@@ -336,118 +356,131 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Main Editorial Masthead & Navigation (Fully responsive across all phones, tablets, and desktop) */}
+      {/* Top Masthead Tier: Brand Crest, Moroccan Telemetry, Sound & Language Switcher */}
       <div className="mx-auto max-w-7xl px-3 sm:px-6">
-        <div className="flex flex-col justify-between gap-3 py-3 xl:flex-row xl:items-center">
-          {/* Top Row: Brand Crest & Prominent Language Controller */}
-          <div className="flex items-center justify-between gap-3 w-full xl:w-auto">
-            {/* Custom Moroccan Zellige & Brass Fish Brand Crest */}
-            <div
-              onClick={() => {
-                sounds.playBubble()
-                setActiveTab('fish')
-              }}
-              className="flex cursor-pointer items-center gap-2.5 sm:gap-3.5 group min-w-0"
-            >
-              <img
-                src={getAssetUrl("favicon.svg")}
-                alt="L7OT Moroccan Maritime Crest"
-                className="h-10 w-10 sm:h-12 sm:w-12 shrink-0 rounded-lg border border-[#d96b27]/40 bg-[#14100d] p-0.5 shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:border-[#e68a45]"
-              />
-              <div className="min-w-0">
-                <div className="flex items-baseline gap-2">
-                  <h1 className="font-editorial text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-[#f6f1e7] truncate">
-                    {t.siteTitle}
-                  </h1>
-                  <span className="hidden sm:inline border border-[#d96b27]/35 bg-[#d96b27]/10 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase text-[#f2b47e]">
-                    {lang === 'ar'
-                      ? '44 نوعاً'
-                      : lang === 'fr'
-                        ? '44 ESPÈCES'
-                        : '44 SPECIES'}
-                  </span>
-                </div>
-                <p className="mt-0.5 text-[11px] sm:text-xs text-[#a69b8d] truncate">{t.tagline}</p>
+        <div className="flex items-center justify-between gap-3 py-2.5 sm:py-3 border-b border-[#f6f1e7]/8">
+          {/* Custom Moroccan Zellige & Brass Fish Brand Crest */}
+          <div
+            onClick={() => {
+              sounds.playBubble()
+              setActiveTab('fish')
+            }}
+            className="flex cursor-pointer items-center gap-2.5 sm:gap-3.5 group min-w-0"
+          >
+            <img
+              src={getAssetUrl("favicon.svg")}
+              alt="L7OT Moroccan Maritime Crest"
+              className="h-9 w-9 sm:h-11 sm:w-11 shrink-0 rounded-lg border border-[#d96b27]/40 bg-[#14100d] p-0.5 shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:border-[#e68a45]"
+            />
+            <div className="min-w-0">
+              <div className="flex items-baseline gap-2">
+                <h1 className="font-editorial text-lg sm:text-2xl font-bold tracking-tight text-[#f6f1e7] truncate">
+                  {t.siteTitle}
+                </h1>
+                <span className="hidden sm:inline border border-[#d96b27]/35 bg-[#d96b27]/10 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase text-[#f2b47e] rounded">
+                  {lang === 'ar'
+                    ? '44 نوعاً'
+                    : lang === 'fr'
+                      ? '44 ESPÈCES'
+                      : '44 SPECIES'}
+                </span>
               </div>
-            </div>
-
-            {/* Prominent High-End Language Switcher & Audio Controls (Accessible on EVERY screen, never stuck!) */}
-            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-              {/* GPS Port Chip (Visible on mobile/tablet) */}
-              {userPortLocation && (
-                <button
-                  type="button"
-                  onClick={userPortLocation.detectLocation}
-                  disabled={userPortLocation.isLocating}
-                  title={lang === 'ar' ? 'رصد الموقع الجغرافي وتحديد أقرب ميناء مغربي' : 'Localisation GPS du port le plus proche'}
-                  className="hidden md:inline-flex lg:hidden items-center gap-1 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1 text-xs font-medium text-cyan-300"
-                >
-                  <MapPin className={`h-3.5 w-3.5 text-cyan-400 ${userPortLocation.isLocating ? 'animate-spin' : ''}`} />
-                  <span className="max-w-[110px] truncate">
-                    {userPortLocation.isLocating
-                      ? 'GPS...'
-                      : (lang === 'ar' ? userPortLocation.selectedRegion.primaryPortAr.split('/')[0] : userPortLocation.selectedRegion.primaryPortFr.split('/')[0])}
-                  </span>
-                </button>
-              )}
-
-              {/* Language Switcher Pills */}
-              <div className="flex items-center rounded-xl border border-[#f6f1e7]/20 bg-[#14110f] p-1 shadow-lg ring-1 ring-white/5">
-                <button
-                  type="button"
-                  onClick={() => setLang('ar')}
-                  className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-all active:scale-95 ${
-                    lang === 'ar'
-                      ? 'bg-[#d96b27] text-[#0b0908] shadow-md'
-                      : 'text-[#a69b8d] hover:text-[#f6f1e7]'
-                  }`}
-                >
-                  العربية
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setLang('fr')}
-                  className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-all active:scale-95 ${
-                    lang === 'fr'
-                      ? 'bg-[#d96b27] text-[#0b0908] shadow-md'
-                      : 'text-[#a69b8d] hover:text-[#f6f1e7]'
-                  }`}
-                >
-                  FR
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setLang('en')}
-                  className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-all active:scale-95 ${
-                    lang === 'en'
-                      ? 'bg-[#d96b27] text-[#0b0908] shadow-md'
-                      : 'text-[#a69b8d] hover:text-[#f6f1e7]'
-                  }`}
-                >
-                  EN
-                </button>
-              </div>
-
-              {/* Sound Toggle */}
-              <button
-                type="button"
-                onClick={() => setSoundActive(sounds.toggle())}
-                title={soundActive ? (lang === 'ar' ? 'كتم المؤثرات الصوتية' : 'Couper les sons') : (lang === 'ar' ? 'تشغيل المؤثرات الصوتية' : 'Activer les sons')}
-                className={`flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl transition-all border shadow-lg active:scale-95 ${
-                  soundActive
-                    ? 'border-cyan-500/30 bg-cyan-500/15 text-cyan-300'
-                    : 'border-white/10 text-[#786c60] hover:text-[#f6f1e7] bg-[#14110f]'
-                }`}
-              >
-                {soundActive ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
-              </button>
+              <p className="text-[11px] sm:text-xs text-[#a69b8d] truncate max-w-[210px] sm:max-w-md">{t.tagline}</p>
             </div>
           </div>
 
-          {/* Numbered Editorial Index Navigation (Touch-scrollable with short labels on mobile, full labels on desktop) */}
+          {/* Controls: GPS Port Badge, High-End Language Switcher & Audio Toggle */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+            {/* GPS Port Chip (Visible on screens with room) */}
+            {userPortLocation && (
+              <button
+                type="button"
+                onClick={userPortLocation.detectLocation}
+                disabled={userPortLocation.isLocating}
+                title={lang === 'ar' ? 'رصد الموقع الجغرافي وتحديد أقرب ميناء مغربي' : 'Localisation GPS du port le plus proche'}
+                className="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1 text-xs font-medium text-cyan-300 hover:border-cyan-400/50 hover:bg-cyan-500/15 transition-all"
+              >
+                <MapPin className={`h-3.5 w-3.5 text-cyan-400 ${userPortLocation.isLocating ? 'animate-spin' : ''}`} />
+                <span className="max-w-[130px] truncate">
+                  {userPortLocation.isLocating
+                    ? 'GPS...'
+                    : (lang === 'ar' ? userPortLocation.selectedRegion.primaryPortAr.split('/')[0] : userPortLocation.selectedRegion.primaryPortFr.split('/')[0])}
+                </span>
+              </button>
+            )}
+
+            {/* Language Switcher Pills */}
+            <div className="flex items-center rounded-xl border border-[#f6f1e7]/20 bg-[#14110f] p-0.5 sm:p-1 shadow-lg ring-1 ring-white/5">
+              <button
+                type="button"
+                onClick={() => setLang('ar')}
+                className={`rounded-lg px-2 sm:px-2.5 py-1 text-xs font-bold transition-all active:scale-95 ${
+                  lang === 'ar'
+                    ? 'bg-[#d96b27] text-[#0b0908] shadow-md'
+                    : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+                }`}
+              >
+                العربية
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang('fr')}
+                className={`rounded-lg px-2 sm:px-2.5 py-1 text-xs font-bold transition-all active:scale-95 ${
+                  lang === 'fr'
+                    ? 'bg-[#d96b27] text-[#0b0908] shadow-md'
+                    : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+                }`}
+              >
+                FR
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang('en')}
+                className={`rounded-lg px-2 sm:px-2.5 py-1 text-xs font-bold transition-all active:scale-95 ${
+                  lang === 'en'
+                    ? 'bg-[#d96b27] text-[#0b0908] shadow-md'
+                    : 'text-[#a69b8d] hover:text-[#f6f1e7]'
+                }`}
+              >
+                EN
+              </button>
+            </div>
+
+            {/* Sound Toggle */}
+            <button
+              type="button"
+              onClick={() => setSoundActive(sounds.toggle())}
+              title={soundActive ? (lang === 'ar' ? 'كتم المؤثرات الصوتية' : 'Couper les sons') : (lang === 'ar' ? 'تشغيل المؤثرات الصوتية' : 'Activer les sons')}
+              className={`flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl transition-all border shadow-lg active:scale-95 ${
+                soundActive
+                  ? 'border-cyan-500/30 bg-cyan-500/15 text-cyan-300'
+                  : 'border-white/10 text-[#786c60] hover:text-[#f6f1e7] bg-[#14110f]'
+              }`}
+            >
+              {soundActive ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Navigation Tier: Dedicated Full-Width Navigation Bar (100% visible on PC/Desktop, auto-centering touch rail on mobile) */}
+      <div className="mx-auto max-w-7xl px-2 sm:px-6 py-2">
+        <div className="relative flex items-center">
+          {/* Mobile Prev Navigation Scroll Arrow */}
+          <button
+            type="button"
+            onClick={() => scrollNav('prev')}
+            aria-label={lang === 'ar' ? 'السابق في شريط التصفح' : 'Précédent dans la navigation'}
+            className="md:hidden flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-[#181310] text-[#a69b8d] hover:text-[#f6f1e7] active:scale-90 transition z-10 me-1 shadow-sm"
+          >
+            <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
+          </button>
+
+          {/* Navigation Bar (Desktop: 2-tier 6-column grid, 100% visible; Mobile: touch-scrollable rail with auto-center) */}
           <nav
+            ref={navScrollRef}
             aria-label="Main Navigation"
-            className="flex overflow-x-auto no-scrollbar scroll-smooth snap-x items-center gap-1.5 rounded-xl border border-[#f6f1e7]/10 bg-[#14110f] p-1.5 shadow-inner max-w-full -mx-1 px-1 sm:mx-0 sm:px-1.5"
+            className="flex-1 flex overflow-x-auto md:overflow-visible no-scrollbar scroll-smooth snap-x md:snap-none md:grid md:grid-cols-4 lg:grid-cols-6 items-center gap-1 sm:gap-1.5 rounded-xl border border-[#f6f1e7]/10 bg-[#14110f] p-1.5 shadow-inner"
           >
             {navItems.map((item) => {
               const isActive = activeTab === item.id
@@ -456,17 +489,20 @@ export const Header: React.FC<HeaderProps> = ({
                 <button
                   key={item.id}
                   type="button"
+                  data-tab-id={item.id}
+                  data-active={isActive ? 'true' : 'false'}
                   aria-label={item.label}
+                  title={item.label}
                   onClick={() => {
                     sounds.playTabClick()
                     setActiveTab(item.id)
                   }}
-                  className={`group relative flex shrink-0 snap-start items-center gap-1.5 rounded-lg px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs transition-transform duration-150 active:scale-95 ${
+                  className={`group relative flex shrink-0 md:shrink items-center justify-center gap-1.5 rounded-lg px-2 sm:px-2.5 py-1.5 text-xs transition-all duration-150 active:scale-95 ${
                     isActive
-                      ? 'bg-[#d96b27] text-[#0b0908] font-bold shadow-md shadow-[#d96b27]/20 ring-1 ring-[#e68a45]'
+                      ? 'bg-[#d96b27] text-[#0b0908] font-bold shadow-md shadow-[#d96b27]/25 ring-1 ring-[#e68a45]'
                       : item.highlight
                         ? 'border border-[#e68a45]/40 bg-[#e68a45]/10 text-[#f2b47e] hover:bg-[#e68a45]/20'
-                        : 'text-[#d4cbbd] hover:bg-[#f6f1e7]/8 hover:text-[#f6f1e7]'
+                        : 'text-[#d4cbbd] hover:bg-[#f6f1e7]/10 hover:text-[#f6f1e7]'
                   }`}
                 >
                   <Icon
@@ -481,21 +517,28 @@ export const Header: React.FC<HeaderProps> = ({
                   <span
                     dir="ltr"
                     className={`font-mono text-[9px] ${
-                      isActive ? 'text-[#0b0908]/80 font-bold' : 'text-[#e68a45]/80'
+                      isActive ? 'text-[#0b0908]/90 font-bold' : 'text-[#e68a45]/80'
                     }`}
                   >
                     {item.index}
                   </span>
-                  <span className="font-medium text-xs whitespace-nowrap sm:hidden">
+                  <span className="font-medium text-xs whitespace-nowrap">
                     {item.shortLabel}
-                  </span>
-                  <span className="font-medium text-xs whitespace-nowrap hidden sm:inline">
-                    {item.label}
                   </span>
                 </button>
               )
             })}
           </nav>
+
+          {/* Mobile Next Navigation Scroll Arrow */}
+          <button
+            type="button"
+            onClick={() => scrollNav('next')}
+            aria-label={lang === 'ar' ? 'التالي في شريط التصفح' : 'Suivant dans la navigation'}
+            className="md:hidden flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-[#181310] text-[#a69b8d] hover:text-[#f6f1e7] active:scale-90 transition z-10 ms-1 shadow-sm"
+          >
+            <ChevronRight className="h-4 w-4 rtl:rotate-180" />
+          </button>
         </div>
       </div>
     </header>
