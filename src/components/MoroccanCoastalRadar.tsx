@@ -764,6 +764,27 @@ export const MoroccanCoastalRadar: React.FC<MoroccanCoastalRadarProps> = ({
       <div className="relative z-10 mt-6 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-start">
         {/* Left Column: Stylized Coastal Vector Map (7 cols) */}
         <div className="lg:col-span-7 rounded-xl border border-white/5 bg-[#090d12] p-4 sm:p-6 relative overflow-hidden shadow-inner">
+          {/* Interactive Onboarding Explainer Banner */}
+          <div className="mb-4 rounded-lg border border-cyan-500/30 bg-cyan-950/30 p-3 flex items-start gap-3 text-xs">
+            <span className="text-xl select-none shrink-0 mt-0.5">🗺️</span>
+            <div className="space-y-1">
+              <p className="font-bold text-cyan-200">
+                {lang === 'ar'
+                  ? 'خريطة السواحل والموانئ (3,500 كلم) · اضغط على أي نقطة لاختيار الميناء'
+                  : lang === 'fr'
+                  ? 'Atlas Halieutique (3 500 km) · Cliquez sur un port pour afficher ses données'
+                  : 'Coastal & Ports Atlas (3,500 km) · Click any port point to view live data'}
+              </p>
+              <p className="text-[11px] text-[#a69b8d] leading-relaxed">
+                {lang === 'ar'
+                  ? 'تمثل هذه الخريطة الشريط الساحلي للمغرب من السعيدية شرقاً (البحر المتوسط) حتى الكويرة جنوباً (المحيط الأطلسي). انقر على أي نقطة لعرض علو الأمواج، سرعة الرياح، وأهم أنواع السمك المصطادة فيه اليوم.'
+                  : lang === 'fr'
+                  ? 'Cette carte trace le littoral marocain de Saïdia (Méditerranée) à Lagouira (Atlantique). Cliquez sur n\'importe quel port pour voir la houle, le vent, la flotte et les poissons débarqués.'
+                  : 'This map traces the Moroccan coast from Saidia (Mediterranean) down to Lagouira (Atlantic). Click any port to see live swell, wind, fleet, and fresh catch.'}
+              </p>
+            </div>
+          </div>
+
           <div className="flex items-center justify-between text-[11px] font-mono text-[#786c60] mb-3">
             <span className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
@@ -773,7 +794,7 @@ export const MoroccanCoastalRadar: React.FC<MoroccanCoastalRadarProps> = ({
           </div>
 
           {/* SVG Coastline Projection Canvas */}
-          <div className="relative w-full aspect-[16/10] max-h-[520px] select-none">
+          <div className="relative w-full aspect-[16/10] max-h-[540px] select-none bg-[#050910] rounded-lg overflow-hidden border border-white/5">
             <svg
               viewBox="0 0 1000 960"
               className="w-full h-full drop-shadow-lg"
@@ -784,6 +805,12 @@ export const MoroccanCoastalRadar: React.FC<MoroccanCoastalRadarProps> = ({
                   <stop offset="0%" stopColor="#0891b2" stopOpacity="0.9" />
                   <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.95" />
                   <stop offset="100%" stopColor="#d96b27" stopOpacity="0.85" />
+                </linearGradient>
+
+                <linearGradient id="landGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#1e293b" stopOpacity="0.6" />
+                  <stop offset="50%" stopColor="#0f172a" stopOpacity="0.75" />
+                  <stop offset="100%" stopColor="#090d16" stopOpacity="0.9" />
                 </linearGradient>
 
                 <linearGradient id="corridorGlow" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -797,45 +824,104 @@ export const MoroccanCoastalRadar: React.FC<MoroccanCoastalRadarProps> = ({
                 </filter>
               </defs>
 
+              {/* Ocean Grid Lines */}
+              <line x1="50" y1="200" x2="950" y2="200" stroke="rgba(255,255,255,0.025)" strokeDasharray="4 6" />
+              <line x1="50" y1="400" x2="950" y2="400" stroke="rgba(255,255,255,0.025)" strokeDasharray="4 6" />
+              <line x1="50" y1="600" x2="950" y2="600" stroke="rgba(255,255,255,0.025)" strokeDasharray="4 6" />
+              <line x1="50" y1="800" x2="950" y2="800" stroke="rgba(255,255,255,0.025)" strokeDasharray="4 6" />
+
+              {/* Geographic Context: Spain & Strait of Gibraltar (Top) */}
+              <path
+                d="M 500,0 L 800,0 L 780,45 Q 670,55 600,50 Q 540,45 500,0 Z"
+                fill="rgba(30, 41, 59, 0.55)"
+                stroke="rgba(255, 255, 255, 0.1)"
+                strokeWidth="1"
+              />
+              <text
+                x="650"
+                y="32"
+                textAnchor="middle"
+                className="fill-slate-400 font-mono text-[11px] font-bold select-none"
+              >
+                🇪🇸 مضيق جبل طارق · GIBRALTAR
+              </text>
+
+              {/* Geographic Context: Canary Islands (West of Tarfaya/Laayoune) */}
+              <g className="select-none opacity-80">
+                <ellipse cx="65" cy="625" rx="14" ry="7" fill="rgba(30, 41, 59, 0.75)" stroke="#38bdf8" strokeWidth="1" />
+                <ellipse cx="85" cy="640" rx="12" ry="6" fill="rgba(30, 41, 59, 0.75)" stroke="#38bdf8" strokeWidth="1" />
+                <ellipse cx="50" cy="648" rx="10" ry="5" fill="rgba(30, 41, 59, 0.75)" stroke="#38bdf8" strokeWidth="1" />
+                <text x="75" y="670" textAnchor="middle" className="fill-sky-400/70 font-mono text-[10px] font-bold">
+                  🏝️ جزر الكناري (Canaries)
+                </text>
+              </g>
+
               {/* Bathymetric Depth Contour Lines (Canary Current & Upwelling) */}
               <path
                 d="M 50,200 Q 300,300 600,100"
-                stroke="rgba(6, 182, 212, 0.08)"
+                stroke="rgba(6, 182, 212, 0.12)"
                 strokeWidth="1.5"
                 strokeDasharray="4 6"
                 fill="none"
               />
               <path
                 d="M 20,500 Q 250,600 500,400"
-                stroke="rgba(6, 182, 212, 0.08)"
+                stroke="rgba(6, 182, 212, 0.12)"
                 strokeWidth="1.5"
                 strokeDasharray="4 6"
                 fill="none"
               />
               <path
                 d="M 10,800 Q 150,850 400,700"
-                stroke="rgba(6, 182, 212, 0.08)"
+                stroke="rgba(6, 182, 212, 0.12)"
                 strokeWidth="1.5"
                 strokeDasharray="4 6"
                 fill="none"
               />
 
+              {/* Moroccan Sovereign Landmass Shading Fill */}
+              <path
+                d="M 910,65 L 890,70 Q 820,95 740,95 Q 670,80 600,65 Q 560,95 560,130 Q 530,170 480,220 Q 440,260 410,290 Q 395,310 380,335 Q 350,370 330,400 Q 305,445 290,480 Q 270,520 250,550 Q 220,610 190,670 Q 155,760 120,850 Q 105,890 95,930 L 750,930 L 980,500 Z"
+                fill="url(#landGradient)"
+                stroke="rgba(255, 255, 255, 0.08)"
+                strokeWidth="1.5"
+              />
+
+              {/* Sovereign Territory Watermark Inside Landmass */}
+              <g className="select-none pointer-events-none">
+                <text x="620" y="380" className="fill-amber-400/25 font-editorial text-[22px] font-bold tracking-widest text-center">
+                  🇲🇦 المملكة المغربية
+                </text>
+                <text x="620" y="405" className="fill-slate-400/20 font-mono text-[11px] tracking-widest text-center">
+                  ROYAUME DU MAROC · DOMAINE MARITIME
+                </text>
+              </g>
+
+              {/* Ocean Water Geographic Typography */}
+              <text
+                x="140"
+                y="430"
+                transform="rotate(-70 140 430)"
+                className="fill-cyan-500/20 font-mono text-[20px] tracking-[0.25em] font-bold select-none pointer-events-none"
+              >
+                🌊 المحيط الأطلسي · OCÉAN ATLANTIQUE
+              </text>
+              <text
+                x="760"
+                y="45"
+                className="fill-cyan-500/25 font-mono text-[13px] tracking-wider font-bold select-none pointer-events-none"
+              >
+                🌊 البحر الأبيض المتوسط · MÉDITERRANÉE
+              </text>
+
               {/* Stylized Moroccan Coastline Arc */}
               <path
                 d="M 910,65 L 890,70 Q 820,95 740,95 Q 670,80 600,65 Q 560,95 560,130 Q 530,170 480,220 Q 440,260 410,290 Q 395,310 380,335 Q 350,370 330,400 Q 305,445 290,480 Q 270,520 250,550 Q 220,610 190,670 Q 155,760 120,850 Q 105,890 95,930"
                 stroke="url(#coastGradient)"
-                strokeWidth="4"
+                strokeWidth="5"
                 strokeLinecap="round"
                 fill="none"
                 filter="url(#glow)"
-              />
-
-              {/* Landmass Shading Fill */}
-              <path
-                d="M 910,65 L 890,70 Q 820,95 740,95 Q 670,80 600,65 Q 560,95 560,130 Q 530,170 480,220 Q 440,260 410,290 Q 395,310 380,335 Q 350,370 330,400 Q 305,445 290,480 Q 270,520 250,550 Q 220,610 190,670 Q 155,760 120,850 Q 105,890 95,930 L 700,930 L 950,500 Z"
-                fill="rgba(20, 26, 34, 0.45)"
-                stroke="rgba(255, 255, 255, 0.03)"
-                strokeWidth="1"
               />
 
               {/* Fishery Corridors Layer */}
@@ -932,21 +1018,49 @@ export const MoroccanCoastalRadar: React.FC<MoroccanCoastalRadarProps> = ({
                       {/* Inner Core Pin */}
                       <circle cx={port.cx} cy={port.cy} r="3.5" fill="#ffffff" />
 
-                      {/* Port Label */}
-                      <text
-                        x={port.cx + (port.cx > 500 ? -12 : 12)}
-                        y={port.cy + 4}
-                        textAnchor={port.cx > 500 ? 'end' : 'start'}
-                        className={`text-[11px] font-mono select-none transition-all ${
-                          isSelected
-                            ? 'fill-[#f2b47e] font-bold text-[12px]'
-                            : isHovered
-                            ? 'fill-cyan-300 font-semibold'
-                            : 'fill-[#a69b8d]/80 text-[10px]'
-                        }`}
-                      >
-                        {lang === 'ar' ? port.nameAr.split(' ')[0] : port.nameFr.split(' ')[0]}
-                      </text>
+                      {/* Port Label with high-contrast background pill for key hubs or active */}
+                      {(() => {
+                        const isKeyHub = ['tanger-med', 'casablanca', 'safi', 'agadir', 'laayoune', 'dakhla', 'saidia'].includes(port.id)
+                        const labelText = (lang === 'ar' ? port.nameAr.split(' ')[0] : port.nameFr.split(' ')[0]) || ''
+                        const isRightSide = port.cx > 500
+                        const tx = port.cx + (isRightSide ? -16 : 16)
+                        const ty = port.cy + 4
+
+                        return (
+                          <g>
+                            {/* Prominent badge chip for selected or key hub ports */}
+                            {(isSelected || isHovered || isKeyHub) && (
+                              <rect
+                                x={isRightSide ? tx - (labelText.length * 8 + 12) : tx - 4}
+                                y={ty - 13}
+                                width={labelText.length * 8 + 14}
+                                height={18}
+                                rx="4"
+                                fill={isSelected ? 'rgba(217, 107, 39, 0.95)' : isHovered ? 'rgba(8, 145, 178, 0.9)' : 'rgba(15, 23, 42, 0.85)'}
+                                stroke={isSelected ? '#fbd38d' : isHovered ? '#67e8f9' : 'rgba(255, 255, 255, 0.18)'}
+                                strokeWidth="1"
+                              />
+                            )}
+
+                            <text
+                              x={isRightSide ? tx - 6 : tx + 3}
+                              y={ty}
+                              textAnchor={isRightSide ? 'end' : 'start'}
+                              className={`text-[11px] font-mono select-none transition-all ${
+                                isSelected
+                                  ? 'fill-[#0b0908] font-bold text-[11px]'
+                                  : isHovered
+                                  ? 'fill-white font-bold text-[11px]'
+                                  : isKeyHub
+                                  ? 'fill-amber-200 font-semibold text-[10px]'
+                                  : 'fill-[#a69b8d] text-[10px]'
+                              }`}
+                            >
+                              {labelText}
+                            </text>
+                          </g>
+                        )
+                      })()}
                     </g>
                   )
                 })}
