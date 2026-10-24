@@ -482,79 +482,79 @@ export const FishModal: React.FC<FishModalProps> = ({
           <button
             type="button"
             onClick={() => setModalTab('overview')}
-            className={`rounded-sm px-3 py-1.5 transition-all flex items-center gap-1.5 ${
+            className={`rounded-lg px-3 h-8 whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 ${
               modalTab === 'overview'
                 ? 'bg-[#d96b27] text-[#0b0908] font-bold'
                 : 'text-[#b5a592] hover:text-[#f4ede2]'
             }`}
           >
             <BookOpen className="h-3.5 w-3.5" />
-            {lang === 'ar' ? 'نظرة عامة والأسماء' : 'Aperçu & Noms'}
+            <span>{lang === 'ar' ? 'نظرة عامة والأسماء' : 'Aperçu & Noms'}</span>
           </button>
 
           <button
             type="button"
             onClick={() => setModalTab('law')}
-            className={`rounded-sm px-3 py-1.5 transition-all flex items-center gap-1.5 ${
+            className={`rounded-lg px-3 h-8 whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 ${
               modalTab === 'law'
                 ? 'bg-amber-500 text-[#0b0908] font-bold'
                 : 'text-amber-400/80 hover:text-amber-300'
             }`}
           >
             <Scale className="h-3.5 w-3.5" />
-            {lang === 'ar' ? 'قانون الصيد والمقاسات' : 'Lois & Tailles Min.'}
+            <span>{lang === 'ar' ? 'قانون الصيد والمقاسات' : 'Lois & Tailles Min.'}</span>
           </button>
 
           <button
             type="button"
             onClick={() => setModalTab('cleaning')}
-            className={`rounded-sm px-3 py-1.5 transition-all flex items-center gap-1.5 ${
+            className={`rounded-lg px-3 h-8 whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 ${
               modalTab === 'cleaning'
                 ? 'bg-[#d96b27] text-[#0b0908] font-bold'
                 : 'text-[#b5a592] hover:text-[#f4ede2]'
             }`}
           >
             <Scissors className="h-3.5 w-3.5" />
-            {lang === 'ar' ? 'دليل التنقية (الكسال)' : 'Vidéo & Découpe'}
+            <span>{lang === 'ar' ? 'دليل التنقية (الكسال)' : 'Vidéo & Découpe'}</span>
           </button>
 
           <button
             type="button"
             onClick={() => setModalTab('nutrition')}
-            className={`rounded-sm px-3 py-1.5 transition-all flex items-center gap-1.5 ${
+            className={`rounded-lg px-3 h-8 whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 ${
               modalTab === 'nutrition'
                 ? 'bg-[#d96b27] text-[#0b0908] font-bold'
                 : 'text-[#b5a592] hover:text-[#f4ede2]'
             }`}
           >
             <Zap className="h-3.5 w-3.5" />
-            {lang === 'ar' ? 'القيمة الغذائية' : 'Nutrition'}
+            <span>{lang === 'ar' ? 'القيمة الغذائية' : 'Nutrition'}</span>
           </button>
 
           <button
             type="button"
             onClick={() => setModalTab('market')}
-            className={`rounded-sm px-3 py-1.5 transition-all flex items-center gap-1.5 ${
+            className={`rounded-lg px-3 h-8 whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 ${
               modalTab === 'market'
                 ? 'bg-[#d96b27] text-[#0b0908] font-bold'
                 : 'text-[#b5a592] hover:text-[#f4ede2]'
             }`}
           >
             <TrendingUp className="h-3.5 w-3.5" />
-            {lang === 'ar' ? 'بورصة الأسعار' : 'Bourse & Marchés'}
+            <span>{lang === 'ar' ? 'بورصة الأسعار' : 'Bourse & Marchés'}</span>
           </button>
 
           <button
             type="button"
             onClick={() => setModalTab('science_api')}
-            className={`rounded-sm px-3 py-1.5 transition-all flex items-center gap-1.5 ${
+            className={`rounded-lg px-3 h-8 whitespace-nowrap shrink-0 transition-all flex items-center gap-1.5 ${
               modalTab === 'science_api'
                 ? 'bg-cyan-500 text-[#0b0908] font-bold'
                 : 'text-cyan-400/80 hover:text-cyan-300'
             }`}
           >
             <Database className="h-3.5 w-3.5" />
-            {lang === 'ar' ? 'البيولوجيا (WoRMS)' : 'Biologie (APIs)'}
+            <span>{lang === 'ar' ? 'البيولوجيا (WoRMS)' : 'Biologie (APIs)'}</span>
           </button>
         </div>
 

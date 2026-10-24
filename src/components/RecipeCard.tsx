@@ -107,9 +107,9 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({
                 </span>
               </div>
 
-              <span className="inline-flex items-center gap-1 rounded bg-[#f6f1e7] px-2.5 py-1 font-sans text-[11px] font-bold text-[#0b0908] transition-colors group-hover:bg-[#e68a45]">
-                <ChefHat className="h-3 w-3" />
-                {t.viewDetails}
+              <span className="inline-flex h-7 items-center gap-1.5 rounded-lg bg-[#f6f1e7] px-2.5 font-sans text-[11px] font-bold text-[#0b0908] transition-colors group-hover:bg-[#e68a45] whitespace-nowrap shrink-0">
+                <ChefHat className="h-3 w-3 shrink-0" />
+                <span className="whitespace-nowrap">{t.viewDetails}</span>
               </span>
             </div>
           </div>

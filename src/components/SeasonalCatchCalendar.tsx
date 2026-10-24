@@ -140,7 +140,7 @@ export const SeasonalCatchCalendar: React.FC<SeasonalCatchCalendarProps> = ({
           <button
             type="button"
             onClick={() => setActiveCategory('all')}
-            className={`rounded-lg px-3.5 py-1.5 font-bold transition ${
+            className={`rounded-lg px-3.5 py-1.5 font-bold transition whitespace-nowrap shrink-0 ${
               activeCategory === 'all'
                 ? 'bg-[#d96b27] text-[#0b0908]'
                 : 'text-[#a69b8d] hover:text-[#f6f1e7]'
@@ -151,7 +151,7 @@ export const SeasonalCatchCalendar: React.FC<SeasonalCatchCalendarProps> = ({
           <button
             type="button"
             onClick={() => setActiveCategory('peak')}
-            className={`rounded-lg px-3.5 py-1.5 font-bold transition ${
+            className={`rounded-lg px-3.5 py-1.5 font-bold transition whitespace-nowrap shrink-0 ${
               activeCategory === 'peak'
                 ? 'bg-emerald-600 text-white'
                 : 'text-[#a69b8d] hover:text-emerald-400'
@@ -162,7 +162,7 @@ export const SeasonalCatchCalendar: React.FC<SeasonalCatchCalendarProps> = ({
           <button
             type="button"
             onClick={() => setActiveCategory('rest')}
-            className={`rounded-lg px-3.5 py-1.5 font-bold transition ${
+            className={`rounded-lg px-3.5 py-1.5 font-bold transition whitespace-nowrap shrink-0 ${
               activeCategory === 'rest'
                 ? 'bg-rose-600 text-white'
                 : 'text-[#a69b8d] hover:text-rose-400'

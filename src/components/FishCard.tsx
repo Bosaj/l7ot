@@ -180,7 +180,7 @@ export const FishCard: React.FC<FishCardProps> = ({
             type="button"
             onClick={handleAudio}
             title={t.listenPronunciation}
-            className={`absolute bottom-3 end-3 flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold shadow-lg backdrop-blur-md transition-all ${
+            className={`absolute bottom-3 end-3 flex h-8 items-center gap-2 rounded-full border px-3 text-xs font-semibold shadow-lg backdrop-blur-md transition-all whitespace-nowrap shrink-0 ${
               isPlayingAudio
                 ? 'border-[#e68a45] bg-[#d96b27] text-[#0b0908] ring-4 ring-[#d96b27]/30'
                 : 'border-[#f6f1e7]/25 bg-[#0b0908]/85 text-[#f6f1e7] hover:border-[#e68a45] hover:bg-[#d96b27] hover:text-[#0b0908]'
@@ -358,9 +358,9 @@ export const FishCard: React.FC<FishCardProps> = ({
             </div>
           </div>
 
-          {/* Action Bar */}
+          {/* Action Bar (Uniform 32px Button Heights & Guaranteed Single-Line Labels) */}
           <div className="flex items-center justify-between gap-1.5 border-t border-[#f6f1e7]/10 pt-3">
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 shrink-0">
               {onOpenCleaningTutorial && (
                 <button
                   type="button"
@@ -375,15 +375,15 @@ export const FishCard: React.FC<FishCardProps> = ({
                         ? 'Tutoriel vidéo de nettoyage'
                         : 'Video Cleaning Tutorial'
                   }
-                  className="flex items-center gap-1 rounded border border-[#f6f1e7]/12 bg-[#1c1714] px-2.5 py-1.5 text-[11px] font-medium text-[#f2b47e] transition-colors hover:border-[#d96b27] hover:bg-[#d96b27] hover:text-[#0b0908]"
+                  className="flex h-8 items-center gap-1.5 rounded-lg border border-[#f6f1e7]/12 bg-[#1c1714] px-2 sm:px-2.5 text-[11px] font-medium text-[#f2b47e] transition-colors hover:border-[#d96b27] hover:bg-[#d96b27] hover:text-[#0b0908] whitespace-nowrap shrink-0 active:scale-95"
                 >
-                  <Scissors className="h-3.5 w-3.5" />
-                  <span className="hidden sm:inline">
+                  <Scissors className="h-3.5 w-3.5 shrink-0" />
+                  <span className="hidden xl:inline whitespace-nowrap">
                     {lang === 'ar'
-                      ? 'فيديو التنقية'
+                      ? 'تنقية الحوت'
                       : lang === 'fr'
                         ? 'Nettoyage'
-                        : 'Cleaning Video'}
+                        : 'Cleaning'}
                   </span>
                 </button>
               )}
@@ -400,9 +400,9 @@ export const FishCard: React.FC<FishCardProps> = ({
                       ? 'حاسبة القيمة الغذائية الحية (100غ / 1كلغ)'
                       : '100g / 1kg Live Nutrition Calculator'
                   }
-                  className="flex h-8 w-8 items-center justify-center rounded border border-[#f6f1e7]/12 bg-[#1c1714] text-emerald-400 transition-colors hover:bg-emerald-500 hover:text-[#0b0908]"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#f6f1e7]/12 bg-[#1c1714] text-emerald-400 transition-colors hover:bg-emerald-500 hover:text-[#0b0908] shrink-0 active:scale-95"
                 >
-                  <Zap className="h-3.5 w-3.5" />
+                  <Zap className="h-3.5 w-3.5 shrink-0" />
                 </button>
               )}
 
@@ -414,9 +414,9 @@ export const FishCard: React.FC<FishCardProps> = ({
                     onCookWithFish(fish)
                   }}
                   title={t.chefTitle}
-                  className="flex h-8 w-8 items-center justify-center rounded border border-[#f6f1e7]/12 bg-[#1c1714] text-[#e68a45] transition-colors hover:bg-[#d96b27] hover:text-[#0b0908]"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#f6f1e7]/12 bg-[#1c1714] text-[#e68a45] transition-colors hover:bg-[#d96b27] hover:text-[#0b0908] shrink-0 active:scale-95"
                 >
-                  <ChefHat className="h-3.5 w-3.5" />
+                  <ChefHat className="h-3.5 w-3.5 shrink-0" />
                 </button>
               )}
             </div>
@@ -424,10 +424,12 @@ export const FishCard: React.FC<FishCardProps> = ({
             <button
               type="button"
               onClick={() => onSelectFish(fish)}
-              className="flex items-center gap-1.5 rounded bg-[#f6f1e7] px-3 py-1.5 text-xs font-bold text-[#0b0908] transition-colors hover:bg-[#e68a45]"
+              aria-label={`${t.viewDetails} - ${localizedPrimaryName}`}
+              title={t.viewDetails}
+              className="flex h-8 items-center gap-1.5 rounded-lg bg-[#f6f1e7] px-2.5 sm:px-3 text-xs font-bold text-[#0b0908] transition-colors hover:bg-[#e68a45] whitespace-nowrap shrink-0 shadow-sm active:scale-95"
             >
-              <Eye className="h-3.5 w-3.5" />
-              <span>{t.viewDetails}</span>
+              <Eye className="h-3.5 w-3.5 shrink-0" />
+              <span className="whitespace-nowrap">{t.viewDetails}</span>
             </button>
           </div>
         </div>

@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.3] - 2026-10-24
+
+### Fixed & Enhanced
+- **Universal Button Protection & Single-Line Text Enforcement:**
+  - Added universal base CSS rule in `src/index.css` enforcing `white-space: nowrap !important`, `text-wrap: nowrap !important`, and `line-height: 1.25` on all `<button>` elements across the entire website.
+  - Eliminated awkward multi-line text wrapping that distorted button shapes, bloated button heights, or squeezed adjacent UI elements.
+- **Harmonized 32px Action Bar in FishCard:**
+  - Standardized all 4 action buttons (`Scissors` Cleaning Tutorial, `Zap` Quick Nutrition, `ChefHat` Coastal Chef, and `Eye` View Details) to a uniform 32px (`h-8`) height.
+  - Streamlined `t.viewDetails` string across all languages (`عرض التفاصيل` / `Voir détails` / `View Details`) so it never wraps.
+  - Added responsive collapse on `Scissors` cleaning button text (`تنقية الحوت`) on compact viewports to display the crisp icon while preserving the primary action button.
+- **Cross-Component Button Refinement:**
+  - Applied `whitespace-nowrap shrink-0` across recipe cards, modal tabs, seasonal calendar filter pills, and tactical map controls.
+- **Verification & Testing:**
+  - 100% test pass rate across all 17 test suites (71/71 tests passing).
+  - Chrome DevTools MCP verification across mobile (375px), tablet (768px), and desktop (1440px) confirming uniform 32px button heights with zero text wrapping.
+
+---
+
 ## [2.1.2] - 2026-10-24
 
 ### Fixed & Enhanced

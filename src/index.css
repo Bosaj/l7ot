@@ -81,6 +81,14 @@
     overflow: hidden !important;
   }
 
+  /* Universal button protection: prevent awkward multi-line text wrapping and maintain consistent touch targets across the entire website */
+  button {
+    white-space: nowrap !important;
+    text-wrap: nowrap !important;
+    line-height: 1.25;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   /* Tactile subtle film/paper grain overlay across the viewport */
   body::before {
     content: '';

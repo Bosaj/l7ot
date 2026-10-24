@@ -309,7 +309,7 @@ export const App: React.FC = () => {
                         key={cat.id}
                         type="button"
                         onClick={() => setSelectedCategory(cat.id)}
-                        className={`shrink-0 snap-start rounded-lg px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-medium transition-all active:scale-95 ${
+                        className={`shrink-0 snap-start whitespace-nowrap rounded-lg px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-medium transition-all active:scale-95 ${
                           selectedCategory === cat.id
                             ? 'bg-[#d96b27] text-[#0b0908] font-bold shadow-md shadow-[#d96b27]/20'
                             : 'border border-[#f6f1e7]/10 bg-[#0b0908] text-[#a69b8d] hover:border-[#f6f1e7]/25 hover:text-[#f6f1e7]'
@@ -325,7 +325,7 @@ export const App: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setSelectedCoast('all')}
-                      className={`flex-1 sm:flex-initial text-center rounded px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold transition-colors active:scale-95 ${
+                      className={`flex-1 sm:flex-initial text-center whitespace-nowrap rounded px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold transition-colors active:scale-95 ${
                         selectedCoast === 'all'
                           ? 'bg-[#d96b27] text-[#0b0908]'
                           : 'text-[#a69b8d] hover:text-[#f6f1e7]'
@@ -336,7 +336,7 @@ export const App: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setSelectedCoast('atlantic')}
-                      className={`flex-1 sm:flex-initial text-center rounded px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold transition-colors active:scale-95 ${
+                      className={`flex-1 sm:flex-initial text-center whitespace-nowrap rounded px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold transition-colors active:scale-95 ${
                         selectedCoast === 'atlantic'
                           ? 'bg-[#d96b27] text-[#0b0908]'
                           : 'text-[#a69b8d] hover:text-[#f6f1e7]'
@@ -347,7 +347,7 @@ export const App: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setSelectedCoast('mediterranean')}
-                      className={`flex-1 sm:flex-initial text-center rounded px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold transition-colors active:scale-95 ${
+                      className={`flex-1 sm:flex-initial text-center whitespace-nowrap rounded px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold transition-colors active:scale-95 ${
                         selectedCoast === 'mediterranean'
                           ? 'bg-[#d96b27] text-[#0b0908]'
                           : 'text-[#a69b8d] hover:text-[#f6f1e7]'
@@ -417,14 +417,14 @@ export const App: React.FC = () => {
                     sounds.playBubble()
                     setShowCoastalRadar(!showCoastalRadar)
                   }}
-                  className={`inline-flex items-center justify-center gap-1.5 rounded-lg border px-3 py-1.5 font-mono text-xs font-bold transition w-full sm:w-auto ${
+                  className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-lg border px-3 text-xs font-bold transition w-full sm:w-auto whitespace-nowrap shrink-0 active:scale-95 ${
                     showCoastalRadar
                       ? 'border-[#d96b27] bg-[#d96b27] text-[#0b0908]'
                       : 'border-cyan-500/30 bg-cyan-500/10 text-cyan-300 hover:border-cyan-400'
                   }`}
                 >
                   <Map className="h-3.5 w-3.5 text-current shrink-0" />
-                  <span className="truncate">
+                  <span className="whitespace-nowrap">
                     {showCoastalRadar
                       ? (lang === 'ar' ? 'إخفاء الخريطة' : 'Masquer Radar')
                       : (lang === 'ar' ? 'خريطة السواحل والموانئ' : 'Radar & Carte')}
@@ -435,10 +435,10 @@ export const App: React.FC = () => {
                   type="button"
                   onClick={userPortLocation.detectLocation}
                   disabled={userPortLocation.isLocating}
-                  className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#d96b27] px-3 py-1.5 font-mono text-xs font-bold text-[#0b0908] transition hover:bg-[#b85318] w-full sm:w-auto"
+                  className="inline-flex h-8 items-center justify-center gap-1.5 rounded-lg bg-[#d96b27] px-3 text-xs font-bold text-[#0b0908] transition hover:bg-[#b85318] w-full sm:w-auto whitespace-nowrap shrink-0 active:scale-95"
                 >
                   <Compass className={`h-3.5 w-3.5 shrink-0 ${userPortLocation.isLocating ? 'animate-spin' : ''}`} />
-                  <span className="truncate">
+                  <span className="whitespace-nowrap">
                     {userPortLocation.isLocating
                       ? (lang === 'ar' ? 'جاري الرصد...' : 'Localisation...')
                       : (lang === 'ar' ? 'موقعي (GPS)' : 'Ma position (GPS)')}
@@ -830,7 +830,7 @@ export const App: React.FC = () => {
               </span>
             </div>
             <div className="shrink-0 text-start sm:text-end">
-              <span>{lang === 'ar' ? 'النسخة v2.1.2 · رخصة MIT الحرة' : 'Release v2.1.2 · MIT Open Source License'}</span>
+              <span>{lang === 'ar' ? 'النسخة v2.1.3 · رخصة MIT الحرة' : 'Release v2.1.3 · MIT Open Source License'}</span>
             </div>
           </div>
         </div>

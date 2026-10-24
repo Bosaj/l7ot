@@ -496,7 +496,7 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
             sounds.playBubble()
             setTileMode('marine')
           }}
-          className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-mono font-bold transition ${
+          className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-mono font-bold transition whitespace-nowrap shrink-0 ${
             tileMode === 'marine'
               ? 'bg-cyan-500 text-black shadow-lg shadow-cyan-500/30'
               : 'text-[#a69b8d] hover:text-white hover:bg-white/5'
@@ -515,7 +515,7 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
             sounds.playBubble()
             setTileMode('satellite')
           }}
-          className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-mono font-bold transition ${
+          className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-mono font-bold transition whitespace-nowrap shrink-0 ${
             tileMode === 'satellite'
               ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/30'
               : 'text-[#a69b8d] hover:text-white hover:bg-white/5'
@@ -533,7 +533,7 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
             sounds.playBubble()
             setTileMode('natgeo')
           }}
-          className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-mono font-bold transition ${
+          className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-mono font-bold transition whitespace-nowrap shrink-0 ${
             tileMode === 'natgeo'
               ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/30'
               : 'text-[#a69b8d] hover:text-white hover:bg-white/5'
@@ -551,7 +551,7 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
             sounds.playSonar()
             setShowNauticalMarks((prev) => !prev)
           }}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-bold transition border ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-bold transition border whitespace-nowrap shrink-0 ${
             showNauticalMarks
               ? 'bg-amber-400 text-black border-amber-300 shadow-lg shadow-amber-400/40'
               : 'border-white/10 text-[#a69b8d] hover:text-white hover:bg-white/5'
@@ -576,7 +576,7 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
             sounds.playSonar()
             setShowRadarGrid((prev) => !prev)
           }}
-          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-mono font-bold transition border ${
+          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-mono font-bold transition border whitespace-nowrap shrink-0 ${
             showRadarGrid
               ? 'bg-cyan-400 text-black border-cyan-300 shadow-lg shadow-cyan-400/30'
               : 'border-white/10 text-[#a69b8d] hover:text-white hover:bg-white/5'
@@ -593,7 +593,7 @@ export const MoroccanLeafletMap: React.FC<MoroccanLeafletMapProps> = ({
         <button
           type="button"
           onClick={handleResetMoroccoView}
-          className="flex items-center gap-2 rounded-lg bg-[#090d16]/95 hover:bg-slate-800 border border-cyan-500/30 px-3.5 py-2 text-xs font-mono font-bold text-white shadow-2xl backdrop-blur-md transition hover:scale-105"
+          className="flex items-center gap-2 rounded-lg bg-[#090d16]/95 hover:bg-slate-800 border border-cyan-500/30 px-3.5 py-2 text-xs font-mono font-bold text-white shadow-2xl backdrop-blur-md transition hover:scale-105 whitespace-nowrap shrink-0"
           title={lang === 'ar' ? 'إعادة تركيز الخريطة على كامل المغرب' : 'Recentrer sur tout le Maroc'}
         >
           <Maximize2 className="h-3.5 w-3.5 text-cyan-400" />
