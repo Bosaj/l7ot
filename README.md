@@ -233,3 +233,10 @@ Distributed under the **MIT License**. See [`LICENSE`](./LICENSE) for more infor
 
 Designed, architected and built with passion by:
 **[Oussama EL HADJI](https://www.linkedin.com/in/oussama-el-hadji-388a101b7/)** ([@Bosaj](https://github.com/Bosaj))
+
+---
+
+## 📄 License
+**Proprietary & Commercial Software License** — All Rights Reserved © 2026 Oussama Elhadji (`@Bosaj`) <[oussousselhadji@gmail.com](mailto:oussousselhadji@gmail.com)>.
+
+Unauthorized copying, distribution, resale, or reverse engineering is strictly prohibited. See [LICENSE](LICENSE) for full legal terms.
