@@ -48,6 +48,7 @@ import {
 } from '../services/marineApis'
 import { FishSpecimenPassportModal } from './FishSpecimenPassportModal'
 import { SpecimenShareCardModal } from './SpecimenShareCardModal'
+import { MarineAnatomy3DExplorer } from './MarineAnatomy3DExplorer'
 import { generateSeafoodProductSchema, injectJsonLd } from '../lib/seoStructuredData'
 
 interface FishModalProps {
@@ -1058,6 +1059,9 @@ export const FishModal: React.FC<FishModalProps> = ({
           {/* TAB 2: CLEANING TUTORIAL & VIDEO */}
           {modalTab === 'cleaning' && (
             <div className="space-y-6">
+              {/* Interactive 3D WebGL Anatomical Structure & Organ Explorer (#26) */}
+              <MarineAnatomy3DExplorer fish={fish} lang={lang} />
+
               <div className="rounded-sm border border-[#2a211c] bg-[#181310] p-5 space-y-4">
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#2a211c] pb-3">
                   <div>

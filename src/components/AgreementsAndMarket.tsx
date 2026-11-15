@@ -8,15 +8,17 @@ import {
   Calendar,
 } from 'lucide-react'
 import { FISHERIES_AGREEMENTS, MARKET_TRENDS } from '../data/agreements'
+import { MOROCCAN_FISH } from '../data/fish'
 import type { FisheriesAgreement } from '../data/types'
 import type { SupportedLanguage } from '../i18n/strings'
+import { OnpWholesaleAuctionIndex } from './OnpWholesaleAuctionIndex'
 
 interface AgreementsAndMarketProps {
   lang: SupportedLanguage
 }
 
 export const AgreementsAndMarket: React.FC<AgreementsAndMarketProps> = ({ lang }) => {
-  const [activeSubSection, setActiveSubSection] = useState<'agreements' | 'trends'>('agreements')
+  const [activeSubSection, setActiveSubSection] = useState<'agreements' | 'trends' | 'criee22'>('agreements')
 
   const getStatusBadge = (status: FisheriesAgreement['status']) => {
     switch (status) {
@@ -129,6 +131,25 @@ export const AgreementsAndMarket: React.FC<AgreementsAndMarketProps> = ({ lang }
                 : lang === 'en'
                 ? '2. Market Trends & Biological Rest'
                 : '2. تتبع الأسواق والراحة البيولوجية'}
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveSubSection('criee22')}
+            className={`flex items-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-bold transition-all ${
+              activeSubSection === 'criee22'
+                ? 'bg-amber-500 text-[#0b0908] shadow-lg shadow-amber-500/25 ring-2 ring-amber-400/30'
+                : 'bg-slate-800/60 text-amber-300 hover:bg-slate-800 hover:text-amber-200'
+            }`}
+          >
+            <Anchor className="h-4 w-4" />
+            <span>
+              {lang === 'fr'
+                ? '3. Indice de Gros ONP (22 Criées)'
+                : lang === 'en'
+                ? '3. ONP Wholesale Index (22 Ports)'
+                : '3. مؤشر الجملة الرسمي (22 مرسى ONP)'}
             </span>
           </button>
         </div>
@@ -401,6 +422,11 @@ export const AgreementsAndMarket: React.FC<AgreementsAndMarketProps> = ({ lang }
             ))}
           </div>
         </div>
+      )}
+
+      {/* Sub-Section 3: Wholesale Criée Auction Index across 22 ONP Ports (#23) */}
+      {activeSubSection === 'criee22' && (
+        <OnpWholesaleAuctionIndex allFish={MOROCCAN_FISH} lang={lang} />
       )}
     </div>
   )

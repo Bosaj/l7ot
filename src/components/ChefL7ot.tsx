@@ -14,6 +14,7 @@ import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
 import { calculateCharmoula } from '../lib/charmoula'
 import { PriceBadge } from './PriceBadge'
+import { CoastalSommelierModal } from './CoastalSommelierModal'
 
 interface ChefL7otProps {
   allFish: Fish[]
@@ -348,6 +349,16 @@ export const ChefL7ot: React.FC<ChefL7otProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Embedded AI Coastal Sommelier (#25) */}
+      <CoastalSommelierModal
+        fish={currentFish}
+        allFish={allFish}
+        lang={lang}
+        preferredMethod={method}
+        isModal={false}
+        onSelectFish={(f) => setFishId(f.id)}
+      />
     </div>
   )
 }

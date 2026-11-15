@@ -15,6 +15,8 @@ import {
 } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import { MoroccanTideAndLunarClock } from './MoroccanTideAndLunarClock'
+import { MarineDiveForecastPortal } from './MarineDiveForecastPortal'
+import { MaritimeGaleAlertCenter } from './MaritimeGaleAlertCenter'
 
 interface PortMarineData {
   id: string
@@ -597,6 +599,12 @@ console.log("Vulnerability Score:", bio.data[0].Vulnerability);`,
           </div>
         </div>
       </section>
+
+      {/* SECTION 1.2: REAL-TIME MARITIME SAFETY & GALE WIND WARNING PUSH NOTIFICATIONS (#22) */}
+      <MaritimeGaleAlertCenter lang={lang} />
+
+      {/* SECTION 1.4: MARINE DIVE & SPEARFISHING FORECAST PORTAL (#21) */}
+      <MarineDiveForecastPortal lang={lang} />
 
       {/* SECTION 1.5: MOROCCAN TIDE & LUNAR CYCLE TELEMETRY */}
       <MoroccanTideAndLunarClock lang={lang} />

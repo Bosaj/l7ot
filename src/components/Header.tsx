@@ -18,12 +18,14 @@ import {
   TrendingUp,
   ChevronLeft,
   ChevronRight,
+  AlertTriangle,
 } from 'lucide-react'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
 import type { MoroccanPortRegion } from '../lib/moroccanRegions'
 import { sounds } from '../lib/soundEffects'
 import { getAssetUrl } from '../lib/assetHelper'
+import { INITIAL_DGM_PORT_BULLETINS } from '../lib/maritimeGaleAlerts'
 
 export type NavTab =
   | 'fish'
@@ -46,6 +48,7 @@ interface HeaderProps {
   setLang: (lang: SupportedLanguage) => void
   isHighSeasActive?: boolean
   onToggleSimulatedOffline?: () => void
+  onOpenGaleAlerts?: () => void
   userPortLocation?: {
     selectedRegion: MoroccanPortRegion
     isLocating: boolean
@@ -64,11 +67,13 @@ export const Header: React.FC<HeaderProps> = ({
   setLang,
   isHighSeasActive,
   onToggleSimulatedOffline,
+  onOpenGaleAlerts,
   userPortLocation,
 }) => {
   const t = STRINGS[lang]
   const [soundActive, setSoundActive] = useState(() => sounds.isEnabled())
   const navScrollRef = useRef<HTMLElement>(null)
+  const activeGaleAlertsCount = INITIAL_DGM_PORT_BULLETINS.filter((b) => b.isGaleTriggered).length
 
   // Smoothly scroll active tab into view on mobile touch devices
   useEffect(() => {
@@ -389,8 +394,42 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          {/* Controls: GPS Port Badge, High-End Language Switcher & Audio Toggle */}
+          {/* Controls: Gale Warning Badge, GPS Port Badge, High-End Language Switcher & Audio Toggle */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+            {/* Visual Maritime Gale Warning Badge (#22) */}
+            <button
+              type="button"
+              onClick={() => {
+                sounds.playTabClick()
+                if (onOpenGaleAlerts) {
+                  onOpenGaleAlerts()
+                } else {
+                  setActiveTab('marine-apis')
+                }
+              }}
+              aria-label={
+                lang === 'ar'
+                  ? `إنذار الرياح والأمواج DGM (${activeGaleAlertsCount})`
+                  : `Alerte Coup de Vent DGM (${activeGaleAlertsCount})`
+              }
+              title={
+                lang === 'ar'
+                  ? 'نشرة إنذار السلامة البحرية ورياح الشرقي لقوارب الفلوكة (DGM)'
+                  : 'Alertes BMS Côte DGM & Coups de Vent (>25 nœuds / >3,5m)'
+              }
+              className="inline-flex items-center gap-1.5 rounded-lg border border-rose-500/45 bg-rose-500/15 px-2 sm:px-2.5 py-1 text-[11px] font-mono font-bold text-rose-300 hover:border-rose-400 hover:bg-rose-500/25 transition-all active:scale-95"
+            >
+              <AlertTriangle className="h-3.5 w-3.5 text-rose-400 animate-pulse shrink-0" />
+              <span className="hidden md:inline">
+                {lang === 'ar'
+                  ? `إنذار بحري (${activeGaleAlertsCount})`
+                  : lang === 'fr'
+                    ? `BMS Mer (${activeGaleAlertsCount})`
+                    : `Gale Alert (${activeGaleAlertsCount})`}
+              </span>
+              <span className="md:hidden">{activeGaleAlertsCount}</span>
+            </button>
+
             {/* GPS Port Chip (Visible on screens with room) */}
             {userPortLocation && (
               <button

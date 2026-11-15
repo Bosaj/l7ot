@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import type { Fish } from '../data/types'
 import type { SupportedLanguage } from '../i18n/strings'
+import { MarineAnatomy3DExplorer } from './MarineAnatomy3DExplorer'
 
 interface CleaningTutorialModalProps {
   fish: Fish
@@ -241,6 +242,9 @@ export const CleaningTutorialModal: React.FC<CleaningTutorialModalProps> = ({
 
         {/* Modal Scrollable Body */}
         <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6">
+          {/* Interactive 3D WebGL / Matrix3D Anatomical Structure & Organ Explorer (#26) */}
+          <MarineAnatomy3DExplorer fish={fish} lang={lang} />
+
           {activeVideoId && (
             <VideoPlayer
               videoId={activeVideoId}

@@ -22,6 +22,7 @@ interface RecipeModalProps {
   onBackToFish?: () => void
   backToFishName?: string
   onSelectFishId?: (fishId: string) => void
+  onOpenSommelier?: (recipe: Recipe) => void
 }
 
 export const RecipeModal: React.FC<RecipeModalProps> = ({
@@ -31,6 +32,7 @@ export const RecipeModal: React.FC<RecipeModalProps> = ({
   onBackToFish,
   backToFishName,
   onSelectFishId,
+  onOpenSommelier,
 }) => {
   const t = STRINGS[lang]
   const [playingVideo, setPlayingVideo] = useState(false)
@@ -126,6 +128,23 @@ export const RecipeModal: React.FC<RecipeModalProps> = ({
             <Flame className="h-4 w-4 text-[#c85a32]" />
             <span dir="ltr">~{recipe.caloriesEst} kcal</span>
           </div>
+
+          {onOpenSommelier && (
+            <button
+              type="button"
+              onClick={() => onOpenSommelier(recipe)}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-amber-500/40 bg-amber-500/15 px-3 py-1 font-sans text-xs font-bold text-amber-300 hover:bg-amber-500 hover:text-black transition"
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              <span>
+                {lang === 'ar'
+                  ? 'اسأل الساقي الساحلي (Sommelier)'
+                  : lang === 'fr'
+                    ? 'Accords Sommelier Côtier'
+                    : 'Ask Coastal Sommelier'}
+              </span>
+            </button>
+          )}
         </div>
 
         {/* Modal Body */}

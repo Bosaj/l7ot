@@ -31,6 +31,9 @@ import { MoroccanCoastalRadar } from './components/MoroccanCoastalRadar'
 import { SeasonalCatchCalendar } from './components/SeasonalCatchCalendar'
 import { MarineGpsNavigator } from './components/MarineGpsNavigator'
 import { OffshoreFishermanBanner } from './components/OffshoreFishermanBanner'
+import { CoastalSommelierModal } from './components/CoastalSommelierModal'
+import { MaritimeGaleAlertCenter } from './components/MaritimeGaleAlertCenter'
+import { OnpWholesaleAuctionIndex } from './components/OnpWholesaleAuctionIndex'
 import type { NavTab } from './components/Header'
 import { sounds } from './lib/soundEffects'
 
@@ -58,6 +61,8 @@ export const App: React.FC = () => {
   const [cleaningFish, setCleaningFish] = useState<Fish | null>(null)
   const [activeRecipe, setActiveRecipe] = useState<Recipe | null>(null)
   const [chefFishId, setChefFishId] = useState<string>('sardine')
+  const [sommelierFish, setSommelierFish] = useState<Fish | null>(null)
+  const [showGaleAlertModal, setShowGaleAlertModal] = useState<boolean>(false)
 
   const t = STRINGS[lang]
   const isRtl = lang === 'ar'
@@ -142,6 +147,7 @@ export const App: React.FC = () => {
         setLang={setLang}
         isHighSeasActive={offlineStatus.isHighSeasActive}
         onToggleSimulatedOffline={offlineStatus.toggleSimulatedOffline}
+        onOpenGaleAlerts={() => setShowGaleAlertModal(true)}
         userPortLocation={userPortLocation}
       />
 
@@ -485,6 +491,7 @@ export const App: React.FC = () => {
                       setActiveFish(f)
                       setFishModalTab('nutrition')
                     }}
+                    onOpenSommelier={(f) => setSommelierFish(f)}
                   />
                 ))}
               </div>
@@ -582,6 +589,10 @@ export const App: React.FC = () => {
                     sounds.playBubble()
                     setActiveRecipe(r)
                   }}
+                  onOpenSommelier={(r) => {
+                    const found = MOROCCAN_FISH.find((f) => r.fishIds.includes(f.id)) || MOROCCAN_FISH[0]!
+                    setSommelierFish(found)
+                  }}
                 />
               ))}
             </div>
@@ -607,16 +618,19 @@ export const App: React.FC = () => {
           />
         )}
 
-        {/* Tab: Bourse Citoyenne (Crowdsourced Souk & Port Price Reporter) */}
+        {/* Tab: Bourse Citoyenne (Crowdsourced Souk & Port Price Reporter + 22 ONP Ports Index) */}
         {activeTab === 'bourse' && (
-          <CommunityPriceReporter
-            allFish={MOROCCAN_FISH}
-            lang={lang}
-            onSelectFishModal={(f) => {
-              setActiveFish(f)
-              setFishModalTab('overview')
-            }}
-          />
+          <div className="space-y-10">
+            <CommunityPriceReporter
+              allFish={MOROCCAN_FISH}
+              lang={lang}
+              onSelectFishModal={(f) => {
+                setActiveFish(f)
+                setFishModalTab('overview')
+              }}
+            />
+            <OnpWholesaleAuctionIndex allFish={MOROCCAN_FISH} lang={lang} />
+          </div>
         )}
 
         {/* Tab 5: International Fisheries Agreements & Market Trends */}
@@ -692,6 +706,30 @@ export const App: React.FC = () => {
               setFishModalTab('overview')
             }
           }}
+          onOpenSommelier={(r) => {
+            const found = MOROCCAN_FISH.find((f) => r.fishIds.includes(f.id)) || MOROCCAN_FISH[0]!
+            setActiveRecipe(null)
+            setSommelierFish(found)
+          }}
+        />
+      )}
+
+      {sommelierFish && (
+        <CoastalSommelierModal
+          fish={sommelierFish}
+          allFish={MOROCCAN_FISH}
+          lang={lang}
+          isModal={true}
+          onClose={() => setSommelierFish(null)}
+          onSelectFish={(f) => setSommelierFish(f)}
+        />
+      )}
+
+      {showGaleAlertModal && (
+        <MaritimeGaleAlertCenter
+          lang={lang}
+          isModal={true}
+          onClose={() => setShowGaleAlertModal(false)}
         />
       )}
 

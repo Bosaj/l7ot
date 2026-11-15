@@ -1,5 +1,5 @@
 import React from 'react'
-import { Clock, Users, Flame, ChefHat } from 'lucide-react'
+import { Clock, Users, Flame, ChefHat, Sparkles } from 'lucide-react'
 import type { Recipe } from '../data/types'
 import type { SupportedLanguage } from '../i18n/strings'
 import { STRINGS } from '../i18n/strings'
@@ -9,6 +9,7 @@ interface RecipeCardProps {
   index?: number
   lang: SupportedLanguage
   onSelectRecipe: (recipe: Recipe) => void
+  onOpenSommelier?: (recipe: Recipe) => void
 }
 
 export const RecipeCard: React.FC<RecipeCardProps> = ({
@@ -16,6 +17,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({
   index = 0,
   lang,
   onSelectRecipe,
+  onOpenSommelier,
 }) => {
   const t = STRINGS[lang]
   const recipeCode = `REC-${String(index + 1).padStart(2, '0')}`
@@ -107,10 +109,27 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({
                 </span>
               </div>
 
-              <span className="inline-flex h-7 items-center gap-1.5 rounded-lg bg-[#f6f1e7] px-2.5 font-sans text-[11px] font-bold text-[#0b0908] transition-colors group-hover:bg-[#e68a45] whitespace-nowrap shrink-0">
-                <ChefHat className="h-3 w-3 shrink-0" />
-                <span className="whitespace-nowrap">{t.viewDetails}</span>
-              </span>
+              <div className="flex items-center gap-1.5">
+                {onOpenSommelier && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      onOpenSommelier(recipe)
+                    }}
+                    aria-label={`Ask Sommelier - ${recipe.titleFrench}`}
+                    className="inline-flex h-7 items-center gap-1 rounded-lg border border-amber-500/40 bg-amber-500/15 px-2 font-sans text-[11px] font-bold text-amber-300 transition-colors hover:bg-amber-500 hover:text-[#0b0908] whitespace-nowrap shrink-0"
+                  >
+                    <Sparkles className="h-3 w-3 shrink-0" />
+                    <span>{lang === 'ar' ? 'الساقي الساحلي' : 'Ask Sommelier'}</span>
+                  </button>
+                )}
+
+                <span className="inline-flex h-7 items-center gap-1.5 rounded-lg bg-[#f6f1e7] px-2.5 font-sans text-[11px] font-bold text-[#0b0908] transition-colors group-hover:bg-[#e68a45] whitespace-nowrap shrink-0">
+                  <ChefHat className="h-3 w-3 shrink-0" />
+                  <span className="whitespace-nowrap">{t.viewDetails}</span>
+                </span>
+              </div>
             </div>
           </div>
         </div>

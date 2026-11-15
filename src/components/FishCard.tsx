@@ -26,6 +26,7 @@ interface FishCardProps {
   onCookWithFish?: (fish: Fish) => void
   onOpenCleaningTutorial?: (fish: Fish) => void
   onOpenNutrition?: (fish: Fish) => void
+  onOpenSommelier?: (fish: Fish) => void
 }
 
 export const FishCard: React.FC<FishCardProps> = ({
@@ -37,6 +38,7 @@ export const FishCard: React.FC<FishCardProps> = ({
   onCookWithFish,
   onOpenCleaningTutorial,
   onOpenNutrition,
+  onOpenSommelier,
 }) => {
   const t = STRINGS[lang]
   const [imgError, setImgError] = useState(false)
@@ -417,6 +419,30 @@ export const FishCard: React.FC<FishCardProps> = ({
                   className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#f6f1e7]/12 bg-[#1c1714] text-[#e68a45] transition-colors hover:bg-[#d96b27] hover:text-[#0b0908] shrink-0 active:scale-95"
                 >
                   <ChefHat className="h-3.5 w-3.5 shrink-0" />
+                </button>
+              )}
+
+              {onOpenSommelier && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onOpenSommelier(fish)
+                  }}
+                  aria-label={`Ask Sommelier - ${localizedPrimaryName}`}
+                  title={
+                    lang === 'ar'
+                      ? 'اسأل الساقي الساحلي (الحوامض، السلطات وأتاي)'
+                      : lang === 'fr'
+                        ? 'Demander au Sommelier Côtier IA'
+                        : 'Ask AI Coastal Sommelier'
+                  }
+                  className="flex h-8 items-center gap-1 rounded-lg border border-amber-500/35 bg-amber-500/15 px-2 text-[11px] font-bold text-amber-300 transition-colors hover:bg-amber-500 hover:text-[#0b0908] shrink-0 active:scale-95"
+                >
+                  <Sparkles className="h-3.5 w-3.5 shrink-0" />
+                  <span className="hidden sm:inline whitespace-nowrap">
+                    {lang === 'ar' ? 'الساقي' : 'Sommelier'}
+                  </span>
                 </button>
               )}
             </div>
